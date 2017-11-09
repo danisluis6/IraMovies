@@ -3,18 +3,18 @@ package vn.enclave.iramovies.ui.activities.base.Home;
 import android.annotation.SuppressLint;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
+import android.view.Menu;
 import android.view.View;
 import android.view.animation.TranslateAnimation;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 
 import butterknife.BindView;
 import vn.enclave.iramovies.R;
 import vn.enclave.iramovies.ui.activities.base.BaseView;
+import vn.enclave.iramovies.ui.views.ToolbarLayout;
 
 
 public class HomeScreen extends BaseView {
@@ -28,11 +28,8 @@ public class HomeScreen extends BaseView {
     @BindView(R.id.main_content)
     public View mMainContent;
 
-    @BindView(R.id.toolbar)
-    public Toolbar mToolbar;
-
-    @BindView(R.id.layoutMenu)
-    public RelativeLayout mLayoutMenu;
+    @BindView(R.id.toolbar_layout)
+    public ToolbarLayout mToolbar;
 
     private float mLastTranslate = 0.0f;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -42,11 +39,10 @@ public class HomeScreen extends BaseView {
         return R.layout.activity_main;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void activityCreated() {
-
-        mToolbar.setNavigationIcon(R.drawable.ic_menu);
-        setSupportActionBar(mToolbar);
+        setSupportActionBar(mToolbar.getToolbar());
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         setupDrawerToggle();
@@ -58,10 +54,12 @@ public class HomeScreen extends BaseView {
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         mDrawerToggle.syncState();
+        mToolbar.getToolbar().setNavigationIcon(R.drawable.ic_menu);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     void setupDrawerToggle(){
-        mDrawerToggle = new android.support.v7.app.ActionBarDrawerToggle(this,mDrawerLayout,mToolbar,R.string.app_name, R.string.app_name);
+        mDrawerToggle = new android.support.v7.app.ActionBarDrawerToggle(this,mDrawerLayout,mToolbar.getToolbar(),R.string.app_name, R.string.app_name);
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, null, 0, 0) {
             @SuppressLint("NewApi")
             public void onDrawerSlide(View drawerView, float slideOffset) {
@@ -81,5 +79,11 @@ public class HomeScreen extends BaseView {
             }
         };
         mDrawerToggle.syncState();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.toolbar_menu, menu);
+        return true;
     }
 }

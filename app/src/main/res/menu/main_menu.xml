@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/new_game"
-        android:icon="@drawable/ic_add_black_24dp"
+        android:icon="@drawable/ic_view_list"
         android:title="new game"
         android:showAsAction="ifRoom"/>
 
-    <item android:id="@+id/help"
-        android:icon="@drawable/delete"
-        android:title="help"
-        android:showAsAction="ifRoom"/>
+    <item android:id="@+id/fdsfs"
+        android:icon="@drawable/ic_view_list"
+        android:title="new game"
+        android:showAsAction="always"/>
 </menu>

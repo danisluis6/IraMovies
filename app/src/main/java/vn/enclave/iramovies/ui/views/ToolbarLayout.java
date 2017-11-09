@@ -5,11 +5,14 @@ import android.graphics.Color;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.constraint.ConstraintLayout;
+import android.support.v7.widget.ActionMenuView;
+import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toolbar;
 
 import java.lang.reflect.Field;
 
@@ -46,18 +49,16 @@ public class ToolbarLayout extends ConstraintLayout{
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void initViews() {
         // Default information Toolbar
+        mToolbar.setNavigationIcon(R.drawable.ic_menu);
         mToolbar.setTitle(Constant.ToolbarLayoutInfo._TITLE);
-        mToolbar.setTitleTextColor(Color.parseColor(Constant.ToolbarLayoutInfo._TITLE_TEXT_COLOR));
-        mToolbar.setBackgroundColor(Color.parseColor(Constant.ToolbarLayoutInfo._BACKGROUND_COLOR));
-        // mToolbar.setNavigationIcon(R.drawable.delete);
-
+        getTitleTextView(mToolbar).setTextColor(Color.WHITE);
+        getTitleTextView(mToolbar).setPadding(0,0,0, 8);
         /**
          * @Run: https://stackoverflow.com/questions/23538929/android-menuitem-custom-layout
          * => Custom pop menu in Android
          *
          * @Run: com.captech.myapp.ui.views
          */
-        mToolbar.inflateMenu(R.menu.toolbar_menu);
         mToolbar.inflateMenu(R.menu.main_menu);
     }
 
@@ -75,12 +76,40 @@ public class ToolbarLayout extends ConstraintLayout{
      * => mTitleTextView => Go to root Toolbar and you will see it.
      */
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    public TextView getTextViewTitle(Toolbar toolbar) {
+    public TextView getTitleTextView(Toolbar toolbar) {
         try {
             Class<?> toolbarClass = Toolbar.class;
             Field titleTextViewField = toolbarClass.getDeclaredField("mTitleTextView");
             titleTextViewField.setAccessible(true);
             return (TextView) titleTextViewField.get(toolbar);
+        }
+        catch (NoSuchFieldException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    public ImageButton getNavButtonView(Toolbar toolbar) {
+        try {
+            Class<?> toolbarClass = Toolbar.class;
+            Field mNavButtonView = toolbarClass.getDeclaredField("mNavButtonView");
+            mNavButtonView.setAccessible(true);
+            return (ImageButton) mNavButtonView.get(toolbar);
+        }
+        catch (NoSuchFieldException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    public ImageView getLogoView(Toolbar toolbar) {
+        try {
+            Class<?> toolbarClass = Toolbar.class;
+            Field mLogoView = toolbarClass.getDeclaredField("mLogoView");
+            mLogoView.setAccessible(true);
+            return (ImageView) mLogoView.get(toolbar);
         }
         catch (NoSuchFieldException | IllegalAccessException e) {
             e.printStackTrace();
@@ -96,12 +125,5 @@ public class ToolbarLayout extends ConstraintLayout{
      */
     public Toolbar getToolbar() {
         return mToolbar;
-        /*
-         * mToolbar.setTitle();
-         * mToolbar.setBackground();
-         * mToolbar.setForeBackground();
-         * mToolbar.set...
-         */
     }
-
 }

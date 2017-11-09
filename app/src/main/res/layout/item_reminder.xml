@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="8dp">
+
+        <ImageView
+            android:id="@+id/imvSmallThumbnail"
+            android:layout_width="88dp"
+            android:layout_height="88dp"
+            android:scaleType="fitCenter" />
+
+        <TextView
+            android:id="@+id/tvSmallTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_toRightOf="@+id/imvSmallThumbnail"
+            android:layout_toEndOf="@+id/imvSmallThumbnail"
+            android:ellipsize="marquee"
+            android:text="The Dark Tower - 2017 -..."
+            android:textColor="#000000"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tvSmallDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvSmallTitle"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            android:layout_toRightOf="@+id/imvSmallThumbnail"
+            android:layout_toEndOf="@+id/imvSmallThumbnail"
+            android:ellipsize="marquee"
+            android:text="2017-09-02 10:06"
+            android:textColor="#000000"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:id="@+id/imvIconArrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_arrow_right"
+            android:contentDescription="@string/image_description" />
+    </RelativeLayout>
+
+    <View
+        android:layout_below="@+id/imvSmallThumbnail"
+        android:layout_width="match_parent"
+        android:layout_height="1sp"
+        android:background="#E6E6E8"/>
+
+</LinearLayout>
+
+

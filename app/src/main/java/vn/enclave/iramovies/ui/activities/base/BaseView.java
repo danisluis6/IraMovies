@@ -14,7 +14,7 @@ public abstract class BaseView extends AppCompatActivity{
 
     private static String TAG = Utils.makeLogTag(BaseView.class);
 
-    private Context mInstance;
+    private BaseView mInstance;
     private Unbinder mUnbinder;
 
     @Override
@@ -30,7 +30,7 @@ public abstract class BaseView extends AppCompatActivity{
         mUnbinder = ButterKnife.bind(this);
     }
 
-    public synchronized Context getInstance() {
+    public synchronized BaseView getInstance() {
         if (mInstance == null) {
             mInstance = this;
         }

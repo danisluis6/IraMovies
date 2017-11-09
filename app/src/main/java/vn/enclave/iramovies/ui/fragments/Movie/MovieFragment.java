@@ -1,5 +1,10 @@
 package vn.enclave.iramovies.ui.fragments.Movie;
 
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
 import vn.enclave.iramovies.ui.fragments.Base.IRBaseFragment;
 
 /**
@@ -8,4 +13,13 @@ import vn.enclave.iramovies.ui.fragments.Base.IRBaseFragment;
  */
 
 public class MovieFragment extends IRBaseFragment {
+    @Override
+    public View getViewLayout(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        return null;
+    }
+
+    @Override
+    public void fragmentCreated() {
+
+    }
 }

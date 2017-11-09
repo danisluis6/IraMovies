@@ -10,14 +10,28 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <ListView
+    <!--<ListView-->
+        <!--android:id="@+id/profile"-->
+        <!--android:layout_gravity="start"-->
+        <!--android:choiceMode="singleChoice"-->
+        <!--android:background="#FFFFFF"-->
+        <!--android:layout_width="320dp"-->
+        <!--android:dividerHeight="1dp"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:divider="@android:color/darker_gray" />-->
+
+    <LinearLayout
+        android:orientation="vertical"
         android:id="@+id/profile"
         android:layout_gravity="start"
-        android:choiceMode="singleChoice"
-        android:background="#FFFFFF"
         android:layout_width="320dp"
-        android:dividerHeight="1dp"
-        android:layout_height="match_parent"
-        android:divider="@android:color/darker_gray" />
+        android:layout_height="match_parent">
+
+        <fragment
+            android:name="vn.enclave.iramovies.ui.views.ProfileFragment"
+            android:layout_width="320dp"
+            android:layout_height="match_parent"/>
+
+    </LinearLayout>
 
 </android.support.v4.widget.DrawerLayout>

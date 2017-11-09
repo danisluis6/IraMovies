@@ -9,7 +9,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.Menu;
 import android.view.View;
 import android.view.animation.TranslateAnimation;
-import android.widget.ListView;
+import android.widget.LinearLayout;
 
 import butterknife.BindView;
 import vn.enclave.iramovies.R;
@@ -23,7 +23,7 @@ public class HomeScreen extends BaseView {
     public DrawerLayout mDrawerLayout;
 
     @BindView(R.id.profile)
-    public ListView mDrawerList;
+    public LinearLayout mDrawerList;
 
     @BindView(R.id.main_content)
     public View mMainContent;
@@ -58,8 +58,8 @@ public class HomeScreen extends BaseView {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    void setupDrawerToggle(){
-        mDrawerToggle = new android.support.v7.app.ActionBarDrawerToggle(this,mDrawerLayout,mToolbar.getToolbar(),R.string.app_name, R.string.app_name);
+    void setupDrawerToggle() {
+        mDrawerToggle = new android.support.v7.app.ActionBarDrawerToggle(this, mDrawerLayout, mToolbar.getToolbar(), R.string.app_name, R.string.app_name);
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, null, 0, 0) {
             @SuppressLint("NewApi")
             public void onDrawerSlide(View drawerView, float slideOffset) {

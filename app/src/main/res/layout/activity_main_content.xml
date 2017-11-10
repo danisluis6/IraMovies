@@ -15,13 +15,12 @@
         android:background="@color/colorPrimaryDark"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- This could be your fragment container, or something -->
-    <FrameLayout
-        android:id="@+id/fragment_container"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpaper_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_marginBottom="56dp"
         android:layout_marginTop="56dp"
         app:layout_constraintBottom_toBottomOf="@+id/lnBottomBar"
@@ -40,6 +39,7 @@
         app:layout_constraintRight_toRightOf="parent">
 
         <LinearLayout
+            android:id="@+id/vpMovies"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -64,6 +64,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/vpFavorites"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -88,6 +89,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/vpSettings"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -112,6 +114,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/vpAbout"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"

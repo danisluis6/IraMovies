@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import vn.enclave.iramovies.R;
 import vn.enclave.iramovies.ui.fragments.Base.IRBaseFragment;
 
 /**
@@ -15,7 +16,7 @@ import vn.enclave.iramovies.ui.fragments.Base.IRBaseFragment;
 public class SettingFragment extends IRBaseFragment {
     @Override
     public View getViewLayout(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return null;
+        return inflater.inflate(R.layout.fragment_setting, container, false);
     }
 
     @Override

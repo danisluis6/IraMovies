@@ -1,8 +1,8 @@
 package vn.enclave.iramovies.ui.fragments.Base;
 
-import android.app.Fragment;
 import android.arch.persistence.room.Room;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +18,7 @@ import vn.enclave.iramovies.ui.activities.base.BaseView;
  *
  */
 
-public abstract class IRBaseFragment extends Fragment{
+public abstract class IRBaseFragment extends Fragment {
 
     /**
      * Container activity

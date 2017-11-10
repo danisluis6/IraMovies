@@ -18,6 +18,12 @@ public class Constants {
     /** Intent argument */
     public static final String IMAGE_PATH = "path_image";
 
+    /** Index of these fragments in ViewPaper */
+    public static final int MOVIES_INDEX = 0;
+    public static final int FAVORITES_INDEX = 1;
+    public static final int SETTING_INDEX = 2;
+    public static final int ABOUT_INDEX = 3;
+
     /* Toolbar Information */
     public static class ToolbarLayoutInfo {
         public static String _TITLE = "Home";

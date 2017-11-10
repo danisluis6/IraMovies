@@ -9,4 +9,8 @@
     <style name="HomeScreen" parent="AppTheme">
     </style>
 
+    <style name="ImageHolderView" parent="AppTheme">
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
 </resources>

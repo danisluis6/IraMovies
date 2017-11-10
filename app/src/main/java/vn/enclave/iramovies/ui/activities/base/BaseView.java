@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import vn.enclave.iramovies.local.storage.AppDatabase;
 import vn.enclave.iramovies.utilities.Utils;
 
 
@@ -14,12 +15,16 @@ public abstract class BaseView extends AppCompatActivity{
 
     private static String TAG = Utils.makeLogTag(BaseView.class);
 
-    private BaseView mInstance;
+    /**
+     * Context
+     */
+    protected Context mContext;
     private Unbinder mUnbinder;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mContext = getApplicationContext();
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(getLayoutResId());
         setView();
@@ -28,13 +33,6 @@ public abstract class BaseView extends AppCompatActivity{
 
     private void setView() {
         mUnbinder = ButterKnife.bind(this);
-    }
-
-    public synchronized BaseView getInstance() {
-        if (mInstance == null) {
-            mInstance = this;
-        }
-        return mInstance;
     }
 
     public abstract int getLayoutResId();

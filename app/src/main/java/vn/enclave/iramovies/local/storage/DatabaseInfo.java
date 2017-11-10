@@ -12,26 +12,23 @@ package vn.enclave.iramovies.local.storage;
 public class DatabaseInfo {
 
     // Database version
-    public static final int DATABASE_VERSION = 1;
+    public static final int DB_VERSION = 1;
 
     // Database name
-    public static final String DATABASE_NAME = "car_supper";
+    public static final String DB_NAME = "iramovies";
 
-    // Video table name
+    // Table User
     public static class Tables {
-        public static final String Video = "video";
-        public static final String Topic = "topic";
+        public static final String User = "user";
     }
 
-    // Columns in Video table
-    public static class Video {
-        public static final String COLUMN_ID = "id";
-        public static final String COLUMN_URL = "url";
-        public static final String COLUMN_TOPIC_ID = "topic_id";
-    }
-
-    public static class Topic {
+    // Columns of Video table
+    public static class User {
         public static final String COLUMN_ID = "id";
         public static final String COLUMN_NAME = "name";
+        public static final String COLUMN_BIRTHDAY = "birthday";
+        public static final String COLUMN_AVATAR = "avatar";
+        public static final String COLUMN_EMAIL = "email";
+        public static final String COLUMN_GENDER = "gender";
     }
 }

@@ -30,6 +30,7 @@
             android:background="#141414">
 
             <TextView
+                android:id="@+id/tvCancel"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="16dp"
@@ -41,12 +42,13 @@
                 android:textSize="16sp" />
 
             <TextView
+                android:id="@+id/tvChoose"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="16dp"
-                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
                 android:layout_weight="1"
-                android:gravity="center_vertical"
+                android:gravity="center_vertical|right"
                 android:text="Choose"
                 android:textColor="#FFFFFF"
                 android:textSize="16sp" />

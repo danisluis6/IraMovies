@@ -28,7 +28,7 @@
         android:layout_height="match_parent">
 
         <fragment
-            android:name="vn.enclave.iramovies.ui.views.ProfileFragment"
+            android:name="vn.enclave.iramovies.ui.activities.base.Profile.fragments.ProfileFragment"
             android:layout_width="320dp"
             android:layout_height="match_parent"/>
 

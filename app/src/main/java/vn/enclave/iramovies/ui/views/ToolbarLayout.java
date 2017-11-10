@@ -5,7 +5,6 @@ import android.graphics.Color;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.constraint.ConstraintLayout;
-import android.support.v7.widget.ActionMenuView;
 import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -19,7 +18,7 @@ import java.lang.reflect.Field;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import vn.enclave.iramovies.R;
-import vn.enclave.iramovies.utilities.Constant;
+import vn.enclave.iramovies.utilities.Constants;
 
 /**
  * @Run: https://stackoverflow.com/questions/2335813/how-to-inflate-one-view-with-a-layout
@@ -50,7 +49,7 @@ public class ToolbarLayout extends ConstraintLayout{
     private void initViews() {
         // Default information Toolbar
         mToolbar.setNavigationIcon(R.drawable.ic_menu);
-        mToolbar.setTitle(Constant.ToolbarLayoutInfo._TITLE);
+        mToolbar.setTitle(Constants.ToolbarLayoutInfo._TITLE);
         getTitleTextView(mToolbar).setTextColor(Color.WHITE);
         getTitleTextView(mToolbar).setPadding(0,0,0, 8);
         /**

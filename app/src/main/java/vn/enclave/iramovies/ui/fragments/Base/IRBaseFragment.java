@@ -1,6 +1,7 @@
 package vn.enclave.iramovies.ui.fragments.Base;
 
 import android.app.Fragment;
+import android.arch.persistence.room.Room;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,8 @@ import android.view.ViewGroup;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import vn.enclave.iramovies.local.storage.AppDatabase;
+import vn.enclave.iramovies.ui.activities.base.BaseView;
 
 /**
  * Created by lorence on 08/11/2017.
@@ -17,14 +20,21 @@ import butterknife.Unbinder;
 
 public abstract class IRBaseFragment extends Fragment{
 
+    /**
+     * Container activity
+     */
+    protected BaseView mActivity;
     private Unbinder mUnbinder;
     private View mView;
+    protected AppDatabase mAppDatabase;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        fragmentCreated();
+        mActivity = (BaseView)this.getActivity();
+        mAppDatabase = Room.databaseBuilder(mActivity, AppDatabase.class, AppDatabase.DB_NAME).build();
         mView = getViewLayout(inflater, container, savedInstanceState);
         mUnbinder = ButterKnife.bind(this, mView);
+        fragmentCreated();
         return mView;
     }
 

@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
@@ -37,33 +38,33 @@ import vn.enclave.iramovies.utilities.Utils;
 
 public class HomeView extends BaseView {
 
+    private static int mCurrentPage;
     @BindView(R.id.drawer_layout)
     public DrawerLayout mDrawerLayout;
-
     @BindView(R.id.profile)
     public LinearLayout mDrawerList;
-
     @BindView(R.id.main_content)
     public View mMainContent;
-
     @BindView(R.id.toolbar_layout)
     public ToolbarLayout mToolbar;
-
     @BindView(R.id.viewpaper_content)
     public ViewPager mViewPager;
-
     @BindView(R.id.vpMovies)
     public LinearLayout vpMovies;
-
     @BindView(R.id.vpFavorites)
     public LinearLayout vpFavorites;
-
     @BindView(R.id.vpSettings)
     public LinearLayout vpSettings;
-
     @BindView(R.id.vpAbout)
     public LinearLayout vpAbout;
-
+    @BindView(R.id.vpMoviesLine)
+    public View vpMoviesLine;
+    @BindView(R.id.vpFavoritesLine)
+    public View vpFavoritesLine;
+    @BindView(R.id.vpSettingsLine)
+    public View vpSettingsLine;
+    @BindView(R.id.vpAboutLine)
+    public View vpAboutLine;
     private float mLastTranslate = 0.0f;
     private ActionBarDrawerToggle mDrawerToggle;
 
@@ -81,10 +82,20 @@ public class HomeView extends BaseView {
         setupDrawerToggle();
         //noinspection deprecation
         mDrawerLayout.setDrawerListener(mDrawerToggle);
-
         // init Fragments in ViewPaper
         initialPages();
+        resetLayoutView();
+        vpMoviesLine.setVisibility(View.VISIBLE);
     }
+
+    private void resetLayoutView() {
+        vpAboutLine.setVisibility(View.GONE);
+        vpMoviesLine.setVisibility(View.GONE);
+        vpFavoritesLine.setVisibility(View.GONE);
+        vpSettingsLine.setVisibility(View.GONE);
+    }
+
+    private float mStartPoint, mEndPoint;
 
     public void initialPages() {
         List<Fragment> fragments = new Vector<>();
@@ -94,10 +105,38 @@ public class HomeView extends BaseView {
         fragments.add(Fragment.instantiate(mContext, AboutFragment.class.getName()));
 
         mViewPager.setAdapter(new PaperAdapter(getSupportFragmentManager(), fragments));
+        mCurrentPage = mViewPager.getCurrentItem();
 
+        /*
+         * @Run: https://stackoverflow.com/questions/8117523/how-do-you-get-the-current-page-number-of-a-viewpager-for-android
+         * => Done
+         *
+         * @Run: https://stackoverflow.com/questions/15002339/android-viewpager-detect-page-scroll-state
+         * => Done
+         *
+         * @Run: https://stackoverflow.com/questions/6645537/how-to-detect-the-swipe-left-or-right-in-android
+         * => Done
+         *
+         * @Run: https://www.google.com/search?q=PagerTabStrip+example+android&client=ubuntu&hs=pk8&channel=fs&source=lnms&tbm=isch&sa=X&ved=0ahUKEwjx2eCI17rXAhWGx7wKHXfOCB8Q_AUICigB&biw=1855&bih=983
+         *
+         */
         mViewPager.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
+                switch(motionEvent.getAction())
+                {
+                    case MotionEvent.ACTION_DOWN:
+                        mStartPoint = motionEvent.getX();
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        mEndPoint = motionEvent.getX();
+                        float deltaX = mEndPoint - mStartPoint;
+                        if (Math.abs(deltaX) > 150) {
+                            // mViewPager.addOnPageChangeListener(new PageListener());
+                            Utils.Toast.showToast(mContext, "Left to Right");
+                        }
+                        break;
+                }
                 return false;
             }
         });
@@ -148,16 +187,30 @@ public class HomeView extends BaseView {
         switch (view.getId()) {
             case R.id.vpMovies:
                 mViewPager.setCurrentItem(Constants.MOVIES_INDEX, true);
+                resetLayoutView();
+                vpMoviesLine.setVisibility(View.VISIBLE);
                 break;
             case R.id.vpFavorites:
                 mViewPager.setCurrentItem(Constants.FAVORITES_INDEX, true);
+                resetLayoutView();
+                vpFavoritesLine.setVisibility(View.VISIBLE);
                 break;
             case R.id.vpSettings:
                 mViewPager.setCurrentItem(Constants.SETTING_INDEX, true);
+                resetLayoutView();
+                vpSettingsLine.setVisibility(View.VISIBLE);
                 break;
             case R.id.vpAbout:
                 mViewPager.setCurrentItem(Constants.ABOUT_INDEX, true);
+                resetLayoutView();
+                vpAboutLine.setVisibility(View.VISIBLE);
                 break;
+        }
+    }
+
+    private static class PageListener extends ViewPager.SimpleOnPageChangeListener {
+        public void onPageSelected(int position) {
+            mCurrentPage = position;
         }
     }
 }

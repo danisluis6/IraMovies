@@ -4,32 +4,33 @@ import android.annotation.SuppressLint;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.TranslateAnimation;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import java.util.List;
 import java.util.Vector;
 
 import butterknife.BindView;
-import butterknife.OnClick;
+import butterknife.ButterKnife;
 import vn.enclave.iramovies.R;
 import vn.enclave.iramovies.ui.activities.base.BaseView;
-import vn.enclave.iramovies.ui.activities.base.Home.adapters.PaperAdapter;
+import vn.enclave.iramovies.ui.activities.base.Home.adapters.SectionPaperAdapter;
 import vn.enclave.iramovies.ui.fragments.About.AboutFragment;
 import vn.enclave.iramovies.ui.fragments.Favorite.FavoriteFragment;
 import vn.enclave.iramovies.ui.fragments.Movie.MovieFragment;
 import vn.enclave.iramovies.ui.fragments.Setting.SettingFragment;
+import vn.enclave.iramovies.ui.views.TabItem;
 import vn.enclave.iramovies.ui.views.ToolbarLayout;
-import vn.enclave.iramovies.utilities.Constants;
-import vn.enclave.iramovies.utilities.Utils;
 
 
 /**
@@ -38,7 +39,6 @@ import vn.enclave.iramovies.utilities.Utils;
 
 public class HomeView extends BaseView {
 
-    private static int mCurrentPage;
     @BindView(R.id.drawer_layout)
     public DrawerLayout mDrawerLayout;
     @BindView(R.id.profile)
@@ -49,22 +49,8 @@ public class HomeView extends BaseView {
     public ToolbarLayout mToolbar;
     @BindView(R.id.viewpaper_content)
     public ViewPager mViewPager;
-    @BindView(R.id.vpMovies)
-    public LinearLayout vpMovies;
-    @BindView(R.id.vpFavorites)
-    public LinearLayout vpFavorites;
-    @BindView(R.id.vpSettings)
-    public LinearLayout vpSettings;
-    @BindView(R.id.vpAbout)
-    public LinearLayout vpAbout;
-    @BindView(R.id.vpMoviesLine)
-    public View vpMoviesLine;
-    @BindView(R.id.vpFavoritesLine)
-    public View vpFavoritesLine;
-    @BindView(R.id.vpSettingsLine)
-    public View vpSettingsLine;
-    @BindView(R.id.vpAboutLine)
-    public View vpAboutLine;
+    @BindView(R.id.tbBottomBar)
+    public TabLayout tabNavigationBottomMenu;
     private float mLastTranslate = 0.0f;
     private ActionBarDrawerToggle mDrawerToggle;
 
@@ -80,33 +66,46 @@ public class HomeView extends BaseView {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         setupDrawerToggle();
-        //noinspection deprecation
+        // noinspection deprecation
         mDrawerLayout.setDrawerListener(mDrawerToggle);
         // init Fragments in ViewPaper
         initialPages();
-        resetLayoutView();
-        vpMoviesLine.setVisibility(View.VISIBLE);
+        addViews();
+
     }
 
-    private void resetLayoutView() {
-        vpAboutLine.setVisibility(View.GONE);
-        vpMoviesLine.setVisibility(View.GONE);
-        vpFavoritesLine.setVisibility(View.GONE);
-        vpSettingsLine.setVisibility(View.GONE);
-    }
+    private void addViews() {
+        TabItem moviesTab = new TabItem(mContext, null);
+        moviesTab.setTabIcon(R.drawable.ic_movies);
+        moviesTab.setTabText(getResources().getStringArray(R.array.menu_bottom_nav)[0]);
+        tabNavigationBottomMenu.getTabAt(0).setCustomView(moviesTab.getView());
 
-    private float mStartPoint, mEndPoint;
+        TabItem favoritesTab = new TabItem(mContext, null);
+        favoritesTab.setTabIcon(R.drawable.ic_favorite);
+        favoritesTab.setTabText(getResources().getStringArray(R.array.menu_bottom_nav)[1]);
+        // tabNavigationBottomMenu.addTab(tabNavigationBottomMenu.newTab().setCustomView(favoritesTab)); // Add new => Custom => Line 2
+        tabNavigationBottomMenu.getTabAt(1).setCustomView(favoritesTab.getView());
+
+
+        TabItem settingsTab = new TabItem(mContext, null);
+        settingsTab.setTabIcon(R.drawable.ic_settings);
+        settingsTab.setTabText(getResources().getStringArray(R.array.menu_bottom_nav)[2]);
+        tabNavigationBottomMenu.getTabAt(2).setCustomView(settingsTab.getView());
+
+        TabItem aboutsTab = new TabItem(mContext, null);
+        aboutsTab.setTabIcon(R.drawable.ic_about);
+        aboutsTab.setTabText(getResources().getStringArray(R.array.menu_bottom_nav)[3]);
+        tabNavigationBottomMenu.getTabAt(3).setCustomView(aboutsTab.getView());
+    }
 
     public void initialPages() {
         List<Fragment> fragments = new Vector<>();
         fragments.add(MovieFragment.instantiate(mContext, MovieFragment.class.getName()));
         fragments.add(FavoriteFragment.instantiate(mContext, FavoriteFragment.class.getName()));
-        fragments.add(Fragment.instantiate(mContext, SettingFragment.class.getName()));
-        fragments.add(Fragment.instantiate(mContext, AboutFragment.class.getName()));
-
-        mViewPager.setAdapter(new PaperAdapter(getSupportFragmentManager(), fragments));
-        mCurrentPage = mViewPager.getCurrentItem();
-
+        fragments.add(SettingFragment.instantiate(mContext, SettingFragment.class.getName()));
+        fragments.add(AboutFragment.instantiate(mContext, AboutFragment.class.getName()));
+        mViewPager.setAdapter(new SectionPaperAdapter(mContext, getSupportFragmentManager(), fragments));
+        tabNavigationBottomMenu.setupWithViewPager(mViewPager);
         /*
          * @Run: https://stackoverflow.com/questions/8117523/how-do-you-get-the-current-page-number-of-a-viewpager-for-android
          * => Done
@@ -118,28 +117,8 @@ public class HomeView extends BaseView {
          * => Done
          *
          * @Run: https://www.google.com/search?q=PagerTabStrip+example+android&client=ubuntu&hs=pk8&channel=fs&source=lnms&tbm=isch&sa=X&ved=0ahUKEwjx2eCI17rXAhWGx7wKHXfOCB8Q_AUICigB&biw=1855&bih=983
-         *
+         * => Done
          */
-        mViewPager.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                switch(motionEvent.getAction())
-                {
-                    case MotionEvent.ACTION_DOWN:
-                        mStartPoint = motionEvent.getX();
-                        break;
-                    case MotionEvent.ACTION_UP:
-                        mEndPoint = motionEvent.getX();
-                        float deltaX = mEndPoint - mStartPoint;
-                        if (Math.abs(deltaX) > 150) {
-                            // mViewPager.addOnPageChangeListener(new PageListener());
-                            Utils.Toast.showToast(mContext, "Left to Right");
-                        }
-                        break;
-                }
-                return false;
-            }
-        });
     }
 
     @Override
@@ -177,40 +156,5 @@ public class HomeView extends BaseView {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.toolbar_menu, menu);
         return true;
-    }
-
-    @OnClick({R.id.vpMovies, R.id.vpFavorites, R.id.vpSettings, R.id.vpAbout})
-    public void onClick(View view) {
-        if (Utils.isDoubleClick()) {
-            return;
-        }
-        switch (view.getId()) {
-            case R.id.vpMovies:
-                mViewPager.setCurrentItem(Constants.MOVIES_INDEX, true);
-                resetLayoutView();
-                vpMoviesLine.setVisibility(View.VISIBLE);
-                break;
-            case R.id.vpFavorites:
-                mViewPager.setCurrentItem(Constants.FAVORITES_INDEX, true);
-                resetLayoutView();
-                vpFavoritesLine.setVisibility(View.VISIBLE);
-                break;
-            case R.id.vpSettings:
-                mViewPager.setCurrentItem(Constants.SETTING_INDEX, true);
-                resetLayoutView();
-                vpSettingsLine.setVisibility(View.VISIBLE);
-                break;
-            case R.id.vpAbout:
-                mViewPager.setCurrentItem(Constants.ABOUT_INDEX, true);
-                resetLayoutView();
-                vpAboutLine.setVisibility(View.VISIBLE);
-                break;
-        }
-    }
-
-    private static class PageListener extends ViewPager.SimpleOnPageChangeListener {
-        public void onPageSelected(int position) {
-            mCurrentPage = position;
-        }
     }
 }

@@ -2,4 +2,11 @@
     <string name="app_name">IraMovies</string>
     <string name="image_description">Informations about image</string>
     <string name="announce_update_info_account">Please update your information before using application!</string>
+
+    <array name="menu_bottom_nav">
+        <item name="movies">Movies</item>
+        <item name="favorites">Favorites</item>
+        <item name="settings">Settings</item>
+        <item name="about">About</item>
+    </array>
 </resources>

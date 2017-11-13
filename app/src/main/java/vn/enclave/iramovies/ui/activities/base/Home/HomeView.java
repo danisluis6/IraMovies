@@ -9,19 +9,15 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.animation.TranslateAnimation;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import java.util.List;
 import java.util.Vector;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import vn.enclave.iramovies.R;
 import vn.enclave.iramovies.ui.activities.base.BaseView;
 import vn.enclave.iramovies.ui.activities.base.Home.adapters.SectionPaperAdapter;

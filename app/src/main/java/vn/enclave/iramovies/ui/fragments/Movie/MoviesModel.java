@@ -6,4 +6,6 @@ package vn.enclave.iramovies.ui.fragments.Movie;
  */
 
 public class MoviesModel {
+
+
 }

@@ -9,4 +9,11 @@
         <item name="settings">Settings</item>
         <item name="about">About</item>
     </array>
+
+
+    <!-- Info movie_card_view -->
+    <string name="release_date">Release date:</string>
+    <string name="rating">Rating:</string>
+    <string name="overview">Overview:</string>
+
 </resources>

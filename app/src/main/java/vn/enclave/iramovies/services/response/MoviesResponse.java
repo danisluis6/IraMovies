@@ -9,19 +9,52 @@ import com.google.gson.annotations.SerializedName;
  */
 
 public class MoviesResponse {
-    @SerializedName("error")
-    @Expose
-    private Error error;
-    @SerializedName("data")
-    @Expose
-    private InboxData data;
 
+    @SerializedName("page")
+    @Expose
+    private Integer page;
 
-    public Error getError() {
-        return error;
+    @SerializedName("results")
+    @Expose
+    private MoviesData results;
+
+    @SerializedName("total_results")
+    @Expose
+    private Integer totalResults;
+
+    @SerializedName("total_pages")
+    @Expose
+    private Integer totalPages;
+
+    public Integer getPage() {
+        return page;
     }
 
-    public InboxData getData() {
-        return data;
+    public void setPage(Integer page) {
+        this.page = page;
+    }
+
+    public MoviesData getResults() {
+        return results;
+    }
+
+    public void setResults(MoviesData results) {
+        this.results = results;
+    }
+
+    public Integer getTotalResults() {
+        return totalResults;
+    }
+
+    public void setTotalResults(Integer totalResults) {
+        this.totalResults = totalResults;
+    }
+
+    public Integer getTotalPages() {
+        return totalPages;
+    }
+
+    public void setTotalPages(Integer totalPages) {
+        this.totalPages = totalPages;
     }
 }

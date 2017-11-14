@@ -3,6 +3,132 @@
 
     <item
         is-multidex="false"
+        jar="/home/lorence/.android/build-cache/9ed7f26523b475c852a0358f71577bb1a62708ed/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="8602ab07133e6ee182726fa27588420dba9d6d55">
+        <dex dex="/home/lorence/Documents/IraMovies/app/build/intermediates/pre-dexed/debug/classes_30aaa2f9903050d3bc44a20aef623febcc1c3616.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/lorence/.android/build-cache/cdf11432e5ff19589355e54a8222d768ca7ba2be/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="bd57e6d90e63921172b30ca28af527267e6d213d">
+        <dex dex="/home/lorence/Documents/IraMovies/app/build/intermediates/pre-dexed/debug/classes_185807c423716e539692c16abb4625d937933ee2.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/lorence/.android/build-cache/52690d04ecee46c99c6d41609e639c5ac340f7bb/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="2520dd452fb1f487eba29ccd2d44358f0b8da788">
+        <dex dex="/home/lorence/Documents/IraMovies/app/build/intermediates/pre-dexed/debug/classes_392697101393bb2b44664124540487af74a401b9.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/lorence/.gradle/wrapper/dists/gradle-2.14.1-all/caches/modules-2/files-2.1/com.google.code.gson/gson/2.7/751f548c85fa49f330cecbb1875893f971b33c4e/gson-2.7.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="751f548c85fa49f330cecbb1875893f971b33c4e">
+        <dex dex="/home/lorence/Documents/IraMovies/app/build/intermediates/pre-dexed/debug/gson-2.7_c85259bce5566dee3e3c7397c8c39a855c635c5c.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/lorence/.gradle/wrapper/dists/gradle-2.14.1-all/caches/modules-2/files-2.1/com.jakewharton/butterknife-annotations/8.8.1/bc373fb6bc7bca3035041b924f158fd2b946ee8d/butterknife-annotations-8.8.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="bc373fb6bc7bca3035041b924f158fd2b946ee8d">
+        <dex dex="/home/lorence/Documents/IraMovies/app/build/intermediates/pre-dexed/debug/butterknife-annotations-8.8.1_e407de79331acc8720a3ba5b8032c15c70f0e60f.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/lorence/.android/build-cache/7c4be290aec010bd8b9fd3a180b050be7d71f0bc/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="ba181b635dc40ba213e382e67397df779f7665b7">
+        <dex dex="/home/lorence/Documents/IraMovies/app/build/intermediates/pre-dexed/debug/classes_f5ce08e945d06779f3feb8ceaf3ed1efe046d308.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/lorence/.gradle/wrapper/dists/gradle-2.14.1-all/caches/modules-2/files-2.1/com.squareup.retrofit2/converter-scalars/2.1.0/7c0d7c8f6e52115bb82fa018d81a8d0cae35dde5/converter-scalars-2.1.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="7c0d7c8f6e52115bb82fa018d81a8d0cae35dde5">
+        <dex dex="/home/lorence/Documents/IraMovies/app/build/intermediates/pre-dexed/debug/converter-scalars-2.1.0_4385761f3be281a91c32486b870e36e21af95165.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/lorence/.gradle/wrapper/dists/gradle-2.14.1-all/caches/modules-2/files-2.1/com.squareup.retrofit2/retrofit/2.1.0/2de7cd8b95b7021b1d597f049bcb422055119f2c/retrofit-2.1.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="2de7cd8b95b7021b1d597f049bcb422055119f2c">
+        <dex dex="/home/lorence/Documents/IraMovies/app/build/intermediates/pre-dexed/debug/retrofit-2.1.0_07bf148e99b78efc0d40d0ebf8a05254e34e3d2f.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/lorence/.gradle/wrapper/dists/gradle-2.14.1-all/caches/modules-2/files-2.1/com.squareup.okhttp3/logging-interceptor/3.4.1/381fc1096ba65040d8e80ea43b2e1d9bad02345e/logging-interceptor-3.4.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="381fc1096ba65040d8e80ea43b2e1d9bad02345e">
+        <dex dex="/home/lorence/Documents/IraMovies/app/build/intermediates/pre-dexed/debug/logging-interceptor-3.4.1_0ff09748ac2df7f5c5470b5811a962f053ba6c9e.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/lorence/.android/build-cache/079d1f175e93292a3768bf09a9a2e1f8caa305b7/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="f7b86f1beb2b3625c6a1a5da6b5fc5294b64aea9">
+        <dex dex="/home/lorence/Documents/IraMovies/app/build/intermediates/pre-dexed/debug/classes_d6b2a61c4b4f0483465131c2b94c1ba6041a3f36.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/lorence/.gradle/wrapper/dists/gradle-2.14.1-all/caches/modules-2/files-2.1/android.arch.persistence.room/common/1.0.0-alpha1/4fb1be8519a8e9d931945beaee734dd7c1691462/common-1.0.0-alpha1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="4fb1be8519a8e9d931945beaee734dd7c1691462">
+        <dex dex="/home/lorence/Documents/IraMovies/app/build/intermediates/pre-dexed/debug/common-1.0.0-alpha1_f7145fbbbca614936c8b77be652b36506499df8c.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/lorence/.android/build-cache/f486b345f9bcc9a1a079c62ea7dc6cd24299acd0/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="f80ef3e88d53cd67f09ae860e9e95967108f5cb2">
+        <dex dex="/home/lorence/Documents/IraMovies/app/build/intermediates/pre-dexed/debug/classes_52bcbda8fe31331ab2786f4cda8290aca8abdd80.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/lorence/.gradle/wrapper/dists/gradle-2.14.1-all/caches/modules-2/files-2.1/com.squareup.retrofit2/converter-gson/2.1.0/aa557d71ead91cbf26e0c316a0f593d168303309/converter-gson-2.1.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="aa557d71ead91cbf26e0c316a0f593d168303309">
+        <dex dex="/home/lorence/Documents/IraMovies/app/build/intermediates/pre-dexed/debug/converter-gson-2.1.0_c3b18e45379183f1962d62ff7bd73ba17dcbbcf2.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/lorence/.android/build-cache/87924357c3f286a360622791501ed3918164b08b/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="a8655e6077da9526c0c94bf063f1275430ce8574">
+        <dex dex="/home/lorence/Documents/IraMovies/app/build/intermediates/pre-dexed/debug/classes_e7658bea49d58e8ddf88b77b5e2ec851ac2ceed0.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="/home/lorence/.android/build-cache/89fa5d2eae33962941d1fb1211fd50155b5d20e5/output/jars/classes.jar"
         jumboMode="false"
         optimize="true"
@@ -39,6 +165,15 @@
     </item>
     <item
         is-multidex="false"
+        jar="/home/lorence/.gradle/wrapper/dists/gradle-2.14.1-all/caches/modules-2/files-2.1/com.squareup.okio/okio/1.9.0/f824591a0016efbaeddb8300bee54832a1398cfa/okio-1.9.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="f824591a0016efbaeddb8300bee54832a1398cfa">
+        <dex dex="/home/lorence/Documents/IraMovies/app/build/intermediates/pre-dexed/debug/okio-1.9.0_f9016bf41a4c826233028e2b5d0e4bb2e4f130ec.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="/home/lorence/.gradle/wrapper/dists/gradle-2.14.1-all/caches/modules-2/files-2.1/android.arch.lifecycle/common/1.0.0-alpha1/dddb0f589fc65ed3a262d1a90f4d61af6891776a/common-1.0.0-alpha1.jar"
         jumboMode="false"
         optimize="true"
@@ -66,48 +201,12 @@
     </item>
     <item
         is-multidex="false"
-        jar="/home/lorence/.android/build-cache/9ed7f26523b475c852a0358f71577bb1a62708ed/output/jars/classes.jar"
+        jar="/home/lorence/.gradle/wrapper/dists/gradle-2.14.1-all/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp/3.4.1/c7c4f9e35c2fd5900da24f9872e3971801f08ce0/okhttp-3.4.1.jar"
         jumboMode="false"
         optimize="true"
         revision="26.0.1"
-        sha1="8602ab07133e6ee182726fa27588420dba9d6d55">
-        <dex dex="/home/lorence/Documents/IraMovies/app/build/intermediates/pre-dexed/debug/classes_30aaa2f9903050d3bc44a20aef623febcc1c3616.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/lorence/.android/build-cache/cdf11432e5ff19589355e54a8222d768ca7ba2be/output/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="26.0.1"
-        sha1="bd57e6d90e63921172b30ca28af527267e6d213d">
-        <dex dex="/home/lorence/Documents/IraMovies/app/build/intermediates/pre-dexed/debug/classes_185807c423716e539692c16abb4625d937933ee2.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/lorence/.android/build-cache/52690d04ecee46c99c6d41609e639c5ac340f7bb/output/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="26.0.1"
-        sha1="2520dd452fb1f487eba29ccd2d44358f0b8da788">
-        <dex dex="/home/lorence/Documents/IraMovies/app/build/intermediates/pre-dexed/debug/classes_392697101393bb2b44664124540487af74a401b9.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/lorence/.gradle/wrapper/dists/gradle-2.14.1-all/caches/modules-2/files-2.1/com.jakewharton/butterknife-annotations/8.8.1/bc373fb6bc7bca3035041b924f158fd2b946ee8d/butterknife-annotations-8.8.1.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="26.0.1"
-        sha1="bc373fb6bc7bca3035041b924f158fd2b946ee8d">
-        <dex dex="/home/lorence/Documents/IraMovies/app/build/intermediates/pre-dexed/debug/butterknife-annotations-8.8.1_e407de79331acc8720a3ba5b8032c15c70f0e60f.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/lorence/.android/build-cache/7c4be290aec010bd8b9fd3a180b050be7d71f0bc/output/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="26.0.1"
-        sha1="ba181b635dc40ba213e382e67397df779f7665b7">
-        <dex dex="/home/lorence/Documents/IraMovies/app/build/intermediates/pre-dexed/debug/classes_f5ce08e945d06779f3feb8ceaf3ed1efe046d308.jar" />
+        sha1="c7c4f9e35c2fd5900da24f9872e3971801f08ce0">
+        <dex dex="/home/lorence/Documents/IraMovies/app/build/intermediates/pre-dexed/debug/okhttp-3.4.1_4a638f82a2a436aa4457c367e362744dc937c6c7.jar" />
     </item>
     <item
         is-multidex="false"
@@ -129,6 +228,24 @@
     </item>
     <item
         is-multidex="false"
+        jar="/home/lorence/.android/build-cache/8ae0eba8b59b65a49ea167a4bf6c564577a53625/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="6fdbd1bd6503815f2cef20a9a137005e5953aad1">
+        <dex dex="/home/lorence/Documents/IraMovies/app/build/intermediates/pre-dexed/debug/classes_fd16351e9620f8082628060481ab9eaa48d38f9d.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/lorence/.gradle/wrapper/dists/gradle-2.14.1-all/caches/modules-2/files-2.1/com.github.bumptech.glide/glide/3.7.0/9e9eeaf9948ee4d6c3ab354e8dc14368f16994a4/glide-3.7.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="9e9eeaf9948ee4d6c3ab354e8dc14368f16994a4">
+        <dex dex="/home/lorence/Documents/IraMovies/app/build/intermediates/pre-dexed/debug/glide-3.7.0_4b33c46a487ba3b81444f3fbb8b0b645505707e0.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="/home/lorence/.android/build-cache/025ec997fa068335458608070c957172948d54ae/output/jars/classes.jar"
         jumboMode="false"
         optimize="true"
@@ -138,39 +255,12 @@
     </item>
     <item
         is-multidex="false"
-        jar="/home/lorence/.android/build-cache/079d1f175e93292a3768bf09a9a2e1f8caa305b7/output/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="26.0.1"
-        sha1="f7b86f1beb2b3625c6a1a5da6b5fc5294b64aea9">
-        <dex dex="/home/lorence/Documents/IraMovies/app/build/intermediates/pre-dexed/debug/classes_d6b2a61c4b4f0483465131c2b94c1ba6041a3f36.jar" />
-    </item>
-    <item
-        is-multidex="false"
         jar="/home/lorence/.android/build-cache/4940961bbb980ab9040a27b585a8d0a7e5c72b93/output/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="26.0.1"
         sha1="13b31fe5f2e97c9fa36b4716cf32c59afb5603b4">
         <dex dex="/home/lorence/Documents/IraMovies/app/build/intermediates/pre-dexed/debug/classes_2f0e92f02074582a67d7a8370dd9219e7c52dec6.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/lorence/.gradle/wrapper/dists/gradle-2.14.1-all/caches/modules-2/files-2.1/android.arch.persistence.room/common/1.0.0-alpha1/4fb1be8519a8e9d931945beaee734dd7c1691462/common-1.0.0-alpha1.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="26.0.1"
-        sha1="4fb1be8519a8e9d931945beaee734dd7c1691462">
-        <dex dex="/home/lorence/Documents/IraMovies/app/build/intermediates/pre-dexed/debug/common-1.0.0-alpha1_f7145fbbbca614936c8b77be652b36506499df8c.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/lorence/.android/build-cache/f486b345f9bcc9a1a079c62ea7dc6cd24299acd0/output/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="26.0.1"
-        sha1="f80ef3e88d53cd67f09ae860e9e95967108f5cb2">
-        <dex dex="/home/lorence/Documents/IraMovies/app/build/intermediates/pre-dexed/debug/classes_52bcbda8fe31331ab2786f4cda8290aca8abdd80.jar" />
     </item>
     <item
         is-multidex="false"
@@ -189,15 +279,6 @@
         revision="26.0.1"
         sha1="d30ac0c26495d7264529e333cec806eec64dd6f3">
         <dex dex="/home/lorence/Documents/IraMovies/app/build/intermediates/pre-dexed/debug/classes_895b959336b4795036487f528095ae7346f7979d.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/lorence/.android/build-cache/87924357c3f286a360622791501ed3918164b08b/output/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="26.0.1"
-        sha1="a8655e6077da9526c0c94bf063f1275430ce8574">
-        <dex dex="/home/lorence/Documents/IraMovies/app/build/intermediates/pre-dexed/debug/classes_e7658bea49d58e8ddf88b77b5e2ec851ac2ceed0.jar" />
     </item>
     <item
         is-multidex="false"

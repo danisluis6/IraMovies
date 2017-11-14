@@ -79,7 +79,6 @@ public class HomeView extends BaseView {
         TabItem favoritesTab = new TabItem(mContext, null);
         favoritesTab.setTabIcon(R.drawable.ic_favorite);
         favoritesTab.setTabText(getResources().getStringArray(R.array.menu_bottom_nav)[1]);
-        // tabNavigationBottomMenu.addTab(tabNavigationBottomMenu.newTab().setCustomView(favoritesTab)); // Add new => Custom => Line 2
         tabNavigationBottomMenu.getTabAt(1).setCustomView(favoritesTab.getView());
 
 

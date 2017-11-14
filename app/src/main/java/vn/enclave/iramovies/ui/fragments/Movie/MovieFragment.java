@@ -66,21 +66,17 @@ public class MovieFragment extends IRBaseFragment implements IMoviesView {
     }
 
     public void getMoviesFromApi() {
-        if(handleData(mGroupMovies)) {
-          mMoviesPresenter.getMoviesFromApi();
-        }
+        handleData(mGroupMovies);
     }
 
-    private boolean handleData(List<Movie> movies) {
+    private void handleData(List<Movie> movies) {
         if (Utils.isInternetOn(mActivity)) {
-            return true;
+            mMoviesPresenter.getMoviesFromApi();
         } else {
             if (movies.isEmpty()) {
                 mFailureLayout.setFailureMessage(getResources().getString(R.string.no_internet_connection));
-                return false;
             } else {
                 Utils.Toast.showToast(mActivity, getString(R.string.no_internet_connection));
-                return false;
             }
         }
     }
@@ -102,7 +98,6 @@ public class MovieFragment extends IRBaseFragment implements IMoviesView {
         mDiaLoadView.show();
     }
 
-
     @Override
     public void showProgressDialog() {
         if (!mDiaLoadView.isShowing()) {
@@ -119,7 +114,7 @@ public class MovieFragment extends IRBaseFragment implements IMoviesView {
 
     @Override
     public void onSuccess(List<Movie> movies) {
-
+        mMoviesAdapter.setMovies(movies);
     }
 
     @Override

@@ -59,6 +59,11 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
         return mGrouMovies.size();
     }
 
+    public void setMovies(List<Movie> movies) {
+        this.mGrouMovies = movies;
+        notifyDataSetChanged();
+    }
+
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
@@ -80,20 +85,6 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
         public ViewHolder(View view){
             super(view);
             ButterKnife.bind(this, view);
-            /*view.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v){
-                    int pos = getAdapterPosition();
-                    if (pos != RecyclerView.NO_POSITION){
-                        Movie clickedDataItem = movieList.get(pos);
-                        Intent intent = new Intent(mContext, DetailActivity.class);
-                        intent.putExtra("movies", clickedDataItem );
-                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        mContext.startActivity(intent);
-                        Toast.makeText(v.getContext(), "You clicked " + clickedDataItem.getOriginalTitle(), Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });*/
         }
     }
 

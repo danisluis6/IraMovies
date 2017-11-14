@@ -58,7 +58,7 @@ public class MoviesModel implements IMoviesModel {
                     MoviesResponse moviesResponse = response.body();
                     if (moviesResponse != null) {
                         List<Movie> grouMoviesDatas = moviesResponse.getResults();
-
+                        mIMoviesPresenter.onSuccess(grouMoviesDatas);
                     }
                 } else  {
                     mIMoviesPresenter.onFailure(mContext.getString(R.string.cannot_get_data));

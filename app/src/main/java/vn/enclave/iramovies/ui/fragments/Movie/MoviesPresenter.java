@@ -42,18 +42,24 @@ public class MoviesPresenter implements IMoviesPresenter {
     @Override
     public void getMoviesFromApi() {
         if (mIMoviesView != null) {
-            // mIMoviesView.showProgressDialog();
+            mIMoviesView.showProgressDialog();
             mInboxModel.getMoviesFromApi();
         }
     }
 
     @Override
     public void onSuccess(List<Movie> movies) {
-
+        if (mIMoviesView != null) {
+            mIMoviesView.dismissProgressDialog();
+            mIMoviesView.onSuccess(movies);
+        }
     }
 
     @Override
     public void onFailure(String message) {
-
+        if (mIMoviesView != null) {
+            mIMoviesView.dismissProgressDialog();
+            mIMoviesView.onFailure(message);
+        }
     }
 }

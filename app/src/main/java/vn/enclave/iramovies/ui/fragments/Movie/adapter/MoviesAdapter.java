@@ -15,9 +15,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import vn.enclave.iramovies.R;
-import vn.enclave.iramovies.local.storage.entity.Movie;
 import vn.enclave.iramovies.services.IraMoviesInfoAPIs;
-import vn.enclave.iramovies.ui.views.LoadView;
+import vn.enclave.iramovies.services.response.Movie;
 import vn.enclave.iramovies.utilities.Constants;
 
 /**

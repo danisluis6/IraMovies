@@ -3,6 +3,8 @@ package vn.enclave.iramovies.services.response;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 /**
  *
  * Created by lorence on 13/11/2017.
@@ -16,7 +18,7 @@ public class MoviesResponse {
 
     @SerializedName("results")
     @Expose
-    private MoviesData results;
+    private List<Movie> results;
 
     @SerializedName("total_results")
     @Expose
@@ -34,14 +36,6 @@ public class MoviesResponse {
         this.page = page;
     }
 
-    public MoviesData getResults() {
-        return results;
-    }
-
-    public void setResults(MoviesData results) {
-        this.results = results;
-    }
-
     public Integer getTotalResults() {
         return totalResults;
     }
@@ -56,5 +50,13 @@ public class MoviesResponse {
 
     public void setTotalPages(Integer totalPages) {
         this.totalPages = totalPages;
+    }
+
+    public List<Movie> getResults() {
+        return results;
+    }
+
+    public void setResults(List<Movie> results) {
+        this.results = results;
     }
 }

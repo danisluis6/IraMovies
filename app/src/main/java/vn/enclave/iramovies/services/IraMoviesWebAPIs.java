@@ -27,7 +27,7 @@ public interface IraMoviesWebAPIs {
      * => Done
      */
     @GET(IraMoviesInfoAPIs.Catogories.Popular)
-    Call<MoviesResponse> getPopularMovies(@Query(IraMoviesInfoAPIs.Fields.API_KEY) String apiKey);
+    Call<MoviesResponse> getPopularMovies(@Query(IraMoviesInfoAPIs.Fields.API_KEY) String apiKey, @Query(IraMoviesInfoAPIs.Fields.PAGE) int page);
 
     /**
      * Get Top Rated Movies

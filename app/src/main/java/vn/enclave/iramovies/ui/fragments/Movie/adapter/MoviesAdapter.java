@@ -1,12 +1,13 @@
 package vn.enclave.iramovies.ui.fragments.Movie.adapter;
 
 import android.content.Context;
-import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -19,18 +20,35 @@ import vn.enclave.iramovies.R;
 import vn.enclave.iramovies.services.IraMoviesInfoAPIs;
 import vn.enclave.iramovies.services.response.Movie;
 import vn.enclave.iramovies.ui.activities.base.BaseView;
+import vn.enclave.iramovies.utilities.Constants;
 import vn.enclave.iramovies.utilities.OverrideFonts;
 
 /**
  * Created by lorence on 14/11/2017.
  * @Run:
+ *
+ * @Run: http://www.devexchanges.info/2017/02/android-recyclerview-dynamically-load.html
+ * => Done
+ *
+ * @Run: https://stackoverflow.com/questions/32040798/recyclerview-oncreateviewholder-return-type-incompatibility-with-multiple-custom
+ * => Done
+ *
+ * @Run:
+ *
  */
 
-public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder>{
+public class MoviesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
     private Context mContext;
     private List<Movie> mGrouMovies;
-    private static BaseView mBaseView;
+    private BaseView mBaseView;
+    private final int TYPE_MOVIE = 0;
+    private final int TYPE_LOAD = 1;
+
+    /** Load more */
+    private OnLoadMoreListener mLoadMoreListener;
+    private boolean mIsLoading = false;
+    private boolean mIsMoreDataAvailable = true;
 
     public MoviesAdapter(Context context, BaseView baseView, List<Movie> grouMovies) {
         this.mContext = context;
@@ -39,23 +57,40 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
     }
 
     @Override
-    public MoviesAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i){
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_movie, viewGroup, false);
-        return new ViewHolder(view);
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType){
+        if (viewType == TYPE_MOVIE) {
+            View view = LayoutInflater.from(this.mContext).inflate(R.layout.item_movie, viewGroup, false);
+            return new MovieViewHolder(view);
+        } else if (viewType == TYPE_LOAD) {
+            View view = LayoutInflater.from(this.mContext).inflate(R.layout.item_load, viewGroup, false);
+            return new LoadingViewHolder(view);
+        }
+        return null;
     }
 
     @Override
-    public void onBindViewHolder(final MoviesAdapter.ViewHolder holder, int position){
-        final Movie movie = mGrouMovies.get(position);
-        holder.tvTitle.setText(movie.getTitle());
-        holder.tvReleaseDate.setText(movie.getReleaseDate());
-        holder.tvRating.setText(movie.getVoteAverage() + "/10.0");
-        holder.tvOverview.setText(movie.getOverview());
-        String poster = IraMoviesInfoAPIs.Images.Thumbnail + movie.getPosterPath();
-        Glide.with(mContext)
-                .load(poster)
-                .placeholder(R.drawable.load)
-                .into(holder.imvSmallThumbnail);
+    public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position){
+        final int mPosition = holder.getAdapterPosition();
+        if (mPosition >= (getItemCount() - 1) && !mIsLoading && mLoadMoreListener != null) {
+            if (mIsMoreDataAvailable) {
+                mIsLoading = true;
+                mLoadMoreListener.onLoadMore();
+            }
+        }
+        if (getItemViewType(mPosition) == TYPE_MOVIE) {
+            if (holder instanceof MovieViewHolder) {
+                final Movie movie = mGrouMovies.get(position);
+                ((MovieViewHolder) holder).tvTitle.setText(movie.getTitle());
+                ((MovieViewHolder) holder).tvReleaseDate.setText(movie.getReleaseDate());
+                ((MovieViewHolder) holder).tvRating.setText(movie.getVoteAverage() + Constants.Keyboards.FORWARD_SLASH + "10.0");
+                ((MovieViewHolder) holder).tvOverview.setText(movie.getOverview());
+                String poster = IraMoviesInfoAPIs.Images.Thumbnail + movie.getPosterPath();
+                Glide.with(mContext)
+                        .load(poster)
+                        .placeholder(R.drawable.load)
+                        .into(((MovieViewHolder) holder).imvSmallThumbnail);
+            }
+        }
     }
 
     @Override
@@ -65,11 +100,21 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
 
     public void setMovies(List<Movie> movies) {
         this.mGrouMovies = movies;
+        mIsLoading = false;
         notifyDataSetChanged();
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        if (TextUtils.equals(mGrouMovies.get(position).getType(), Constants.Objects.LOAD)) {
+            return TYPE_LOAD;
+        } else {
+            return TYPE_MOVIE;
+        }
+    }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+
+    class MovieViewHolder extends RecyclerView.ViewHolder{
 
         @BindView(R.id.tvTitle)
         public TextView tvTitle;
@@ -86,7 +131,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
         @BindView(R.id.imvSmallThumbnail)
         public ImageView imvSmallThumbnail;
 
-        public ViewHolder(View view){
+        MovieViewHolder(View view){
             super(view);
             ButterKnife.bind(this, view);
             initAttributes();
@@ -97,4 +142,47 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
         }
     }
 
+    private class LoadingViewHolder extends RecyclerView.ViewHolder {
+
+        LoadingViewHolder(View view) {
+            super(view);
+        }
+    }
+
+    /** Interface */
+    public void setLoadMoreListener(OnLoadMoreListener loadMoreListener) {
+        this.mLoadMoreListener = loadMoreListener;
+    }
+
+    public interface OnLoadMoreListener {
+        void onLoadMore();
+    }
+
+    public void updateStatusLoading(boolean isLoading) {
+        this.mIsLoading = isLoading;
+    }
+
+    public void setMoreDataAvailable(boolean moreDataAvailable) {
+        mIsMoreDataAvailable = moreDataAvailable;
+    }
+
+    public void add(Movie movie) {
+        mGrouMovies.add(movie);
+        notifyItemInserted(getItemCount() - 1);
+    }
+
+    public void addAll(List<Movie> movies) {
+        mGrouMovies.addAll(movies);
+        mIsLoading = false;
+        notifyDataSetChanged();
+    }
+
+    public void remove(int index) {
+        if (getItemCount() > 0) {
+            mGrouMovies.remove(index);
+            mIsLoading = false;
+            notifyItemRemoved(index);
+            notifyItemRangeChanged(index, getItemCount());
+        }
+    }
 }

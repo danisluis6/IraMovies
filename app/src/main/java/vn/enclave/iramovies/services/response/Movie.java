@@ -3,12 +3,13 @@ package vn.enclave.iramovies.services.response;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+
+import vn.enclave.iramovies.utilities.Constants;
 
 /**
  *
@@ -45,6 +46,8 @@ public class Movie implements Parcelable {
     @SerializedName("vote_average")
     private Double voteAverage;
 
+    private String type = Constants.Objects.MOVIE;
+
     public Movie(String posterPath, boolean adult, String overview, String releaseDate, List<Integer> genreIds, Integer id,
                  String originalTitle, String originalLanguage, String title, String backdropPath, Double popularity,
                  Integer voteCount, Boolean video, Double voteAverage) {
@@ -65,13 +68,15 @@ public class Movie implements Parcelable {
     }
 
     public Movie(){
+    }
 
+    public Movie(String type) {
+        this.type = type;
     }
 
     public static final Comparator<Movie> BY_NAME_ALPHABETICAL = new Comparator<Movie>() {
         @Override
         public int compare(Movie movie, Movie t1) {
-
             return movie.originalTitle.compareTo(t1.originalTitle);
         }
     };
@@ -209,6 +214,7 @@ public class Movie implements Parcelable {
         dest.writeValue(this.voteCount);
         dest.writeValue(this.video);
         dest.writeValue(this.voteAverage);
+        dest.writeString(this.type);
     }
 
     protected Movie(Parcel in) {
@@ -227,6 +233,7 @@ public class Movie implements Parcelable {
         this.voteCount = (Integer) in.readValue(Integer.class.getClassLoader());
         this.video = (Boolean) in.readValue(Boolean.class.getClassLoader());
         this.voteAverage = (Double) in.readValue(Double.class.getClassLoader());
+        this.type = in.readString();
     }
 
     public static final Parcelable.Creator<Movie> CREATOR = new Parcelable.Creator<Movie>() {
@@ -240,4 +247,12 @@ public class Movie implements Parcelable {
             return new Movie[size];
         }
     };
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 }

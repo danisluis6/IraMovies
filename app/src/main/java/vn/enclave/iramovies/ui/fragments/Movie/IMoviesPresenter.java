@@ -16,5 +16,5 @@ public interface IMoviesPresenter extends IBasePresenter<IMoviesView> {
 
     void onFailure(String message);
 
-    void getMoviesFromApi();
+    void getMoviesFromApi(int mPageIndex);
 }

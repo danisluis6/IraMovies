@@ -2,7 +2,6 @@ package vn.enclave.iramovies.ui.fragments.Movie;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -19,12 +18,12 @@ import java.util.List;
 
 import butterknife.BindView;
 import vn.enclave.iramovies.R;
+import vn.enclave.iramovies.local.storage.SessionManager;
 import vn.enclave.iramovies.services.response.Movie;
 import vn.enclave.iramovies.ui.fragments.Base.IRBaseFragment;
 import vn.enclave.iramovies.ui.fragments.Movie.adapter.MoviesAdapter;
 import vn.enclave.iramovies.ui.views.FailureLayout;
 import vn.enclave.iramovies.utilities.Constants;
-import vn.enclave.iramovies.utilities.OverrideFonts;
 import vn.enclave.iramovies.utilities.Utils;
 
 /**
@@ -50,6 +49,10 @@ public class MovieFragment extends IRBaseFragment implements IMoviesView {
 
     /** Work with MVP */
     private MoviesPresenter mMoviesPresenter;
+
+    /** Work with load more */
+    private int mPageIndex;
+    private boolean mIsLoadMore = false;
 
 
     @Override
@@ -78,7 +81,7 @@ public class MovieFragment extends IRBaseFragment implements IMoviesView {
 
     private void handleData(List<Movie> movies) {
         if (Utils.isInternetOn(mActivity)) {
-            mMoviesPresenter.getMoviesFromApi();
+            mMoviesPresenter.getMoviesFromApi(mPageIndex++);
         } else {
             if (movies.isEmpty()) {
                 mFailureLayout.setFailureMessage(getResources().getString(R.string.no_internet_connection));
@@ -95,11 +98,41 @@ public class MovieFragment extends IRBaseFragment implements IMoviesView {
 
         mMoviesAdapter = new MoviesAdapter(mActivity,mActivity, mGroupMovies);
         rcvMovies.setAdapter(mMoviesAdapter);
+
+        mMoviesAdapter.setMoreDataAvailable(true);
+        mMoviesAdapter.updateStatusLoading(false);
+        mMoviesAdapter.setLoadMoreListener(new MoviesAdapter.OnLoadMoreListener() {
+            @Override
+            public void onLoadMore() {
+                rcvMovies.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (mPageIndex < SessionManager.getInstance(mActivity).getTotalPages()) {
+                            mPageIndex++;
+                            mMoviesAdapter.setMoreDataAvailable(true);
+                            loadNextDataFromApi();
+                        } else {
+                            mMoviesAdapter.setMoreDataAvailable(false);
+                            Utils.Toast.showToast(mActivity, getString(R.string.no_more_data));
+                        }
+                    }
+                });
+            }
+        });
     }
+
+    private void loadNextDataFromApi() {
+        mMoviesAdapter.add(new Movie(Constants.Objects.LOAD));
+        mIsLoadMore = true;
+        mMoviesAdapter.updateStatusLoading(false);
+        mMoviesPresenter.getMoviesFromApi(mPageIndex);
+    }
+
 
     private void initAttributes() {
         mMoviesPresenter = new MoviesPresenter(mActivity);
         mMoviesPresenter.attachView(this);
+        mPageIndex = Constants.FIRST_PAGE;
     }
 
     @Override
@@ -123,7 +156,19 @@ public class MovieFragment extends IRBaseFragment implements IMoviesView {
 
     @Override
     public void onSuccess(List<Movie> movies) {
-        mMoviesAdapter.setMovies(movies);
+        if (mIsLoadMore) {
+            // Handle the dismiss loadingMore if there is another caller API is executing
+            updateListMovies(movies);
+        } else {
+            dismissProgressDialog();
+            mMoviesAdapter.setMovies(movies);
+        }
+    }
+
+    private void updateListMovies(List<Movie> listMovies) {
+        mMoviesAdapter.remove(mMoviesAdapter.getItemCount() - 1);
+        mMoviesAdapter.addAll(listMovies);
+        mIsLoadMore = false;
     }
 
     @Override

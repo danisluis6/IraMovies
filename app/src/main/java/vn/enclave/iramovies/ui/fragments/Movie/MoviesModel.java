@@ -10,6 +10,7 @@ import retrofit2.Response;
 import vn.enclave.iramovies.BuildConfig;
 import vn.enclave.iramovies.IRApplication;
 import vn.enclave.iramovies.R;
+import vn.enclave.iramovies.local.storage.SessionManager;
 import vn.enclave.iramovies.services.IraMoviesWebAPIs;
 import vn.enclave.iramovies.services.response.Movie;
 import vn.enclave.iramovies.services.response.MoviesResponse;
@@ -49,8 +50,8 @@ public class MoviesModel implements IMoviesModel {
     }
 
     @Override
-    public void getMoviesFromApi() {
-        Call<MoviesResponse> call = mApiService.getPopularMovies(BuildConfig.THE_MOVIE_DB_API_TOKEN);
+    public void getMoviesFromApi(int mPageIndex) {
+        Call<MoviesResponse> call = mApiService.getPopularMovies(BuildConfig.THE_MOVIE_DB_API_TOKEN, mPageIndex);
         call.enqueue(new Callback<MoviesResponse>() {
             @Override
             public void onResponse(Call<MoviesResponse> call, Response<MoviesResponse> response) {
@@ -59,6 +60,7 @@ public class MoviesModel implements IMoviesModel {
                     if (moviesResponse != null) {
                         List<Movie> grouMoviesDatas = moviesResponse.getResults();
                         mIMoviesPresenter.onSuccess(grouMoviesDatas);
+                        SessionManager.getInstance(mContext).setTotalPages(moviesResponse.getTotalPages());
                     }
                 } else  {
                     mIMoviesPresenter.onFailure(mContext.getString(R.string.cannot_get_data));

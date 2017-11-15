@@ -40,10 +40,10 @@ public class MoviesPresenter implements IMoviesPresenter {
     }
 
     @Override
-    public void getMoviesFromApi() {
+    public void getMoviesFromApi(int mPageIndex) {
         if (mIMoviesView != null) {
             mIMoviesView.showProgressDialog();
-            mInboxModel.getMoviesFromApi();
+            mInboxModel.getMoviesFromApi(mPageIndex);
         }
     }
 

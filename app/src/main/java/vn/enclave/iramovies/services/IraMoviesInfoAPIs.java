@@ -29,5 +29,6 @@ public class IraMoviesInfoAPIs {
 
     public static class Fields {
         public final static String API_KEY = "api_key";
+        public final static String PAGE = "page";
     }
 }

@@ -20,4 +20,9 @@
         <item name="tabIndicatorHeight">1.5dp</item>
     </style>
 
+    <style name="AppTheme.CustomProgressDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">@color/colorPrimaryDark</item>
+        <item name="android:typeface">monospace</item>
+    </style>
+
 </resources>

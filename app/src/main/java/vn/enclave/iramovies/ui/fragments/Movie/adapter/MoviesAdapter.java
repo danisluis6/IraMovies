@@ -1,6 +1,7 @@
 package vn.enclave.iramovies.ui.fragments.Movie.adapter;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,7 +18,8 @@ import butterknife.ButterKnife;
 import vn.enclave.iramovies.R;
 import vn.enclave.iramovies.services.IraMoviesInfoAPIs;
 import vn.enclave.iramovies.services.response.Movie;
-import vn.enclave.iramovies.utilities.Constants;
+import vn.enclave.iramovies.ui.activities.base.BaseView;
+import vn.enclave.iramovies.utilities.OverrideFonts;
 
 /**
  * Created by lorence on 14/11/2017.
@@ -28,10 +30,12 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
 
     private Context mContext;
     private List<Movie> mGrouMovies;
+    private static BaseView mBaseView;
 
-    public MoviesAdapter(Context context, List<Movie> grouMovies) {
+    public MoviesAdapter(Context context, BaseView baseView, List<Movie> grouMovies) {
         this.mContext = context;
         this.mGrouMovies = grouMovies;
+        this.mBaseView = baseView;
     }
 
     @Override
@@ -45,9 +49,9 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
         final Movie movie = mGrouMovies.get(position);
         holder.tvTitle.setText(movie.getTitle());
         holder.tvReleaseDate.setText(movie.getReleaseDate());
-        holder.tvRating.setText(movie.getVoteAverage() + Constants.EMPTY_STRING);
+        holder.tvRating.setText(movie.getVoteAverage() + "/10.0");
         holder.tvOverview.setText(movie.getOverview());
-        String poster = IraMoviesInfoAPIs.Images.Small + movie.getPosterPath();
+        String poster = IraMoviesInfoAPIs.Images.Thumbnail + movie.getPosterPath();
         Glide.with(mContext)
                 .load(poster)
                 .placeholder(R.drawable.load)
@@ -85,6 +89,11 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
         public ViewHolder(View view){
             super(view);
             ButterKnife.bind(this, view);
+            initAttributes();
+        }
+
+        void initAttributes() {
+            tvTitle.setTypeface(OverrideFonts.getTypeFace(mBaseView, OverrideFonts.TYPE_FONT_NAME.HELVETICANEUE, OverrideFonts.TYPE_STYLE.BOLD));
         }
     }
 

@@ -1,6 +1,5 @@
 package vn.enclave.iramovies.ui.fragments.Base;
 
-import android.app.Dialog;
 import android.arch.persistence.room.Room;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

@@ -30,6 +30,9 @@ import vn.enclave.iramovies.ui.views.ToolbarLayout;
 
 
 /**
+ * @Run: https://www.androidhive.info/2016/05/android-working-with-card-view-and-recycler-view/
+ * => Done
+ *
  * @Run:
  */
 

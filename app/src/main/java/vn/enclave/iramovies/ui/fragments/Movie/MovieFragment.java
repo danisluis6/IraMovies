@@ -2,10 +2,12 @@ package vn.enclave.iramovies.ui.fragments.Movie;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +24,7 @@ import vn.enclave.iramovies.ui.fragments.Base.IRBaseFragment;
 import vn.enclave.iramovies.ui.fragments.Movie.adapter.MoviesAdapter;
 import vn.enclave.iramovies.ui.views.FailureLayout;
 import vn.enclave.iramovies.utilities.Constants;
+import vn.enclave.iramovies.utilities.OverrideFonts;
 import vn.enclave.iramovies.utilities.Utils;
 
 /**
@@ -37,7 +40,11 @@ public class MovieFragment extends IRBaseFragment implements IMoviesView {
     @BindView(R.id.failureLayout)
     public FailureLayout mFailureLayout;
     @BindView(R.id.rcvMovies)
+
+    /** RecyclerView */
     public RecyclerView rcvMovies;
+    public RecyclerView.LayoutManager mLayoutManager;
+
     private MoviesAdapter mMoviesAdapter;
     private List<Movie> mGroupMovies;
 
@@ -83,7 +90,10 @@ public class MovieFragment extends IRBaseFragment implements IMoviesView {
 
     private void initViews() {
         mGroupMovies = new ArrayList<>();
-        mMoviesAdapter = new MoviesAdapter(mActivity, mGroupMovies);
+        mLayoutManager = new LinearLayoutManager(mActivity);
+        rcvMovies.setLayoutManager(mLayoutManager);
+
+        mMoviesAdapter = new MoviesAdapter(mActivity,mActivity, mGroupMovies);
         rcvMovies.setAdapter(mMoviesAdapter);
     }
 
@@ -95,7 +105,6 @@ public class MovieFragment extends IRBaseFragment implements IMoviesView {
     @Override
     public void onResume() {
         super.onResume();
-        mDiaLoadView.show();
     }
 
     @Override

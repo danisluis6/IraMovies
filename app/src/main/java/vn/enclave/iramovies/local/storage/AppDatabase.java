@@ -15,6 +15,7 @@ public abstract class AppDatabase extends RoomDatabase {
     public static final String DB_NAME = DatabaseInfo.DB_NAME;
 
     public abstract UserDao getUserDao();
+
 }
 
 

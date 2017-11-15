@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+import vn.enclave.iramovies.local.storage.DatabaseInfo;
 import vn.enclave.iramovies.utilities.Constants;
 
 /**
@@ -16,41 +17,42 @@ import vn.enclave.iramovies.utilities.Constants;
  * Created by lorence on 13/11/2017.
  */
 
-public class Movie implements Parcelable {
-    @SerializedName("poster_path")
+public class MovieData implements Parcelable {
+
+    @SerializedName(DatabaseInfo.Movie.COLUMN_POSTER_PATH)
     private String posterPath;
-    @SerializedName("adult")
+    @SerializedName(DatabaseInfo.Movie.COLUMN_ADULT)
     private boolean adult;
-    @SerializedName("overview")
+    @SerializedName(DatabaseInfo.Movie.COLUMN_OVERVIEW)
     private String overview;
-    @SerializedName("release_date")
+    @SerializedName(DatabaseInfo.Movie.COLUMN_RELEASE_DATE)
     private String releaseDate;
-    @SerializedName("genre_ids")
+    @SerializedName(DatabaseInfo.Movie.COLUMN_GENRE_IDS)
     private List<Integer> genreIds = new ArrayList<Integer>();
-    @SerializedName("id")
+    @SerializedName(DatabaseInfo.Movie.COLUMN_ID)
     private Integer id;
-    @SerializedName("original_title")
+    @SerializedName(DatabaseInfo.Movie.COLUMN_ORIGINAL_TITLE)
     private String originalTitle;
-    @SerializedName("original_language")
+    @SerializedName(DatabaseInfo.Movie.COLUMN_ORIGINAL_LANGUAGE)
     private String originalLanguage;
-    @SerializedName("title")
+    @SerializedName(DatabaseInfo.Movie.COLUMN_TITLE)
     private String title;
-    @SerializedName("backdrop_path")
+    @SerializedName(DatabaseInfo.Movie.COLUMN_BACKDROP_PATH)
     private String backdropPath;
-    @SerializedName("popularity")
+    @SerializedName(DatabaseInfo.Movie.COLUMN_POPULARITY)
     private Double popularity;
-    @SerializedName("vote_count")
+    @SerializedName(DatabaseInfo.Movie.COLUMN_VOTE_COUNT)
     private Integer voteCount;
-    @SerializedName("video")
+    @SerializedName(DatabaseInfo.Movie.COLUMN_VIDEO)
     private Boolean video;
-    @SerializedName("vote_average")
+    @SerializedName(DatabaseInfo.Movie.COLUMN_VOTE_AVERAGE)
     private Double voteAverage;
 
     private String type = Constants.Objects.MOVIE;
 
-    public Movie(String posterPath, boolean adult, String overview, String releaseDate, List<Integer> genreIds, Integer id,
-                 String originalTitle, String originalLanguage, String title, String backdropPath, Double popularity,
-                 Integer voteCount, Boolean video, Double voteAverage) {
+    public MovieData(String posterPath, boolean adult, String overview, String releaseDate, List<Integer> genreIds, Integer id,
+                     String originalTitle, String originalLanguage, String title, String backdropPath, Double popularity,
+                     Integer voteCount, Boolean video, Double voteAverage) {
         this.posterPath = posterPath;
         this.adult = adult;
         this.overview = overview;
@@ -67,17 +69,17 @@ public class Movie implements Parcelable {
         this.voteAverage = voteAverage;
     }
 
-    public Movie(){
+    public MovieData(){
     }
 
-    public Movie(String type) {
+    public MovieData(String type) {
         this.type = type;
     }
 
-    public static final Comparator<Movie> BY_NAME_ALPHABETICAL = new Comparator<Movie>() {
+    public static final Comparator<MovieData> BY_NAME_ALPHABETICAL = new Comparator<MovieData>() {
         @Override
-        public int compare(Movie movie, Movie t1) {
-            return movie.originalTitle.compareTo(t1.originalTitle);
+        public int compare(MovieData movieData, MovieData t1) {
+            return movieData.originalTitle.compareTo(t1.originalTitle);
         }
     };
 
@@ -217,7 +219,7 @@ public class Movie implements Parcelable {
         dest.writeString(this.type);
     }
 
-    protected Movie(Parcel in) {
+    protected MovieData(Parcel in) {
         this.posterPath = in.readString();
         this.adult = in.readByte() != 0;
         this.overview = in.readString();
@@ -236,15 +238,15 @@ public class Movie implements Parcelable {
         this.type = in.readString();
     }
 
-    public static final Parcelable.Creator<Movie> CREATOR = new Parcelable.Creator<Movie>() {
+    public static final Parcelable.Creator<MovieData> CREATOR = new Parcelable.Creator<MovieData>() {
         @Override
-        public Movie createFromParcel(Parcel source) {
-            return new Movie(source);
+        public MovieData createFromParcel(Parcel source) {
+            return new MovieData(source);
         }
 
         @Override
-        public Movie[] newArray(int size) {
-            return new Movie[size];
+        public MovieData[] newArray(int size) {
+            return new MovieData[size];
         }
     };
 

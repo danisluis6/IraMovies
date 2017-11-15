@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -18,7 +17,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import vn.enclave.iramovies.R;
 import vn.enclave.iramovies.services.IraMoviesInfoAPIs;
-import vn.enclave.iramovies.services.response.Movie;
+import vn.enclave.iramovies.services.response.MovieData;
 import vn.enclave.iramovies.ui.activities.base.BaseView;
 import vn.enclave.iramovies.utilities.Constants;
 import vn.enclave.iramovies.utilities.OverrideFonts;
@@ -33,14 +32,15 @@ import vn.enclave.iramovies.utilities.OverrideFonts;
  * @Run: https://stackoverflow.com/questions/32040798/recyclerview-oncreateviewholder-return-type-incompatibility-with-multiple-custom
  * => Done
  *
- * @Run:
+ * @Run: https://codentrick.com/load-more-recyclerview-bottom-progressbar/
+ * => Done
  *
  */
 
 public class MoviesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
     private Context mContext;
-    private List<Movie> mGrouMovies;
+    private List<MovieData> mGrouMovies;
     private BaseView mBaseView;
     private final int TYPE_MOVIE = 0;
     private final int TYPE_LOAD = 1;
@@ -50,7 +50,10 @@ public class MoviesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     private boolean mIsLoading = false;
     private boolean mIsMoreDataAvailable = true;
 
-    public MoviesAdapter(Context context, BaseView baseView, List<Movie> grouMovies) {
+    /** Set Favorite start */
+    private OnChooseFavoriteListener mChooseFavoriteListener;
+
+    public MoviesAdapter(Context context, BaseView baseView, List<MovieData> grouMovies) {
         this.mContext = context;
         this.mGrouMovies = grouMovies;
         this.mBaseView = baseView;
@@ -79,16 +82,23 @@ public class MoviesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         }
         if (getItemViewType(mPosition) == TYPE_MOVIE) {
             if (holder instanceof MovieViewHolder) {
-                final Movie movie = mGrouMovies.get(position);
-                ((MovieViewHolder) holder).tvTitle.setText(movie.getTitle());
-                ((MovieViewHolder) holder).tvReleaseDate.setText(movie.getReleaseDate());
-                ((MovieViewHolder) holder).tvRating.setText(movie.getVoteAverage() + Constants.Keyboards.FORWARD_SLASH + "10.0");
-                ((MovieViewHolder) holder).tvOverview.setText(movie.getOverview());
-                String poster = IraMoviesInfoAPIs.Images.Thumbnail + movie.getPosterPath();
+                final MovieData movieData = mGrouMovies.get(position);
+                ((MovieViewHolder) holder).tvTitle.setText(movieData.getTitle());
+                ((MovieViewHolder) holder).tvReleaseDate.setText(movieData.getReleaseDate());
+                ((MovieViewHolder) holder).tvRating.setText(movieData.getVoteAverage() + Constants.Keyboards.FORWARD_SLASH + "10.0");
+                ((MovieViewHolder) holder).tvOverview.setText(movieData.getOverview());
+                String poster = IraMoviesInfoAPIs.Images.Thumbnail + movieData.getPosterPath();
                 Glide.with(mContext)
                         .load(poster)
                         .placeholder(R.drawable.load)
                         .into(((MovieViewHolder) holder).imvSmallThumbnail);
+
+                ((MovieViewHolder) holder).imvFavorite.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mChooseFavoriteListener.onChoose(movieData);
+                    }
+                });
             }
         }
     }
@@ -98,7 +108,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         return mGrouMovies.size();
     }
 
-    public void setMovies(List<Movie> movies) {
+    public void setMovies(List<MovieData> movies) {
         this.mGrouMovies = movies;
         mIsLoading = false;
         notifyDataSetChanged();
@@ -117,19 +127,22 @@ public class MoviesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     class MovieViewHolder extends RecyclerView.ViewHolder{
 
         @BindView(R.id.tvTitle)
-        public TextView tvTitle;
+        TextView tvTitle;
 
         @BindView(R.id.tvReleaseDate)
-        public TextView tvReleaseDate;
+        TextView tvReleaseDate;
 
         @BindView(R.id.tvRating)
-        public TextView tvRating;
+        TextView tvRating;
 
         @BindView(R.id.tvOverview)
-        public TextView tvOverview;
+        TextView tvOverview;
 
         @BindView(R.id.imvSmallThumbnail)
-        public ImageView imvSmallThumbnail;
+        ImageView imvSmallThumbnail;
+
+        @BindView(R.id.imvFavorite)
+        ImageView imvFavorite;
 
         MovieViewHolder(View view){
             super(view);
@@ -158,6 +171,14 @@ public class MoviesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         void onLoadMore();
     }
 
+    public void setChooseFavoriteListener (OnChooseFavoriteListener chooseFavoriteListener) {
+        this.mChooseFavoriteListener = chooseFavoriteListener;
+    }
+
+    public interface OnChooseFavoriteListener {
+        void onChoose(MovieData movieData);
+    }
+
     public void updateStatusLoading(boolean isLoading) {
         this.mIsLoading = isLoading;
     }
@@ -166,12 +187,12 @@ public class MoviesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         mIsMoreDataAvailable = moreDataAvailable;
     }
 
-    public void add(Movie movie) {
-        mGrouMovies.add(movie);
+    public void add(MovieData movieData) {
+        mGrouMovies.add(movieData);
         notifyItemInserted(getItemCount() - 1);
     }
 
-    public void addAll(List<Movie> movies) {
+    public void addAll(List<MovieData> movies) {
         mGrouMovies.addAll(movies);
         mIsLoading = false;
         notifyDataSetChanged();

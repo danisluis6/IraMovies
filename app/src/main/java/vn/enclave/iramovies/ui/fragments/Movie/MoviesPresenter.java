@@ -4,7 +4,7 @@ import android.content.Context;
 
 import java.util.List;
 
-import vn.enclave.iramovies.services.response.Movie;
+import vn.enclave.iramovies.services.response.MovieData;
 
 /**
  *
@@ -40,15 +40,15 @@ public class MoviesPresenter implements IMoviesPresenter {
     }
 
     @Override
-    public void getMoviesFromApi(int mPageIndex) {
+    public void getMoviesFromApi(int mPageIndex, boolean isLoadMore) {
         if (mIMoviesView != null) {
-            mIMoviesView.showProgressDialog();
+            mIMoviesView.showProgressDialog(isLoadMore);
             mInboxModel.getMoviesFromApi(mPageIndex);
         }
     }
 
     @Override
-    public void onSuccess(List<Movie> movies) {
+    public void onSuccess(List<MovieData> movies) {
         if (mIMoviesView != null) {
             mIMoviesView.dismissProgressDialog();
             mIMoviesView.onSuccess(movies);
@@ -61,5 +61,11 @@ public class MoviesPresenter implements IMoviesPresenter {
             mIMoviesView.dismissProgressDialog();
             mIMoviesView.onFailure(message);
         }
+    }
+
+    /** Work with database local ROOM */
+    @Override
+    public void addMovie(MovieData movieData) {
+        mInboxModel.addMovie(movieData);
     }
 }

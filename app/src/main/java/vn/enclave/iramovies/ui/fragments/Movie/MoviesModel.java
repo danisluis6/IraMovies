@@ -12,7 +12,7 @@ import vn.enclave.iramovies.IRApplication;
 import vn.enclave.iramovies.R;
 import vn.enclave.iramovies.local.storage.SessionManager;
 import vn.enclave.iramovies.services.IraMoviesWebAPIs;
-import vn.enclave.iramovies.services.response.Movie;
+import vn.enclave.iramovies.services.response.MovieData;
 import vn.enclave.iramovies.services.response.MoviesResponse;
 
 /**
@@ -37,7 +37,6 @@ public class MoviesModel implements IMoviesModel {
      */
     private IraMoviesWebAPIs mApiService;
 
-
     MoviesModel(Context context) {
         this.mContext = context;
         mApiService = IRApplication.getInstance().getEzFaxingWebAPIs();
@@ -58,7 +57,7 @@ public class MoviesModel implements IMoviesModel {
                 if(response.isSuccessful()) {
                     MoviesResponse moviesResponse = response.body();
                     if (moviesResponse != null) {
-                        List<Movie> grouMoviesDatas = moviesResponse.getResults();
+                        List<MovieData> grouMoviesDatas = moviesResponse.getResults();
                         mIMoviesPresenter.onSuccess(grouMoviesDatas);
                         SessionManager.getInstance(mContext).setTotalPages(moviesResponse.getTotalPages());
                     }
@@ -73,4 +72,26 @@ public class MoviesModel implements IMoviesModel {
             }
         });
     }
+
+    // Work with local database ROOM
+    @Override
+    public void addMovie(MovieData movieData) {
+/*        new AsyncTask<MoviesResponse, Void, Long>() {
+            @Override
+            protected Long doInBackground(MoviesResponse... params) {
+                return IRApplication.getInstance().initAppDatabase().getMovieDao().insertMovies(convertMovieData(params[0]));
+            }
+
+            @Override
+            protected void onPostExecute(Long id) {
+                if (id > 0) {
+                    Toast.makeText(mContext, "Add fds successfully", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(mContext, "Add Contact failed", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }.execute(movieData);*/
+    }
+
+
 }

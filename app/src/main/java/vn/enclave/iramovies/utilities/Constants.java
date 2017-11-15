@@ -23,7 +23,7 @@ public class Constants {
     public static final int FAVORITES_INDEX = 1;
     public static final int SETTING_INDEX = 2;
     public static final int ABOUT_INDEX = 3;
-    public static final int FIRST_PAGE = 0;
+    public static final int FIRST_PAGE = 1;
 
     /* Toolbar Information */
     public static class ToolbarLayoutInfo {
@@ -44,7 +44,7 @@ public class Constants {
     }
 
     public static class Objects {
-        public static final String MOVIE = "Movie";
+        public static final String MOVIE = "fds";
         public static final String LOAD = "Load";
     }
 }

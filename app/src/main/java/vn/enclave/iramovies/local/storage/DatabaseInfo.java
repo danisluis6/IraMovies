@@ -20,6 +20,7 @@ public class DatabaseInfo {
     // Table User
     public static class Tables {
         public static final String User = "user";
+        public static final String Movie = "movie";
     }
 
     // Columns of Video table
@@ -27,8 +28,24 @@ public class DatabaseInfo {
         public static final String COLUMN_ID = "id";
         public static final String COLUMN_NAME = "name";
         public static final String COLUMN_BIRTHDAY = "birthday";
-        public static final String COLUMN_AVATAR = "avatar";
         public static final String COLUMN_EMAIL = "email";
         public static final String COLUMN_GENDER = "gender";
+    }
+
+    public static class Movie {
+        public static final String COLUMN_POSTER_PATH = "poster_path";
+        public static final String COLUMN_ADULT = "adult";
+        public static final String COLUMN_OVERVIEW = "overview";
+        public static final String COLUMN_RELEASE_DATE = "release_date";
+        public static final String COLUMN_GENRE_IDS = "genre_ids";
+        public static final String COLUMN_ID = "id";
+        public static final String COLUMN_ORIGINAL_TITLE = "original_title";
+        public static final String COLUMN_ORIGINAL_LANGUAGE = "original_language";
+        public static final String COLUMN_TITLE = "title";
+        public static final String COLUMN_BACKDROP_PATH = "backdrop_path";
+        public static final String COLUMN_POPULARITY = "popularity";
+        public static final String COLUMN_VOTE_COUNT = "vote_count";
+        public static final String COLUMN_VIDEO = "video";
+        public static final String COLUMN_VOTE_AVERAGE = "vote_average";
     }
 }

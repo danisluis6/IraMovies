@@ -2,7 +2,7 @@ package vn.enclave.iramovies.ui.fragments.Movie;
 
 import java.util.List;
 
-import vn.enclave.iramovies.services.response.Movie;
+import vn.enclave.iramovies.services.response.MovieData;
 
 /**
  *
@@ -11,11 +11,11 @@ import vn.enclave.iramovies.services.response.Movie;
 
 public interface IMoviesView {
 
-    void showProgressDialog();
+    void showProgressDialog(boolean isLoadMore);
 
     void dismissProgressDialog();
 
-    void onSuccess(List<Movie> movies);
+    void onSuccess(List<MovieData> movies);
 
     void onFailure(String message);
 }

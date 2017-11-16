@@ -1,6 +1,7 @@
 package vn.enclave.iramovies.ui.fragments.Movie.adapter;
 
 import android.content.Context;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -35,6 +36,8 @@ import vn.enclave.iramovies.utilities.OverrideFonts;
  * @Run: https://codentrick.com/load-more-recyclerview-bottom-progressbar/
  * => Done
  *
+ *  @Run: http://android-pratap.blogspot.in/2015/01/recyclerview-with-checkbox-example.html
+ *  => Fix save the states when scroll view in Recycler View
  */
 
 public class MoviesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
@@ -73,7 +76,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position){
-        final int mPosition = holder.getAdapterPosition();
+        final int mPosition = position;
         if (mPosition >= (getItemCount() - 1) && !mIsLoading && mLoadMoreListener != null) {
             if (mIsMoreDataAvailable) {
                 mIsLoading = true;
@@ -82,11 +85,15 @@ public class MoviesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         }
         if (getItemViewType(mPosition) == TYPE_MOVIE) {
             if (holder instanceof MovieViewHolder) {
-                final Movie movie = mGrouMovies.get(position);
+                final Movie movie = mGrouMovies.get(mPosition);
                 ((MovieViewHolder) holder).tvTitle.setText(movie.getTitle());
                 ((MovieViewHolder) holder).tvReleaseDate.setText(movie.getReleaseDate());
                 ((MovieViewHolder) holder).tvRating.setText(movie.getVoteAverage() + Constants.Keyboards.FORWARD_SLASH + "10.0");
                 ((MovieViewHolder) holder).tvOverview.setText(movie.getOverview());
+
+                ((MovieViewHolder) holder).imvFavorite.setImageResource((movie.getFavorite() == Constants.Favorites.FAVORITE) ? R.drawable.ic_star_picked : R.drawable.ic_star);
+                ((MovieViewHolder) holder).imvFavorite.setTag(mGrouMovies.get(mPosition));
+
                 String poster = IraMoviesInfoAPIs.Images.Thumbnail + movie.getBackdropPath();
                 Glide.with(mContext)
                         .load(poster)
@@ -96,7 +103,21 @@ public class MoviesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 ((MovieViewHolder) holder).imvFavorite.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        backupStatusOfScrolling(v);
+                        navigateToMovieView(movie);
+                    }
 
+                    private void backupStatusOfScrolling(View v) {
+                        ImageView imvFavorite = (ImageView) v;
+                        Movie movie = (Movie) imvFavorite.getTag();
+
+                        movie.setFavorite(Constants.Favorites.FAVORITE);
+                        mGrouMovies.get(mPosition).setFavorite(Constants.Favorites.FAVORITE);
+                        // Temp
+                        imvFavorite.setImageResource((movie.getFavorite() == Constants.Favorites.FAVORITE) ? R.drawable.ic_star_picked : R.drawable.ic_star);
+                    }
+
+                    private void navigateToMovieView(Movie movie) {
                         mChooseFavoriteListener.onChoose(movie);
                     }
                 });
@@ -154,7 +175,6 @@ public class MoviesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
         void initAttributes() {
             tvTitle.setTypeface(OverrideFonts.getTypeFace(mBaseView, OverrideFonts.TYPE_FONT_NAME.HELVETICANEUE, OverrideFonts.TYPE_STYLE.BOLD));
-            imvFavorite.setImageResource(R.drawable.ic_star);
         }
     }
 

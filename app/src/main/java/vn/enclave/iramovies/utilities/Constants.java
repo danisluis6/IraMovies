@@ -24,6 +24,7 @@ public class Constants {
     public static final int SETTING_INDEX = 2;
     public static final int ABOUT_INDEX = 3;
     public static final int FIRST_PAGE = 1;
+    public static String SAVE_THE_STATE = "save_state";
 
     /* Toolbar Information */
     public static class ToolbarLayoutInfo {
@@ -46,5 +47,10 @@ public class Constants {
     public static class Objects {
         public static final String MOVIE = "fds";
         public static final String LOAD = "Load";
+    }
+
+    public static class Favorites {
+        public static int DEFAULT = 0;
+        public static int FAVORITE = 1;
     }
 }

@@ -63,9 +63,12 @@ public class Movie implements Parcelable {
     private String type = Constants.Objects.MOVIE;
 
     @Ignore
+    private int favorite = Constants.Favorites.DEFAULT;
+
+    @Ignore
     public Movie(String posterPath, String overview, String releaseDate, Integer id,
                  String originalTitle, String originalLanguage, String title, String backdropPath,
-                 Double voteAverage) {
+                 Double voteAverage, int favorite) {
         this.posterPath = posterPath;
         this.overview = overview;
         this.releaseDate = releaseDate;
@@ -75,6 +78,7 @@ public class Movie implements Parcelable {
         this.title = title;
         this.backdropPath = backdropPath;
         this.voteAverage = voteAverage;
+        this.favorite = favorite;
     }
 
     public Movie(){
@@ -180,6 +184,7 @@ public class Movie implements Parcelable {
         dest.writeString(this.backdropPath);
         dest.writeValue(this.voteAverage);
         dest.writeString(this.type);
+        dest.writeValue(this.favorite);
     }
 
     protected Movie(Parcel in) {
@@ -193,6 +198,7 @@ public class Movie implements Parcelable {
         this.backdropPath = in.readString();
         this.voteAverage = (Double) in.readValue(Double.class.getClassLoader());
         this.type = in.readString();
+        this.favorite = in.readInt();
     }
 
     public static final Parcelable.Creator<Movie> CREATOR = new Parcelable.Creator<Movie>() {
@@ -213,5 +219,11 @@ public class Movie implements Parcelable {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public int getFavorite() { return favorite; }
+
+    public void setFavorite(int favorite) {
+        this.favorite = favorite;
     }
 }

@@ -159,12 +159,7 @@ public class MovieFragment extends IRBaseFragment implements IMoviesView {
     @Override
     public void onSuccess(List<Movie> movies) {
         mMoviesAdapter.setMoreDataAvailable(mPageIndex < SessionManager.getInstance(mActivity).getTotalPages());
-        if (mPageIndex == Constants.FIRST_PAGE && mMoviesAdapter.getItemCount() > 0) {
-            mMoviesAdapter.clear();
-            rcvMovies.scrollToPosition(0);
-        }
         ++mPageIndex; /* End fix */
-
         if (mIsLoadMore) {
             // Handle the dismiss loadingMore if there is another caller API is executing
             updateListMovies(movies);

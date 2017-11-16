@@ -22,8 +22,8 @@ import vn.enclave.iramovies.R;
 import vn.enclave.iramovies.ui.activities.base.BaseView;
 import vn.enclave.iramovies.ui.activities.base.Home.adapters.SectionPaperAdapter;
 import vn.enclave.iramovies.ui.fragments.About.AboutFragment;
-import vn.enclave.iramovies.ui.fragments.Favorite.FavoriteFragment;
-import vn.enclave.iramovies.ui.fragments.Movie.MovieFragment;
+import vn.enclave.iramovies.ui.fragments.Favorite.FavoriteView;
+import vn.enclave.iramovies.ui.fragments.Movie.MovieView;
 import vn.enclave.iramovies.ui.fragments.Setting.SettingFragment;
 import vn.enclave.iramovies.ui.views.TabItem;
 import vn.enclave.iramovies.ui.views.ToolbarLayout;
@@ -98,8 +98,8 @@ public class HomeView extends BaseView {
 
     public void initialPages() {
         List<Fragment> fragments = new Vector<>();
-        fragments.add(MovieFragment.instantiate(mContext, MovieFragment.class.getName()));
-        fragments.add(FavoriteFragment.instantiate(mContext, FavoriteFragment.class.getName()));
+        fragments.add(MovieView.instantiate(mContext, MovieView.class.getName()));
+        fragments.add(FavoriteView.instantiate(mContext, FavoriteView.class.getName()));
         fragments.add(SettingFragment.instantiate(mContext, SettingFragment.class.getName()));
         fragments.add(AboutFragment.instantiate(mContext, AboutFragment.class.getName()));
         mViewPager.setAdapter(new SectionPaperAdapter(mContext, getSupportFragmentManager(), fragments));

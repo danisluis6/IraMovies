@@ -26,12 +26,12 @@ public class MoviesPresenter implements IMoviesPresenter {
     /**
      * IInboxModel
      */
-    private IMoviesModel mInboxModel;
+    private IMoviesModel mMovieModel;
 
     MoviesPresenter(Context context) {
         this.mContext = context;
-        mInboxModel = new MoviesModel(mContext);
-        mInboxModel.attachView(this);
+        mMovieModel = new MoviesModel(mContext);
+        mMovieModel.attachView(this);
     }
 
     @Override
@@ -43,7 +43,7 @@ public class MoviesPresenter implements IMoviesPresenter {
     public void getMoviesFromApi(int mPageIndex, boolean isLoadMore) {
         if (mIMoviesView != null) {
             mIMoviesView.showProgressDialog(isLoadMore);
-            mInboxModel.getMoviesFromApi(mPageIndex);
+            mMovieModel.getMoviesFromApi(mPageIndex);
         }
     }
 
@@ -66,6 +66,11 @@ public class MoviesPresenter implements IMoviesPresenter {
     /** Work with database local ROOM */
     @Override
     public void addMovie(Movie movie) {
-        mInboxModel.addMovie(movie);
+        mMovieModel.addMovie(movie);
+    }
+
+    @Override
+    public void deleteMovie(Movie movie) {
+        mMovieModel.deleteMovie(movie);
     }
 }

@@ -21,6 +21,7 @@ import vn.enclave.iramovies.R;
 import vn.enclave.iramovies.local.storage.SessionManager;
 import vn.enclave.iramovies.services.response.Movie;
 import vn.enclave.iramovies.ui.fragments.Base.IRBaseFragment;
+import vn.enclave.iramovies.ui.fragments.Favorite.FavoritesPresenter;
 import vn.enclave.iramovies.ui.fragments.Movie.adapter.MoviesAdapter;
 import vn.enclave.iramovies.ui.views.FailureLayout;
 import vn.enclave.iramovies.utilities.Constants;
@@ -33,7 +34,7 @@ import vn.enclave.iramovies.utilities.Utils;
  * => Done
  */
 
-public class MovieFragment extends IRBaseFragment implements IMoviesView {
+public class MovieView extends IRBaseFragment implements IMoviesView {
 
     @BindView(R.id.failureLayout)
     public FailureLayout mFailureLayout;
@@ -52,6 +53,8 @@ public class MovieFragment extends IRBaseFragment implements IMoviesView {
     /** Work with load more */
     private int mPageIndex;
     private boolean mIsLoadMore = false;
+
+    private FavoritesPresenter mFavoritesPresenter;
 
 
     @Override
@@ -114,7 +117,18 @@ public class MovieFragment extends IRBaseFragment implements IMoviesView {
         mMoviesAdapter.setChooseFavoriteListener(new MoviesAdapter.OnChooseFavoriteListener() {
             @Override
             public void onChoose(Movie movie) {
+                if (Utils.isDoubleClick()) {
+                    return;
+                }
                 mMoviesPresenter.addMovie(movie);
+            }
+
+            @Override
+            public void onRemove(Movie movie) {
+                if (Utils.isDoubleClick()) {
+                    return;
+                }
+                mMoviesPresenter.deleteMovie(movie);
             }
         });
     }
@@ -133,6 +147,7 @@ public class MovieFragment extends IRBaseFragment implements IMoviesView {
     private void initAttributes() {
         mMoviesPresenter = new MoviesPresenter(mActivity);
         mMoviesPresenter.attachView(this);
+
         mPageIndex = Constants.FIRST_PAGE;
         mMoviesAdapter.setMoreDataAvailable(true);
     }
@@ -177,7 +192,7 @@ public class MovieFragment extends IRBaseFragment implements IMoviesView {
 
     @Override
     public void onFailure(String message) {
-
+        // TODO
     }
 
     @Override

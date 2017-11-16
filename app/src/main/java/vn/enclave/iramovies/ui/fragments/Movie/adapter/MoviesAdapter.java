@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -103,22 +104,34 @@ public class MoviesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 ((MovieViewHolder) holder).imvFavorite.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        backupStatusOfScrolling(v);
-                        navigateToMovieView(movie);
+                        backupStatusWhenScrolling(v);
                     }
 
-                    private void backupStatusOfScrolling(View v) {
+                    private void backupStatusWhenScrolling(View v) {
                         ImageView imvFavorite = (ImageView) v;
                         Movie movie = (Movie) imvFavorite.getTag();
 
-                        movie.setFavorite(Constants.Favorites.FAVORITE);
-                        mGrouMovies.get(mPosition).setFavorite(Constants.Favorites.FAVORITE);
-                        // Temp
-                        imvFavorite.setImageResource((movie.getFavorite() == Constants.Favorites.FAVORITE) ? R.drawable.ic_star_picked : R.drawable.ic_star);
+                        if (movie.getFavorite() == Constants.Favorites.DEFAULT) {
+                            updateView(Constants.Favorites.FAVORITE, imvFavorite);
+                            navigateToAddNew(movie);
+                        } else {
+                            updateView(Constants.Favorites.DEFAULT, imvFavorite);
+                            navigateToRemove(movie);
+                        }
                     }
 
-                    private void navigateToMovieView(Movie movie) {
+                    private void navigateToAddNew(Movie movie) {
                         mChooseFavoriteListener.onChoose(movie);
+                    }
+
+                    private void navigateToRemove(Movie movie) {
+                        mChooseFavoriteListener.onRemove(movie);
+                    }
+
+                    private void updateView(int status, ImageView imvFavorite) {
+                        movie.setFavorite(status);
+                        mGrouMovies.get(mPosition).setFavorite(status);
+                        imvFavorite.setImageResource((movie.getFavorite() == Constants.Favorites.FAVORITE) ? R.drawable.ic_star_picked : R.drawable.ic_star);
                     }
                 });
             }
@@ -200,6 +213,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     public interface OnChooseFavoriteListener {
         void onChoose(Movie movie);
+        void onRemove(Movie movie);
     }
 
     public void updateStatusLoading(boolean isLoading) {

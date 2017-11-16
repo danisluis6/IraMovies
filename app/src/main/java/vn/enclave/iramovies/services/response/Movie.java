@@ -22,7 +22,7 @@ import vn.enclave.iramovies.utilities.Constants;
 @Entity(tableName = DatabaseInfo.Tables.Movie)
 public class Movie implements Parcelable {
 
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     @ColumnInfo(name = DatabaseInfo.Movie.COLUMN_ID)
     @SerializedName(DatabaseInfo.Movie.COLUMN_ID)
     private Integer id;
@@ -59,11 +59,11 @@ public class Movie implements Parcelable {
     @SerializedName(DatabaseInfo.Movie.COLUMN_VOTE_AVERAGE)
     private Double voteAverage;
 
-    @Ignore
-    private String type = Constants.Objects.MOVIE;
+    @ColumnInfo(name = DatabaseInfo.Movie.COLUMN_FAVORITE)
+    private Integer favorite = Constants.Favorites.DEFAULT;
 
     @Ignore
-    private int favorite = Constants.Favorites.DEFAULT;
+    private String type = Constants.Objects.MOVIE;
 
     @Ignore
     public Movie(String posterPath, String overview, String releaseDate, Integer id,
@@ -198,7 +198,7 @@ public class Movie implements Parcelable {
         this.backdropPath = in.readString();
         this.voteAverage = (Double) in.readValue(Double.class.getClassLoader());
         this.type = in.readString();
-        this.favorite = in.readInt();
+        this.favorite = (Integer) in.readValue(Integer.class.getClassLoader());
     }
 
     public static final Parcelable.Creator<Movie> CREATOR = new Parcelable.Creator<Movie>() {
@@ -221,9 +221,9 @@ public class Movie implements Parcelable {
         this.type = type;
     }
 
-    public int getFavorite() { return favorite; }
+    public Integer getFavorite() { return favorite; }
 
-    public void setFavorite(int favorite) {
+    public void setFavorite(Integer favorite) {
         this.favorite = favorite;
     }
 }

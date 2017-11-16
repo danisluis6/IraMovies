@@ -14,4 +14,6 @@ public interface IMoviesModel extends IBasePresenter<IMoviesPresenter> {
     void getMoviesFromApi(int mPageIndex);
 
     void addMovie(Movie movie);
+
+    void deleteMovie(Movie movie);
 }

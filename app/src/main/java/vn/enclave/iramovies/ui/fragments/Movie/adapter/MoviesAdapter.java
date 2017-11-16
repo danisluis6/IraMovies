@@ -17,7 +17,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import vn.enclave.iramovies.R;
 import vn.enclave.iramovies.services.IraMoviesInfoAPIs;
-import vn.enclave.iramovies.services.response.MovieData;
+import vn.enclave.iramovies.services.response.Movie;
 import vn.enclave.iramovies.ui.activities.base.BaseView;
 import vn.enclave.iramovies.utilities.Constants;
 import vn.enclave.iramovies.utilities.OverrideFonts;
@@ -40,7 +40,7 @@ import vn.enclave.iramovies.utilities.OverrideFonts;
 public class MoviesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
     private Context mContext;
-    private List<MovieData> mGrouMovies;
+    private List<Movie> mGrouMovies;
     private BaseView mBaseView;
     private final int TYPE_MOVIE = 0;
     private final int TYPE_LOAD = 1;
@@ -53,7 +53,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     /** Set Favorite start */
     private OnChooseFavoriteListener mChooseFavoriteListener;
 
-    public MoviesAdapter(Context context, BaseView baseView, List<MovieData> grouMovies) {
+    public MoviesAdapter(Context context, BaseView baseView, List<Movie> grouMovies) {
         this.mContext = context;
         this.mGrouMovies = grouMovies;
         this.mBaseView = baseView;
@@ -82,12 +82,12 @@ public class MoviesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         }
         if (getItemViewType(mPosition) == TYPE_MOVIE) {
             if (holder instanceof MovieViewHolder) {
-                final MovieData movieData = mGrouMovies.get(position);
-                ((MovieViewHolder) holder).tvTitle.setText(movieData.getTitle());
-                ((MovieViewHolder) holder).tvReleaseDate.setText(movieData.getReleaseDate());
-                ((MovieViewHolder) holder).tvRating.setText(movieData.getVoteAverage() + Constants.Keyboards.FORWARD_SLASH + "10.0");
-                ((MovieViewHolder) holder).tvOverview.setText(movieData.getOverview());
-                String poster = IraMoviesInfoAPIs.Images.Thumbnail + movieData.getPosterPath();
+                final Movie movie = mGrouMovies.get(position);
+                ((MovieViewHolder) holder).tvTitle.setText(movie.getTitle());
+                ((MovieViewHolder) holder).tvReleaseDate.setText(movie.getReleaseDate());
+                ((MovieViewHolder) holder).tvRating.setText(movie.getVoteAverage() + Constants.Keyboards.FORWARD_SLASH + "10.0");
+                ((MovieViewHolder) holder).tvOverview.setText(movie.getOverview());
+                String poster = IraMoviesInfoAPIs.Images.Thumbnail + movie.getBackdropPath();
                 Glide.with(mContext)
                         .load(poster)
                         .placeholder(R.drawable.load)
@@ -96,11 +96,13 @@ public class MoviesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 ((MovieViewHolder) holder).imvFavorite.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        mChooseFavoriteListener.onChoose(movieData);
+
+                        mChooseFavoriteListener.onChoose(movie);
                     }
                 });
             }
         }
+
     }
 
     @Override
@@ -108,7 +110,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         return mGrouMovies.size();
     }
 
-    public void setMovies(List<MovieData> movies) {
+    public void setMovies(List<Movie> movies) {
         this.mGrouMovies = movies;
         mIsLoading = false;
         notifyDataSetChanged();
@@ -152,6 +154,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
         void initAttributes() {
             tvTitle.setTypeface(OverrideFonts.getTypeFace(mBaseView, OverrideFonts.TYPE_FONT_NAME.HELVETICANEUE, OverrideFonts.TYPE_STYLE.BOLD));
+            imvFavorite.setImageResource(R.drawable.ic_star);
         }
     }
 
@@ -176,7 +179,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     }
 
     public interface OnChooseFavoriteListener {
-        void onChoose(MovieData movieData);
+        void onChoose(Movie movie);
     }
 
     public void updateStatusLoading(boolean isLoading) {
@@ -187,12 +190,12 @@ public class MoviesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         mIsMoreDataAvailable = moreDataAvailable;
     }
 
-    public void add(MovieData movieData) {
-        mGrouMovies.add(movieData);
+    public void add(Movie movie) {
+        mGrouMovies.add(movie);
         notifyItemInserted(getItemCount() - 1);
     }
 
-    public void addAll(List<MovieData> movies) {
+    public void addAll(List<Movie> movies) {
         mGrouMovies.addAll(movies);
         mIsLoading = false;
         notifyDataSetChanged();
@@ -205,5 +208,10 @@ public class MoviesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             notifyItemRemoved(index);
             notifyItemRangeChanged(index, getItemCount());
         }
+    }
+
+    public void clear() {
+        mGrouMovies.clear();
+        notifyDataSetChanged();
     }
 }

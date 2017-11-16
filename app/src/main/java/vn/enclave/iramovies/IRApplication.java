@@ -22,10 +22,7 @@ public class IRApplication extends Application{
      */
     private IraMoviesWebAPIs mIraMoviesWebAPIs;
 
-    /**
-     * AppDatabase
-     */
-    private AppDatabase mAppDatabase;
+
 
     public static synchronized IRApplication getInstance() {
         if (sInstance == null) {
@@ -40,12 +37,4 @@ public class IRApplication extends Application{
         }
         return mIraMoviesWebAPIs;
     }
-
-    public AppDatabase initAppDatabase() {
-        if (mAppDatabase.isOpen()) {
-            return mAppDatabase = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DB_NAME).build();
-        }
-        return mAppDatabase;
-    }
-
 }

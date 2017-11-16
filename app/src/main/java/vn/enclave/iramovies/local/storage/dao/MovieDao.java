@@ -9,7 +9,7 @@ import android.arch.persistence.room.Update;
 import java.util.List;
 
 import vn.enclave.iramovies.local.storage.DatabaseInfo;
-import vn.enclave.iramovies.local.storage.entity.Movie;
+import vn.enclave.iramovies.services.response.Movie;
 
 /**
  *
@@ -19,7 +19,7 @@ import vn.enclave.iramovies.local.storage.entity.Movie;
 @Dao
 public interface MovieDao {
 
-    @Query("SELECT * FROM "+ DatabaseInfo.Tables.User)
+    @Query("SELECT * FROM "+ DatabaseInfo.Tables.Movie)
     List<Movie> getMovies();
 
     @Insert
@@ -30,5 +30,4 @@ public interface MovieDao {
 
     @Delete
     int deleteMovies(Movie... movies);
-
 }

@@ -2,7 +2,7 @@ package vn.enclave.iramovies.ui.fragments.Movie;
 
 import java.util.List;
 
-import vn.enclave.iramovies.services.response.MovieData;
+import vn.enclave.iramovies.services.response.Movie;
 import vn.enclave.iramovies.ui.interfaces.IBasePresenter;
 
 /*
@@ -12,11 +12,11 @@ import vn.enclave.iramovies.ui.interfaces.IBasePresenter;
 public interface IMoviesPresenter extends IBasePresenter<IMoviesView> {
 
     // Copy IMoviesView and paste it in here
-    void onSuccess(List<MovieData> movies);
+    void onSuccess(List<Movie> movies);
 
     void onFailure(String message);
 
     void getMoviesFromApi(int mPageIndex, boolean isLoadMore);
 
-    void addMovie(MovieData movieData);
+    void addMovie(Movie movie);
 }

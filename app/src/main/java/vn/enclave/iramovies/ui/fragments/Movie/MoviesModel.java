@@ -1,6 +1,9 @@
 package vn.enclave.iramovies.ui.fragments.Movie;
 
+import android.arch.persistence.room.Room;
 import android.content.Context;
+import android.os.AsyncTask;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -10,9 +13,10 @@ import retrofit2.Response;
 import vn.enclave.iramovies.BuildConfig;
 import vn.enclave.iramovies.IRApplication;
 import vn.enclave.iramovies.R;
+import vn.enclave.iramovies.local.storage.AppDatabase;
 import vn.enclave.iramovies.local.storage.SessionManager;
 import vn.enclave.iramovies.services.IraMoviesWebAPIs;
-import vn.enclave.iramovies.services.response.MovieData;
+import vn.enclave.iramovies.services.response.Movie;
 import vn.enclave.iramovies.services.response.MoviesResponse;
 
 /**
@@ -37,9 +41,15 @@ public class MoviesModel implements IMoviesModel {
      */
     private IraMoviesWebAPIs mApiService;
 
+    /**
+     * AppDatabase
+     */
+    private AppDatabase mAppDatabase;
+
     MoviesModel(Context context) {
         this.mContext = context;
         mApiService = IRApplication.getInstance().getEzFaxingWebAPIs();
+        mAppDatabase = Room.databaseBuilder(mContext, AppDatabase.class, AppDatabase.DB_NAME).build();
     }
 
 
@@ -57,7 +67,7 @@ public class MoviesModel implements IMoviesModel {
                 if(response.isSuccessful()) {
                     MoviesResponse moviesResponse = response.body();
                     if (moviesResponse != null) {
-                        List<MovieData> grouMoviesDatas = moviesResponse.getResults();
+                        List<Movie> grouMoviesDatas = moviesResponse.getResults();
                         mIMoviesPresenter.onSuccess(grouMoviesDatas);
                         SessionManager.getInstance(mContext).setTotalPages(moviesResponse.getTotalPages());
                     }
@@ -75,11 +85,11 @@ public class MoviesModel implements IMoviesModel {
 
     // Work with local database ROOM
     @Override
-    public void addMovie(MovieData movieData) {
-/*        new AsyncTask<MoviesResponse, Void, Long>() {
+    public void addMovie(Movie movie) {
+        new AsyncTask<Movie, Void, Long>() {
             @Override
-            protected Long doInBackground(MoviesResponse... params) {
-                return IRApplication.getInstance().initAppDatabase().getMovieDao().insertMovies(convertMovieData(params[0]));
+            protected Long doInBackground(Movie... params) {
+                return mAppDatabase.getMovieDao().insertMovies(params[0]);
             }
 
             @Override
@@ -90,7 +100,7 @@ public class MoviesModel implements IMoviesModel {
                     Toast.makeText(mContext, "Add Contact failed", Toast.LENGTH_SHORT).show();
                 }
             }
-        }.execute(movieData);*/
+        }.execute(movie);
     }
 
 

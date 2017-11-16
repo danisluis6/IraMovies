@@ -19,8 +19,7 @@ import java.util.List;
 import butterknife.BindView;
 import vn.enclave.iramovies.R;
 import vn.enclave.iramovies.local.storage.SessionManager;
-import vn.enclave.iramovies.local.storage.entity.Movie;
-import vn.enclave.iramovies.services.response.MovieData;
+import vn.enclave.iramovies.services.response.Movie;
 import vn.enclave.iramovies.ui.fragments.Base.IRBaseFragment;
 import vn.enclave.iramovies.ui.fragments.Movie.adapter.MoviesAdapter;
 import vn.enclave.iramovies.ui.views.FailureLayout;
@@ -36,7 +35,6 @@ import vn.enclave.iramovies.utilities.Utils;
 
 public class MovieFragment extends IRBaseFragment implements IMoviesView {
 
-    // private static String TAG = MovieFragment.class.getName();
     @BindView(R.id.failureLayout)
     public FailureLayout mFailureLayout;
     @BindView(R.id.rcvMovies)
@@ -46,7 +44,7 @@ public class MovieFragment extends IRBaseFragment implements IMoviesView {
     public RecyclerView.LayoutManager mLayoutManager;
 
     private MoviesAdapter mMoviesAdapter;
-    private List<MovieData> mGroupMovies;
+    private List<Movie> mGroupMovies;
 
     /** Work with MVP */
     private MoviesPresenter mMoviesPresenter;
@@ -80,7 +78,7 @@ public class MovieFragment extends IRBaseFragment implements IMoviesView {
         handleData(mGroupMovies);
     }
 
-    private void handleData(List<MovieData> movies) {
+    private void handleData(List<Movie> movies) {
         if (Utils.isInternetOn(mActivity)) {
             mMoviesPresenter.getMoviesFromApi(mPageIndex, true);
         } else {
@@ -108,30 +106,24 @@ public class MovieFragment extends IRBaseFragment implements IMoviesView {
                 rcvMovies.post(new Runnable() {
                     @Override
                     public void run() {
-                        if (mPageIndex < SessionManager.getInstance(mActivity).getTotalPages()) {
-                            mMoviesAdapter.setMoreDataAvailable(true);
-                            mPageIndex++;
-                            loadNextDataFromApi();
-                        } else {
-                            mMoviesAdapter.setMoreDataAvailable(false);
-                            Utils.Toast.showToast(mActivity, getString(R.string.no_more_data));
-                        }
+                        loadNextDataFromApi();
                     }
                 });
             }
         });
         mMoviesAdapter.setChooseFavoriteListener(new MoviesAdapter.OnChooseFavoriteListener() {
             @Override
-            public void onChoose(MovieData movieData) {
-                Movie movie = new Movie();
-
-                mMoviesPresenter.addMovie(movieData);
+            public void onChoose(Movie movie) {
+                mMoviesPresenter.addMovie(movie);
             }
         });
     }
 
     private void loadNextDataFromApi() {
-        mMoviesAdapter.add(new MovieData(Constants.Objects.LOAD));
+        if (mIsLoadMore) {
+            return;
+        }
+        mMoviesAdapter.add(new Movie(Constants.Objects.LOAD));
         mIsLoadMore = true;
         mMoviesAdapter.updateStatusLoading(false);
         mMoviesPresenter.getMoviesFromApi(mPageIndex, false);
@@ -142,6 +134,7 @@ public class MovieFragment extends IRBaseFragment implements IMoviesView {
         mMoviesPresenter = new MoviesPresenter(mActivity);
         mMoviesPresenter.attachView(this);
         mPageIndex = Constants.FIRST_PAGE;
+        mMoviesAdapter.setMoreDataAvailable(true);
     }
 
     @Override
@@ -164,7 +157,14 @@ public class MovieFragment extends IRBaseFragment implements IMoviesView {
     }
 
     @Override
-    public void onSuccess(List<MovieData> movies) {
+    public void onSuccess(List<Movie> movies) {
+        mMoviesAdapter.setMoreDataAvailable(mPageIndex < SessionManager.getInstance(mActivity).getTotalPages());
+        if (mPageIndex == Constants.FIRST_PAGE && mMoviesAdapter.getItemCount() > 0) {
+            mMoviesAdapter.clear();
+            rcvMovies.scrollToPosition(0);
+        }
+        ++mPageIndex; /* End fix */
+
         if (mIsLoadMore) {
             // Handle the dismiss loadingMore if there is another caller API is executing
             updateListMovies(movies);
@@ -174,7 +174,7 @@ public class MovieFragment extends IRBaseFragment implements IMoviesView {
         }
     }
 
-    private void updateListMovies(List<MovieData> listMovies) {
+    private void updateListMovies(List<Movie> listMovies) {
         mMoviesAdapter.remove(mMoviesAdapter.getItemCount() - 1);
         mMoviesAdapter.addAll(listMovies);
         mIsLoadMore = false;

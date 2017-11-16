@@ -1,6 +1,7 @@
 package vn.enclave.iramovies.ui.activities.base.Home;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
@@ -27,6 +28,8 @@ import vn.enclave.iramovies.ui.fragments.Movie.MovieView;
 import vn.enclave.iramovies.ui.fragments.Setting.SettingFragment;
 import vn.enclave.iramovies.ui.views.TabItem;
 import vn.enclave.iramovies.ui.views.ToolbarLayout;
+import vn.enclave.iramovies.utilities.Constants;
+import vn.enclave.iramovies.utilities.Utils;
 
 
 /**
@@ -53,6 +56,11 @@ public class HomeView extends BaseView {
     private float mLastTranslate = 0.0f;
     private ActionBarDrawerToggle mDrawerToggle;
 
+    private Fragment mMovieView;
+    private Fragment mFavoriteView;
+    private Fragment mSettingView;
+    private Fragment mAboutView;
+
     @Override
     public int getLayoutResId() {
         return R.layout.activity_main;
@@ -68,9 +76,24 @@ public class HomeView extends BaseView {
         // noinspection deprecation
         mDrawerLayout.setDrawerListener(mDrawerToggle);
         // init Fragments in ViewPaper
+        defineFragment();
         initialPages();
         addViews();
 
+    }
+
+    /**
+     * @Run: seprate each child fragments
+     * => Done
+     *
+     * @Run: Faxage => Shoot change view[read/un-read] update to NavigationBar => The same
+     * => OnActivityForResult
+     */
+    private void defineFragment() {
+        mMovieView = MovieView.instantiate(mContext, MovieView.class.getName());
+        mFavoriteView = FavoriteView.instantiate(mContext, FavoriteView.class.getName());
+        mSettingView = SettingFragment.instantiate(mContext, SettingFragment.class.getName());
+        mAboutView = AboutFragment.instantiate(mContext, AboutFragment.class.getName());
     }
 
     private void addViews() {
@@ -98,10 +121,10 @@ public class HomeView extends BaseView {
 
     public void initialPages() {
         List<Fragment> fragments = new Vector<>();
-        fragments.add(MovieView.instantiate(mContext, MovieView.class.getName()));
-        fragments.add(FavoriteView.instantiate(mContext, FavoriteView.class.getName()));
-        fragments.add(SettingFragment.instantiate(mContext, SettingFragment.class.getName()));
-        fragments.add(AboutFragment.instantiate(mContext, AboutFragment.class.getName()));
+        fragments.add(mMovieView);
+        fragments.add(mFavoriteView);
+        fragments.add(mSettingView);
+        fragments.add(mAboutView);
         mViewPager.setAdapter(new SectionPaperAdapter(mContext, getSupportFragmentManager(), fragments));
         tabNavigationBottomMenu.setupWithViewPager(mViewPager);
         /*
@@ -154,5 +177,16 @@ public class HomeView extends BaseView {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.toolbar_menu, menu);
         return true;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case Constants.Interact.HANDLE_STATUS_FAVORITE:
+                // TODO
+                Utils.Toast.showToast(mContext, "Hello Parent");
+                break;
+        }
     }
 }

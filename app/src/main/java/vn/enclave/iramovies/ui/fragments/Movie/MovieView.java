@@ -1,6 +1,7 @@
 package vn.enclave.iramovies.ui.fragments.Movie;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -53,9 +54,6 @@ public class MovieView extends IRBaseFragment implements IMoviesView {
     /** Work with load more */
     private int mPageIndex;
     private boolean mIsLoadMore = false;
-
-    private FavoritesPresenter mFavoritesPresenter;
-
 
     @Override
     public View getViewLayout(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -121,6 +119,10 @@ public class MovieView extends IRBaseFragment implements IMoviesView {
                     return;
                 }
                 mMoviesPresenter.addMovie(movie);
+                /* Call Interface to refresh data in FavoriteScreen */
+                Intent intent = new Intent();
+                intent.putExtra("demo", "Hello Parent");
+                mActivity.startActivityForResult(intent, Constants.Interact.HANDLE_STATUS_FAVORITE);
             }
 
             @Override
@@ -132,6 +134,8 @@ public class MovieView extends IRBaseFragment implements IMoviesView {
             }
         });
     }
+
+
 
     private void loadNextDataFromApi() {
         if (mIsLoadMore) {

@@ -16,6 +16,7 @@ import vn.enclave.iramovies.services.response.Movie;
 import vn.enclave.iramovies.ui.fragments.Base.IRBaseFragment;
 import vn.enclave.iramovies.ui.fragments.Favorite.adapter.FavoritesAdapter;
 import vn.enclave.iramovies.ui.views.FailureLayout;
+import vn.enclave.iramovies.utilities.Utils;
 
 /**
  * Created by lorence on 08/11/2017.
@@ -57,6 +58,25 @@ public class FavoriteView extends IRBaseFragment implements IFavoritesView{
 
         mFavoritesAdapter = new FavoritesAdapter(mActivity,mActivity, mGroupMovies);
         rcvMovies.setAdapter(mFavoritesAdapter);
+
+        mFavoritesAdapter.setChooseFavoriteListener(new FavoritesAdapter.OnChooseFavoriteListener() {
+            @Override
+            public void onChoose(Movie movie) {
+                if (Utils.isDoubleClick()) {
+                    return;
+                }
+                mFavoritesPresenter.addMovie(movie);
+            }
+
+            @Override
+            public void onRemove(Movie movie) {
+                if (Utils.isDoubleClick()) {
+                    return;
+                }
+                mFavoritesPresenter.deleteMovie(movie);
+                mFavoritesAdapter.remove(movie);
+            }
+        });
     }
 
     private void initAttributes() {

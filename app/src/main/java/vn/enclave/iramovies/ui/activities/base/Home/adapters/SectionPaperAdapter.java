@@ -10,6 +10,7 @@ import java.util.List;
 import vn.enclave.iramovies.R;
 
 /**
+ *
  * Created by enclaveit on 27/12/2016.
  */
 
@@ -50,4 +51,5 @@ public class SectionPaperAdapter extends FragmentPagerAdapter {
                 return null;
         }
     }
+
 }

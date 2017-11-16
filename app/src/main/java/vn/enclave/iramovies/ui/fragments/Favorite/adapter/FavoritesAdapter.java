@@ -123,6 +123,11 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
         notifyDataSetChanged();
     }
 
+    public void remove(Movie movie) {
+        mGroupMovies.remove(movie);
+        notifyDataSetChanged();
+    }
+
     class ViewHolder extends RecyclerView.ViewHolder{
 
         @BindView(R.id.tvTitle)

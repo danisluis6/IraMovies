@@ -53,4 +53,9 @@ public class Constants {
         public static int DEFAULT = 0;
         public static int FAVORITE = 1;
     }
+
+    /* Interact between child fragment and container activity */
+    public static class Interact {
+        public static int HANDLE_STATUS_FAVORITE = 0;
+    }
 }

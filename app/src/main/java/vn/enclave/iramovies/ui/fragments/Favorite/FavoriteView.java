@@ -16,6 +16,7 @@ import vn.enclave.iramovies.services.response.Movie;
 import vn.enclave.iramovies.ui.fragments.Base.IRBaseFragment;
 import vn.enclave.iramovies.ui.fragments.Favorite.adapter.FavoritesAdapter;
 import vn.enclave.iramovies.ui.views.FailureLayout;
+import vn.enclave.iramovies.utilities.Constants;
 import vn.enclave.iramovies.utilities.Utils;
 
 /**
@@ -49,6 +50,7 @@ public class FavoriteView extends IRBaseFragment implements IFavoritesView{
         initViews();
         initAttributes();
         getMoviesFromLocal();
+
     }
 
     private void initViews() {
@@ -65,6 +67,8 @@ public class FavoriteView extends IRBaseFragment implements IFavoritesView{
                 if (Utils.isDoubleClick()) {
                     return;
                 }
+                mMovieInterface.updateCountFavoritesOnMenu(movie.getFavorite());
+                mMovieInterface.refreshFavoriteInMovieScreen(movie);
                 mFavoritesPresenter.addMovie(movie);
             }
 
@@ -73,6 +77,7 @@ public class FavoriteView extends IRBaseFragment implements IFavoritesView{
                 if (Utils.isDoubleClick()) {
                     return;
                 }
+                mMovieInterface.updateCountFavoritesOnMenu(movie.getFavorite());
                 mFavoritesPresenter.deleteMovie(movie);
                 mFavoritesAdapter.remove(movie);
             }
@@ -90,7 +95,6 @@ public class FavoriteView extends IRBaseFragment implements IFavoritesView{
 
     @Override
     public void onResume() {
-        getMoviesFromLocal();
         super.onResume();
     }
 
@@ -111,6 +115,11 @@ public class FavoriteView extends IRBaseFragment implements IFavoritesView{
     @Override
     public void onSuccess(List<Movie> movies) {
         mFavoritesAdapter.setMovies(movies);
+        updateStatusFavorite(movies.size());
+    }
+
+    private void updateStatusFavorite(int count) {
+        mMovieInterface.setTotalFavoritesOnMenu(count);
     }
 
     @Override
@@ -119,6 +128,23 @@ public class FavoriteView extends IRBaseFragment implements IFavoritesView{
     }
 
     public void refreshStatusFavorite(Movie movie) {
+        if (movie.getFavorite() == Constants.Favorites.DEFAULT) {
+            mFavoritesAdapter.remove(movie);
+        } else {
+            mFavoritesAdapter.add(movie);
+        }
+    }
 
+    public FavoriteInterface mMovieInterface;
+
+    /* Interface */
+    public interface FavoriteInterface {
+        void refreshFavoriteInMovieScreen(Movie movie);
+        void setTotalFavoritesOnMenu(int count);
+        void updateCountFavoritesOnMenu(int value);
+    }
+
+    public void setFavoriteInterface(FavoriteInterface favoriteInterface) {
+        this.mMovieInterface = favoriteInterface;
     }
 }

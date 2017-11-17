@@ -83,7 +83,6 @@ public class FavoritesModel implements IFavoritesModel {
             @Override
             protected void onPostExecute(Long id) {
                 if (id > 0) {
-                    Toast.makeText(mContext, "Add Movie successfully", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(mContext, "Add Movie failed", Toast.LENGTH_SHORT).show();
                 }
@@ -102,7 +101,6 @@ public class FavoritesModel implements IFavoritesModel {
             @Override
             protected void onPostExecute(Integer id) {
                 if (id > 0) {
-                    Toast.makeText(mContext, "Delete Movie successfully", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(mContext, "Delete Movie failed", Toast.LENGTH_SHORT).show();
                 }

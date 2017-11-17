@@ -1,9 +1,7 @@
 package vn.enclave.iramovies;
 
 import android.app.Application;
-import android.arch.persistence.room.Room;
 
-import vn.enclave.iramovies.local.storage.AppDatabase;
 import vn.enclave.iramovies.services.IraMoviesWebAPIs;
 
 /**
@@ -21,8 +19,6 @@ public class IRApplication extends Application{
      * EzFaxingWebAPIs
      */
     private IraMoviesWebAPIs mIraMoviesWebAPIs;
-
-
 
     public static synchronized IRApplication getInstance() {
         if (sInstance == null) {

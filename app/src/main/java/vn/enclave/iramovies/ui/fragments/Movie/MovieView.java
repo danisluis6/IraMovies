@@ -118,7 +118,6 @@ public class MovieView extends IRBaseFragment implements IMoviesView {
                 if (Utils.isDoubleClick()) {
                     return;
                 }
-                mMovieInterface.updateStatusFavorite(movie);
                 mMoviesPresenter.addMovie(movie);
             }
 
@@ -185,6 +184,12 @@ public class MovieView extends IRBaseFragment implements IMoviesView {
         }
     }
 
+    @Override
+    public void addMovieSuccess(Movie movie) {
+        mMovieInterface.updateCountFavoritesOnMenu(movie.getFavorite());
+        mMovieInterface.refreshFavoriteInFavoriteScreen(movie);
+    }
+
     private void updateListMovies(List<Movie> listMovies) {
         mMoviesAdapter.remove(mMoviesAdapter.getItemCount() - 1);
         mMoviesAdapter.addAll(listMovies);
@@ -194,6 +199,12 @@ public class MovieView extends IRBaseFragment implements IMoviesView {
     @Override
     public void onFailure(String message) {
         // TODO
+    }
+
+    @Override
+    public void deleteMovieSuccess(Movie movie) {
+        mMovieInterface.updateCountFavoritesOnMenu(movie.getFavorite());
+        mMovieInterface.refreshFavoriteInFavoriteScreen(movie);
     }
 
     @Override
@@ -215,12 +226,19 @@ public class MovieView extends IRBaseFragment implements IMoviesView {
 
     public MovieInterface mMovieInterface;
 
-    /* Interface */
-    public interface MovieInterface {
-        void updateStatusFavorite(Movie movie);
+    public void refreshStatusFavorite(Movie movie) {
+        if (movie.getFavorite() == Constants.Favorites.DEFAULT) {
+            mMoviesAdapter.remove(movie);
+        }
     }
 
-    public void setHomeInterface(MovieInterface homeInterface) {
-        this.mMovieInterface = homeInterface;
+    /* Interface */
+    public interface MovieInterface {
+        void refreshFavoriteInFavoriteScreen(Movie movie);
+        void updateCountFavoritesOnMenu(int value);
+    }
+
+    public void setMovieInterface(MovieInterface movieInterface) {
+        this.mMovieInterface = movieInterface;
     }
 }

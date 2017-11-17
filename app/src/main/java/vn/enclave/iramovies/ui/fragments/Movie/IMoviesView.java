@@ -18,4 +18,8 @@ public interface IMoviesView {
     void onSuccess(List<Movie> movies);
 
     void onFailure(String message);
+
+    void addMovieSuccess(Movie movie);
+
+    void deleteMovieSuccess(Movie movie);
 }

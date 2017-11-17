@@ -10,7 +10,8 @@ import vn.enclave.iramovies.ui.fragments.Base.IRBaseFragment;
 
 /**
  * Created by lorence on 08/11/2017.
- * @Run:
+ *
+ * @Run: https://developer.android.com/guide/topics/ui/settings.html
  */
 
 public class SettingView extends IRBaseFragment {

@@ -9,10 +9,12 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.animation.TranslateAnimation;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import java.util.List;
 import java.util.Vector;
@@ -28,6 +30,7 @@ import vn.enclave.iramovies.ui.fragments.Movie.MovieView;
 import vn.enclave.iramovies.ui.fragments.Setting.SettingView;
 import vn.enclave.iramovies.ui.views.TabItem;
 import vn.enclave.iramovies.ui.views.ToolbarLayout;
+import vn.enclave.iramovies.utilities.Constants;
 import vn.enclave.iramovies.utilities.Utils;
 
 
@@ -35,7 +38,8 @@ import vn.enclave.iramovies.utilities.Utils;
  * @Run: https://www.androidhive.info/2016/05/android-working-with-card-view-and-recycler-view/
  * => Done
  *
- * @Run:
+ * @Run: https://www.google.com/search?q=create+badge+icon+at+corner+layout&client=ubuntu&hs=Amc&channel=fs&source=lnms&sa=X&ved=0ahUKEwiu9dnh_MTXAhVHPo8KHV3OBAgQ_AUICSgA&biw=1505&bih=877&dpr=1
+ * => Done
  */
 
 public class HomeView extends BaseView{
@@ -60,6 +64,12 @@ public class HomeView extends BaseView{
     private SettingView mSettingView;
     private AboutView mAboutView;
 
+
+    private TabItem moviesTab;
+    private TabItem favoritesTab;
+    private TabItem settingsTab;
+    private TabItem aboutsTab;
+
     private PaperAdapter mPageAdapter;
 
     @Override
@@ -72,15 +82,15 @@ public class HomeView extends BaseView{
     public void activityCreated() {
         setSupportActionBar(mToolbar.getToolbar());
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mDrawerLayout = findViewById(R.id.drawer_layout);
         setupDrawerToggle();
         // noinspection deprecation
         mDrawerLayout.setDrawerListener(mDrawerToggle);
         // init Fragments in ViewPaper
         initFragments();
-        defineFragmentOnViewPaper();
         initialPages();
-        addViews();
+        initViews();
+        defineFragmentOnViewPaper();
     }
 
     private void initFragments() {
@@ -90,46 +100,24 @@ public class HomeView extends BaseView{
         mAboutView = (AboutView) AboutView.instantiate(mContext, AboutView.class.getName());
     }
 
-    /**
-     * @Run: seprate each child fragments
-     * => Done
-     *
-     * @Run: Faxage => Shoot change view[read/un-read] update to NavigationBar => The same
-     * => OnActivityForResult
-     */
-    private void defineFragmentOnViewPaper() {
-        mMovieView.setHomeInterface(new MovieView.MovieInterface() {
-            @Override
-            public void updateStatusFavorite(Movie movie) {
-                /*
-                 * Notice that
-                 * - WHen initial fragment in Android
-                 * - When update fragmetn in Android
-                 * => That's all
-                 */
-                mFavoriteView.refreshStatusFavorite(movie);
-            }
-        });
-    }
-
-    private void addViews() {
-        TabItem moviesTab = new TabItem(mContext, null);
+    private void initViews() {
+        moviesTab = new TabItem(mContext, null);
         moviesTab.setTabIcon(R.drawable.ic_movies);
         moviesTab.setTabText(getResources().getStringArray(R.array.menu_bottom_nav)[0]);
         tabNavigationBottomMenu.getTabAt(0).setCustomView(moviesTab.getView());
 
-        TabItem favoritesTab = new TabItem(mContext, null);
+        favoritesTab = new TabItem(mContext, null);
         favoritesTab.setTabIcon(R.drawable.ic_favorite);
         favoritesTab.setTabText(getResources().getStringArray(R.array.menu_bottom_nav)[1]);
         tabNavigationBottomMenu.getTabAt(1).setCustomView(favoritesTab.getView());
 
 
-        TabItem settingsTab = new TabItem(mContext, null);
+        settingsTab = new TabItem(mContext, null);
         settingsTab.setTabIcon(R.drawable.ic_settings);
         settingsTab.setTabText(getResources().getStringArray(R.array.menu_bottom_nav)[2]);
         tabNavigationBottomMenu.getTabAt(2).setCustomView(settingsTab.getView());
 
-        TabItem aboutsTab = new TabItem(mContext, null);
+        aboutsTab = new TabItem(mContext, null);
         aboutsTab.setTabIcon(R.drawable.ic_about);
         aboutsTab.setTabText(getResources().getStringArray(R.array.menu_bottom_nav)[3]);
         tabNavigationBottomMenu.getTabAt(3).setCustomView(aboutsTab.getView());
@@ -161,6 +149,43 @@ public class HomeView extends BaseView{
          */
     }
 
+    /**
+     * @Run: seprate each child fragments
+     * => Done
+     *
+     * @Run: Faxage => Shoot change view[read/un-read] update to NavigationBar => The same
+     * => OnActivityForResult
+     */
+    private void defineFragmentOnViewPaper() {
+        mMovieView.setMovieInterface(new MovieView.MovieInterface() {
+            @Override
+            public void refreshFavoriteInFavoriteScreen(Movie movie) {
+                mFavoriteView.refreshStatusFavorite(movie);
+            }
+
+            @Override
+            public void updateCountFavoritesOnMenu(int value) {
+                favoritesTab.updateNumberFavorites(value);
+            }
+        });
+        mFavoriteView.setFavoriteInterface(new FavoriteView.FavoriteInterface() {
+            @Override
+            public void refreshFavoriteInMovieScreen(Movie movie) {
+                mMovieView.refreshStatusFavorite(movie);
+            }
+
+            @Override
+            public void setTotalFavoritesOnMenu(int total) {
+                favoritesTab.setNumberFavorites(total);
+            }
+
+            @Override
+            public void updateCountFavoritesOnMenu(int value) {
+                favoritesTab.updateNumberFavorites(value);
+            }
+        });
+    }
+
     private void updateFragmentOnViewPaper() {
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -172,12 +197,12 @@ public class HomeView extends BaseView{
             public void onPageSelected(int position) {
                 switch (position) {
                     case 0:
-                        mMovieView.setHomeInterface(new MovieView.MovieInterface() {
-                            @Override
-                            public void updateStatusFavorite(Movie movie) {
-                                Utils.Toast.showToast(mContext, "Hello World");
-                            }
-                        });
+//                        mMovieView.setMovieInterface(new MovieView.MovieInterface() {
+//                            @Override
+//                            public void refreshFavoriteInFavoriteScreen(Movie movie) {
+//                                mFavoriteView.refreshStatusFavorite(movie);
+//                            }
+//                        });
                         break;
                     case 1:
                         break;

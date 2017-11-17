@@ -123,11 +123,6 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
         notifyDataSetChanged();
     }
 
-    public void remove(Movie movie) {
-        mGroupMovies.remove(movie);
-        notifyDataSetChanged();
-    }
-
     class ViewHolder extends RecyclerView.ViewHolder{
 
         @BindView(R.id.tvTitle)
@@ -157,8 +152,8 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
         void initAttributes() {
             tvTitle.setTypeface(OverrideFonts.getTypeFace(mBaseView, OverrideFonts.TYPE_FONT_NAME.HELVETICANEUE, OverrideFonts.TYPE_STYLE.BOLD));
         }
-    }
 
+    }
     public void setChooseFavoriteListener (OnChooseFavoriteListener chooseFavoriteListener) {
         this.mChooseFavoriteListener = chooseFavoriteListener;
     }
@@ -167,5 +162,13 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
         void onChoose(Movie movie);
         void onRemove(Movie movie);
     }
+    public void add(Movie movie) {
+        mGroupMovies.add(movie);
+        notifyDataSetChanged();
+    }
 
+    public void remove(Movie movie) {
+        mGroupMovies.remove(movie);
+        notifyDataSetChanged();
+    }
 }

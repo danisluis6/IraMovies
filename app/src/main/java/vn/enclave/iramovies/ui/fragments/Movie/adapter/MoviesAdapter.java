@@ -244,8 +244,17 @@ public class MoviesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         }
     }
 
-    public void clear() {
-        mGrouMovies.clear();
+    public void remove(Movie movie) {
+        resetStatusFavorite(movie);
         notifyDataSetChanged();
+    }
+
+    private void resetStatusFavorite(Movie movie) {
+        for (int index = 0; index < mGrouMovies.size(); index++ ) {
+            if (movie.getId().equals(mGrouMovies.get(index).getId())) {
+                mGrouMovies.get(index).setFavorite(Constants.Favorites.DEFAULT);
+            }
+        }
+        setMovies(mGrouMovies);
     }
 }

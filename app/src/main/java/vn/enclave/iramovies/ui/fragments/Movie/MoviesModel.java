@@ -110,7 +110,11 @@ public class MoviesModel implements IMoviesModel {
 
     // Work with local database ROOM
     @Override
-    public void addMovie(Movie movie) {
+    public void addMovie(final Movie movie) {
+
+        // First IN => First OUT
+
+        Log.i("ID", movie.getId()+Constants.EMPTY_STRING);
         new AsyncTask<Movie, Void, Long>() {
             @Override
             protected Long doInBackground(Movie... params) {
@@ -120,7 +124,7 @@ public class MoviesModel implements IMoviesModel {
             @Override
             protected void onPostExecute(Long id) {
                 if (id > 0) {
-                    Toast.makeText(mContext, "Add Movie successfully", Toast.LENGTH_SHORT).show();
+                    mIMoviesPresenter.addMovieSuccess(movie);
                 } else {
                     Toast.makeText(mContext, "Add Movie failed", Toast.LENGTH_SHORT).show();
                 }
@@ -129,7 +133,7 @@ public class MoviesModel implements IMoviesModel {
     }
 
     @Override
-    public void deleteMovie(Movie movie) {
+    public void deleteMovie(final Movie movie) {
         new AsyncTask<Movie, Void, Integer>() {
             @Override
             protected Integer doInBackground(Movie... movies) {
@@ -139,7 +143,7 @@ public class MoviesModel implements IMoviesModel {
             @Override
             protected void onPostExecute(Integer id) {
                 if (id > 0) {
-                    Toast.makeText(mContext, "Delete Movie successfully", Toast.LENGTH_SHORT).show();
+                    mIMoviesPresenter.deleteMovieSuccess(movie);
                 } else {
                     Toast.makeText(mContext, "Delete Movie failed", Toast.LENGTH_SHORT).show();
                 }

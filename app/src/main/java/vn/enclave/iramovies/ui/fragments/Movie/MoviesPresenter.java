@@ -73,4 +73,20 @@ public class MoviesPresenter implements IMoviesPresenter {
     public void deleteMovie(Movie movie) {
         mMovieModel.deleteMovie(movie);
     }
+
+    @Override
+    public void addMovieSuccess(Movie movie) {
+        if (mIMoviesView != null) {
+            mIMoviesView.dismissProgressDialog();
+            mIMoviesView.addMovieSuccess(movie);
+        }
+    }
+
+    @Override
+    public void deleteMovieSuccess(Movie movie) {
+        if (mIMoviesView != null) {
+            mIMoviesView.dismissProgressDialog();
+            mIMoviesView.deleteMovieSuccess(movie);
+        }
+    }
 }

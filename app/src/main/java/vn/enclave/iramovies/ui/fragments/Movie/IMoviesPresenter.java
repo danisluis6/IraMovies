@@ -21,4 +21,8 @@ public interface IMoviesPresenter extends IBasePresenter<IMoviesView> {
     void addMovie(Movie movie);
 
     void deleteMovie(Movie movie);
+
+    void addMovieSuccess(Movie movie);
+
+    void deleteMovieSuccess(Movie movie);
 }

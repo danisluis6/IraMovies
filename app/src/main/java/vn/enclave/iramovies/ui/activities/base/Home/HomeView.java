@@ -1,7 +1,6 @@
 package vn.enclave.iramovies.ui.activities.base.Home;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
@@ -20,15 +19,15 @@ import java.util.Vector;
 
 import butterknife.BindView;
 import vn.enclave.iramovies.R;
+import vn.enclave.iramovies.services.response.Movie;
 import vn.enclave.iramovies.ui.activities.base.BaseView;
-import vn.enclave.iramovies.ui.activities.base.Home.adapters.SectionPaperAdapter;
-import vn.enclave.iramovies.ui.fragments.About.AboutFragment;
+import vn.enclave.iramovies.ui.activities.base.Home.adapters.PaperAdapter;
+import vn.enclave.iramovies.ui.fragments.About.AboutView;
 import vn.enclave.iramovies.ui.fragments.Favorite.FavoriteView;
 import vn.enclave.iramovies.ui.fragments.Movie.MovieView;
-import vn.enclave.iramovies.ui.fragments.Setting.SettingFragment;
+import vn.enclave.iramovies.ui.fragments.Setting.SettingView;
 import vn.enclave.iramovies.ui.views.TabItem;
 import vn.enclave.iramovies.ui.views.ToolbarLayout;
-import vn.enclave.iramovies.utilities.Constants;
 import vn.enclave.iramovies.utilities.Utils;
 
 
@@ -39,7 +38,7 @@ import vn.enclave.iramovies.utilities.Utils;
  * @Run:
  */
 
-public class HomeView extends BaseView {
+public class HomeView extends BaseView{
 
     @BindView(R.id.drawer_layout)
     public DrawerLayout mDrawerLayout;
@@ -56,12 +55,12 @@ public class HomeView extends BaseView {
     private float mLastTranslate = 0.0f;
     private ActionBarDrawerToggle mDrawerToggle;
 
-    private Fragment mMovieView;
-    private Fragment mFavoriteView;
-    private Fragment mSettingView;
-    private Fragment mAboutView;
+    private MovieView mMovieView;
+    private FavoriteView mFavoriteView;
+    private SettingView mSettingView;
+    private AboutView mAboutView;
 
-    private SectionPaperAdapter mPageAdapter;
+    private PaperAdapter mPageAdapter;
 
     @Override
     public int getLayoutResId() {
@@ -78,10 +77,17 @@ public class HomeView extends BaseView {
         // noinspection deprecation
         mDrawerLayout.setDrawerListener(mDrawerToggle);
         // init Fragments in ViewPaper
-        defineFragment();
+        initFragments();
+        defineFragmentOnViewPaper();
         initialPages();
         addViews();
+    }
 
+    private void initFragments() {
+        mMovieView = (MovieView) MovieView.instantiate(mContext, MovieView.class.getName());
+        mFavoriteView = (FavoriteView) FavoriteView.instantiate(mContext, FavoriteView.class.getName());
+        mSettingView = (SettingView) SettingView.instantiate(mContext, SettingView.class.getName());
+        mAboutView = (AboutView) AboutView.instantiate(mContext, AboutView.class.getName());
     }
 
     /**
@@ -91,11 +97,19 @@ public class HomeView extends BaseView {
      * @Run: Faxage => Shoot change view[read/un-read] update to NavigationBar => The same
      * => OnActivityForResult
      */
-    private void defineFragment() {
-        mMovieView = MovieView.instantiate(mContext, MovieView.class.getName());
-        mFavoriteView = FavoriteView.instantiate(mContext, FavoriteView.class.getName());
-        mSettingView = SettingFragment.instantiate(mContext, SettingFragment.class.getName());
-        mAboutView = AboutFragment.instantiate(mContext, AboutFragment.class.getName());
+    private void defineFragmentOnViewPaper() {
+        mMovieView.setHomeInterface(new MovieView.MovieInterface() {
+            @Override
+            public void updateStatusFavorite(Movie movie) {
+                /*
+                 * Notice that
+                 * - WHen initial fragment in Android
+                 * - When update fragmetn in Android
+                 * => That's all
+                 */
+                mFavoriteView.refreshStatusFavorite(movie);
+            }
+        });
     }
 
     private void addViews() {
@@ -127,8 +141,9 @@ public class HomeView extends BaseView {
         fragments.add(mFavoriteView);
         fragments.add(mSettingView);
         fragments.add(mAboutView);
-        mPageAdapter = new SectionPaperAdapter(mContext, getSupportFragmentManager(), fragments);
+        mPageAdapter = new PaperAdapter(mContext, getSupportFragmentManager(), fragments);
         mViewPager.setAdapter(mPageAdapter);
+        updateFragmentOnViewPaper();
         tabNavigationBottomMenu.setupWithViewPager(mViewPager);
 
         /*
@@ -144,6 +159,40 @@ public class HomeView extends BaseView {
          * @Run: https://www.google.com/search?q=PagerTabStrip+example+android&client=ubuntu&hs=pk8&channel=fs&source=lnms&tbm=isch&sa=X&ved=0ahUKEwjx2eCI17rXAhWGx7wKHXfOCB8Q_AUICigB&biw=1855&bih=983
          * => Done
          */
+    }
+
+    private void updateFragmentOnViewPaper() {
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                switch (position) {
+                    case 0:
+                        mMovieView.setHomeInterface(new MovieView.MovieInterface() {
+                            @Override
+                            public void updateStatusFavorite(Movie movie) {
+                                Utils.Toast.showToast(mContext, "Hello World");
+                            }
+                        });
+                        break;
+                    case 1:
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        break;
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 
     @Override
@@ -181,16 +230,5 @@ public class HomeView extends BaseView {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.toolbar_menu, menu);
         return true;
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode) {
-            case Constants.Interact.HANDLE_STATUS_FAVORITE:
-                // TODO
-                Utils.Toast.showToast(mContext, "Hello Parent");
-                break;
-        }
     }
 }

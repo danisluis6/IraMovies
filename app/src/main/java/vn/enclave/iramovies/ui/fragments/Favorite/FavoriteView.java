@@ -90,6 +90,7 @@ public class FavoriteView extends IRBaseFragment implements IFavoritesView{
 
     @Override
     public void onResume() {
+        getMoviesFromLocal();
         super.onResume();
     }
 
@@ -115,5 +116,9 @@ public class FavoriteView extends IRBaseFragment implements IFavoritesView{
     @Override
     public void onFailure(String message) {
         // TODO
+    }
+
+    public void refreshStatusFavorite(Movie movie) {
+
     }
 }

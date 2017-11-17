@@ -1,7 +1,6 @@
 package vn.enclave.iramovies.ui.fragments.Movie;
 
 import android.Manifest;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -22,7 +21,6 @@ import vn.enclave.iramovies.R;
 import vn.enclave.iramovies.local.storage.SessionManager;
 import vn.enclave.iramovies.services.response.Movie;
 import vn.enclave.iramovies.ui.fragments.Base.IRBaseFragment;
-import vn.enclave.iramovies.ui.fragments.Favorite.FavoritesPresenter;
 import vn.enclave.iramovies.ui.fragments.Movie.adapter.MoviesAdapter;
 import vn.enclave.iramovies.ui.views.FailureLayout;
 import vn.enclave.iramovies.utilities.Constants;
@@ -41,7 +39,7 @@ public class MovieView extends IRBaseFragment implements IMoviesView {
     public FailureLayout mFailureLayout;
     @BindView(R.id.rcvMovies)
 
-    /** RecyclerView */
+    /* RecyclerView */
     public RecyclerView rcvMovies;
     public RecyclerView.LayoutManager mLayoutManager;
 
@@ -120,11 +118,8 @@ public class MovieView extends IRBaseFragment implements IMoviesView {
                 if (Utils.isDoubleClick()) {
                     return;
                 }
+                mMovieInterface.updateStatusFavorite(movie);
                 mMoviesPresenter.addMovie(movie);
-                /* Call Interface to refresh data in FavoriteScreen */
-                Intent intent = new Intent();
-                intent.putExtra("demo", "Hello Parent");
-                mActivity.startActivityForResult(intent, Constants.Interact.HANDLE_STATUS_FAVORITE);
             }
 
             @Override
@@ -216,5 +211,16 @@ public class MovieView extends IRBaseFragment implements IMoviesView {
                 break;
             }
         }
+    }
+
+    public MovieInterface mMovieInterface;
+
+    /* Interface */
+    public interface MovieInterface {
+        void updateStatusFavorite(Movie movie);
+    }
+
+    public void setHomeInterface(MovieInterface homeInterface) {
+        this.mMovieInterface = homeInterface;
     }
 }

@@ -55,6 +55,8 @@ public class MovieView extends IRBaseFragment implements IMoviesView {
     private int mPageIndex;
     private boolean mIsLoadMore = false;
 
+    public MovieView(){}
+
     @Override
     public View getViewLayout(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_movies, container, false);

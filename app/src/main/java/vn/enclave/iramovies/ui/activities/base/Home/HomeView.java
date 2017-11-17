@@ -61,6 +61,8 @@ public class HomeView extends BaseView {
     private Fragment mSettingView;
     private Fragment mAboutView;
 
+    private SectionPaperAdapter mPageAdapter;
+
     @Override
     public int getLayoutResId() {
         return R.layout.activity_main;
@@ -125,8 +127,10 @@ public class HomeView extends BaseView {
         fragments.add(mFavoriteView);
         fragments.add(mSettingView);
         fragments.add(mAboutView);
-        mViewPager.setAdapter(new SectionPaperAdapter(mContext, getSupportFragmentManager(), fragments));
+        mPageAdapter = new SectionPaperAdapter(mContext, getSupportFragmentManager(), fragments);
+        mViewPager.setAdapter(mPageAdapter);
         tabNavigationBottomMenu.setupWithViewPager(mViewPager);
+
         /*
          * @Run: https://stackoverflow.com/questions/8117523/how-do-you-get-the-current-page-number-of-a-viewpager-for-android
          * => Done

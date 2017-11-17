@@ -19,7 +19,7 @@ import vn.enclave.iramovies.ui.views.DialogView;
  *
  */
 
-public abstract class IRBaseFragment extends Fragment {
+public abstract class IRBaseFragment extends Fragment{
 
     /**
      * Container activity
@@ -55,5 +55,9 @@ public abstract class IRBaseFragment extends Fragment {
             mUnbinder.unbind();
         }
         super.onDestroyView();
+    }
+
+    public interface Updateable {
+        public void update();
     }
 }

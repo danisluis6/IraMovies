@@ -4,17 +4,24 @@ import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 
 import java.util.List;
 
 import vn.enclave.iramovies.R;
+import vn.enclave.iramovies.ui.fragments.Movie.MovieView;
 
 /**
  *
  * Created by enclaveit on 27/12/2016.
+ *
+ * @Run: https://stackoverflow.com/questions/18088076/update-fragment-from-viewpager
+ * => Done
+ *
+ * @Run: https://www.youtube.com/watch?v=8wAZ3uWioTk
  */
 
-public class SectionPaperAdapter extends FragmentPagerAdapter {
+public class SectionPaperAdapter extends FragmentStatePagerAdapter {
 
     private List<Fragment> fragments;
     private Context mContext;
@@ -23,11 +30,6 @@ public class SectionPaperAdapter extends FragmentPagerAdapter {
         super(fm);
         this.fragments = fragments;
         this.mContext = context;
-    }
-
-    @Override
-    public Fragment getItem(int position) {
-        return this.fragments.get(position);
     }
 
     @Override
@@ -51,5 +53,20 @@ public class SectionPaperAdapter extends FragmentPagerAdapter {
                 return null;
         }
     }
+
+    @Override
+    public Fragment getItem(int position) {
+        return this.fragments.get(position);
+    }
+
+    @Override
+    public int getItemPosition(Object object) {
+//        Fragment f = (Fragment ) object;
+//        if (f != null) {
+//            f.update();
+//        }
+        return super.getItemPosition(object);
+    }
+
 
 }

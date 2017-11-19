@@ -18,4 +18,6 @@ public interface IFavoritesView {
     void onSuccess(List<Movie> movies);
 
     void onFailure(String message);
+
+    void deleteSuccess(Movie movie);
 }

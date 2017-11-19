@@ -23,6 +23,7 @@ import vn.enclave.iramovies.services.response.Movie;
 import vn.enclave.iramovies.ui.activities.base.BaseView;
 import vn.enclave.iramovies.utilities.Constants;
 import vn.enclave.iramovies.utilities.OverrideFonts;
+import vn.enclave.iramovies.utilities.Utils;
 
 /**
  * Created by lorence on 14/11/2017.
@@ -110,7 +111,9 @@ public class MoviesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                     private void backupStatusWhenScrolling(View v) {
                         ImageView imvFavorite = (ImageView) v;
                         Movie movie = (Movie) imvFavorite.getTag();
-
+                        if (Utils.isDoubleClick()) {
+                            return;
+                        }
                         if (movie.getFavorite() == Constants.Favorites.DEFAULT) {
                             updateView(Constants.Favorites.FAVORITE, imvFavorite);
                             navigateToAddNew(movie);

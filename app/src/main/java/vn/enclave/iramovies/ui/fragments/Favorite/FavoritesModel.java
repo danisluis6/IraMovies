@@ -91,7 +91,7 @@ public class FavoritesModel implements IFavoritesModel {
     }
 
     @Override
-    public void deleteMovie(Movie movie) {
+    public void deleteMovie(final Movie movie) {
         new AsyncTask<Movie, Void, Integer>() {
             @Override
             protected Integer doInBackground(Movie... movies) {
@@ -101,6 +101,7 @@ public class FavoritesModel implements IFavoritesModel {
             @Override
             protected void onPostExecute(Integer id) {
                 if (id > 0) {
+                    mIFavoritesPresenter.deleteSuccess(movie);
                 } else {
                     Toast.makeText(mContext, "Delete Movie failed", Toast.LENGTH_SHORT).show();
                 }

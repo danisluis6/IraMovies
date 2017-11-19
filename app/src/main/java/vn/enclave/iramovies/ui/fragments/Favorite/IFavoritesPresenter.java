@@ -21,4 +21,6 @@ public interface IFavoritesPresenter extends IBasePresenter<IFavoritesView> {
     void addMovie(Movie movie);
 
     void deleteMovie(Movie movie);
+
+    void deleteSuccess(Movie movie);
 }

@@ -3,8 +3,6 @@ package vn.enclave.iramovies.ui.fragments.Movie;
 import android.arch.persistence.room.Room;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.text.TextUtils;
-import android.util.Log;
 import android.widget.Toast;
 
 import java.util.List;
@@ -23,7 +21,6 @@ import vn.enclave.iramovies.services.response.MoviesResponse;
 import vn.enclave.iramovies.utilities.Constants;
 
 /**
- *
  * Created by lorence on 13/11/2017.
  */
 
@@ -49,12 +46,16 @@ public class MoviesModel implements IMoviesModel {
      */
     private AppDatabase mAppDatabase;
 
-    MoviesModel(Context context) {
+    private AddAsyncTask mAddAsyncTask;
+    private DeleteAsyncTask mDeleteAsyncTask;
+    private ListAsyncTask mListAsyncTask;
+    private boolean isAsyncTask = false;
+
+    public MoviesModel(Context context) {
         this.mContext = context;
         mApiService = IRApplication.getInstance().getEzFaxingWebAPIs();
         mAppDatabase = Room.databaseBuilder(mContext, AppDatabase.class, AppDatabase.DB_NAME).build();
     }
-
 
     @Override
     public void attachView(IMoviesPresenter view) {
@@ -67,14 +68,14 @@ public class MoviesModel implements IMoviesModel {
         call.enqueue(new Callback<MoviesResponse>() {
             @Override
             public void onResponse(Call<MoviesResponse> call, Response<MoviesResponse> response) {
-                if(response.isSuccessful()) {
+                if (response.isSuccessful()) {
                     MoviesResponse moviesResponse = response.body();
                     if (moviesResponse != null) {
                         List<Movie> grouMoviesDatas = moviesResponse.getResults();
                         mIMoviesPresenter.onSuccess(updateStatusFavorite(grouMoviesDatas));
                         SessionManager.getInstance(mContext).setTotalPages(moviesResponse.getTotalPages());
                     }
-                } else  {
+                } else {
                     mIMoviesPresenter.onFailure(mContext.getString(R.string.cannot_get_data));
                 }
             }
@@ -87,67 +88,94 @@ public class MoviesModel implements IMoviesModel {
     }
 
     private List<Movie> updateStatusFavorite(final List<Movie> movies) {
-        new AsyncTask<Void, Void, List<Movie>>() {
-            @Override
-            protected List<Movie> doInBackground(Void... params) {
-                return mAppDatabase.getMovieDao().getMovies();
-            }
-
-            @Override
-            protected void onPostExecute(List<Movie> groupMovies) {
-                for (int i = 0; i < movies.size(); i++) {
-                    for (int j = 0; j < groupMovies.size(); j++) {
-                        if (movies.get(i).getId().equals(groupMovies.get(j).getId())) {
-                            movies.get(i).setFavorite(Constants.Favorites.FAVORITE);
-                            break;
-                        }
-                    }
-                }
-            }
-        }.execute();
+        mListAsyncTask = new ListAsyncTask(movies);
+        mListAsyncTask.execute();
         return movies;
     }
 
     // Work with local database ROOM
     @Override
     public void addMovie(final Movie movie) {
-
         // First IN => First OUT
-
-        Log.i("ID", movie.getId()+Constants.EMPTY_STRING);
-        new AsyncTask<Movie, Void, Long>() {
-            @Override
-            protected Long doInBackground(Movie... params) {
-                return mAppDatabase.getMovieDao().insertMovies(params[0]);
-            }
-
-            @Override
-            protected void onPostExecute(Long id) {
-                if (id > 0) {
-                    mIMoviesPresenter.addMovieSuccess(movie);
-                } else {
-                    Toast.makeText(mContext, "Add Movie failed", Toast.LENGTH_SHORT).show();
-                }
-            }
-        }.execute(movie);
+        mAddAsyncTask = new AddAsyncTask(movie);
+        mAddAsyncTask.execute(movie);
     }
 
     @Override
     public void deleteMovie(final Movie movie) {
-        new AsyncTask<Movie, Void, Integer>() {
-            @Override
-            protected Integer doInBackground(Movie... movies) {
-                return mAppDatabase.getMovieDao().deleteMovies(movies);
-            }
+        mDeleteAsyncTask = new DeleteAsyncTask(movie);
+        mDeleteAsyncTask.execute(movie);
+    }
 
-            @Override
-            protected void onPostExecute(Integer id) {
-                if (id > 0) {
-                    mIMoviesPresenter.deleteMovieSuccess(movie);
-                } else {
-                    Toast.makeText(mContext, "Delete Movie failed", Toast.LENGTH_SHORT).show();
+    class AddAsyncTask extends AsyncTask<Movie, Void, Long> {
+
+        private Movie movie;
+
+        public AddAsyncTask(Movie movie) {
+            this.movie = movie;
+        }
+
+        @Override
+        protected Long doInBackground(Movie... params) {
+            return mAppDatabase.getMovieDao().insertMovies(params[0]);
+        }
+
+        @Override
+        protected void onPostExecute(Long id) {
+            if (id > 0) {
+                mIMoviesPresenter.addMovieSuccess(movie);
+            } else {
+                Toast.makeText(mContext, "Add Movie failed", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    class DeleteAsyncTask extends AsyncTask<Movie, Void, Integer> {
+
+        private Movie movie;
+
+        public DeleteAsyncTask(Movie movie) {
+            this.movie = movie;
+        }
+
+        @Override
+        protected Integer doInBackground(Movie... movies) {
+            return mAppDatabase.getMovieDao().deleteMovies(movies);
+        }
+
+        @Override
+        protected void onPostExecute(Integer id) {
+            if (id > 0) {
+                mIMoviesPresenter.deleteMovieSuccess(movie);
+            } else {
+                Toast.makeText(mContext, "Delete Movie failed", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    class ListAsyncTask extends AsyncTask<Void, Void, List<Movie>> {
+
+        private List<Movie> movies;
+
+        public ListAsyncTask (List<Movie> movies) {
+            this.movies = movies;
+        }
+
+        @Override
+        protected List<Movie> doInBackground(Void... params) {
+            return mAppDatabase.getMovieDao().getMovies();
+        }
+
+        @Override
+        protected void onPostExecute(List<Movie> groupMovies) {
+            for (int i = 0; i < movies.size(); i++) {
+                for (int j = 0; j < groupMovies.size(); j++) {
+                    if (movies.get(i).getId().equals(groupMovies.get(j).getId())) {
+                        movies.get(i).setFavorite(Constants.Favorites.FAVORITE);
+                        break;
+                    }
                 }
             }
-        }.execute(movie);
+        }
     }
 }

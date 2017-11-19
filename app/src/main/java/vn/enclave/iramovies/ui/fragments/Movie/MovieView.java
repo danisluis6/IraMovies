@@ -127,17 +127,11 @@ public class MovieView extends IRBaseFragment implements IMoviesView {
         mMoviesAdapter.setChooseFavoriteListener(new MoviesAdapter.OnChooseFavoriteListener() {
             @Override
             public void onChoose(Movie movie) {
-                if (Utils.isDoubleClick()) {
-                    return;
-                }
                 mMoviesPresenter.addMovie(movie);
             }
 
             @Override
             public void onRemove(Movie movie) {
-                if (Utils.isDoubleClick()) {
-                    return;
-                }
                 mMoviesPresenter.deleteMovie(movie);
             }
         });
@@ -198,12 +192,11 @@ public class MovieView extends IRBaseFragment implements IMoviesView {
     private void updateListMovies(List<Movie> listMovies) {
         mMoviesAdapter.remove(mMoviesAdapter.getItemCount() - 1);
         mMoviesAdapter.addAll(listMovies);
-        mIsLoadMore = false;
     }
 
     @Override
     public void onFailure(String message) {
-        // TODO
+        Utils.Toast.showToast(mActivity, message);
     }
 
     @Override

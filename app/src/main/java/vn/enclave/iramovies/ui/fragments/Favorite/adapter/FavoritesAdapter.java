@@ -45,7 +45,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
     private BaseView mBaseView;
 
     /** Set Favorite start */
-    private OnChooseFavoriteListener mChooseFavoriteListener;
+    private OnRemoveFavoriteListener mRemoveFavoriteListener;
 
     public FavoritesAdapter(Context context, BaseView baseView, List<Movie> grouMovies) {
         this.mContext = context;
@@ -80,35 +80,10 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
         holder.imvFavorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                backupStatusWhenScrolling(v);
+                movie.setFavorite(Constants.Favorites.DEFAULT);
+                mRemoveFavoriteListener.onRemove(movie);
             }
 
-            private void backupStatusWhenScrolling(View v) {
-                ImageView imvFavorite = (ImageView) v;
-                Movie movie = (Movie) imvFavorite.getTag();
-
-                if (movie.getFavorite() == Constants.Favorites.DEFAULT) {
-                    updateView(Constants.Favorites.FAVORITE, imvFavorite);
-                    navigateToAddNew(movie);
-                } else {
-                    updateView(Constants.Favorites.DEFAULT, imvFavorite);
-                    navigateToRemove(movie);
-                }
-            }
-
-            private void navigateToAddNew(Movie movie) {
-                mChooseFavoriteListener.onChoose(movie);
-            }
-
-            private void navigateToRemove(Movie movie) {
-                mChooseFavoriteListener.onRemove(movie);
-            }
-
-            private void updateView(int status, ImageView imvFavorite) {
-                movie.setFavorite(status);
-                mGroupMovies.get(mPosition).setFavorite(status);
-                imvFavorite.setImageResource((movie.getFavorite() == Constants.Favorites.FAVORITE) ? R.drawable.ic_star_picked : R.drawable.ic_star);
-            }
         });
 
     }
@@ -154,12 +129,11 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
         }
 
     }
-    public void setChooseFavoriteListener (OnChooseFavoriteListener chooseFavoriteListener) {
-        this.mChooseFavoriteListener = chooseFavoriteListener;
+    public void setRemoveFavoriteListener (OnRemoveFavoriteListener removeFavoriteListener) {
+        this.mRemoveFavoriteListener = removeFavoriteListener;
     }
 
-    public interface OnChooseFavoriteListener {
-        void onChoose(Movie movie);
+    public interface OnRemoveFavoriteListener {
         void onRemove(Movie movie);
     }
     public void add(Movie movie) {

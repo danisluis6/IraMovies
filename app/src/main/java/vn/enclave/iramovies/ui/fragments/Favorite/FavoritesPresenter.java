@@ -73,4 +73,12 @@ public class FavoritesPresenter implements IFavoritesPresenter {
     public void deleteMovie(Movie movie) {
         mFavoritesModel.deleteMovie(movie);
     }
+
+    @Override
+    public void deleteSuccess(Movie movie) {
+        if (mIFavoritesView != null) {
+            mIFavoritesView.dismissProgressDialog();
+            mIFavoritesView.deleteSuccess(movie);
+        }
+    }
 }

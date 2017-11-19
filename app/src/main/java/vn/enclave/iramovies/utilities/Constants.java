@@ -8,7 +8,7 @@ package vn.enclave.iramovies.utilities;
 public class Constants {
 
     public static final String EMPTY_STRING = "";
-    public static final int DOUBLE_CLICK_TIME_DELTA = 500;
+    public static final int DOUBLE_CLICK_TIME_DELTA = 600;
 
     /** Intent information */
     public static final int GALLERY_REQUEST = 11;
@@ -19,18 +19,11 @@ public class Constants {
     public static final String IMAGE_PATH = "path_image";
 
     /** Index of these fragments in ViewPaper */
-    public static final int MOVIES_INDEX = 0;
-    public static final int FAVORITES_INDEX = 1;
-    public static final int SETTING_INDEX = 2;
-    public static final int ABOUT_INDEX = 3;
     public static final int FIRST_PAGE = 1;
-    public static String SAVE_THE_STATE = "save_state";
 
     /* Toolbar Information */
     public static class ToolbarLayoutInfo {
         public static String _TITLE = "Home";
-        public static String _BACKGROUND_COLOR = "#FAFBBA";
-        public static String _TITLE_TEXT_COLOR = "#FFFFFF";
     }
 
 
@@ -52,10 +45,5 @@ public class Constants {
     public static class Favorites {
         public static int DEFAULT = 0;
         public static int FAVORITE = 1;
-    }
-
-    /* Interact between child fragment and container activity */
-    public static class Interact {
-        public final static int HANDLE_STATUS_FAVORITE = 0;
     }
 }

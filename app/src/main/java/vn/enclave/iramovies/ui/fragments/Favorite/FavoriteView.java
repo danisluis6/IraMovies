@@ -63,25 +63,14 @@ public class FavoriteView extends IRBaseFragment implements IFavoritesView{
         }
         rcvMovies.setAdapter(mFavoritesAdapter);
 
-        mFavoritesAdapter.setChooseFavoriteListener(new FavoritesAdapter.OnChooseFavoriteListener() {
-            @Override
-            public void onChoose(Movie movie) {
-                if (Utils.isDoubleClick()) {
-                    return;
-                }
-                mMovieInterface.updateCountFavoritesOnMenu(movie.getFavorite());
-                mMovieInterface.refreshFavoriteInMovieScreen(movie);
-                mFavoritesPresenter.addMovie(movie);
-            }
-
+        mFavoritesAdapter.setRemoveFavoriteListener(new FavoritesAdapter.OnRemoveFavoriteListener() {
             @Override
             public void onRemove(Movie movie) {
                 if (Utils.isDoubleClick()) {
                     return;
                 }
-                mMovieInterface.updateCountFavoritesOnMenu(movie.getFavorite());
+                mFavoriteInterface.updateCountFavoritesOnMenu(movie.getFavorite());
                 mFavoritesPresenter.deleteMovie(movie);
-                mFavoritesAdapter.remove(movie);
             }
         });
     }
@@ -120,13 +109,18 @@ public class FavoriteView extends IRBaseFragment implements IFavoritesView{
         updateStatusFavorite(movies.size());
     }
 
+    @Override
+    public void deleteSuccess(Movie movie) {
+        mFavoritesAdapter.remove(movie);
+    }
+
     private void updateStatusFavorite(int count) {
-        mMovieInterface.setTotalFavoritesOnMenu(count);
+        mFavoriteInterface.setTotalFavoritesOnMenu(count);
     }
 
     @Override
     public void onFailure(String message) {
-        // TODO
+        Utils.Toast.showToast(mActivity, message);
     }
 
     public void refreshStatusFavorite(Movie movie) {
@@ -137,7 +131,7 @@ public class FavoriteView extends IRBaseFragment implements IFavoritesView{
         }
     }
 
-    public FavoriteInterface mMovieInterface;
+    public FavoriteInterface mFavoriteInterface;
 
     /* Interface */
     public interface FavoriteInterface {
@@ -147,6 +141,6 @@ public class FavoriteView extends IRBaseFragment implements IFavoritesView{
     }
 
     public void setFavoriteInterface(FavoriteInterface favoriteInterface) {
-        this.mMovieInterface = favoriteInterface;
+        this.mFavoriteInterface = favoriteInterface;
     }
 }

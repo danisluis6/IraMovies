@@ -150,5 +150,4 @@ public class MoviesModel implements IMoviesModel {
             }
         }.execute(movie);
     }
-
 }

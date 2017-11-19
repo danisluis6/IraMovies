@@ -33,13 +33,19 @@ public abstract class IRBaseFragment extends Fragment{
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        setRetainInstance(true);
+        initAtributes(inflater,container,savedInstanceState);
+        fragmentCreated();
+        return mView;
+    }
+
+    protected void initAtributes(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mActivity = (BaseView)this.getActivity();
         mAppDatabase = Room.databaseBuilder(mActivity, AppDatabase.class, AppDatabase.DB_NAME).build();
         mView = getViewLayout(inflater, container, savedInstanceState);
         mUnbinder = ButterKnife.bind(this, mView);
         mDiaLoadView = new DialogView(mActivity);
-        fragmentCreated();
-        return mView;
     }
 
     public abstract View getViewLayout(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState);
@@ -56,9 +62,5 @@ public abstract class IRBaseFragment extends Fragment{
             mUnbinder.unbind();
         }
         super.onDestroyView();
-    }
-
-    public interface Updateable {
-        public void update();
     }
 }

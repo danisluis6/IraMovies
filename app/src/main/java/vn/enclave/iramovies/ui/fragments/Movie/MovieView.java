@@ -31,6 +31,9 @@ import vn.enclave.iramovies.utilities.Utils;
  *
  * @Run: Apply Mode-View_Presenter : MVP
  * => Done
+ *
+ * @Run: https://stackoverflow.com/questions/28494637/android-how-to-stop-refreshing-fragments-on-tab-change
+ * => Done
  */
 
 public class MovieView extends IRBaseFragment implements IMoviesView {
@@ -64,7 +67,6 @@ public class MovieView extends IRBaseFragment implements IMoviesView {
     public void fragmentCreated() {
         initViews();
         initAttributes();
-
         if (ContextCompat.checkSelfPermission(mActivity, Manifest.permission.INTERNET) == PackageManager.PERMISSION_GRANTED &&
                 ContextCompat.checkSelfPermission(mActivity, Manifest.permission.ACCESS_NETWORK_STATE) == PackageManager.PERMISSION_GRANTED) {
             getMoviesFromApi();
@@ -73,6 +75,12 @@ public class MovieView extends IRBaseFragment implements IMoviesView {
                     new String[]{Manifest.permission.INTERNET, Manifest.permission.ACCESS_NETWORK_STATE},
                     Constants.Permissions.ACCESS_INTERNET);
         }
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
     }
 
     public void getMoviesFromApi() {
@@ -91,12 +99,16 @@ public class MovieView extends IRBaseFragment implements IMoviesView {
         }
     }
 
+
+
     private void initViews() {
         mGroupMovies = new ArrayList<>();
         mLayoutManager = new LinearLayoutManager(mActivity);
         rcvMovies.setLayoutManager(mLayoutManager);
 
-        mMoviesAdapter = new MoviesAdapter(mActivity,mActivity, mGroupMovies);
+        if (mMoviesAdapter == null) {
+            mMoviesAdapter = new MoviesAdapter(mActivity,mActivity, mGroupMovies);
+        }
         rcvMovies.setAdapter(mMoviesAdapter);
 
         mMoviesAdapter.setMoreDataAvailable(true);
@@ -132,7 +144,6 @@ public class MovieView extends IRBaseFragment implements IMoviesView {
     }
 
 
-
     private void loadNextDataFromApi() {
         if (mIsLoadMore) {
             return;
@@ -143,18 +154,12 @@ public class MovieView extends IRBaseFragment implements IMoviesView {
         mMoviesPresenter.getMoviesFromApi(mPageIndex, false);
     }
 
-
     private void initAttributes() {
         mMoviesPresenter = new MoviesPresenter(mActivity);
         mMoviesPresenter.attachView(this);
 
         mPageIndex = Constants.FIRST_PAGE;
         mMoviesAdapter.setMoreDataAvailable(true);
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
     }
 
     @Override

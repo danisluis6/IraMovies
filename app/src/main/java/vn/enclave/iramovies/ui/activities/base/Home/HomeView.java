@@ -40,6 +40,9 @@ import vn.enclave.iramovies.utilities.Utils;
  *
  * @Run: https://www.google.com/search?q=create+badge+icon+at+corner+layout&client=ubuntu&hs=Amc&channel=fs&source=lnms&sa=X&ved=0ahUKEwiu9dnh_MTXAhVHPo8KHV3OBAgQ_AUICSgA&biw=1505&bih=877&dpr=1
  * => Done
+ *
+ * @Run: https://stackoverflow.com/questions/8348707/prevent-viewpager-from-destroying-off-screen-views
+ * => Done mViewPager.setOffscreenPageLimit(tabNavigationBottomMenu.getTabCount()-1);
  */
 
 public class HomeView extends BaseView{
@@ -131,6 +134,7 @@ public class HomeView extends BaseView{
         fragments.add(mAboutView);
         mPageAdapter = new PaperAdapter(mContext, getSupportFragmentManager(), fragments);
         mViewPager.setAdapter(mPageAdapter);
+        mViewPager.setOffscreenPageLimit(mPageAdapter.getCount()-1);
         updateFragmentOnViewPaper();
         tabNavigationBottomMenu.setupWithViewPager(mViewPager);
 

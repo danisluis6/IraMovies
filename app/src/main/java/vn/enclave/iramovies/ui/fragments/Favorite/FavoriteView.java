@@ -58,7 +58,9 @@ public class FavoriteView extends IRBaseFragment implements IFavoritesView{
         mLayoutManager = new LinearLayoutManager(mActivity);
         rcvMovies.setLayoutManager(mLayoutManager);
 
-        mFavoritesAdapter = new FavoritesAdapter(mActivity,mActivity, mGroupMovies);
+        if (mFavoritesAdapter == null) {
+            mFavoritesAdapter = new FavoritesAdapter(mActivity,mActivity, mGroupMovies);
+        }
         rcvMovies.setAdapter(mFavoritesAdapter);
 
         mFavoritesAdapter.setChooseFavoriteListener(new FavoritesAdapter.OnChooseFavoriteListener() {

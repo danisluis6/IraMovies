@@ -162,6 +162,16 @@ public class MoviesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         }
     }
 
+    public void refreshFavorite(Movie movie) {
+        for (int index = 0; index < mGrouMovies.size(); index++) {
+            if (mGrouMovies.get(index).getId().equals(movie.getId())) {
+                mGrouMovies.get(index).setFavorite(Constants.Favorites.DEFAULT);
+                break;
+            }
+        }
+        notifyDataSetChanged();
+    }
+
 
     class MovieViewHolder extends RecyclerView.ViewHolder{
 

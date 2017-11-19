@@ -39,6 +39,8 @@ public class FavoriteView extends IRBaseFragment implements IFavoritesView{
 
     /** Work with MVP */
     private FavoritesPresenter mFavoritesPresenter;
+    public FavoriteInterface mFavoriteInterface;
+    public UpdatedFavoriteScreen mInterfaceRefresh;
 
     @Override
     public View getViewLayout(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -112,6 +114,7 @@ public class FavoriteView extends IRBaseFragment implements IFavoritesView{
     @Override
     public void deleteSuccess(Movie movie) {
         mFavoritesAdapter.remove(movie);
+        mInterfaceRefresh.onRefreshFavoriteOnMovieScreen(movie);
     }
 
     private void updateStatusFavorite(int count) {
@@ -131,16 +134,21 @@ public class FavoriteView extends IRBaseFragment implements IFavoritesView{
         }
     }
 
-    public FavoriteInterface mFavoriteInterface;
+    public interface UpdatedFavoriteScreen {
+        void onRefreshFavoriteOnMovieScreen(Movie movie);
+    }
 
     /* Interface */
     public interface FavoriteInterface {
-        void refreshFavoriteInMovieScreen(Movie movie);
         void setTotalFavoritesOnMenu(int count);
         void updateCountFavoritesOnMenu(int value);
     }
 
     public void setFavoriteInterface(FavoriteInterface favoriteInterface) {
         this.mFavoriteInterface = favoriteInterface;
+    }
+
+    public void setOnRefreshFavoriteOnMovieScreen(UpdatedFavoriteScreen mInterfaceRefresh) {
+        this.mInterfaceRefresh =mInterfaceRefresh;
     }
 }

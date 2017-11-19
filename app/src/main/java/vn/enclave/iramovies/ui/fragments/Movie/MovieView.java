@@ -224,10 +224,8 @@ public class MovieView extends IRBaseFragment implements IMoviesView {
 
     public MovieInterface mMovieInterface;
 
-    public void refreshStatusFavorite(Movie movie) {
-        if (movie.getFavorite() == Constants.Favorites.DEFAULT) {
-            mMoviesAdapter.remove(movie);
-        }
+    public void removeMovieFavorite(Movie movie) {
+        mMoviesAdapter.refreshFavorite(movie);
     }
 
     /* Interface */

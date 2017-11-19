@@ -9,12 +9,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.animation.TranslateAnimation;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import java.util.List;
 import java.util.Vector;
@@ -30,8 +28,6 @@ import vn.enclave.iramovies.ui.fragments.Movie.MovieView;
 import vn.enclave.iramovies.ui.fragments.Setting.SettingView;
 import vn.enclave.iramovies.ui.views.TabItem;
 import vn.enclave.iramovies.ui.views.ToolbarLayout;
-import vn.enclave.iramovies.utilities.Constants;
-import vn.enclave.iramovies.utilities.Utils;
 
 
 /**
@@ -174,11 +170,6 @@ public class HomeView extends BaseView{
         });
         mFavoriteView.setFavoriteInterface(new FavoriteView.FavoriteInterface() {
             @Override
-            public void refreshFavoriteInMovieScreen(Movie movie) {
-                mMovieView.refreshStatusFavorite(movie);
-            }
-
-            @Override
             public void setTotalFavoritesOnMenu(int total) {
                 favoritesTab.setNumberFavorites(total);
             }
@@ -201,14 +192,14 @@ public class HomeView extends BaseView{
             public void onPageSelected(int position) {
                 switch (position) {
                     case 0:
-//                        mMovieView.setMovieInterface(new MovieView.MovieInterface() {
-//                            @Override
-//                            public void refreshFavoriteInFavoriteScreen(Movie movie) {
-//                                mFavoriteView.refreshStatusFavorite(movie);
-//                            }
-//                        });
                         break;
                     case 1:
+                        mFavoriteView.setOnRefreshFavoriteOnMovieScreen(new FavoriteView.UpdatedFavoriteScreen() {
+                            @Override
+                            public void onRefreshFavoriteOnMovieScreen(Movie movie) {
+                                mMovieView.removeMovieFavorite(movie);
+                            }
+                        });
                         break;
                     case 2:
                         break;

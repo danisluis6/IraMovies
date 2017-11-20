@@ -42,4 +42,12 @@
     <string name="movie_with_rate_from">Movie with rate from:</string>
     <string name="from_release_year">From Release Year:</string>
 
+    <!-- lable -->
+    <string name="label_filter">Filter:</string>
+    <string name="label_category">Category</string>
+    <string name="label_movie_with_rate">Movie with rate from</string>
+    <string name="label_from_release_year">From Release year</string>
+    <string name="label_sort_by">Sort By</string>
+    <string name="label_release_date">Release Date</string>
+
 </resources>

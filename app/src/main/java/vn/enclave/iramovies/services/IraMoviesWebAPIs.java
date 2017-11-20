@@ -36,7 +36,7 @@ public interface IraMoviesWebAPIs {
      * => Done
      */
     @GET(IraMoviesInfoAPIs.Catogories.Top_Rated)
-    Call<MoviesResponse> getTopRatedMovies(@Query(IraMoviesInfoAPIs.Fields.API_KEY) String apiKey);
+    Call<MoviesResponse> getTopRatedMovies(@Query(IraMoviesInfoAPIs.Fields.API_KEY) String apiKey, @Query(IraMoviesInfoAPIs.Fields.PAGE) int page);
 
     /**
      * Get Now Playing Movies
@@ -45,7 +45,7 @@ public interface IraMoviesWebAPIs {
      * => Done
      */
     @GET(IraMoviesInfoAPIs.Catogories.Now_playing)
-    Call<MoviesResponse> getNowPlayingMovies(@Query(IraMoviesInfoAPIs.Fields.API_KEY) String apiKey);
+    Call<MoviesResponse> getNowPlayingMovies(@Query(IraMoviesInfoAPIs.Fields.API_KEY) String apiKey, @Query(IraMoviesInfoAPIs.Fields.PAGE) int page);
 
     /**
      * Get Upcoming Movies
@@ -54,7 +54,7 @@ public interface IraMoviesWebAPIs {
      * => Done
      */
     @GET(IraMoviesInfoAPIs.Catogories.Upcoming)
-    Call<MoviesResponse> getUpcomingMovies(@Query(IraMoviesInfoAPIs.Fields.API_KEY) String apiKey);
+    Call<MoviesResponse> getUpcomingMovies(@Query(IraMoviesInfoAPIs.Fields.API_KEY) String apiKey, @Query(IraMoviesInfoAPIs.Fields.PAGE) int page);
 
     class Factory {
         public static IraMoviesWebAPIs create(Context context) {

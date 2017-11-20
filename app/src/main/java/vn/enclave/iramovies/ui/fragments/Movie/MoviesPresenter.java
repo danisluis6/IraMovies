@@ -40,10 +40,10 @@ public class MoviesPresenter implements IMoviesPresenter {
     }
 
     @Override
-    public void getMoviesFromApi(int mPageIndex, boolean isLoadMore) {
+    public void getMoviesFromApi(int mPageIndex, boolean isLoadMore, MovieView.MODE mode) {
         if (mIMoviesView != null) {
             mIMoviesView.showProgressDialog(isLoadMore);
-            mMovieModel.getMoviesFromApi(mPageIndex);
+            mMovieModel.getMoviesFromApi(mPageIndex, mode);
         }
     }
 

@@ -89,7 +89,7 @@ public class MovieView extends IRBaseFragment implements IMoviesView {
 
     private void handleData(List<Movie> movies) {
         if (Utils.isInternetOn(mActivity)) {
-            mMoviesPresenter.getMoviesFromApi(mPageIndex, true);
+            mMoviesPresenter.getMoviesFromApi(mPageIndex, true, MODE.POPULAR);
         } else {
             if (movies.isEmpty()) {
                 mFailureLayout.setFailureMessage(getResources().getString(R.string.no_internet_connection));
@@ -145,7 +145,7 @@ public class MovieView extends IRBaseFragment implements IMoviesView {
         mMoviesAdapter.add(new Movie(Constants.Objects.LOAD));
         mIsLoadMore = true;
         mMoviesAdapter.updateStatusLoading(false);
-        mMoviesPresenter.getMoviesFromApi(mPageIndex, false);
+        mMoviesPresenter.getMoviesFromApi(mPageIndex, false, MODE.POPULAR);
     }
 
     private void initAttributes() {
@@ -228,6 +228,19 @@ public class MovieView extends IRBaseFragment implements IMoviesView {
         mMoviesAdapter.refreshFavorite(movie);
     }
 
+    public void reload(MODE mode) {
+        if (Utils.isInternetOn(mActivity)) {
+            mPageIndex = Constants.FIRST_PAGE;
+            mMoviesPresenter.getMoviesFromApi(mPageIndex, true, mode);
+        } else {
+            if (mGroupMovies.isEmpty()) {
+                mFailureLayout.setFailureMessage(getResources().getString(R.string.no_internet_connection));
+            } else {
+                Utils.Toast.showToast(mActivity, getString(R.string.no_internet_connection));
+            }
+        }
+    }
+
     /* Interface */
     public interface MovieInterface {
         void refreshFavoriteInFavoriteScreen(Movie movie);
@@ -236,5 +249,9 @@ public class MovieView extends IRBaseFragment implements IMoviesView {
 
     public void setMovieInterface(MovieInterface movieInterface) {
         this.mMovieInterface = movieInterface;
+    }
+
+    public enum MODE {
+        POPULAR, TOP_RATED, UPCOMING, NOWPLAYING
     }
 }

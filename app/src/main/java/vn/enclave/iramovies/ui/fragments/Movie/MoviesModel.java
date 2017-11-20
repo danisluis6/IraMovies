@@ -63,7 +63,91 @@ public class MoviesModel implements IMoviesModel {
     }
 
     @Override
-    public void getMoviesFromApi(int mPageIndex) {
+    public void getMoviesFromApi(int mPageIndex, MovieView.MODE mode) {
+        if (mode == MovieView.MODE.POPULAR) {
+            getListPopularMovies(mPageIndex);
+        } else if (mode == MovieView.MODE.TOP_RATED){
+            getListTopRatedMovies(mPageIndex);
+        } else if (mode == MovieView.MODE.UPCOMING) {
+            getListUpcomingMovies(mPageIndex);
+        } else if (mode == MovieView.MODE.NOWPLAYING) {
+            getListNowPlayingMovies(mPageIndex);
+        }
+    }
+
+    private void getListNowPlayingMovies(int mPageIndex) {
+        Call<MoviesResponse> call = mApiService.getNowPlayingMovies(BuildConfig.THE_MOVIE_DB_API_TOKEN, mPageIndex);
+        call.enqueue(new Callback<MoviesResponse>() {
+            @Override
+            public void onResponse(Call<MoviesResponse> call, Response<MoviesResponse> response) {
+                if (response.isSuccessful()) {
+                    MoviesResponse moviesResponse = response.body();
+                    if (moviesResponse != null) {
+                        List<Movie> grouMoviesDatas = moviesResponse.getResults();
+                        mIMoviesPresenter.onSuccess(updateStatusFavorite(grouMoviesDatas));
+                        SessionManager.getInstance(mContext).setTotalPages(moviesResponse.getTotalPages());
+                    }
+                } else {
+                    mIMoviesPresenter.onFailure(mContext.getString(R.string.cannot_get_data));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MoviesResponse> call, Throwable t) {
+                mIMoviesPresenter.onFailure(mContext.getString(R.string.cannot_get_data));
+            }
+        });
+    }
+
+    private void getListUpcomingMovies(int mPageIndex) {
+        Call<MoviesResponse> call = mApiService.getUpcomingMovies(BuildConfig.THE_MOVIE_DB_API_TOKEN, mPageIndex);
+        call.enqueue(new Callback<MoviesResponse>() {
+            @Override
+            public void onResponse(Call<MoviesResponse> call, Response<MoviesResponse> response) {
+                if (response.isSuccessful()) {
+                    MoviesResponse moviesResponse = response.body();
+                    if (moviesResponse != null) {
+                        List<Movie> grouMoviesDatas = moviesResponse.getResults();
+                        mIMoviesPresenter.onSuccess(updateStatusFavorite(grouMoviesDatas));
+                        SessionManager.getInstance(mContext).setTotalPages(moviesResponse.getTotalPages());
+                    }
+                } else {
+                    mIMoviesPresenter.onFailure(mContext.getString(R.string.cannot_get_data));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MoviesResponse> call, Throwable t) {
+                mIMoviesPresenter.onFailure(mContext.getString(R.string.cannot_get_data));
+            }
+        });
+    }
+
+    private void getListTopRatedMovies(int mPageIndex) {
+        Call<MoviesResponse> call = mApiService.getTopRatedMovies(BuildConfig.THE_MOVIE_DB_API_TOKEN, mPageIndex);
+        call.enqueue(new Callback<MoviesResponse>() {
+            @Override
+            public void onResponse(Call<MoviesResponse> call, Response<MoviesResponse> response) {
+                if (response.isSuccessful()) {
+                    MoviesResponse moviesResponse = response.body();
+                    if (moviesResponse != null) {
+                        List<Movie> grouMoviesDatas = moviesResponse.getResults();
+                        mIMoviesPresenter.onSuccess(updateStatusFavorite(grouMoviesDatas));
+                        SessionManager.getInstance(mContext).setTotalPages(moviesResponse.getTotalPages());
+                    }
+                } else {
+                    mIMoviesPresenter.onFailure(mContext.getString(R.string.cannot_get_data));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MoviesResponse> call, Throwable t) {
+                mIMoviesPresenter.onFailure(mContext.getString(R.string.cannot_get_data));
+            }
+        });
+    }
+
+    private void getListPopularMovies(int mPageIndex) {
         Call<MoviesResponse> call = mApiService.getPopularMovies(BuildConfig.THE_MOVIE_DB_API_TOKEN, mPageIndex);
         call.enqueue(new Callback<MoviesResponse>() {
             @Override

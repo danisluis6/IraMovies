@@ -20,6 +20,12 @@ public class Constants {
 
     /** Index of these fragments in ViewPaper */
     public static final int FIRST_PAGE = 1;
+    public static class Tab {
+        public static int Movie = 0;
+        public static int Favorite = 1;
+        public static int Setting = 2;
+        public static int About = 3;
+    }
 
     /* Toolbar Information */
     public static class ToolbarLayoutInfo {

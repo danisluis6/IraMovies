@@ -58,7 +58,6 @@ public class ToolbarLayout extends ConstraintLayout{
          *
          * @Run: com.captech.myapp.ui.views
          */
-        mToolbar.inflateMenu(R.menu.main_menu);
     }
 
     private void initAttributes() {

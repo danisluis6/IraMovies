@@ -11,7 +11,7 @@ import vn.enclave.iramovies.ui.interfaces.IBasePresenter;
 public interface IMoviesModel extends IBasePresenter<IMoviesPresenter> {
 
 
-    void getMoviesFromApi(int mPageIndex);
+    void getMoviesFromApi(int mPageIndex, MovieView.MODE mode);
 
     void addMovie(Movie movie);
 

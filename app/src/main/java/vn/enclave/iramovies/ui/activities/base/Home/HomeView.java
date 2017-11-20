@@ -10,6 +10,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.TranslateAnimation;
 import android.widget.LinearLayout;
@@ -28,20 +29,22 @@ import vn.enclave.iramovies.ui.fragments.Movie.MovieView;
 import vn.enclave.iramovies.ui.fragments.Setting.SettingView;
 import vn.enclave.iramovies.ui.views.TabItem;
 import vn.enclave.iramovies.ui.views.ToolbarLayout;
+import vn.enclave.iramovies.utilities.Constants;
 
 
 /**
  * @Run: https://www.androidhive.info/2016/05/android-working-with-card-view-and-recycler-view/
  * => Done
- *
  * @Run: https://www.google.com/search?q=create+badge+icon+at+corner+layout&client=ubuntu&hs=Amc&channel=fs&source=lnms&sa=X&ved=0ahUKEwiu9dnh_MTXAhVHPo8KHV3OBAgQ_AUICSgA&biw=1505&bih=877&dpr=1
  * => Done
- *
  * @Run: https://stackoverflow.com/questions/8348707/prevent-viewpager-from-destroying-off-screen-views
  * => Done mViewPager.setOffscreenPageLimit(tabNavigationBottomMenu.getTabCount()-1);
+ * @Run: https://github.com/smartherd/AndroidToolbars/blob/master/app/src/main/java/com/example/sriyanksiddhartha/androidtoolbar/MainActivity.java
+ * => Done
+ * @Run: https://material.io/icons/
  */
 
-public class HomeView extends BaseView{
+public class HomeView extends BaseView {
 
     @BindView(R.id.drawer_layout)
     public DrawerLayout mDrawerLayout;
@@ -120,6 +123,8 @@ public class HomeView extends BaseView{
         aboutsTab.setTabIcon(R.drawable.ic_about);
         aboutsTab.setTabText(getResources().getStringArray(R.array.menu_bottom_nav)[3]);
         tabNavigationBottomMenu.getTabAt(3).setCustomView(aboutsTab.getView());
+
+        updateTitleBar(getResources().getString(R.string.popular));
     }
 
     public void initialPages() {
@@ -130,7 +135,7 @@ public class HomeView extends BaseView{
         fragments.add(mAboutView);
         mPageAdapter = new PaperAdapter(mContext, getSupportFragmentManager(), fragments);
         mViewPager.setAdapter(mPageAdapter);
-        mViewPager.setOffscreenPageLimit(mPageAdapter.getCount()-1);
+        mViewPager.setOffscreenPageLimit(mPageAdapter.getCount() - 1);
         updateFragmentOnViewPaper();
         tabNavigationBottomMenu.setupWithViewPager(mViewPager);
 
@@ -152,7 +157,6 @@ public class HomeView extends BaseView{
     /**
      * @Run: seprate each child fragments
      * => Done
-     *
      * @Run: Faxage => Shoot change view[read/un-read] update to NavigationBar => The same
      * => OnActivityForResult
      */
@@ -192,8 +196,10 @@ public class HomeView extends BaseView{
             public void onPageSelected(int position) {
                 switch (position) {
                     case 0:
+                        updateTitleBar(getResources().getString(R.string.popular));
                         break;
                     case 1:
+                        updateTitleBar(getResources().getString(R.string.favorites));
                         mFavoriteView.setOnRefreshFavoriteOnMovieScreen(new FavoriteView.UpdatedFavoriteScreen() {
                             @Override
                             public void onRefreshFavoriteOnMovieScreen(Movie movie) {
@@ -202,8 +208,10 @@ public class HomeView extends BaseView{
                         });
                         break;
                     case 2:
+                        updateTitleBar(getResources().getString(R.string.settings));
                         break;
                     case 3:
+                        updateTitleBar(getResources().getString(R.string.about));
                         break;
                 }
             }
@@ -213,6 +221,10 @@ public class HomeView extends BaseView{
 
             }
         });
+    }
+
+    void updateTitleBar(String title) {
+        mToolbar.getToolbar().setTitle(title);
     }
 
     @Override
@@ -248,7 +260,57 @@ public class HomeView extends BaseView{
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.toolbar_menu, menu);
+        getMenuInflater().inflate(R.menu.main_menu, menu);
         return true;
+    }
+
+/*    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.popular_movies:
+                updateTitleBar(getResources().getString(R.string.popular));
+                mMovieView.reload(MovieView.MODE.POPULAR);
+                break;
+            case R.id.top_rated_movies:
+                updateTitleBar(getResources().getString(R.string.top_rated));
+                mMovieView.reload(MovieView.MODE.TOP_RATED);
+                break;
+            case R.id.upcoming_movies:
+                updateTitleBar(getResources().getString(R.string.up_coming));
+                mMovieView.reload(MovieView.MODE.UPCOMING);
+                break;
+            case R.id.nowplaying_movies:
+                updateTitleBar(getResources().getString(R.string.now_playing));
+                mMovieView.reload(MovieView.MODE.NOWPLAYING);
+                break;
+            case R.id.view_list:
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }*/
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.movies:
+                mViewPager.setCurrentItem(Constants.Tab.Movie);
+                break;
+            case R.id.favorites:
+                mViewPager.setCurrentItem(Constants.Tab.Favorite);
+                break;
+            case R.id.settings:
+                mViewPager.setCurrentItem(Constants.Tab.Setting);
+                break;
+            case R.id.about:
+                mViewPager.setCurrentItem(Constants.Tab.About);
+                break;
+            case R.id.view_list:
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

@@ -12,6 +12,10 @@ import vn.enclave.iramovies.ui.fragments.Base.IRBaseFragment;
  * Created by lorence on 08/11/2017.
  *
  * @Run: https://developer.android.com/guide/topics/ui/settings.html
+ * @Run: http://www.androidinterview.com/android-custom-listview-with-checkbox-example/
+ * => Done
+ *
+ * @Run: https://stackoverflow.com/questions/16163215/android-styling-seek-bar
  */
 
 public class SettingView extends IRBaseFragment {

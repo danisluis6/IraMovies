@@ -217,10 +217,6 @@ public class Movie implements Parcelable {
         return type;
     }
 
-    public void setType(String type) {
-        this.type = type;
-    }
-
     public Integer getFavorite() { return favorite; }
 
     public void setFavorite(Integer favorite) {

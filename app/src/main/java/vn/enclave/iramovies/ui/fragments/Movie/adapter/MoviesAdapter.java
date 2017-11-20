@@ -1,10 +1,8 @@
 package vn.enclave.iramovies.ui.fragments.Movie.adapter;
 
 import android.content.Context;
-import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -255,19 +253,5 @@ public class MoviesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             notifyItemRemoved(index);
             notifyItemRangeChanged(index, getItemCount());
         }
-    }
-
-    public void remove(Movie movie) {
-        resetStatusFavorite(movie);
-        notifyDataSetChanged();
-    }
-
-    private void resetStatusFavorite(Movie movie) {
-        for (int index = 0; index < mGrouMovies.size(); index++ ) {
-            if (movie.getId().equals(mGrouMovies.get(index).getId())) {
-                mGrouMovies.get(index).setFavorite(Constants.Favorites.DEFAULT);
-            }
-        }
-        setMovies(mGrouMovies);
     }
 }

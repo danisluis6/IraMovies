@@ -16,9 +16,15 @@ import vn.enclave.iramovies.ui.fragments.Base.IRBaseFragment;
  * => Done
  *
  * @Run: https://stackoverflow.com/questions/16163215/android-styling-seek-bar
+ *
+ * @Run: https://stackoverflow.com/questions/34932963/android-seekbar-with-custom-drawable
+ * => android:left = "2dp"
  */
 
 public class SettingView extends IRBaseFragment {
+
+    
+
     @Override
     public View getViewLayout(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_setting, container, false);

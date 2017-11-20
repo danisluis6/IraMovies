@@ -3,7 +3,10 @@
 
     <item
         android:id="@android:id/background"
-        android:drawable="@drawable/seekbar_stroke_background" />
+        android:drawable="@drawable/seekbar_stroke_background"
+        android:left="2dp"
+        android:right="2dp"/>
+
     <item android:id="@android:id/progress">
         <clip android:drawable="@drawable/seekbar_stroke_progress" />
     </item>

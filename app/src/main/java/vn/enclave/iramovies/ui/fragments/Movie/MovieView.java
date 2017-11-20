@@ -31,7 +31,6 @@ import vn.enclave.iramovies.utilities.Utils;
  *
  * @Run: Apply Mode-View_Presenter : MVP
  * => Done
- *
  * @Run: https://stackoverflow.com/questions/28494637/android-how-to-stop-refreshing-fragments-on-tab-change
  * => Done
  */
@@ -45,18 +44,21 @@ public class MovieView extends IRBaseFragment implements IMoviesView {
     /* RecyclerView */
     public RecyclerView rcvMovies;
     public RecyclerView.LayoutManager mLayoutManager;
-
+    public MovieInterface mMovieInterface;
     private MoviesAdapter mMoviesAdapter;
     private List<Movie> mGroupMovies;
-
-    /** Work with MVP */
+    /**
+     * Work with MVP
+     */
     private MoviesPresenter mMoviesPresenter;
-
-    /** Work with load more */
+    /**
+     * Work with load more
+     */
     private int mPageIndex;
     private boolean mIsLoadMore = false;
 
-    public MovieView(){}
+    public MovieView() {
+    }
 
     @Override
     public View getViewLayout(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -76,7 +78,6 @@ public class MovieView extends IRBaseFragment implements IMoviesView {
                     Constants.Permissions.ACCESS_INTERNET);
         }
     }
-
 
     @Override
     public void onResume() {
@@ -99,15 +100,13 @@ public class MovieView extends IRBaseFragment implements IMoviesView {
         }
     }
 
-
-
     private void initViews() {
         mGroupMovies = new ArrayList<>();
         mLayoutManager = new LinearLayoutManager(mActivity);
         rcvMovies.setLayoutManager(mLayoutManager);
 
         if (mMoviesAdapter == null) {
-            mMoviesAdapter = new MoviesAdapter(mActivity,mActivity, mGroupMovies);
+            mMoviesAdapter = new MoviesAdapter(mActivity, mActivity, mGroupMovies);
         }
         rcvMovies.setAdapter(mMoviesAdapter);
 
@@ -136,7 +135,6 @@ public class MovieView extends IRBaseFragment implements IMoviesView {
             }
         });
     }
-
 
     private void loadNextDataFromApi() {
         if (mIsLoadMore) {
@@ -222,8 +220,6 @@ public class MovieView extends IRBaseFragment implements IMoviesView {
         }
     }
 
-    public MovieInterface mMovieInterface;
-
     public void removeMovieFavorite(Movie movie) {
         mMoviesAdapter.refreshFavorite(movie);
     }
@@ -241,17 +237,18 @@ public class MovieView extends IRBaseFragment implements IMoviesView {
         }
     }
 
-    /* Interface */
-    public interface MovieInterface {
-        void refreshFavoriteInFavoriteScreen(Movie movie);
-        void updateCountFavoritesOnMenu(int value);
-    }
-
     public void setMovieInterface(MovieInterface movieInterface) {
         this.mMovieInterface = movieInterface;
     }
 
     public enum MODE {
         POPULAR, TOP_RATED, UPCOMING, NOWPLAYING
+    }
+
+    /* Interface */
+    public interface MovieInterface {
+        void refreshFavoriteInFavoriteScreen(Movie movie);
+
+        void updateCountFavoritesOnMenu(int value);
     }
 }

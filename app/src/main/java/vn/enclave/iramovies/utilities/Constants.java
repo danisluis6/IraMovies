@@ -52,4 +52,6 @@ public class Constants {
         public static int DEFAULT = 0;
         public static int FAVORITE = 1;
     }
+
+    public static String URL = "https://www.themoviedb.org/";
 }

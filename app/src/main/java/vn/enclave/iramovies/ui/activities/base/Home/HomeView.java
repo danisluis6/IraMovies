@@ -264,33 +264,6 @@ public class HomeView extends BaseView {
         return true;
     }
 
-/*    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        switch (id) {
-            case R.id.popular_movies:
-                updateTitleBar(getResources().getString(R.string.popular));
-                mMovieView.reload(MovieView.MODE.POPULAR);
-                break;
-            case R.id.top_rated_movies:
-                updateTitleBar(getResources().getString(R.string.top_rated));
-                mMovieView.reload(MovieView.MODE.TOP_RATED);
-                break;
-            case R.id.upcoming_movies:
-                updateTitleBar(getResources().getString(R.string.up_coming));
-                mMovieView.reload(MovieView.MODE.UPCOMING);
-                break;
-            case R.id.nowplaying_movies:
-                updateTitleBar(getResources().getString(R.string.now_playing));
-                mMovieView.reload(MovieView.MODE.NOWPLAYING);
-                break;
-            case R.id.view_list:
-                break;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }*/
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();

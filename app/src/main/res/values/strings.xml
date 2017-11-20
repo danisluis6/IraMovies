@@ -11,7 +11,7 @@
     </array>
 
     <!-- menu -->
-    <string name="movies">movies</string>
+    <string name="movies">Movies</string>
     <string name="popular">Popular</string>
     <string name="top_rated">Top Rated</string>
     <string name="up_coming">Up Coming</string>

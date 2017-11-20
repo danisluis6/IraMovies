@@ -23,11 +23,11 @@ import vn.enclave.iramovies.ui.fragments.Base.IRBaseFragment;
 
 public class SettingView extends IRBaseFragment {
 
-    
+
 
     @Override
     public View getViewLayout(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_setting, container, false);
+        return inflater.inflate(R.layout.fragment_no, container, false);
     }
 
     @Override

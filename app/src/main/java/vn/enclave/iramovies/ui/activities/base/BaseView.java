@@ -45,4 +45,5 @@ public abstract class BaseView extends AppCompatActivity{
         }
         super.onDestroy();
     }
+
 }

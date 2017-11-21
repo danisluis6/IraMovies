@@ -10,6 +10,12 @@
         <item name="about">About</item>
     </array>
 
+    <!-- Category -->
+    <string name="category_popular">Popular Movies</string>
+    <string name="category_top_rated">Top Rated Movies</string>
+    <string name="category_up_coming">Upcoming Movies</string>
+    <string name="category_now_playing">Now Playing Movies</string>
+
     <!-- menu -->
     <string name="movies">Movies</string>
     <string name="popular">Popular</string>
@@ -49,5 +55,10 @@
     <string name="label_from_release_year">From Release year</string>
     <string name="label_sort_by">Sort By</string>
     <string name="label_release_date">Release Date</string>
+
+    <!-- button -->
+    <string name="btn_cancel">Cancel</string>
+    <string name="btn_yes">Yes</string>
+    <string name="btn_no">No</string>
 
 </resources>

@@ -131,11 +131,14 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
+                android:id="@+id/edtReleaseYear"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
                 android:layout_marginStart="30dp"
                 android:background="@android:color/transparent"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
                 android:hint=""
                 android:maxLines="1"
                 android:textColor="#000"
@@ -189,11 +192,14 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
+                android:id="@+id/edtReleaseDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
                 android:layout_marginStart="30dp"
                 android:background="@android:color/transparent"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
                 android:hint=""
                 android:textColor="#000"
                 android:textSize="14sp"

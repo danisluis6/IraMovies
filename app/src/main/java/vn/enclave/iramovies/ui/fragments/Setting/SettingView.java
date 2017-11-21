@@ -6,14 +6,17 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.EditText;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 import vn.enclave.iramovies.R;
+import vn.enclave.iramovies.ui.dialog.DialogCategory;
+import vn.enclave.iramovies.ui.dialog.DialogReleaseDate;
+import vn.enclave.iramovies.ui.dialog.DialogReleaseYear;
+import vn.enclave.iramovies.ui.dialog.DialogSeekBar;
 import vn.enclave.iramovies.ui.fragments.Base.IRBaseFragment;
-import vn.enclave.iramovies.ui.views.CategoryDialog;
-import vn.enclave.iramovies.ui.views.SeekBarDialog;
 import vn.enclave.iramovies.utilities.Constants;
 import vn.enclave.iramovies.utilities.Utils;
 
@@ -21,16 +24,27 @@ import vn.enclave.iramovies.utilities.Utils;
  * Created by lorence on 08/11/2017.
  *
  * @Run: https://developer.android.com/guide/topics/ui/settings.html
+ * => Done
+ *
  * @Run: http://www.androidinterview.com/android-custom-listview-with-checkbox-example/
  * => Done
  *
  * @Run: https://stackoverflow.com/questions/16163215/android-styling-seek-bar
+ * => Done
  *
  * @Run: https://stackoverflow.com/questions/34932963/android-seekbar-with-custom-drawable
  * => android:left = "2dp"
  *
  * @Run: https://stackoverflow.com/questions/26097513/android-simple-alert-dialog
  * => Done
+ *
+ * @Run: https://developer.android.com/guide/topics/ui/settings.html
+ * => Implement
+ *
+ * @Run: https://www.youtube.com/watch?v=0-7YvU9fz8k
+ * => Follow
+ *
+ * @Run: https://developer.android.com/guide/topics/ui/settings.html
  */
 
 public class SettingView extends IRBaseFragment {
@@ -53,6 +67,12 @@ public class SettingView extends IRBaseFragment {
     @BindView(R.id.edtMovieWithRate)
     EditText edtMovieWithRate;
 
+    @BindView(R.id.edtReleaseYear)
+    EditText edtReleaseYear;
+
+    @BindView(R.id.edtReleaseDate)
+    EditText edtReleaseDate;
+
     @Override
     public View getViewLayout(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_setting, container, false);
@@ -61,12 +81,12 @@ public class SettingView extends IRBaseFragment {
     @Override
     public void fragmentCreated() {
         edtCategory.setText(getString(R.string.category_popular));
+        edtReleaseDate.setText(getString(R.string.label_rating_movies));
     }
 
     @Override
     protected void initAtributes(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.initAtributes(inflater, container, savedInstanceState);
-        edtCategory.setClickable(false);
     }
 
     @OnClick({R.id.categoryLayout, R.id.movieWithRateLayout, R.id.fromReleaseYearLayout, R.id.releaseDateLayout})
@@ -82,19 +102,42 @@ public class SettingView extends IRBaseFragment {
                 openSeekBarDialog();
                 break;
             case R.id.fromReleaseYearLayout:
-                Utils.Toast.showToast(mActivity, "C");
+                openReleaseYearDialog();
                 break;
             case R.id.releaseDateLayout:
-                Utils.Toast.showToast(mActivity, "E");
+                openReleaseDateDialog();
                 break;
         }
     }
 
+    private void openReleaseDateDialog() {
+        DialogReleaseDate releaseDateDialog = new DialogReleaseDate(mActivity, new DialogReleaseDate.OnRadioSelected() {
+            @Override
+            public void onRadioSelected(String text) {
+                edtReleaseDate.setText(text);
+            }
+        }, getRadioSelectedRelease());
+        releaseDateDialog.show();
+    }
+
+    private void openReleaseYearDialog() {
+        DialogReleaseYear releaseYearDialog = new DialogReleaseYear(mActivity, new DialogReleaseYear.OnGetValueEditText() {
+            @Override
+            public void onGetValueEditText(final String text) {
+                mActivity.getWindow().setSoftInputMode(
+                        WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
+                );
+                edtReleaseYear.setText(text);
+            }
+        }, getValueFromEditText());
+        releaseYearDialog.show();
+    }
+
     private void openSeekBarDialog() {
-        SeekBarDialog seekBarDialog = new SeekBarDialog(mActivity, new SeekBarDialog.OnGetValueSeekBar() {
+        DialogSeekBar seekBarDialog = new DialogSeekBar(mActivity, new DialogSeekBar.OnGetValueSeekBar() {
             @Override
             public void onGetValueSeekBar(String value) {
-                edtMovieWithRate.setText(value);
+                edtMovieWithRate.setText(TextUtils.equals(value, "0") ? "0.0" : value);
             }
         }, getValueFromSeekBar());
         seekBarDialog.show();
@@ -102,25 +145,25 @@ public class SettingView extends IRBaseFragment {
 
     private void openCategoryDialog() {
 
-        CategoryDialog categoryDialog = new CategoryDialog(mActivity, new CategoryDialog.OnRadioSelected() {
+        DialogCategory categoryDialog = new DialogCategory(mActivity, new DialogCategory.OnRadioSelected() {
             @Override
             public void onRadioSelected(String text) {
                 edtCategory.setText(text);
             }
-        }, getRadioSelected());
+        }, getRadioSelectedCategory());
         categoryDialog.show();
     }
 
-    public CategoryDialog.TYPE getRadioSelected() {
+    public DialogCategory.TYPE getRadioSelectedCategory() {
         String text = edtCategory.getText().toString();
         if (TextUtils.equals(text, getString(R.string.category_popular))) {
-            return CategoryDialog.TYPE.POPULAR;
+            return DialogCategory.TYPE.POPULAR;
         } else if (TextUtils.equals(text, getString(R.string.category_top_rated))) {
-            return CategoryDialog.TYPE.TOP_RATED;
+            return DialogCategory.TYPE.TOP_RATED;
         } else if (TextUtils.equals(text, getString(R.string.category_up_coming))) {
-            return CategoryDialog.TYPE.UP_COMING;
+            return DialogCategory.TYPE.UP_COMING;
         } else if (TextUtils.equals(text, getString(R.string.category_now_playing))) {
-            return CategoryDialog.TYPE.NOW_PLAYING;
+            return DialogCategory.TYPE.NOW_PLAYING;
         }
         return null;
     }
@@ -131,5 +174,19 @@ public class SettingView extends IRBaseFragment {
         } else {
             return edtMovieWithRate.getText().toString();
         }
+    }
+
+    public String getValueFromEditText() {
+        return edtReleaseYear.getText().toString();
+    }
+
+    public DialogReleaseDate.TYPE getRadioSelectedRelease() {
+        String text = edtReleaseDate.getText().toString();
+        if (TextUtils.equals(text, getString(R.string.label_release_date))) {
+            return DialogReleaseDate.TYPE.RELEASE_DATE;
+        } else if (TextUtils.equals(text, getString(R.string.label_rating_movies))) {
+            return DialogReleaseDate.TYPE.RATING_MOVIES;
+        }
+        return null;
     }
 }

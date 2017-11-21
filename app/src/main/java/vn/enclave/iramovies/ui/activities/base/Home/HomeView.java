@@ -42,6 +42,15 @@ import vn.enclave.iramovies.utilities.Constants;
  * @Run: https://github.com/smartherd/AndroidToolbars/blob/master/app/src/main/java/com/example/sriyanksiddhartha/androidtoolbar/MainActivity.java
  * => Done
  * @Run: https://material.io/icons/
+ *
+ * @Run: https://stackoverflow.com/questions/27556623/creating-a-searchview-that-looks-like-the-material-design-guidelines
+ * => Implement
+ *
+ * @Run: https://stackoverflow.com/questions/7066657/android-how-to-dynamically-change-menu-item-text-outside-of-onoptionsitemssele
+ * => Implement
+ *
+ * @Run: https://stackoverflow.com/questions/39963330/android-menuitem-setshowasaction-not-working
+ * => Done
  */
 
 public class HomeView extends BaseView {
@@ -73,6 +82,7 @@ public class HomeView extends BaseView {
     private TabItem aboutsTab;
 
     private PaperAdapter mPageAdapter;
+    private Menu mMenu;
 
     @Override
     public int getLayoutResId() {
@@ -197,9 +207,13 @@ public class HomeView extends BaseView {
                 switch (position) {
                     case 0:
                         updateTitleBar(getResources().getString(R.string.popular));
+                        mMenu.findItem(R.id.search).setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
+                        mMenu.findItem(R.id.view_list).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
                         break;
                     case 1:
                         updateTitleBar(getResources().getString(R.string.favorites));
+                        mMenu.findItem(R.id.search).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+                        mMenu.findItem(R.id.view_list).setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
                         mFavoriteView.setOnRefreshFavoriteOnMovieScreen(new FavoriteView.UpdatedFavoriteScreen() {
                             @Override
                             public void onRefreshFavoriteOnMovieScreen(Movie movie) {
@@ -209,9 +223,13 @@ public class HomeView extends BaseView {
                         break;
                     case 2:
                         updateTitleBar(getResources().getString(R.string.settings));
+                        mMenu.findItem(R.id.search).setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
+                        mMenu.findItem(R.id.view_list).setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
                         break;
                     case 3:
                         updateTitleBar(getResources().getString(R.string.about));
+                        mMenu.findItem(R.id.search).setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
+                        mMenu.findItem(R.id.view_list).setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
                         break;
                 }
             }
@@ -261,6 +279,7 @@ public class HomeView extends BaseView {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
+        this.mMenu = menu;
         return true;
     }
 
@@ -281,6 +300,8 @@ public class HomeView extends BaseView {
                 mViewPager.setCurrentItem(Constants.Tab.About);
                 break;
             case R.id.view_list:
+                break;
+            case R.id.search:
                 break;
         }
 

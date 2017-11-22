@@ -17,7 +17,7 @@ import butterknife.BindView;
 import vn.enclave.iramovies.R;
 import vn.enclave.iramovies.services.response.Movie;
 import vn.enclave.iramovies.ui.fragments.Base.IRBaseFragment;
-import vn.enclave.iramovies.ui.fragments.Favorite.adapter.FavoritesAdapter;
+import vn.enclave.iramovies.ui.fragments.Favorite.adapter.FavoriteAdapter;
 import vn.enclave.iramovies.ui.views.FailureLayout;
 import vn.enclave.iramovies.utilities.Constants;
 import vn.enclave.iramovies.utilities.Utils;
@@ -37,7 +37,7 @@ public class FavoriteView extends IRBaseFragment implements IFavoritesView{
     public RecyclerView rcvMovies;
     public RecyclerView.LayoutManager mLayoutManager;
 
-    private FavoritesAdapter mFavoritesAdapter;
+    private FavoriteAdapter mFavoritesAdapter;
     private List<Movie> mGroupMovies;
 
     /** Work with MVP */
@@ -64,11 +64,11 @@ public class FavoriteView extends IRBaseFragment implements IFavoritesView{
         rcvMovies.setLayoutManager(mLayoutManager);
 
         if (mFavoritesAdapter == null) {
-            mFavoritesAdapter = new FavoritesAdapter(mActivity,mActivity, mGroupMovies);
+            mFavoritesAdapter = new FavoriteAdapter(mActivity,mActivity, mGroupMovies);
         }
         rcvMovies.setAdapter(mFavoritesAdapter);
 
-        mFavoritesAdapter.setRemoveFavoriteListener(new FavoritesAdapter.OnRemoveFavoriteListener() {
+        mFavoritesAdapter.setRemoveFavoriteListener(new FavoriteAdapter.OnRemoveFavoriteListener() {
             @Override
             public void onRemove(Movie movie) {
                 if (Utils.isDoubleClick()) {

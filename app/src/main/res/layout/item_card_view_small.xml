@@ -13,7 +13,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="4dp"
         android:scaleType="fitXY"
-        android:src="@drawable/placeholder"
+        android:src="@drawable/load"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearTop" />
 
@@ -47,7 +47,7 @@
             android:id="@+id/imvFavorite"
             android:layout_width="28dp"
             android:layout_height="28dp"
-            android:src="@drawable/placeholder"
+            android:src="@drawable/load"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -152,7 +152,7 @@
         android:layout_marginRight="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:background="#000"
+        android:background="#e8e8e8"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imvSmallThumbnail" />

@@ -9,7 +9,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +22,7 @@ import vn.enclave.iramovies.R;
 import vn.enclave.iramovies.local.storage.SessionManager;
 import vn.enclave.iramovies.services.response.Movie;
 import vn.enclave.iramovies.ui.fragments.Base.IRBaseFragment;
-import vn.enclave.iramovies.ui.fragments.Movie.adapter.MoviesAdapter;
+import vn.enclave.iramovies.ui.fragments.Movie.adapter.MovieAdapter;
 import vn.enclave.iramovies.ui.views.FailureLayout;
 import vn.enclave.iramovies.utilities.Constants;
 import vn.enclave.iramovies.utilities.Utils;
@@ -47,14 +46,16 @@ public class MovieView extends IRBaseFragment implements IMoviesView {
 
     @BindView(R.id.failureLayout)
     public FailureLayout mFailureLayout;
-    @BindView(R.id.rcvMovies)
 
     /* RecyclerView */
+    @BindView(R.id.rcvMovies)
     public RecyclerView rcvMovies;
-    public RecyclerView.LayoutManager mLayoutManager;
-    public MovieInterface mMovieInterface;
-    private MoviesAdapter mMoviesAdapter;
+
+    private RecyclerView.LayoutManager mLayoutManager;
+    private MovieInterface mMovieInterface;
+    private MovieAdapter mMoviesListAdapter, mMoviesGridAdapter;
     private List<Movie> mGroupMovies;
+
     /**
      * Work with MVP
      */
@@ -75,7 +76,7 @@ public class MovieView extends IRBaseFragment implements IMoviesView {
 
     @Override
     public void fragmentCreated() {
-        initViews();
+        initViews(true);
         initAttributes();
         if (ContextCompat.checkSelfPermission(mActivity, Manifest.permission.INTERNET) == PackageManager.PERMISSION_GRANTED &&
                 ContextCompat.checkSelfPermission(mActivity, Manifest.permission.ACCESS_NETWORK_STATE) == PackageManager.PERMISSION_GRANTED) {
@@ -108,26 +109,32 @@ public class MovieView extends IRBaseFragment implements IMoviesView {
         }
     }
 
-    private void initViews() {
+    private void initViews(boolean isDisplay) {
         mGroupMovies = new ArrayList<>();
         //Use this setting to improve performance if you know that changes in
         //the content do not change the layout size of the RecyclerView
         if (rcvMovies != null) {
             rcvMovies.setHasFixedSize(true);
         }
-
-        mLayoutManager = new LinearLayoutManager(mActivity);
-        // mLayoutManager = new GridLayoutManager(mActivity, 2);
-        rcvMovies.setLayoutManager(mLayoutManager);
-
-        if (mMoviesAdapter == null) {
-            mMoviesAdapter = new MoviesAdapter(mActivity, mActivity, mGroupMovies);
+        if (isDisplay) {
+            if (mMoviesListAdapter == null) {
+                mMoviesListAdapter = new MovieAdapter(mActivity, mActivity, mGroupMovies, isDisplay);
+            }
+            mLayoutManager = new LinearLayoutManager(mActivity);
+            rcvMovies.setLayoutManager(mLayoutManager);
+            rcvMovies.setAdapter(mMoviesListAdapter);
+        } else {
+            if (mMoviesGridAdapter == null) {
+                mMoviesGridAdapter = new MovieAdapter(mActivity, mActivity, mGroupMovies, isDisplay);
+            }
+            mLayoutManager = new GridLayoutManager(mActivity, 2);
+            rcvMovies.setLayoutManager(mLayoutManager);
+            rcvMovies.setAdapter(mMoviesGridAdapter);
         }
-        rcvMovies.setAdapter(mMoviesAdapter);
 
-        mMoviesAdapter.setMoreDataAvailable(true);
-        mMoviesAdapter.updateStatusLoading(false);
-        mMoviesAdapter.setLoadMoreListener(new MoviesAdapter.OnLoadMoreListener() {
+        mMoviesListAdapter.setMoreDataAvailable(true);
+        mMoviesListAdapter.updateStatusLoading(false);
+        mMoviesListAdapter.setLoadMoreListener(new MovieAdapter.OnLoadMoreListener() {
             @Override
             public void onLoadMore() {
                 rcvMovies.post(new Runnable() {
@@ -138,7 +145,7 @@ public class MovieView extends IRBaseFragment implements IMoviesView {
                 });
             }
         });
-        mMoviesAdapter.setChooseFavoriteListener(new MoviesAdapter.OnChooseFavoriteListener() {
+        mMoviesListAdapter.setChooseFavoriteListener(new MovieAdapter.OnChooseFavoriteListener() {
             @Override
             public void onChoose(Movie movie) {
                 mMoviesPresenter.addMovie(movie);
@@ -155,9 +162,9 @@ public class MovieView extends IRBaseFragment implements IMoviesView {
         if (mIsLoadMore) {
             return;
         }
-        mMoviesAdapter.add(new Movie(Constants.Objects.LOAD));
+        mMoviesListAdapter.add(new Movie(Constants.Objects.LOAD));
         mIsLoadMore = true;
-        mMoviesAdapter.updateStatusLoading(false);
+        mMoviesListAdapter.updateStatusLoading(false);
         mMoviesPresenter.getMoviesFromApi(mPageIndex, false, MODE.POPULAR);
     }
 
@@ -166,7 +173,7 @@ public class MovieView extends IRBaseFragment implements IMoviesView {
         mMoviesPresenter.attachView(this);
 
         mPageIndex = Constants.FIRST_PAGE;
-        mMoviesAdapter.setMoreDataAvailable(true);
+        mMoviesListAdapter.setMoreDataAvailable(true);
     }
 
     @Override
@@ -185,14 +192,14 @@ public class MovieView extends IRBaseFragment implements IMoviesView {
 
     @Override
     public void onSuccess(List<Movie> movies) {
-        mMoviesAdapter.setMoreDataAvailable(mPageIndex < SessionManager.getInstance(mActivity).getTotalPages());
+        mMoviesListAdapter.setMoreDataAvailable(mPageIndex < SessionManager.getInstance(mActivity).getTotalPages());
         ++mPageIndex; /* End fix */
         if (mIsLoadMore) {
             // Handle the dismiss loadingMore if there is another caller API is executing
             updateListMovies(movies);
         } else {
             dismissProgressDialog();
-            mMoviesAdapter.setMovies(movies);
+            mMoviesListAdapter.setMovies(movies);
         }
     }
 
@@ -203,8 +210,8 @@ public class MovieView extends IRBaseFragment implements IMoviesView {
     }
 
     private void updateListMovies(List<Movie> listMovies) {
-        mMoviesAdapter.remove(mMoviesAdapter.getItemCount() - 1);
-        mMoviesAdapter.addAll(listMovies);
+        mMoviesListAdapter.remove(mMoviesListAdapter.getItemCount() - 1);
+        mMoviesListAdapter.addAll(listMovies);
     }
 
     @Override
@@ -236,7 +243,7 @@ public class MovieView extends IRBaseFragment implements IMoviesView {
     }
 
     public void removeMovieFavorite(Movie movie) {
-        mMoviesAdapter.refreshFavorite(movie);
+        mMoviesListAdapter.refreshFavorite(movie);
     }
 
     public void reload(MODE mode) {
@@ -254,6 +261,10 @@ public class MovieView extends IRBaseFragment implements IMoviesView {
 
     public void setMovieInterface(MovieInterface movieInterface) {
         this.mMovieInterface = movieInterface;
+    }
+
+    public void setOnDisplay(boolean onDisplay) {
+        initViews(onDisplay);
     }
 
     public enum MODE {

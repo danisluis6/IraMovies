@@ -317,16 +317,12 @@ public class HomeView extends BaseView {
     }
 
     /**
+     * @param searchView
      * @Run; https://stackoverflow.com/questions/27687116/how-to-remove-search-plate-in-searchview
      * => Done
-     *
      * @Run: https://stackoverflow.com/questions/30842921/how-to-remove-white-underline-in-a-searchview-widget-in-toolbar-android
      * => Done
-     *
-     * @Run:
-     * => Done
-     *
-     * @param searchView
+     * @Run: => Done
      */
 
     private void removeSearchPlateInSearchView(final SearchView searchView) {
@@ -392,10 +388,9 @@ public class HomeView extends BaseView {
                 mViewPager.setCurrentItem(Constants.Tab.About);
                 break;
             case R.id.view_list:
-                if (!Utils.isDoubleClick()) {
-                    item.setIcon( isModeView ? ContextCompat.getDrawable(this, R.drawable.ic_view_thumnail) : ContextCompat.getDrawable(this, R.drawable.ic_view_list));
-                    isModeView = !isModeView;
-                }
+                item.setIcon(isModeView ? ContextCompat.getDrawable(this, R.drawable.ic_view_thumnail) : ContextCompat.getDrawable(this, R.drawable.ic_view_list));
+                isModeView = !isModeView;
+                mMovieView.setOnDisplay(isModeView);
                 break;
         }
 

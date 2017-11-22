@@ -21,10 +21,11 @@ import vn.enclave.iramovies.services.response.MoviesResponse;
 import vn.enclave.iramovies.utilities.Constants;
 
 /**
+ *
  * Created by lorence on 13/11/2017.
  */
 
-public class MoviesModel implements IMoviesModel {
+class MoviesModel implements IMoviesModel {
 
     /**
      * Context
@@ -46,12 +47,7 @@ public class MoviesModel implements IMoviesModel {
      */
     private AppDatabase mAppDatabase;
 
-    private AddAsyncTask mAddAsyncTask;
-    private DeleteAsyncTask mDeleteAsyncTask;
-    private ListAsyncTask mListAsyncTask;
-    private boolean isAsyncTask = false;
-
-    public MoviesModel(Context context) {
+    MoviesModel(Context context) {
         this.mContext = context;
         mApiService = IRApplication.getInstance().getEzFaxingWebAPIs();
         mAppDatabase = Room.databaseBuilder(mContext, AppDatabase.class, AppDatabase.DB_NAME).build();
@@ -156,7 +152,7 @@ public class MoviesModel implements IMoviesModel {
                     MoviesResponse moviesResponse = response.body();
                     if (moviesResponse != null) {
                         List<Movie> grouMoviesDatas = moviesResponse.getResults();
-                        mIMoviesPresenter.onSuccess(updateStatusFavorite(grouMoviesDatas));
+                        updateStatusFavorite(grouMoviesDatas);
                         SessionManager.getInstance(mContext).setTotalPages(moviesResponse.getTotalPages());
                     }
                 } else {
@@ -172,7 +168,7 @@ public class MoviesModel implements IMoviesModel {
     }
 
     private List<Movie> updateStatusFavorite(final List<Movie> movies) {
-        mListAsyncTask = new ListAsyncTask(movies);
+        ListAsyncTask mListAsyncTask = new ListAsyncTask(movies);
         mListAsyncTask.execute();
         return movies;
     }
@@ -181,21 +177,21 @@ public class MoviesModel implements IMoviesModel {
     @Override
     public void addMovie(final Movie movie) {
         // First IN => First OUT
-        mAddAsyncTask = new AddAsyncTask(movie);
+        AddAsyncTask mAddAsyncTask = new AddAsyncTask(movie);
         mAddAsyncTask.execute(movie);
     }
 
     @Override
     public void deleteMovie(final Movie movie) {
-        mDeleteAsyncTask = new DeleteAsyncTask(movie);
+        DeleteAsyncTask mDeleteAsyncTask = new DeleteAsyncTask(movie);
         mDeleteAsyncTask.execute(movie);
     }
 
-    class AddAsyncTask extends AsyncTask<Movie, Void, Long> {
+    private class AddAsyncTask extends AsyncTask<Movie, Void, Long> {
 
         private Movie movie;
 
-        public AddAsyncTask(Movie movie) {
+        AddAsyncTask(Movie movie) {
             this.movie = movie;
         }
 
@@ -214,11 +210,11 @@ public class MoviesModel implements IMoviesModel {
         }
     }
 
-    class DeleteAsyncTask extends AsyncTask<Movie, Void, Integer> {
+    private class DeleteAsyncTask extends AsyncTask<Movie, Void, Integer> {
 
         private Movie movie;
 
-        public DeleteAsyncTask(Movie movie) {
+        DeleteAsyncTask(Movie movie) {
             this.movie = movie;
         }
 
@@ -237,11 +233,11 @@ public class MoviesModel implements IMoviesModel {
         }
     }
 
-    class ListAsyncTask extends AsyncTask<Void, Void, List<Movie>> {
+    private class ListAsyncTask extends AsyncTask<Void, Void, List<Movie>> {
 
         private List<Movie> movies;
 
-        public ListAsyncTask (List<Movie> movies) {
+        ListAsyncTask (List<Movie> movies) {
             this.movies = movies;
         }
 
@@ -260,6 +256,7 @@ public class MoviesModel implements IMoviesModel {
                     }
                 }
             }
+            mIMoviesPresenter.onSuccess(movies);
         }
     }
 }

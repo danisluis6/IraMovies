@@ -16,13 +16,8 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/activities/base/Home/HomeView.java" afterPath="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/activities/base/Home/HomeView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/views/ToolbarLayout.java" afterPath="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/views/ToolbarLayout.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/toolbar.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/toolbar.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/menu/main_menu.xml" afterPath="$PROJECT_DIR$/app/src/main/res/menu/main_menu.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
     </list>
     <ignored path="IraMovies.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -74,27 +69,42 @@
       <file leaf-file-name="HomeView.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/activities/base/Home/HomeView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="97">
-              <caret line="304" column="51" selection-start-line="304" selection-start-column="51" selection-end-line="304" selection-end-column="51" />
+            <state relative-caret-position="727">
+              <caret line="393" column="47" selection-start-line="393" selection-start-column="47" selection-end-line="393" selection-end-column="47" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#8665#8707#0" expanded="true" />
-                <element signature="e#9156#9200#0" expanded="true" />
-                <element signature="e#9623#9916#0" expanded="true" />
-                <element signature="e#9915#9916#0" expanded="true" />
-                <element signature="e#10017#10060#0" expanded="true" />
-                <element signature="e#10509#10549#0" expanded="true" />
-                <element signature="e#11120#11121#0" expanded="true" />
-                <element signature="e#11173#11174#0" expanded="true" />
-                <element signature="e#11611#11628#0" expanded="true" />
-                <element signature="e#11630#11647#0" expanded="true" />
-                <element signature="e#13371#13372#0" expanded="true" />
-                <element signature="e#13415#13416#0" expanded="true" />
-                <element signature="e#13501#13502#0" expanded="true" />
-                <element signature="e#13545#13546#0" expanded="true" />
-                <element signature="e#15410#15441#0" expanded="true" />
+                <element signature="e#8804#8846#0" expanded="true" />
+                <element signature="e#9295#9339#0" expanded="true" />
+                <element signature="e#9762#10055#0" expanded="true" />
+                <element signature="e#10054#10055#0" expanded="true" />
+                <element signature="e#10156#10199#0" expanded="true" />
+                <element signature="e#10648#10688#0" expanded="true" />
+                <element signature="e#11259#11260#0" expanded="true" />
+                <element signature="e#11312#11313#0" expanded="true" />
+                <element signature="e#11750#11767#0" expanded="true" />
+                <element signature="e#11769#11786#0" expanded="true" />
+                <element signature="e#13826#13827#0" expanded="true" />
+                <element signature="e#13870#13871#0" expanded="true" />
+                <element signature="e#13956#13957#0" expanded="true" />
+                <element signature="e#14000#14001#0" expanded="true" />
+                <element signature="e#15865#15896#0" expanded="true" />
               </folding>
             </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main_menu.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/main_menu.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="390">
+              <caret line="26" column="40" selection-start-line="26" selection-start-column="40" selection-end-line="26" selection-end-column="40" />
+              <folding>
+                <element signature="e#960#976#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+          <provider editor-type-id="android-designer2">
+            <state />
           </provider>
         </entry>
       </file>
@@ -105,19 +115,6 @@
               <caret line="70" column="53" selection-start-line="70" selection-start-column="53" selection-end-line="70" selection-end-column="53" />
               <folding />
             </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="main_menu.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/main_menu.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="615">
-              <caret line="41" column="66" selection-start-line="41" selection-start-column="66" selection-end-line="41" selection-end-column="66" />
-              <folding />
-            </state>
-          </provider>
-          <provider editor-type-id="android-designer2">
-            <state />
           </provider>
         </entry>
       </file>
@@ -2809,7 +2806,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2580645" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2580645" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -3248,21 +3245,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/main_menu.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="615">
-          <caret line="41" column="66" selection-start-line="41" selection-start-column="66" selection-end-line="41" selection-end-column="66" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/v7/appcompat/R.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="267">
-          <caret line="659" column="44" selection-start-line="659" selection-start-column="32" selection-end-line="659" selection-end-column="44" />
+        <state relative-caret-position="225">
+          <caret line="655" column="48" selection-start-line="655" selection-start-column="32" selection-end-line="655" selection-end-column="48" />
           <folding />
         </state>
       </provider>
@@ -3275,27 +3261,40 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/main_menu.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="26" column="40" selection-start-line="26" selection-start-column="40" selection-end-line="26" selection-end-column="40" />
+          <folding>
+            <element signature="e#960#976#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/activities/base/Home/HomeView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="97">
-          <caret line="304" column="51" selection-start-line="304" selection-start-column="51" selection-end-line="304" selection-end-column="51" />
+        <state relative-caret-position="727">
+          <caret line="393" column="47" selection-start-line="393" selection-start-column="47" selection-end-line="393" selection-end-column="47" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#8665#8707#0" expanded="true" />
-            <element signature="e#9156#9200#0" expanded="true" />
-            <element signature="e#9623#9916#0" expanded="true" />
-            <element signature="e#9915#9916#0" expanded="true" />
-            <element signature="e#10017#10060#0" expanded="true" />
-            <element signature="e#10509#10549#0" expanded="true" />
-            <element signature="e#11120#11121#0" expanded="true" />
-            <element signature="e#11173#11174#0" expanded="true" />
-            <element signature="e#11611#11628#0" expanded="true" />
-            <element signature="e#11630#11647#0" expanded="true" />
-            <element signature="e#13371#13372#0" expanded="true" />
-            <element signature="e#13415#13416#0" expanded="true" />
-            <element signature="e#13501#13502#0" expanded="true" />
-            <element signature="e#13545#13546#0" expanded="true" />
-            <element signature="e#15410#15441#0" expanded="true" />
+            <element signature="e#8804#8846#0" expanded="true" />
+            <element signature="e#9295#9339#0" expanded="true" />
+            <element signature="e#9762#10055#0" expanded="true" />
+            <element signature="e#10054#10055#0" expanded="true" />
+            <element signature="e#10156#10199#0" expanded="true" />
+            <element signature="e#10648#10688#0" expanded="true" />
+            <element signature="e#11259#11260#0" expanded="true" />
+            <element signature="e#11312#11313#0" expanded="true" />
+            <element signature="e#11750#11767#0" expanded="true" />
+            <element signature="e#11769#11786#0" expanded="true" />
+            <element signature="e#13826#13827#0" expanded="true" />
+            <element signature="e#13870#13871#0" expanded="true" />
+            <element signature="e#13956#13957#0" expanded="true" />
+            <element signature="e#14000#14001#0" expanded="true" />
+            <element signature="e#15865#15896#0" expanded="true" />
           </folding>
         </state>
       </provider>

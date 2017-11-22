@@ -11,14 +11,18 @@ import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.SearchView;
 import android.text.SpannableStringBuilder;
+import android.util.DisplayMetrics;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.TranslateAnimation;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import java.util.List;
@@ -301,8 +305,13 @@ public class HomeView extends BaseView {
         SearchView mSearchView = (SearchView) menu.findItem(R.id.search).getActionView();
         SearchManager searchManager = (SearchManager) getSystemService(SEARCH_SERVICE);
         mSearchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        mSearchView.setMaxWidth(getWidthTextToolbar());
         removeSearchIconAsHint(mSearchView);
         removeSearchPlateInSearchView(mSearchView);
+
+        /*final ImageView mCloseButton = mSearchView.findViewById(android.support.v7.appcompat.R.id.search_close_btn);
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(0, 0);
+        mCloseButton.setLayoutParams(layoutParams);*/
         mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -354,6 +363,8 @@ public class HomeView extends BaseView {
         SpannableStringBuilder ssb = new SpannableStringBuilder(Constants.EMPTY_STRING);
         ssb.append(getString(R.string.search_view));
         searchEditText.setHint(ssb);
+
+        searchView.setIconifiedByDefault(true);
     }
 
     @Override
@@ -375,5 +386,11 @@ public class HomeView extends BaseView {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public int getWidthTextToolbar() {
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        return displayMetrics.widthPixels - 32;
     }
 }

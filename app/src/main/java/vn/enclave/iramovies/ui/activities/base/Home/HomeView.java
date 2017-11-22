@@ -1,7 +1,6 @@
 package vn.enclave.iramovies.ui.activities.base.Home;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.SearchManager;
 import android.graphics.Color;
 import android.os.Build;
@@ -12,18 +11,14 @@ import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.SearchView;
 import android.text.SpannableStringBuilder;
 import android.util.DisplayMetrics;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.animation.TranslateAnimation;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
@@ -90,6 +85,7 @@ public class HomeView extends BaseView {
     private FavoriteView mFavoriteView;
     private SettingView mSettingView;
     private AboutView mAboutView;
+    private boolean isModeView = true;
 
 
     private TabItem moviesTab;
@@ -303,8 +299,8 @@ public class HomeView extends BaseView {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
-        initSearchView(menu);
         mMenu = menu;
+        initSearchView(menu);
         return true;
     }
 
@@ -394,6 +390,12 @@ public class HomeView extends BaseView {
                 break;
             case R.id.about:
                 mViewPager.setCurrentItem(Constants.Tab.About);
+                break;
+            case R.id.view_list:
+                if (!Utils.isDoubleClick()) {
+                    item.setIcon( isModeView ? ContextCompat.getDrawable(this, R.drawable.ic_view_thumnail) : ContextCompat.getDrawable(this, R.drawable.ic_view_list));
+                    isModeView = !isModeView;
+                }
                 break;
         }
 

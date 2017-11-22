@@ -6,8 +6,10 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +34,12 @@ import vn.enclave.iramovies.utilities.Utils;
  * @Run: Apply Mode-View_Presenter : MVP
  * => Done
  * @Run: https://stackoverflow.com/questions/28494637/android-how-to-stop-refreshing-fragments-on-tab-change
+ * => Done
+ *
+ * @Run: https://www.coderefer.com/android-recyclerview-cardview-tutorial/
+ * => @TODO
+ *
+ * @Run: http://pointofandroid.blogspot.com/2016/12/recyclerviewhorizontal-and-vertical.html
  * => Done
  */
 
@@ -102,7 +110,14 @@ public class MovieView extends IRBaseFragment implements IMoviesView {
 
     private void initViews() {
         mGroupMovies = new ArrayList<>();
+        //Use this setting to improve performance if you know that changes in
+        //the content do not change the layout size of the RecyclerView
+        if (rcvMovies != null) {
+            rcvMovies.setHasFixedSize(true);
+        }
+
         mLayoutManager = new LinearLayoutManager(mActivity);
+        // mLayoutManager = new GridLayoutManager(mActivity, 2);
         rcvMovies.setLayoutManager(mLayoutManager);
 
         if (mMoviesAdapter == null) {

@@ -163,12 +163,14 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
         void onRemove(Movie movie);
     }
     public void add(Movie movie) {
-        mFilterMovies.add(movie);
+        mOriginalGroupMovies.add(movie);
+        mFilterMovies = mOriginalGroupMovies;
         notifyDataSetChanged();
     }
 
     public void remove(Movie movie) {
         mFilterMovies.remove(movie);
+        mOriginalGroupMovies.remove(movie);
         notifyDataSetChanged();
     }
 }

@@ -28,6 +28,9 @@ import vn.enclave.iramovies.utilities.Constants;
  * => Communicate between Custom View and Activity
  *
  * @Run: https://stackoverflow.com/questions/15444375/how-to-create-interface-between-fragment-and-adapter
+ *
+ * @Run: https://stackoverflow.com/questions/9737101/padding-between-actionbars-home-icon-and-title
+ * => Remove padding betwwen title and navigation home icon
  */
 
 public class ToolbarLayout extends ConstraintLayout{
@@ -52,7 +55,7 @@ public class ToolbarLayout extends ConstraintLayout{
         mToolbar.setTitle(Constants.ToolbarLayoutInfo._TITLE);
         getTitleTextView(mToolbar).setTextColor(Color.WHITE);
         getTitleTextView(mToolbar).setPadding(0,0,0, 8);
-        /**
+        /*
          * @Run: https://stackoverflow.com/questions/23538929/android-menuitem-custom-layout
          * => Custom pop menu in Android
          *
@@ -61,7 +64,7 @@ public class ToolbarLayout extends ConstraintLayout{
     }
 
     private void initAttributes() {
-        /**
+        /*
          * @Run: http://sonevalley.blogspot.com/2015/11/ripple-effect-touch-animation-for.html
          * => Animation Ripple in Android
          */
@@ -80,34 +83,6 @@ public class ToolbarLayout extends ConstraintLayout{
             Field titleTextViewField = toolbarClass.getDeclaredField("mTitleTextView");
             titleTextViewField.setAccessible(true);
             return (TextView) titleTextViewField.get(toolbar);
-        }
-        catch (NoSuchFieldException | IllegalAccessException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    public ImageButton getNavButtonView(Toolbar toolbar) {
-        try {
-            Class<?> toolbarClass = Toolbar.class;
-            Field mNavButtonView = toolbarClass.getDeclaredField("mNavButtonView");
-            mNavButtonView.setAccessible(true);
-            return (ImageButton) mNavButtonView.get(toolbar);
-        }
-        catch (NoSuchFieldException | IllegalAccessException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    public ImageView getLogoView(Toolbar toolbar) {
-        try {
-            Class<?> toolbarClass = Toolbar.class;
-            Field mLogoView = toolbarClass.getDeclaredField("mLogoView");
-            mLogoView.setAccessible(true);
-            return (ImageView) mLogoView.get(toolbar);
         }
         catch (NoSuchFieldException | IllegalAccessException e) {
             e.printStackTrace();

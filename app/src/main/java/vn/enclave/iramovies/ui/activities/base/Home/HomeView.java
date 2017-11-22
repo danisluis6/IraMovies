@@ -1,18 +1,24 @@
 package vn.enclave.iramovies.ui.activities.base.Home;
 
 import android.annotation.SuppressLint;
+import android.app.SearchManager;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.SearchView;
+import android.text.SpannableStringBuilder;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.TranslateAnimation;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import java.util.List;
@@ -42,14 +48,13 @@ import vn.enclave.iramovies.utilities.Constants;
  * @Run: https://github.com/smartherd/AndroidToolbars/blob/master/app/src/main/java/com/example/sriyanksiddhartha/androidtoolbar/MainActivity.java
  * => Done
  * @Run: https://material.io/icons/
- *
  * @Run: https://stackoverflow.com/questions/27556623/creating-a-searchview-that-looks-like-the-material-design-guidelines
  * => Implement
- *
  * @Run: https://stackoverflow.com/questions/7066657/android-how-to-dynamically-change-menu-item-text-outside-of-onoptionsitemssele
  * => Implement
- *
  * @Run: https://stackoverflow.com/questions/39963330/android-menuitem-setshowasaction-not-working
+ * => Done
+ * @Run: https://stackoverflow.com/questions/4207880/android-how-do-i-prevent-the-soft-keyboard-from-pushing-my-view-up
  * => Done
  */
 
@@ -207,12 +212,16 @@ public class HomeView extends BaseView {
                 switch (position) {
                     case 0:
                         updateTitleBar(getResources().getString(R.string.popular));
+                        mMenu.findItem(R.id.search).setVisible(false);
                         mMenu.findItem(R.id.search).setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
+                        mMenu.findItem(R.id.view_list).setVisible(true);
                         mMenu.findItem(R.id.view_list).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
                         break;
                     case 1:
                         updateTitleBar(getResources().getString(R.string.favorites));
+                        mMenu.findItem(R.id.search).setVisible(true);
                         mMenu.findItem(R.id.search).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+                        mMenu.findItem(R.id.view_list).setVisible(false);
                         mMenu.findItem(R.id.view_list).setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
                         mFavoriteView.setOnRefreshFavoriteOnMovieScreen(new FavoriteView.UpdatedFavoriteScreen() {
                             @Override
@@ -223,12 +232,16 @@ public class HomeView extends BaseView {
                         break;
                     case 2:
                         updateTitleBar(getResources().getString(R.string.settings));
+                        mMenu.findItem(R.id.search).setVisible(false);
                         mMenu.findItem(R.id.search).setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
+                        mMenu.findItem(R.id.view_list).setVisible(false);
                         mMenu.findItem(R.id.view_list).setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
                         break;
                     case 3:
                         updateTitleBar(getResources().getString(R.string.about));
+                        mMenu.findItem(R.id.search).setVisible(false);
                         mMenu.findItem(R.id.search).setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
+                        mMenu.findItem(R.id.view_list).setVisible(false);
                         mMenu.findItem(R.id.view_list).setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
                         break;
                 }
@@ -279,8 +292,68 @@ public class HomeView extends BaseView {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
-        this.mMenu = menu;
+        initSearchView(menu);
+        mMenu = menu;
         return true;
+    }
+
+    private void initSearchView(Menu menu) {
+        SearchView mSearchView = (SearchView) menu.findItem(R.id.search).getActionView();
+        SearchManager searchManager = (SearchManager) getSystemService(SEARCH_SERVICE);
+        mSearchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        removeSearchIconAsHint(mSearchView);
+        removeSearchPlateInSearchView(mSearchView);
+        mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+    }
+
+    /**
+     * @Run; https://stackoverflow.com/questions/27687116/how-to-remove-search-plate-in-searchview
+     * => Done
+     *
+     * @Run: https://stackoverflow.com/questions/30842921/how-to-remove-white-underline-in-a-searchview-widget-in-toolbar-android
+     * => Done
+     *
+     * @Run:
+     * => Done
+     *
+     * @param searchView
+     */
+
+    private void removeSearchPlateInSearchView(SearchView searchView) {
+        View v = searchView.findViewById(android.support.v7.appcompat.R.id.search_plate);
+        v.setBackgroundColor(ContextCompat.getColor(mContext, R.color.colorPrimaryDark));
+        ((EditText)searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text)).setHintTextColor(Color.parseColor("#919CD5"));
+        ((EditText)searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text)).setTextColor(Color.WHITE);
+    }
+
+    /**
+     * @param searchView
+     * @Run: https://stackoverflow.com/questions/20323990/remove-the-searchicon-as-hint-in-the-searchview
+     * => Done
+     * @Run: https://stackoverflow.com/questions/27556623/creating-a-searchview-that-looks-like-the-material-design-guidelines
+     * => Done
+     * @Run: https://stackoverflow.com/questions/31874836/why-is-androids-searchview-widgets-imageview-with-id-search-mag-icon-returni
+     * => Remove icon right hint search => DONE
+     * @Run: https://stackoverflow.com/questions/27687116/how-to-remove-search-plate-in-searchview
+     * => Go to resource => Remove public static final int search_plate = 0x7f0f008b;
+     * => Done
+     */
+
+    private void removeSearchIconAsHint(SearchView searchView) {
+        EditText searchEditText = searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
+        SpannableStringBuilder ssb = new SpannableStringBuilder(Constants.EMPTY_STRING);
+        ssb.append(getString(R.string.search_view));
+        searchEditText.setHint(ssb);
     }
 
     @Override
@@ -298,10 +371,6 @@ public class HomeView extends BaseView {
                 break;
             case R.id.about:
                 mViewPager.setCurrentItem(Constants.Tab.About);
-                break;
-            case R.id.view_list:
-                break;
-            case R.id.search:
                 break;
         }
 

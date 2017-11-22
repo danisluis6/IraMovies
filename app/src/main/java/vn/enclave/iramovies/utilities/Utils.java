@@ -8,6 +8,7 @@ import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 
 import java.io.ByteArrayOutputStream;
 
@@ -68,6 +69,14 @@ public class Utils {
         if (view != null) {
             InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+    }
+
+    public static void clearFocusOnSearchView(View view) {
+        if (view instanceof EditText) {
+            if (view.isFocused()) {
+                view.clearFocus();
+            }
         }
     }
 }

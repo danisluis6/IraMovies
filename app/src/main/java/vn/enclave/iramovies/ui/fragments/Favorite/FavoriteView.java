@@ -3,9 +3,12 @@ package vn.enclave.iramovies.ui.fragments.Favorite;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +33,7 @@ public class FavoriteView extends IRBaseFragment implements IFavoritesView{
     public FailureLayout mFailureLayout;
     @BindView(R.id.rcvMovies)
 
-    /** RecyclerView */
+    /* RecyclerView */
     public RecyclerView rcvMovies;
     public RecyclerView.LayoutManager mLayoutManager;
 
@@ -134,6 +137,33 @@ public class FavoriteView extends IRBaseFragment implements IFavoritesView{
         }
     }
 
+    public void filter(CharSequence mSearchKey) {
+        if (mFavoritesAdapter != null) {
+            mFavoritesAdapter.filter(mSearchKey);
+        }
+    }
+
+    private TextWatcher mTextWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable search) {
+            filter(search);
+        }
+    };
+
+    public void filterAutomatic(EditText edtSearch) {
+        edtSearch.addTextChangedListener(mTextWatcher);
+    }
+
     public interface UpdatedFavoriteScreen {
         void onRefreshFavoriteOnMovieScreen(Movie movie);
     }
@@ -149,6 +179,6 @@ public class FavoriteView extends IRBaseFragment implements IFavoritesView{
     }
 
     public void setOnRefreshFavoriteOnMovieScreen(UpdatedFavoriteScreen mInterfaceRefresh) {
-        this.mInterfaceRefresh =mInterfaceRefresh;
+        this.mInterfaceRefresh = mInterfaceRefresh;
     }
 }

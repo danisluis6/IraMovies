@@ -2,6 +2,7 @@ package vn.enclave.iramovies.ui.fragments.Favorite.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -41,7 +43,8 @@ import vn.enclave.iramovies.utilities.OverrideFonts;
 public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.ViewHolder>{
 
     private Context mContext;
-    private List<Movie> mGroupMovies;
+    private List<Movie> mOriginalGroupMovies;
+    private List<Movie> mFilterMovies;
     private BaseView mBaseView;
 
     /** Set Favorite start */
@@ -49,7 +52,8 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
 
     public FavoritesAdapter(Context context, BaseView baseView, List<Movie> grouMovies) {
         this.mContext = context;
-        this.mGroupMovies = grouMovies;
+        this.mOriginalGroupMovies = grouMovies;
+        mFilterMovies = mOriginalGroupMovies;
         this.mBaseView = baseView;
     }
 
@@ -62,14 +66,14 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
     @Override
     public void onBindViewHolder(final FavoritesAdapter.ViewHolder holder, int position){
         final int mPosition = position;
-        final Movie movie = mGroupMovies.get(mPosition);
+        final Movie movie = mFilterMovies.get(mPosition);
         holder.tvTitle.setText(movie.getTitle());
         holder.tvReleaseDate.setText(movie.getReleaseDate());
         holder.tvRating.setText(movie.getVoteAverage() + Constants.Keyboards.FORWARD_SLASH + "10.0");
         holder.tvOverview.setText(movie.getOverview());
 
         holder.imvFavorite.setImageResource((movie.getFavorite() == Constants.Favorites.FAVORITE) ? R.drawable.ic_star_picked : R.drawable.ic_star);
-        holder.imvFavorite.setTag(mGroupMovies.get(mPosition));
+        holder.imvFavorite.setTag(mFilterMovies.get(mPosition));
 
         String poster = IraMoviesInfoAPIs.Images.Thumbnail + movie.getBackdropPath();
         Glide.with(mContext)
@@ -88,14 +92,36 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
 
     }
 
+    /**
+     * https://stackoverflow.com/questions/34429090/getitemcount-return-only-the-original-content-of-recyclerview
+     * => Decide that mOriginalGroupMovies or MFilterMovies is returned
+     * @return
+     */
     @Override
     public int getItemCount() {
-        return mGroupMovies.size();
+        return mFilterMovies.size();
     }
 
     public void setMovies(List<Movie> movies) {
-        this.mGroupMovies = movies;
+        this.mOriginalGroupMovies = movies;
+        this.mFilterMovies = mOriginalGroupMovies;
         notifyDataSetChanged();
+    }
+
+    public void filter(CharSequence search) {
+        if (TextUtils.isEmpty(search)) {
+            mFilterMovies = mOriginalGroupMovies;
+        } else {
+            mFilterMovies = new ArrayList<>();
+            search = search.toString().trim().toLowerCase();
+            for (Movie movie: mOriginalGroupMovies) {
+                String temp = movie.getTitle().trim().toLowerCase();
+                if (temp.contains(search)) {
+                    mFilterMovies.add(movie);
+                }
+            }
+        };
+        this.notifyDataSetChanged();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
@@ -137,12 +163,12 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
         void onRemove(Movie movie);
     }
     public void add(Movie movie) {
-        mGroupMovies.add(movie);
+        mFilterMovies.add(movie);
         notifyDataSetChanged();
     }
 
     public void remove(Movie movie) {
-        mGroupMovies.remove(movie);
+        mFilterMovies.remove(movie);
         notifyDataSetChanged();
     }
 }

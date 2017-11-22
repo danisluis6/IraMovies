@@ -1,6 +1,7 @@
 package vn.enclave.iramovies.ui.activities.base.Home;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.SearchManager;
 import android.graphics.Color;
 import android.os.Build;
@@ -16,14 +17,19 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.SearchView;
 import android.text.SpannableStringBuilder;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.animation.TranslateAnimation;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import java.util.List;
 import java.util.Vector;
@@ -40,6 +46,7 @@ import vn.enclave.iramovies.ui.fragments.Setting.SettingView;
 import vn.enclave.iramovies.ui.views.TabItem;
 import vn.enclave.iramovies.ui.views.ToolbarLayout;
 import vn.enclave.iramovies.utilities.Constants;
+import vn.enclave.iramovies.utilities.Utils;
 
 
 /**
@@ -308,21 +315,9 @@ public class HomeView extends BaseView {
         mSearchView.setMaxWidth(getWidthTextToolbar());
         removeSearchIconAsHint(mSearchView);
         removeSearchPlateInSearchView(mSearchView);
-
         /*final ImageView mCloseButton = mSearchView.findViewById(android.support.v7.appcompat.R.id.search_close_btn);
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(0, 0);
         mCloseButton.setLayoutParams(layoutParams);*/
-        mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                return false;
-            }
-        });
     }
 
     /**
@@ -338,11 +333,28 @@ public class HomeView extends BaseView {
      * @param searchView
      */
 
-    private void removeSearchPlateInSearchView(SearchView searchView) {
+    private void removeSearchPlateInSearchView(final SearchView searchView) {
         View v = searchView.findViewById(android.support.v7.appcompat.R.id.search_plate);
         v.setBackgroundColor(ContextCompat.getColor(mContext, R.color.colorPrimaryDark));
-        ((EditText)searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text)).setHintTextColor(Color.parseColor("#919CD5"));
-        ((EditText)searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text)).setTextColor(Color.WHITE);
+        final EditText edtSearch = searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
+
+        edtSearch.setHintTextColor(Color.parseColor("#919CD5"));
+        edtSearch.setTextColor(Color.WHITE);
+        edtSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                if (i == EditorInfo.IME_ACTION_SEARCH ||
+                        keyEvent.getAction() == KeyEvent.ACTION_DOWN &&
+                                keyEvent.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
+                    Utils.dimissKeyBoard(HomeView.this);
+                    Utils.clearFocusOnSearchView(edtSearch);
+                    mFavoriteView.filter(searchView.getQuery());
+                    return true;
+                }
+                return false;
+            }
+        });
+        mFavoriteView.filterAutomatic(edtSearch);
     }
 
     /**

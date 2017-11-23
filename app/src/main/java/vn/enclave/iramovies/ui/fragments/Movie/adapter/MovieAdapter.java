@@ -1,6 +1,7 @@
 package vn.enclave.iramovies.ui.fragments.Movie.adapter;
 
 import android.content.Context;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -35,6 +36,9 @@ import vn.enclave.iramovies.utilities.Utils;
  * => Done
  * @Run: http://android-pratap.blogspot.in/2015/01/recyclerview-with-checkbox-example.html
  * => Fix save the states when scroll view in Recycler View
+ *
+ * @Run: https://stackoverflow.com/questions/28581712/android-recyclerview-change-layout-file-list-to-grid-onoptionitemselected
+ * => Done
  */
 
 public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -107,7 +111,7 @@ public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                     ((MovieViewHolder) holder).imvFavorite.setImageResource((movie.getFavorite() == Constants.Favorites.FAVORITE) ? R.drawable.ic_star_picked : R.drawable.ic_star);
                     ((MovieViewHolder) holder).imvFavorite.setTag(mGrouMovies.get(mPosition));
 
-                    String poster = IraMoviesInfoAPIs.Images.Thumbnail + movie.getBackdropPath();
+                    String poster = IraMoviesInfoAPIs.Images.Small + movie.getBackdropPath();
                     Glide.with(mContext)
                             .load(poster)
                             .placeholder(R.drawable.load)
@@ -244,18 +248,22 @@ public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         @BindView(R.id.tvTitle)
         TextView tvTitle;
 
+        @Nullable
         @BindView(R.id.tvReleaseDate)
         TextView tvReleaseDate;
 
+        @Nullable
         @BindView(R.id.tvRating)
         TextView tvRating;
 
+        @Nullable
         @BindView(R.id.tvOverview)
         TextView tvOverview;
 
         @BindView(R.id.imvSmallThumbnail)
         ImageView imvSmallThumbnail;
 
+        @Nullable
         @BindView(R.id.imvFavorite)
         ImageView imvFavorite;
 
@@ -275,5 +283,10 @@ public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         LoadingViewHolder(View view) {
             super(view);
         }
+    }
+
+    public void setModeDisplay (boolean isModeDisplay) {
+        this.isModeDisplay = isModeDisplay;
+        notifyDataSetChanged();
     }
 }

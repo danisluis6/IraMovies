@@ -66,7 +66,7 @@ class MoviesModel implements IMoviesModel {
             getListTopRatedMovies(mPageIndex);
         } else if (mode == MovieView.MODE.UPCOMING) {
             getListUpcomingMovies(mPageIndex);
-        } else if (mode == MovieView.MODE.NOWPLAYING) {
+        } else if (mode == MovieView.MODE.NOW_PLAYING) {
             getListNowPlayingMovies(mPageIndex);
         }
     }

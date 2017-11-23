@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="true"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/imvFavorite"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginLeft="11dp"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="18dp"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/ic_star_picked"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/lbReleaseDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="11dp"
+        android:text="Release date:"
+        android:textColor="#000"
+        android:textSize="14sp"
+        app:layout_constraintLeft_toRightOf="@+id/imvFavorite"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvReleaseDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="11dp"
+        android:text="2017-08-25"
+        android:textColor="#F50057"
+        android:textSize="14sp"
+        app:layout_constraintLeft_toRightOf="@+id/lbReleaseDate"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/lbRating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="5dp"
+        android:text="Rating:"
+        android:textColor="#000"
+        android:textSize="14sp"
+        app:layout_constraintLeft_toRightOf="@+id/imvFavorite"
+        app:layout_constraintTop_toBottomOf="@+id/lbReleaseDate" />
+
+    <TextView
+        android:id="@+id/tvRating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="5dp"
+        android:text="4.7/10"
+        android:textColor="#F50057"
+        android:textSize="14sp"
+        app:layout_constraintLeft_toRightOf="@+id/lbRating"
+        app:layout_constraintTop_toBottomOf="@+id/tvReleaseDate" />
+
+    <ImageView
+        android:id="@+id/imvThumnail"
+        android:layout_width="134dp"
+        android:layout_height="174dp"
+        android:layout_marginLeft="11dp"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="5dp"
+        android:contentDescription="@string/app_name"
+        android:scaleType="fitXY"
+        android:src="@drawable/load"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lbRating" />
+
+    <Button
+        android:id="@+id/btnReminder"
+        android:layout_width="wrap_content"
+        android:layout_height="36dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/shape_button"
+        android:text="REMINDER"
+        android:textColor="@android:color/white"
+        android:textSize="12sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/lnOverview"
+        app:layout_constraintTop_toBottomOf="@+id/imvThumnail" />
+
+    <TextView
+        android:id="@+id/lbOverview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="9dp"
+        android:layout_marginStart="9dp"
+        android:layout_marginTop="4dp"
+        android:text="Overview:"
+        android:textColor="#F50057"
+        android:textSize="14sp"
+        app:layout_constraintLeft_toRightOf="@+id/imvThumnail"
+        app:layout_constraintTop_toBottomOf="@+id/lbRating" />
+
+    <LinearLayout
+        android:id="@+id/lnOverview"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="11dp"
+        android:layout_marginLeft="9dp"
+        android:layout_marginRight="11dp"
+        android:layout_marginStart="9dp"
+        android:layout_marginTop="6dp"
+        app:layout_constraintBottom_toTopOf="@+id/rcvCast"
+        app:layout_constraintLeft_toRightOf="@+id/imvThumnail"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lbOverview">
+
+        <TextView
+            android:id="@+id/tvOverview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/lbCast"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="11dp"
+        android:layout_marginLeft="11dp"
+        android:layout_marginStart="11dp"
+        android:text="Cast &amp; Crew"
+        android:textColor="#F50057"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/rcvCast"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rcvCast"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:clipToPadding="false"
+        android:scrollbars="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+</android.support.constraint.ConstraintLayout>

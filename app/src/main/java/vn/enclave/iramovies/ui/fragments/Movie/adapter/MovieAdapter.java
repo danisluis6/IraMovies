@@ -36,7 +36,6 @@ import vn.enclave.iramovies.utilities.Utils;
  * => Done
  * @Run: http://android-pratap.blogspot.in/2015/01/recyclerview-with-checkbox-example.html
  * => Fix save the states when scroll view in Recycler View
- *
  * @Run: https://stackoverflow.com/questions/28581712/android-recyclerview-change-layout-file-list-to-grid-onoptionitemselected
  * => Done
  */
@@ -60,12 +59,14 @@ public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
      * Set Favorite start
      */
     private OnChooseFavoriteListener mChooseFavoriteListener;
+    private IMovieAdapter mIMovieAdapter;
 
-    public MovieAdapter(Context context, BaseView baseView, List<Movie> grouMovies, boolean isModeDisplay) {
+    public MovieAdapter(Context context, BaseView baseView, List<Movie> grouMovies, boolean isModeDisplay, IMovieAdapter iMovieAdapter) {
         this.mContext = context;
         this.mGrouMovies = grouMovies;
         this.mBaseView = baseView;
         this.isModeDisplay = isModeDisplay;
+        this.mIMovieAdapter = iMovieAdapter;
     }
 
     @Override
@@ -102,6 +103,12 @@ public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         if (getItemViewType(mPosition) == TYPE_MOVIE) {
             if (holder instanceof MovieViewHolder) {
                 final Movie movie = mGrouMovies.get(mPosition);
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mIMovieAdapter.openDetailMovie(movie);
+                    }
+                });
                 if (isModeDisplay) {
                     ((MovieViewHolder) holder).tvTitle.setText(movie.getTitle());
                     ((MovieViewHolder) holder).tvReleaseDate.setText(movie.getReleaseDate());
@@ -111,7 +118,7 @@ public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                     ((MovieViewHolder) holder).imvFavorite.setImageResource((movie.getFavorite() == Constants.Favorites.FAVORITE) ? R.drawable.ic_star_picked : R.drawable.ic_star);
                     ((MovieViewHolder) holder).imvFavorite.setTag(mGrouMovies.get(mPosition));
 
-                    String poster = IraMoviesInfoAPIs.Images.Small + movie.getBackdropPath();
+                    String poster = IraMoviesInfoAPIs.Images.Small + movie.getPosterPath();
                     Glide.with(mContext)
                             .load(poster)
                             .placeholder(R.drawable.load)
@@ -233,6 +240,10 @@ public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         }
     }
 
+    public void setModeDisplay(boolean isModeDisplay) {
+        this.isModeDisplay = isModeDisplay;
+    }
+
     public interface OnLoadMoreListener {
         void onLoadMore();
     }
@@ -241,6 +252,10 @@ public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         void onChoose(Movie movie);
 
         void onRemove(Movie movie);
+    }
+
+    public interface IMovieAdapter {
+        void openDetailMovie(Movie movie);
     }
 
     class MovieViewHolder extends RecyclerView.ViewHolder {
@@ -283,10 +298,5 @@ public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         LoadingViewHolder(View view) {
             super(view);
         }
-    }
-
-    public void setModeDisplay (boolean isModeDisplay) {
-        this.isModeDisplay = isModeDisplay;
-        notifyDataSetChanged();
     }
 }

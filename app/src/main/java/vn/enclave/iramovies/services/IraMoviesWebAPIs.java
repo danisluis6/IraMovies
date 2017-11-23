@@ -26,7 +26,7 @@ public interface IraMoviesWebAPIs {
      * @Run: http://api.themoviedb.org/3/movie/popular?api_key=2d390f2deaa23e8b65d42a80beb8c1bd
      * => Done
      */
-    @GET(IraMoviesInfoAPIs.Catogories.Popular)
+    @GET(IraMoviesInfoAPIs.Categories.Popular)
     Call<MoviesResponse> getPopularMovies(@Query(IraMoviesInfoAPIs.Fields.API_KEY) String apiKey, @Query(IraMoviesInfoAPIs.Fields.PAGE) int page);
 
     /**
@@ -35,7 +35,7 @@ public interface IraMoviesWebAPIs {
      * @Run: http://api.themoviedb.org/3/movie/top_rated?api_key=2d390f2deaa23e8b65d42a80beb8c1bd
      * => Done
      */
-    @GET(IraMoviesInfoAPIs.Catogories.Top_Rated)
+    @GET(IraMoviesInfoAPIs.Categories.Top_Rated)
     Call<MoviesResponse> getTopRatedMovies(@Query(IraMoviesInfoAPIs.Fields.API_KEY) String apiKey, @Query(IraMoviesInfoAPIs.Fields.PAGE) int page);
 
     /**
@@ -44,7 +44,7 @@ public interface IraMoviesWebAPIs {
      * @Run: http://api.themoviedb.org/3/movie/now_playing?api_key=2d390f2deaa23e8b65d42a80beb8c1bd
      * => Done
      */
-    @GET(IraMoviesInfoAPIs.Catogories.Now_playing)
+    @GET(IraMoviesInfoAPIs.Categories.Now_playing)
     Call<MoviesResponse> getNowPlayingMovies(@Query(IraMoviesInfoAPIs.Fields.API_KEY) String apiKey, @Query(IraMoviesInfoAPIs.Fields.PAGE) int page);
 
     /**
@@ -53,8 +53,11 @@ public interface IraMoviesWebAPIs {
      * @Run: http://api.themoviedb.org/3/movie/upcoming?api_key=2d390f2deaa23e8b65d42a80beb8c1bd
      * => Done
      */
-    @GET(IraMoviesInfoAPIs.Catogories.Upcoming)
+    @GET(IraMoviesInfoAPIs.Categories.Upcoming)
     Call<MoviesResponse> getUpcomingMovies(@Query(IraMoviesInfoAPIs.Fields.API_KEY) String apiKey, @Query(IraMoviesInfoAPIs.Fields.PAGE) int page);
+
+    @GET(IraMoviesInfoAPIs.Categories.Detail)
+    Call<MoviesResponse> getMovieDetail(@Query(IraMoviesInfoAPIs.Fields.API_KEY) String apiKey);
 
     class Factory {
         public static IraMoviesWebAPIs create(Context context) {

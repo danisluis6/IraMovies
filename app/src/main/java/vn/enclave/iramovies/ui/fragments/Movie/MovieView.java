@@ -2,16 +2,16 @@ package vn.enclave.iramovies.ui.fragments.Movie;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
-import android.content.res.Resources;
-import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,9 +22,11 @@ import java.util.List;
 
 import butterknife.BindView;
 import vn.enclave.iramovies.R;
+import vn.enclave.iramovies.local.storage.DatabaseInfo;
 import vn.enclave.iramovies.local.storage.SessionManager;
 import vn.enclave.iramovies.services.response.Movie;
 import vn.enclave.iramovies.ui.fragments.Base.IRBaseFragment;
+import vn.enclave.iramovies.ui.fragments.Detail.MovieDetailView;
 import vn.enclave.iramovies.ui.fragments.Movie.adapter.MovieAdapter;
 import vn.enclave.iramovies.ui.views.FailureLayout;
 import vn.enclave.iramovies.utilities.Constants;
@@ -37,10 +39,8 @@ import vn.enclave.iramovies.utilities.Utils;
  * => Done
  * @Run: https://stackoverflow.com/questions/28494637/android-how-to-stop-refreshing-fragments-on-tab-change
  * => Done
- *
  * @Run: https://www.coderefer.com/android-recyclerview-cardview-tutorial/
  * => @TODO
- *
  * @Run: http://pointofandroid.blogspot.com/2016/12/recyclerviewhorizontal-and-vertical.html
  * => Done
  */
@@ -68,6 +68,7 @@ public class MovieView extends IRBaseFragment implements IMoviesView {
      */
     private int mPageIndex;
     private boolean mIsLoadMore = false;
+
 
     public MovieView() {
     }
@@ -120,7 +121,14 @@ public class MovieView extends IRBaseFragment implements IMoviesView {
             rcvMovies.setHasFixedSize(true);
         }
         if (mMoviesAdapter == null) {
-            mMoviesAdapter = new MovieAdapter(mActivity, mActivity, mGroupMovies, true);
+            mMoviesAdapter = new MovieAdapter(mActivity, mActivity, mGroupMovies, true, new MovieAdapter.IMovieAdapter() {
+                @Override
+                public void openDetailMovie(Movie movie) {
+                    MovieDetailView mDetailView = new MovieDetailView();
+                    mDetailView.setArguments(getMovieBundle(movie));
+                    switchDetailMovie(mDetailView, false, R.id.fragment_movies);
+                }
+            });
         }
         mLayoutManager = new LinearLayoutManager(mActivity);
         rcvMovies.setLayoutManager(mLayoutManager);
@@ -149,6 +157,18 @@ public class MovieView extends IRBaseFragment implements IMoviesView {
                 mMoviesPresenter.deleteMovie(movie);
             }
         });
+    }
+
+    private Bundle getMovieBundle(Movie movie) {
+        Bundle mBundle = new Bundle();
+        mBundle.putInt(DatabaseInfo.Movie.COLUMN_ID, movie.getId());
+        mBundle.putString(DatabaseInfo.Movie.COLUMN_TITLE, movie.getTitle());
+        mBundle.putString(DatabaseInfo.Movie.COLUMN_POSTER_PATH, movie.getPosterPath());
+        mBundle.putString(DatabaseInfo.Movie.COLUMN_RELEASE_DATE, movie.getReleaseDate());
+        mBundle.putDouble(DatabaseInfo.Movie.COLUMN_VOTE_AVERAGE, movie.getVoteAverage());
+        mBundle.putString(DatabaseInfo.Movie.COLUMN_OVERVIEW, movie.getOverview());
+        mBundle.putInt(DatabaseInfo.Movie.COLUMN_FAVORITE, movie.getFavorite());
+        return mBundle;
     }
 
     private void loadNextDataFromApi() {
@@ -257,16 +277,29 @@ public class MovieView extends IRBaseFragment implements IMoviesView {
     }
 
     public void setOnDisplay(boolean onDisplay) {
-        mMoviesAdapter.setModeDisplay(onDisplay);
+        rcvMovies.setAdapter(mMoviesAdapter);
         if (onDisplay) {
             rcvMovies.setLayoutManager(new LinearLayoutManager(mActivity));
         } else {
             rcvMovies.setLayoutManager(new GridLayoutManager(mActivity, 2));
         }
-        rcvMovies.setAdapter(mMoviesAdapter);
+        mMoviesAdapter.setModeDisplay(onDisplay);
     }
 
-    public enum MODE {
+    /**
+     * Initialize object FragmentManger to manager fragment
+     */
+    private void switchDetailMovie(Fragment fragment, boolean addToBackStack, int id) {
+        FragmentManager fm = mActivity.getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        if (ft.isEmpty()) {
+            ft.replace(id, fragment);
+        }
+        ft.addToBackStack(Constants.EMPTY_STRING);
+        ft.commit();
+    }
+
+    enum MODE {
         POPULAR, TOP_RATED, UPCOMING, NOW_PLAYING
     }
 
@@ -275,51 +308,5 @@ public class MovieView extends IRBaseFragment implements IMoviesView {
         void refreshFavoriteInFavoriteScreen(Movie movie);
 
         void updateCountFavoritesOnMenu(int value);
-    }
-
-    /**
-     * RecyclerView item decoration - give equal margin around grid item
-     */
-    public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
-
-        private int spanCount;
-        private int spacing;
-        private boolean includeEdge;
-
-        public GridSpacingItemDecoration(int spanCount, int spacing, boolean includeEdge) {
-            this.spanCount = spanCount;
-            this.spacing = spacing;
-            this.includeEdge = includeEdge;
-        }
-
-        @Override
-        public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-            int position = parent.getChildAdapterPosition(view); // item position
-            int column = position % spanCount; // item column
-
-            if (includeEdge) {
-                outRect.left = spacing - column * spacing / spanCount; // spacing - column * ((1f / spanCount) * spacing)
-                outRect.right = (column + 1) * spacing / spanCount; // (column + 1) * ((1f / spanCount) * spacing)
-
-                if (position < spanCount) { // top edge
-                    outRect.top = spacing;
-                }
-                outRect.bottom = spacing; // item bottom
-            } else {
-                outRect.left = column * spacing / spanCount; // column * ((1f / spanCount) * spacing)
-                outRect.right = spacing - (column + 1) * spacing / spanCount; // spacing - (column + 1) * ((1f /    spanCount) * spacing)
-                if (position >= spanCount) {
-                    outRect.top = spacing; // item top
-                }
-            }
-        }
-    }
-
-    /**
-     * Converting dp to pixel
-     */
-    private int dpToPx(int dp) {
-        Resources r = getResources();
-        return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
     }
 }

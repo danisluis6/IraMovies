@@ -27,6 +27,8 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.util.Util;
+
 import java.util.List;
 import java.util.Vector;
 
@@ -218,8 +220,20 @@ public class HomeView extends BaseView {
             }
 
             @Override
-            public void onPageSelected(int position) {
+            public void onPageSelected(final int position) {
                 mToolbar.getToolbar().setNavigationIcon(R.drawable.ic_menu);
+//                mToolbar.getToolbar().setNavigationOnClickListener(new View.OnClickListener() {
+//                    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+//                    @Override
+//                    public void onClick(View v) {
+//                        Fragment fragment = mPageAdapter.getItem(position);
+//                        if (fragment.getChildFragmentManager().getBackStackEntryCount() > 0) {
+//                            onBackPressed();
+//                        } else {
+//                            setupDrawerToggle();
+//                        }
+//                    }
+//                });
                 switch (position) {
                     case 0:
                         if (mMovieView.getChildFragmentManager().getBackStackEntryCount() == 0) {

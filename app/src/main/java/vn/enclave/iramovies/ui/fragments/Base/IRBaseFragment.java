@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import vn.enclave.iramovies.local.storage.AppDatabase;
-import vn.enclave.iramovies.services.response.Movie;
 import vn.enclave.iramovies.ui.activities.base.BaseView;
 import vn.enclave.iramovies.ui.views.DialogView;
 

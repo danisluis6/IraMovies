@@ -6,7 +6,7 @@ import android.arch.persistence.room.RoomDatabase;
 import vn.enclave.iramovies.local.storage.dao.MovieDao;
 import vn.enclave.iramovies.local.storage.dao.UserDao;
 import vn.enclave.iramovies.local.storage.entity.User;
-import vn.enclave.iramovies.services.response.Movie;
+import vn.enclave.iramovies.local.storage.entity.Movie;
 
 /**
  * @author acampbell

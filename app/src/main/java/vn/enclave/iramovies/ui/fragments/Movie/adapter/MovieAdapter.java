@@ -17,8 +17,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import vn.enclave.iramovies.R;
-import vn.enclave.iramovies.services.IraMoviesInfoAPIs;
-import vn.enclave.iramovies.services.response.Movie;
+import vn.enclave.iramovies.services.IraMovieInfoAPIs;
+import vn.enclave.iramovies.local.storage.entity.Movie;
 import vn.enclave.iramovies.ui.activities.base.BaseView;
 import vn.enclave.iramovies.utilities.Constants;
 import vn.enclave.iramovies.utilities.OverrideFonts;
@@ -118,7 +118,7 @@ public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                     ((MovieViewHolder) holder).imvFavorite.setImageResource((movie.getFavorite() == Constants.Favorites.FAVORITE) ? R.drawable.ic_star_picked : R.drawable.ic_star);
                     ((MovieViewHolder) holder).imvFavorite.setTag(mGrouMovies.get(mPosition));
 
-                    String poster = IraMoviesInfoAPIs.Images.Small + movie.getPosterPath();
+                    String poster = IraMovieInfoAPIs.Images.Small + movie.getPosterPath();
                     Glide.with(mContext)
                             .load(poster)
                             .placeholder(R.drawable.load)
@@ -161,7 +161,7 @@ public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                     });
                 } else {
                     ((MovieViewHolder) holder).tvTitle.setText(movie.getTitle());
-                    String poster = IraMoviesInfoAPIs.Images.Thumbnail + movie.getBackdropPath();
+                    String poster = IraMovieInfoAPIs.Images.Thumbnail + movie.getBackdropPath();
                     Glide.with(mContext)
                             .load(poster)
                             .placeholder(R.drawable.load)

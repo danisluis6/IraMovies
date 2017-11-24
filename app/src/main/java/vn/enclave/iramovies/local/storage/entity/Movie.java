@@ -1,4 +1,4 @@
-package vn.enclave.iramovies.services.response;
+package vn.enclave.iramovies.local.storage.entity;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;

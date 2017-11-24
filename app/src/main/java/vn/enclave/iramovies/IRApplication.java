@@ -2,7 +2,7 @@ package vn.enclave.iramovies;
 
 import android.app.Application;
 
-import vn.enclave.iramovies.services.IraMoviesWebAPIs;
+import vn.enclave.iramovies.services.IraMovieWebAPIs;
 
 /**
  *
@@ -18,7 +18,7 @@ public class IRApplication extends Application{
     /**
      * EzFaxingWebAPIs
      */
-    private IraMoviesWebAPIs mIraMoviesWebAPIs;
+    private IraMovieWebAPIs mIraMoviesWebAPIs;
 
     public static synchronized IRApplication getInstance() {
         if (sInstance == null) {
@@ -27,9 +27,9 @@ public class IRApplication extends Application{
         return sInstance;
     }
 
-    public IraMoviesWebAPIs getEzFaxingWebAPIs() {
+    public IraMovieWebAPIs getEzFaxingWebAPIs() {
         if (mIraMoviesWebAPIs == null) {
-            mIraMoviesWebAPIs = IraMoviesWebAPIs.Factory.create(sInstance);
+            mIraMoviesWebAPIs = IraMovieWebAPIs.Factory.create(sInstance);
         }
         return mIraMoviesWebAPIs;
     }

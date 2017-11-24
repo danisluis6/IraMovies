@@ -16,18 +16,44 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ba10d59d-9357-4e43-94ba-ab289211e44a" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_castcrew.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/services/IraMoviesInfoAPIs.java" afterPath="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/services/IraMovieInfoAPIs.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/services/IraMoviesWebAPIs.java" afterPath="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/services/IraMovieWebAPIs.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/services/response/Movie.java" afterPath="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/local/storage/entity/Movie.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/services/response/MoviesResponse.java" afterPath="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/services/response/MovieResponse.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Movie/IMoviesModel.java" afterPath="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Movie/IMovieModel.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Movie/IMoviesPresenter.java" afterPath="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Movie/IMoviePresenter.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Movie/IMoviesView.java" afterPath="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Movie/IMovieView.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Movie/MoviesModel.java" afterPath="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Movie/MovieModel.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Movie/MoviesPresenter.java" afterPath="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Movie/MoviePresenter.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileHashes.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileSnapshots.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/services/IraMoviesInfoAPIs.java" afterPath="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/services/IraMoviesInfoAPIs.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/services/IraMoviesWebAPIs.java" afterPath="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/services/IraMoviesWebAPIs.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/IRApplication.java" afterPath="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/IRApplication.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/local/storage/AppDatabase.java" afterPath="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/local/storage/AppDatabase.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/local/storage/dao/MovieDao.java" afterPath="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/local/storage/dao/MovieDao.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/activities/base/Home/HomeView.java" afterPath="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/activities/base/Home/HomeView.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Base/IRBaseFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Base/IRBaseFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Detail/IMovieDetailPresenter.java" afterPath="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Detail/IMovieDetailPresenter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Detail/IMovieDetailView.java" afterPath="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Detail/IMovieDetailView.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Detail/MovieDetailModel.java" afterPath="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Detail/MovieDetailModel.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Detail/MovieDetailPresenter.java" afterPath="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Detail/MovieDetailPresenter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Detail/MovieDetailView.java" afterPath="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Detail/MovieDetailView.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Favorite/FavoriteView.java" afterPath="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Favorite/FavoriteView.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Favorite/FavoritesModel.java" afterPath="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Favorite/FavoritesModel.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Favorite/FavoritesPresenter.java" afterPath="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Favorite/FavoritesPresenter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Favorite/IFavoritesModel.java" afterPath="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Favorite/IFavoritesModel.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Favorite/IFavoritesPresenter.java" afterPath="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Favorite/IFavoritesPresenter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Favorite/IFavoritesView.java" afterPath="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Favorite/IFavoritesView.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Favorite/adapter/FavoriteAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Favorite/adapter/FavoriteAdapter.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Movie/MovieView.java" afterPath="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Movie/MovieView.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Movie/adapter/MovieAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Movie/adapter/MovieAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_movies.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_movies.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_movie_list.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_movie_list.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/interfaces/IBasePresenter.java" afterPath="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/interfaces/IBasePresenter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_detail.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_detail.xml" />
     </list>
     <ignored path="IraMovies.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -76,15 +102,13 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="MovieView.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="MovieView.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Movie/MovieView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="632">
-              <caret line="200" column="39" selection-start-line="200" selection-start-column="39" selection-end-line="200" selection-end-column="39" />
+            <state relative-caret-position="344">
+              <caret line="56" column="19" selection-start-line="56" selection-start-column="19" selection-end-line="56" selection-end-column="19" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#3274#3275#0" expanded="true" />
-                <element signature="e#3306#3307#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -93,49 +117,16 @@
       <file leaf-file-name="MovieDetailView.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Detail/MovieDetailView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="741">
-              <caret line="119" column="42" selection-start-line="119" selection-start-column="42" selection-end-line="119" selection-end-column="42" />
+            <state relative-caret-position="576">
+              <caret line="163" column="35" selection-start-line="163" selection-start-column="35" selection-end-line="163" selection-end-column="35" />
               <folding>
                 <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MovieDetailPresenter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Detail/MovieDetailPresenter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="645">
-              <caret line="43" column="36" selection-start-line="43" selection-start-column="36" selection-end-line="43" selection-end-column="36" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#776#777#0" expanded="true" />
-                <element signature="e#821#822#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="IraMoviesWebAPIs.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/services/IraMoviesWebAPIs.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="525">
-              <caret line="58" column="42" selection-start-line="58" selection-start-column="42" selection-end-line="58" selection-end-column="42" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="IraMoviesInfoAPIs.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/services/IraMoviesInfoAPIs.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="24" column="56" selection-start-line="24" selection-start-column="56" selection-end-line="24" selection-end-column="56" />
-              <folding>
-                <element signature="e#1189#1190#0" expanded="true" />
-                <element signature="e#1239#1240#0" expanded="true" />
-                <element signature="e#1280#1281#0" expanded="true" />
-                <element signature="e#1311#1312#0" expanded="true" />
+                <element signature="e#5445#5446#0" expanded="true" />
+                <element signature="e#5484#5485#0" expanded="true" />
+                <element signature="e#5533#5534#0" expanded="true" />
+                <element signature="e#5575#5576#0" expanded="true" />
+                <element signature="e#5620#5621#0" expanded="true" />
+                <element signature="e#5658#5659#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -149,6 +140,7 @@
         <option value="Interface" />
         <option value="resourceFile" />
         <option value="layoutResourceFile_vertical" />
+        <option value="layoutResourceFile" />
         <option value="Class" />
       </list>
     </option>
@@ -1972,16 +1964,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/dialog/DialogSeekBar.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/dialog/ReleaseYearDialog.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/dialog_release_date.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/dialog/ReleaseDateDialog.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/dialog/DialogCategory.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_setting.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/dialog/DialogReleaseDate.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/dialog/DialogReleaseYear.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/local/storage/SessionManager.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/xml/settings_screen.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Setting/SettingView.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable/ic_search.xml" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
@@ -1994,15 +1976,12 @@
         <option value="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/views/MySearchView.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/menu/main_menu.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/activities/base/BaseView.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Base/IRBaseFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/utilities/Constants.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Favorite/FavoriteView.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/utilities/Utils.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Movie/MoviesModel.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Movie/adapter/MoviesAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Favorite/adapter/FavoritesAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Favorite/adapter/FavoriteAdapter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/activities/base/Home/HomeView.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/item_movie_thumbnail.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/item_card_view_thumbnail.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/item_card_view_small.xml" />
@@ -2011,18 +1990,31 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_movies.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/services/response/Movie.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Movie/adapter/MovieAdapter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Movie/MovieView.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Detail/IDetailView.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_detail.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Detail/DetailView.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Detail/DetailMoviePresenter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Detail/IMovieDetailPresenter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Detail/IMovieDetailModel.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Detail/MovieDetailView.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Detail/MovieDetailPresenter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Detail/MovieDetailModel.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/services/IraMoviesInfoAPIs.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/services/IraMoviesWebAPIs.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Movie/MoviesModel.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Movie/MovieModel.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/local/storage/entity/Movie.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/services/response/CastResponse.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/services/response/CrewResponse.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/services/IraMovieWebAPIs.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/services/response/CastAndCrewResponse.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Detail/MovieDetailModel.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Detail/IMovieDetailView.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Movie/bean/CastCrew.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Detail/adapter/MovieDetailAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Base/IRBaseFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/activities/base/Home/HomeView.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_detail.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/item_castcrew.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Detail/MovieDetailView.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Movie/MovieView.java" />
       </list>
     </option>
   </component>
@@ -2076,6 +2068,10 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
+      <pane id="PackagesPane" />
+      <pane id="ProjectPane" />
+      <pane id="Scope" />
       <pane id="AndroidView">
         <subPane>
           <PATH>
@@ -2345,6 +2341,74 @@
               <option name="myItemId" value="fragments" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Movie" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bean" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="IraMovies" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="iramovies" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ui" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fragments" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Movie" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="adapter" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="IraMovies" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="iramovies" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ui" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fragments" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -2373,6 +2437,40 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="Detail" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="IraMovies" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="iramovies" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ui" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fragments" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Detail" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="adapter" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -2536,41 +2634,86 @@
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="services" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="IraMovies" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="iramovies" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="storage" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="IraMovies" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="iramovies" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="storage" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="entity" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
-      <pane id="Scratches" />
-      <pane id="ProjectPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Research-about-RecyclerView_CardView" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../ViewPagerMultipleFragmentDemo/build.gradle" />
     <property name="device.picker.selection" value="RQ3002E9SP" />
     <property name="DEBUGGABLE_DEVICE" value="sony-f3116-RQ3002E9SP" />
     <property name="DEBUGGABLE_PROCESS" value="vn.enclave.iramovies" />
     <property name="SHOW_ALL_PROCESSES" value="false" />
     <property name="DEBUGGER_ID" value="Auto" />
-    <property name="SearchEverywhereHistoryKey" value="MovieView&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/fragments/Movie/MovieView.java&#10;DetailVie&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/fragments/Detail/MovieDetailView.java&#10;MovieVi&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/fragments/Movie/MovieView.java&#10;MovieAda&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/fragments/Movie/adapter/MovieAdapter.java&#10;MovieV&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/fragments/Movie/MovieView.java&#10;Movie&#9;PSI&#9;JAVA://vn.enclave.iramovies.services.response.Movie&#10;Cons&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/utilities/Constants.java&#10;SettinVi&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/fragments/Setting/SettingView.java&#10;Imov&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/res/layout/item_movie_list.xml&#10;movie_&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/res/layout/item_movie_list.xml&#10;fragment_Movi&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/res/layout/fragment_movies.xml&#10;IraMo&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/services/IraMoviesWebAPIs.java&#10;HomeVie&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/activities/base/Home/HomeView.java&#10;MovieVie&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/fragments/Movie/MovieView.java&#10;HomeVi&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/activities/base/Home/HomeView.java&#10;Fav&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/fragments/Favorite/adapter/FavoritesAdapter.java&#10;item_movi&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/res/layout/item_movie.xml&#10;IraM&#9;PSI&#9;JAVA://vn.enclave.iramovies.services.IraMoviesWebAPIs&#10;FavoriteAda&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/fragments/Favorite/adapter/FavoritesAdapter.java&#10;FavoriMo&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/fragments/Favorite/FavoritesModel.java&#10;MoviVi&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/fragments/Movie/MovieView.java&#10;FavoriteMo&#9;PSI&#9;JAVA://vn.enclave.iramovies.ui.fragments.Favorite.FavoritesModel&#10;HomVie&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/activities/base/Home/HomeView.java&#10;HomVi&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/activities/base/Home/HomeView.java&#10;MovieMO&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/fragments/Movie/MoviesModel.java&#10;MovieA&#9;PSI&#9;JAVA://vn.enclave.iramovies.ui.fragments.Movie.adapter.MoviesAdapter&#10;Utils&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/utilities/Utils.java&#10;SettinV&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/fragments/Setting/SettingView.java&#10;Dialog&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/dialog/DialogReleaseYear.java&#10;FavoriteA&#9;PSI&#9;JAVA://vn.enclave.iramovies.ui.fragments.Favorite.adapter.FavoritesAdapter&#10;FavoriteVi&#9;PSI&#9;JAVA://vn.enclave.iramovies.ui.fragments.Favorite.FavoriteView&#10;Favorite&#9;ACTION&#9;ActivateFavoritesToolWindow&#10;Strings&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/res/values/strings.xml&#10;strings&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/res/values/strings.xml&#10;sty&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/res/values/styles.xml&#10;Toolba&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/views/ToolbarLayout.java&#10;Str&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/res/values/strings.xml&#10;Setting&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/res/layout/fragment_setting.xml&#10;sett&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/res/layout/fragment_setting.xml&#10;Setti&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/fragments/Setting/SettingView.java&#10;String&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/res/values/strings.xml&#10;set&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/fragments/Setting/SettingView.java&#10;SettingV&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/fragments/Setting/SettingView.java&#10;Sett&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/fragments/Setting/SettingView.java&#10;cat&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/res/layout/category_dialog.xml&#10;SeekBa&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/views/SeekBarDialog.java&#10;strin&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/res/values/strings.xml&#10;cate&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/res/layout/category_dialog.xml&#10;string&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/res/values/strings.xml&#10;BaseVie&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/activities/base/BaseView.java" />
+    <property name="SearchEverywhereHistoryKey" value="MovieDet&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/fragments/Detail/MovieDetailView.java&#10;fragm&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/res/layout/fragment_detail.xml&#10;MovieV&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/fragments/Movie/MovieView.java&#10;HomeView&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/activities/base/Home/HomeView.java&#10;MovieView&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/fragments/Movie/MovieView.java&#10;MovieAda&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/fragments/Movie/adapter/MovieAdapter.java&#10;itemCa&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/res/layout/item_castcrew.xml&#10;MovieDe&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/fragments/Detail/adapter/MovieDetailAdapter.java&#10;MovieVi&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/fragments/Movie/MovieView.java&#10;Ira&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/services/IraMovieInfoAPIs.java&#10;Constan&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/utilities/Constants.java&#10;MovieMo&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/fragments/Movie/MovieModel.java&#10;MovieMod&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/fragments/Movie/MoviesModel.java&#10;DetailVie&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/fragments/Detail/MovieDetailView.java&#10;Movie&#9;PSI&#9;JAVA://vn.enclave.iramovies.services.response.Movie&#10;Cons&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/utilities/Constants.java&#10;SettinVi&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/fragments/Setting/SettingView.java&#10;Imov&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/res/layout/item_movie_list.xml&#10;movie_&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/res/layout/item_movie_list.xml&#10;fragment_Movi&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/res/layout/fragment_movies.xml&#10;IraMo&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/services/IraMoviesWebAPIs.java&#10;HomeVie&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/activities/base/Home/HomeView.java&#10;MovieVie&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/fragments/Movie/MovieView.java&#10;HomeVi&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/activities/base/Home/HomeView.java&#10;Fav&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/fragments/Favorite/adapter/FavoritesAdapter.java&#10;item_movi&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/res/layout/item_movie.xml&#10;IraM&#9;PSI&#9;JAVA://vn.enclave.iramovies.services.IraMoviesWebAPIs&#10;FavoriteAda&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/fragments/Favorite/adapter/FavoritesAdapter.java&#10;FavoriMo&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/fragments/Favorite/FavoritesModel.java&#10;MoviVi&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/fragments/Movie/MovieView.java&#10;FavoriteMo&#9;PSI&#9;JAVA://vn.enclave.iramovies.ui.fragments.Favorite.FavoritesModel&#10;HomVie&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/activities/base/Home/HomeView.java&#10;HomVi&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/activities/base/Home/HomeView.java&#10;MovieMO&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/fragments/Movie/MoviesModel.java&#10;MovieA&#9;PSI&#9;JAVA://vn.enclave.iramovies.ui.fragments.Movie.adapter.MoviesAdapter&#10;Utils&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/utilities/Utils.java&#10;SettinV&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/fragments/Setting/SettingView.java&#10;Dialog&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/dialog/DialogReleaseYear.java&#10;FavoriteA&#9;PSI&#9;JAVA://vn.enclave.iramovies.ui.fragments.Favorite.adapter.FavoritesAdapter&#10;FavoriteVi&#9;PSI&#9;JAVA://vn.enclave.iramovies.ui.fragments.Favorite.FavoriteView&#10;Favorite&#9;ACTION&#9;ActivateFavoritesToolWindow&#10;Strings&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/res/values/strings.xml&#10;strings&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/res/values/strings.xml&#10;sty&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/res/values/styles.xml&#10;Toolba&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/views/ToolbarLayout.java&#10;Str&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/res/values/strings.xml&#10;Setting&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/res/layout/fragment_setting.xml&#10;sett&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/res/layout/fragment_setting.xml&#10;Setti&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/fragments/Setting/SettingView.java&#10;String&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/res/values/strings.xml" />
     <property name="VectorAssetImportPath" value="$PROJECT_DIR$/.." />
   </component>
   <component name="RecentsManager">
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="vn.enclave.iramovies.ui.fragments.Detail" />
-    </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="vn.enclave.iramovies.ui.dialog" />
-    </key>
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="vn.enclave.iramovies.ui.activities.base.Home" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/app/src/main/res/layout" />
       <recent name="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="vn.enclave.iramovies.services.response" />
+      <recent name="vn.enclave.iramovies.ui.fragments.Detail" />
+    </key>
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="vn.enclave.iramovies.ui.activities.base.Home" />
     </key>
   </component>
   <component name="RunManager" selected="Android App.app">
@@ -2910,8 +3053,8 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.62903225" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3548922" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32943678" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3268817" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -2919,16 +3062,16 @@
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2039801" sideWeight="0.49569893" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32903227" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Dynamic Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32946378" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.56344086" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17412935" sideWeight="0.5043011" order="5" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.55376345" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Dynamic Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32946378" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
@@ -2946,73 +3089,11 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="81" />
+      <option name="time" value="96" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/ic_search.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="31" selection-start-line="6" selection-start-column="31" selection-end-line="6" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/wrapper/dists/gradle-2.14.1-all/caches/modules-2/files-2.1/com.android.support/appcompat-v7/26.0.0/52a072bbbbf0671dee246ed97d4d11c000cd1e1/appcompat-v7-26.0.0-sources.jar!/android/support/v7/widget/Toolbar.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="382">
-          <caret line="960" column="33" selection-start-line="960" selection-start-column="19" selection-end-line="960" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/ic_menu.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="30" column="11" selection-start-line="30" selection-start-column="11" selection-end-line="30" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-manifest">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/styles.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" column="92" selection-start-line="20" selection-start-column="92" selection-end-line="20" selection-end-column="92" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/toolbar.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="22" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="765">
-          <caret line="67" column="29" selection-start-line="67" selection-start-column="29" selection-end-line="67" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/views/MySearchView.java" />
     <entry file="file://$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/views/ToolbarLayout.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1080">
@@ -3081,16 +3162,6 @@
         <state relative-caret-position="-54">
           <caret line="14" column="2" selection-start-line="14" selection-start-column="2" selection-end-line="14" selection-end-column="2" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Base/IRBaseFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="7" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3170,17 +3241,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/item_card_view_thumbnail.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="4" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/item_movie_thumbnail.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
@@ -3192,45 +3252,15 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/item_card_view_small.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="311">
-          <caret line="47" column="12" selection-start-line="47" selection-start-column="12" selection-end-line="48" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/item_movie_list.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="36" selection-start-line="17" selection-start-column="36" selection-end-line="17" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_movies.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
           <caret line="4" column="41" selection-start-line="4" selection-start-column="41" selection-end-line="4" selection-end-column="41" />
           <folding />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/utilities/Constants.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
-          <folding />
-        </state>
+      <provider editor-type-id="android-designer2">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Setting/SettingView.java">
@@ -3241,50 +3271,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/services/response/Movie.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="550">
-          <caret line="142" column="49" selection-start-line="142" selection-start-column="49" selection-end-line="142" selection-end-column="49" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Movie/adapter/MovieAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="279">
-          <caret line="186" column="92" selection-start-line="186" selection-start-column="92" selection-end-line="186" selection-end-column="92" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#9665#9666#0" expanded="true" />
-            <element signature="e#9715#9716#0" expanded="true" />
-            <element signature="e#10994#10995#0" expanded="true" />
-            <element signature="e#11029#11030#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Detail/IMovieDetailView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="3" selection-start-line="7" selection-start-column="3" selection-end-line="7" selection-end-column="3" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_detail.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="246">
-          <caret line="123" column="50" selection-start-line="123" selection-start-column="50" selection-end-line="123" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Movie/IMoviesPresenter.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Movie/IMoviePresenter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
           <caret line="11" column="17" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="17" />
@@ -3292,80 +3279,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Detail/IMovieDetailPresenter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" column="4" selection-start-line="19" selection-start-column="4" selection-end-line="19" selection-end-column="44" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/activities/base/Home/HomeView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="601">
-          <caret line="392" column="27" selection-start-line="392" selection-start-column="27" selection-end-line="392" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Movie/MoviesPresenter.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Movie/MoviePresenter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="660">
           <caret line="61" column="44" selection-start-line="61" selection-start-column="12" selection-end-line="61" selection-end-column="44" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Movie/MoviesModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="29" column="4" selection-start-line="29" selection-start-column="4" selection-end-line="53" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Movie/MovieView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="632">
-          <caret line="200" column="39" selection-start-line="200" selection-start-column="39" selection-end-line="200" selection-end-column="39" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#3274#3275#0" expanded="true" />
-            <element signature="e#3306#3307#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Detail/MovieDetailView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="741">
-          <caret line="119" column="42" selection-start-line="119" selection-start-column="42" selection-end-line="119" selection-end-column="42" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Detail/MovieDetailPresenter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="645">
-          <caret line="43" column="36" selection-start-line="43" selection-start-column="36" selection-end-line="43" selection-end-column="36" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#776#777#0" expanded="true" />
-            <element signature="e#821#822#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Detail/MovieDetailModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="29" column="21" selection-start-line="29" selection-start-column="21" selection-end-line="29" selection-end-column="21" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -3380,23 +3297,297 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/services/IraMoviesWebAPIs.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/local/storage/entity/Movie.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="58" column="42" selection-start-line="58" selection-start-column="42" selection-end-line="58" selection-end-column="42" />
+        <state relative-caret-position="420">
+          <caret line="40" column="0" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/services/IraMoviesInfoAPIs.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/item_movie_list.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="24" column="56" selection-start-line="24" selection-start-column="56" selection-end-line="24" selection-end-column="56" />
+        <state relative-caret-position="315">
+          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/item_card_view_small.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="825">
+          <caret line="55" column="48" selection-start-line="55" selection-start-column="48" selection-end-line="55" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/wrapper/dists/gradle-2.14.1-all/caches/modules-2/files-2.1/com.squareup.retrofit2/retrofit/2.1.0/3564ebef90ac75e61ed65ab9af0f422ce92d4afa/retrofit-2.1.0-sources.jar!/retrofit2/Callback.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="435">
+          <caret line="43" column="7" selection-start-line="43" selection-start-column="7" selection-end-line="43" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/services/response/CastResponse.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="630">
+          <caret line="42" column="31" selection-start-line="42" selection-start-column="31" selection-end-line="42" selection-end-column="31" />
           <folding>
-            <element signature="e#1189#1190#0" expanded="true" />
-            <element signature="e#1239#1240#0" expanded="true" />
-            <element signature="e#1280#1281#0" expanded="true" />
-            <element signature="e#1311#1312#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/services/response/CrewResponse.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="4" selection-start-line="12" selection-start-column="4" selection-end-line="14" selection-end-column="28" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#752#753#0" expanded="true" />
+            <element signature="e#783#784#0" expanded="true" />
+            <element signature="e#831#832#0" expanded="true" />
+            <element signature="e#871#872#0" expanded="true" />
+            <element signature="e#908#909#0" expanded="true" />
+            <element signature="e#941#942#0" expanded="true" />
+            <element signature="e#993#994#0" expanded="true" />
+            <element signature="e#1037#1038#0" expanded="true" />
+            <element signature="e#1071#1072#0" expanded="true" />
+            <element signature="e#1100#1101#0" expanded="true" />
+            <element signature="e#1145#1146#0" expanded="true" />
+            <element signature="e#1181#1182#0" expanded="true" />
+            <element signature="e#1211#1212#0" expanded="true" />
+            <element signature="e#1236#1237#0" expanded="true" />
+            <element signature="e#1273#1274#0" expanded="true" />
+            <element signature="e#1301#1302#0" expanded="true" />
+            <element signature="e#1331#1332#0" expanded="true" />
+            <element signature="e#1357#1358#0" expanded="true" />
+            <element signature="e#1395#1396#0" expanded="true" />
+            <element signature="e#1425#1426#0" expanded="true" />
+            <element signature="e#1456#1457#0" expanded="true" />
+            <element signature="e#1483#1484#0" expanded="true" />
+            <element signature="e#1523#1524#0" expanded="true" />
+            <element signature="e#1555#1556#0" expanded="true" />
+            <element signature="e#1593#1594#0" expanded="true" />
+            <element signature="e#1627#1628#0" expanded="true" />
+            <element signature="e#1681#1682#0" expanded="true" />
+            <element signature="e#1727#1728#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/services/IraMovieWebAPIs.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="441">
+          <caret line="60" column="27" selection-start-line="60" selection-start-column="27" selection-end-line="60" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/services/response/MovieResponse.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" column="4" selection-start-line="20" selection-start-column="4" selection-end-line="22" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/services/response/CastAndCrewResponse.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="32" column="5" selection-start-line="32" selection-start-column="5" selection-end-line="32" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#499#500#0" expanded="true" />
+            <element signature="e#524#525#0" expanded="true" />
+            <element signature="e#561#562#0" expanded="true" />
+            <element signature="e#589#590#0" expanded="true" />
+            <element signature="e#632#633#0" expanded="true" />
+            <element signature="e#659#660#0" expanded="true" />
+            <element signature="e#711#712#0" expanded="true" />
+            <element signature="e#743#744#0" expanded="true" />
+            <element signature="e#786#787#0" expanded="true" />
+            <element signature="e#813#814#0" expanded="true" />
+            <element signature="e#865#866#0" expanded="true" />
+            <element signature="e#897#898#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Movie/MovieModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="81" column="82" selection-start-line="81" selection-start-column="24" selection-end-line="81" selection-end-column="82" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/services/IraMovieInfoAPIs.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="435">
+          <caret line="29" column="77" selection-start-line="29" selection-start-column="77" selection-end-line="29" selection-end-column="77" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/utilities/Constants.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="111">
+          <caret line="14" column="46" selection-start-line="14" selection-start-column="46" selection-end-line="14" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Detail/IMovieDetailPresenter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" column="1" selection-start-line="20" selection-start-column="1" selection-end-line="20" selection-end-column="1" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Detail/MovieDetailPresenter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="392">
+          <caret line="46" column="29" selection-start-line="46" selection-start-column="29" selection-end-line="46" selection-end-column="29" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Detail/IMovieDetailView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="28" selection-start-line="9" selection-start-column="28" selection-end-line="9" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Detail/MovieDetailModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="576">
+          <caret line="66" column="51" selection-start-line="66" selection-start-column="51" selection-end-line="66" selection-end-column="51" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2202#2246#0" expanded="true" />
+            <element signature="e#2434#2478#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/item_card_view_thumbnail.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="33" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Movie/bean/CastCrew.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="52" selection-start-line="12" selection-start-column="52" selection-end-line="12" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Movie/adapter/MovieAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1530">
+          <caret line="115" column="20" selection-start-line="115" selection-start-column="20" selection-end-line="115" selection-end-column="87" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/activities/base/Home/HomeView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="727">
+          <caret line="407" column="0" selection-start-line="407" selection-start-column="0" selection-end-line="407" selection-end-column="0" />
+          <folding>
+            <element signature="e#17763#17764#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/item_castcrew.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="26" column="37" selection-start-line="26" selection-start-column="37" selection-end-line="26" selection-end-column="37" />
+          <folding>
+            <element signature="e#556#574#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Detail/adapter/MovieDetailAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="186">
+          <caret line="38" column="0" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Base/IRBaseFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="33" column="16" selection-start-line="33" selection-start-column="16" selection-end-line="33" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_detail.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1770">
+          <caret line="118" column="35" selection-start-line="118" selection-start-column="35" selection-end-line="118" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Detail/MovieDetailView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="576">
+          <caret line="163" column="35" selection-start-line="163" selection-start-column="35" selection-end-line="163" selection-end-column="35" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#5445#5446#0" expanded="true" />
+            <element signature="e#5484#5485#0" expanded="true" />
+            <element signature="e#5533#5534#0" expanded="true" />
+            <element signature="e#5575#5576#0" expanded="true" />
+            <element signature="e#5620#5621#0" expanded="true" />
+            <element signature="e#5658#5659#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Movie/MovieView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="344">
+          <caret line="56" column="19" selection-start-line="56" selection-start-column="19" selection-end-line="56" selection-end-column="19" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

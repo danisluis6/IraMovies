@@ -9,7 +9,7 @@ import android.arch.persistence.room.Update;
 import java.util.List;
 
 import vn.enclave.iramovies.local.storage.DatabaseInfo;
-import vn.enclave.iramovies.services.response.Movie;
+import vn.enclave.iramovies.local.storage.entity.Movie;
 
 /**
  *

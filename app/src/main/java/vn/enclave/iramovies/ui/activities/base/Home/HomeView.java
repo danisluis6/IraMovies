@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -22,7 +23,6 @@ import android.view.View;
 import android.view.animation.TranslateAnimation;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -31,7 +31,7 @@ import java.util.Vector;
 
 import butterknife.BindView;
 import vn.enclave.iramovies.R;
-import vn.enclave.iramovies.services.response.Movie;
+import vn.enclave.iramovies.local.storage.entity.Movie;
 import vn.enclave.iramovies.ui.activities.base.BaseView;
 import vn.enclave.iramovies.ui.activities.base.Home.adapters.PaperAdapter;
 import vn.enclave.iramovies.ui.fragments.About.AboutView;
@@ -401,5 +401,10 @@ public class HomeView extends BaseView {
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         return displayMetrics.widthPixels - 32;
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }

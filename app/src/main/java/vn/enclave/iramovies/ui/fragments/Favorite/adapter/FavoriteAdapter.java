@@ -17,8 +17,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import vn.enclave.iramovies.R;
-import vn.enclave.iramovies.services.IraMoviesInfoAPIs;
-import vn.enclave.iramovies.services.response.Movie;
+import vn.enclave.iramovies.services.IraMovieInfoAPIs;
+import vn.enclave.iramovies.local.storage.entity.Movie;
 import vn.enclave.iramovies.ui.activities.base.BaseView;
 import vn.enclave.iramovies.utilities.Constants;
 import vn.enclave.iramovies.utilities.OverrideFonts;
@@ -75,7 +75,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
         holder.imvFavorite.setImageResource((movie.getFavorite() == Constants.Favorites.FAVORITE) ? R.drawable.ic_star_picked : R.drawable.ic_star);
         holder.imvFavorite.setTag(mFilterMovies.get(mPosition));
 
-        String poster = IraMoviesInfoAPIs.Images.Thumbnail + movie.getBackdropPath();
+        String poster = IraMovieInfoAPIs.Images.Thumbnail + movie.getBackdropPath();
         Glide.with(mContext)
                 .load(poster)
                 .placeholder(R.drawable.load)

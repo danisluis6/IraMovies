@@ -4,7 +4,7 @@ import android.content.Context;
 
 import java.util.List;
 
-import vn.enclave.iramovies.services.response.Movie;
+import vn.enclave.iramovies.local.storage.entity.Movie;
 
 /**
  *

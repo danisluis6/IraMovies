@@ -4,14 +4,14 @@ import android.content.Context;
 
 import java.util.List;
 
-import vn.enclave.iramovies.services.response.Movie;
+import vn.enclave.iramovies.local.storage.entity.Movie;
 
 /**
  *
  * Created by lorence on 13/11/2017.
  */
 
-public class MoviesPresenter implements IMoviesPresenter {
+public class MoviePresenter implements IMoviePresenter {
 
     /**
      * Context
@@ -21,21 +21,21 @@ public class MoviesPresenter implements IMoviesPresenter {
     /**
      * IInboxView
      */
-    private IMoviesView mIMoviesView;
+    private IMovieView mIMoviesView;
 
     /**
      * IInboxModel
      */
-    private IMoviesModel mMovieModel;
+    private IMovieModel mMovieModel;
 
-    MoviesPresenter(Context context) {
+    MoviePresenter(Context context) {
         this.mContext = context;
-        mMovieModel = new MoviesModel(mContext);
+        mMovieModel = new MovieModel(mContext);
         mMovieModel.attachView(this);
     }
 
     @Override
-    public void attachView(IMoviesView view) {
+    public void attachView(IMovieView view) {
         this.mIMoviesView = view;
     }
 

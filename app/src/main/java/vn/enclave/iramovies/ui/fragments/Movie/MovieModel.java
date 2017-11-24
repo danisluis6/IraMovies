@@ -15,9 +15,9 @@ import vn.enclave.iramovies.IRApplication;
 import vn.enclave.iramovies.R;
 import vn.enclave.iramovies.local.storage.AppDatabase;
 import vn.enclave.iramovies.local.storage.SessionManager;
-import vn.enclave.iramovies.services.IraMoviesWebAPIs;
-import vn.enclave.iramovies.services.response.Movie;
-import vn.enclave.iramovies.services.response.MoviesResponse;
+import vn.enclave.iramovies.services.IraMovieWebAPIs;
+import vn.enclave.iramovies.local.storage.entity.Movie;
+import vn.enclave.iramovies.services.response.MovieResponse;
 import vn.enclave.iramovies.utilities.Constants;
 
 /**
@@ -25,7 +25,7 @@ import vn.enclave.iramovies.utilities.Constants;
  * Created by lorence on 13/11/2017.
  */
 
-class MoviesModel implements IMoviesModel {
+class MovieModel implements IMovieModel {
 
     /**
      * Context
@@ -33,28 +33,28 @@ class MoviesModel implements IMoviesModel {
     private final Context mContext;
 
     /**
-     * IMoviesPresenter
+     * IMoviePresenter
      */
-    private IMoviesPresenter mIMoviesPresenter;
+    private IMoviePresenter mIMoviesPresenter;
 
     /**
-     * IraMoviesWebAPIs
+     * IraMovieWebAPIs
      */
-    private IraMoviesWebAPIs mApiService;
+    private IraMovieWebAPIs mApiService;
 
     /**
      * AppDatabase
      */
     private AppDatabase mAppDatabase;
 
-    MoviesModel(Context context) {
+    MovieModel(Context context) {
         this.mContext = context;
         mApiService = IRApplication.getInstance().getEzFaxingWebAPIs();
         mAppDatabase = Room.databaseBuilder(mContext, AppDatabase.class, AppDatabase.DB_NAME).build();
     }
 
     @Override
-    public void attachView(IMoviesPresenter view) {
+    public void attachView(IMoviePresenter view) {
         mIMoviesPresenter = view;
     }
 
@@ -72,12 +72,12 @@ class MoviesModel implements IMoviesModel {
     }
 
     private void getListNowPlayingMovies(int mPageIndex) {
-        Call<MoviesResponse> call = mApiService.getNowPlayingMovies(BuildConfig.THE_MOVIE_DB_API_TOKEN, mPageIndex);
-        call.enqueue(new Callback<MoviesResponse>() {
+        Call<MovieResponse> call = mApiService.getNowPlayingMovies(BuildConfig.THE_MOVIE_DB_API_TOKEN, mPageIndex);
+        call.enqueue(new Callback<MovieResponse>() {
             @Override
-            public void onResponse(Call<MoviesResponse> call, Response<MoviesResponse> response) {
+            public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
                 if (response.isSuccessful()) {
-                    MoviesResponse moviesResponse = response.body();
+                    MovieResponse moviesResponse = response.body();
                     if (moviesResponse != null) {
                         List<Movie> grouMoviesDatas = moviesResponse.getResults();
                         mIMoviesPresenter.onSuccess(updateStatusFavorite(grouMoviesDatas));
@@ -89,19 +89,19 @@ class MoviesModel implements IMoviesModel {
             }
 
             @Override
-            public void onFailure(Call<MoviesResponse> call, Throwable t) {
+            public void onFailure(Call<MovieResponse> call, Throwable t) {
                 mIMoviesPresenter.onFailure(mContext.getString(R.string.cannot_get_data));
             }
         });
     }
 
     private void getListUpcomingMovies(int mPageIndex) {
-        Call<MoviesResponse> call = mApiService.getUpcomingMovies(BuildConfig.THE_MOVIE_DB_API_TOKEN, mPageIndex);
-        call.enqueue(new Callback<MoviesResponse>() {
+        Call<MovieResponse> call = mApiService.getUpcomingMovies(BuildConfig.THE_MOVIE_DB_API_TOKEN, mPageIndex);
+        call.enqueue(new Callback<MovieResponse>() {
             @Override
-            public void onResponse(Call<MoviesResponse> call, Response<MoviesResponse> response) {
+            public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
                 if (response.isSuccessful()) {
-                    MoviesResponse moviesResponse = response.body();
+                    MovieResponse moviesResponse = response.body();
                     if (moviesResponse != null) {
                         List<Movie> grouMoviesDatas = moviesResponse.getResults();
                         mIMoviesPresenter.onSuccess(updateStatusFavorite(grouMoviesDatas));
@@ -113,19 +113,19 @@ class MoviesModel implements IMoviesModel {
             }
 
             @Override
-            public void onFailure(Call<MoviesResponse> call, Throwable t) {
+            public void onFailure(Call<MovieResponse> call, Throwable t) {
                 mIMoviesPresenter.onFailure(mContext.getString(R.string.cannot_get_data));
             }
         });
     }
 
     private void getListTopRatedMovies(int mPageIndex) {
-        Call<MoviesResponse> call = mApiService.getTopRatedMovies(BuildConfig.THE_MOVIE_DB_API_TOKEN, mPageIndex);
-        call.enqueue(new Callback<MoviesResponse>() {
+        Call<MovieResponse> call = mApiService.getTopRatedMovies(BuildConfig.THE_MOVIE_DB_API_TOKEN, mPageIndex);
+        call.enqueue(new Callback<MovieResponse>() {
             @Override
-            public void onResponse(Call<MoviesResponse> call, Response<MoviesResponse> response) {
+            public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
                 if (response.isSuccessful()) {
-                    MoviesResponse moviesResponse = response.body();
+                    MovieResponse moviesResponse = response.body();
                     if (moviesResponse != null) {
                         List<Movie> grouMoviesDatas = moviesResponse.getResults();
                         mIMoviesPresenter.onSuccess(updateStatusFavorite(grouMoviesDatas));
@@ -137,19 +137,19 @@ class MoviesModel implements IMoviesModel {
             }
 
             @Override
-            public void onFailure(Call<MoviesResponse> call, Throwable t) {
+            public void onFailure(Call<MovieResponse> call, Throwable t) {
                 mIMoviesPresenter.onFailure(mContext.getString(R.string.cannot_get_data));
             }
         });
     }
 
     private void getListPopularMovies(int mPageIndex) {
-        Call<MoviesResponse> call = mApiService.getPopularMovies(BuildConfig.THE_MOVIE_DB_API_TOKEN, mPageIndex);
-        call.enqueue(new Callback<MoviesResponse>() {
+        Call<MovieResponse> call = mApiService.getPopularMovies(BuildConfig.THE_MOVIE_DB_API_TOKEN, mPageIndex);
+        call.enqueue(new Callback<MovieResponse>() {
             @Override
-            public void onResponse(Call<MoviesResponse> call, Response<MoviesResponse> response) {
+            public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
                 if (response.isSuccessful()) {
-                    MoviesResponse moviesResponse = response.body();
+                    MovieResponse moviesResponse = response.body();
                     if (moviesResponse != null) {
                         List<Movie> grouMoviesDatas = moviesResponse.getResults();
                         updateStatusFavorite(grouMoviesDatas);
@@ -161,7 +161,7 @@ class MoviesModel implements IMoviesModel {
             }
 
             @Override
-            public void onFailure(Call<MoviesResponse> call, Throwable t) {
+            public void onFailure(Call<MovieResponse> call, Throwable t) {
                 mIMoviesPresenter.onFailure(mContext.getString(R.string.cannot_get_data));
             }
         });

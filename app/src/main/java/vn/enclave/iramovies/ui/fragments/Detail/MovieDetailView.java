@@ -1,6 +1,8 @@
 package vn.enclave.iramovies.ui.fragments.Detail;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,20 +12,29 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import vn.enclave.iramovies.R;
 import vn.enclave.iramovies.local.storage.DatabaseInfo;
-import vn.enclave.iramovies.services.IraMoviesInfoAPIs;
-import vn.enclave.iramovies.services.response.Movie;
+import vn.enclave.iramovies.local.storage.entity.Movie;
+import vn.enclave.iramovies.services.IraMovieInfoAPIs;
+import vn.enclave.iramovies.services.response.CastAndCrewResponse;
 import vn.enclave.iramovies.ui.fragments.Base.IRBaseFragment;
-import vn.enclave.iramovies.ui.fragments.Movie.MoviesPresenter;
+import vn.enclave.iramovies.ui.fragments.Detail.adapter.MovieDetailAdapter;
+import vn.enclave.iramovies.ui.fragments.Movie.bean.CastCrew;
 import vn.enclave.iramovies.utilities.Constants;
 
 /**
  *
  * Created by lorence on 23/11/2017.
+ */
+
+/**
+ * @Run: https://stackoverflow.com/questions/13418436/android-4-2-back-stack-behaviour-with-nested-fragments
+ * => Done
+ *
  */
 
 public class MovieDetailView extends IRBaseFragment implements IMovieDetailView {
@@ -76,7 +87,7 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
         tvReleaseDate.setText(movie.getReleaseDate());
         tvRating.setText(String.valueOf(movie.getVoteAverage()));
         tvOverview.setText(movie.getOverview());
-        String poster = IraMoviesInfoAPIs.Images.Thumbnail + movie.getPosterPath();
+        String poster = IraMovieInfoAPIs.Images.Thumbnail + movie.getPosterPath();
         Glide.with(mActivity)
                 .load(poster)
                 .placeholder(R.drawable.load)
@@ -107,8 +118,26 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
     }
 
     @Override
-    public void onSuccess(List<Movie> movies) {
-        // TODO
+    public void onSuccess(CastAndCrewResponse castAndCrewResponse) {
+        loadCastAndCrew(getPathOfCastAndCrew(castAndCrewResponse));
+    }
+
+    private void loadCastAndCrew(List<CastCrew> castCrewList) {
+        MovieDetailAdapter movieDetailAdapter = new MovieDetailAdapter(mActivity, mActivity, castCrewList);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(mActivity, LinearLayoutManager.HORIZONTAL, false);
+        rcvCast.setLayoutManager(mLayoutManager);
+        rcvCast.setAdapter(movieDetailAdapter);
+    }
+
+    private List<CastCrew> getPathOfCastAndCrew(CastAndCrewResponse castAndCrewResponse) {
+        List<CastCrew> mCastCrews = new ArrayList<>();
+        for (int i = 0; i < castAndCrewResponse.getCast().size(); i++) {
+            mCastCrews.add(new CastCrew(castAndCrewResponse.getCast().get(i).getName(), castAndCrewResponse.getCast().get(i).getProfilePath()));
+        }
+        for (int j = 0; j < castAndCrewResponse.getCrew().size(); j++) {
+            mCastCrews.add(new CastCrew(castAndCrewResponse.getCrew().get(j).getName(), castAndCrewResponse.getCrew().get(j).getProfilePath()));
+        }
+        return mCastCrews;
     }
 
     @Override
@@ -118,5 +147,31 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
 
     public void getCastAndCrew() {
         mDetailMoviePresenter.getCastAndCrewFromApi(getMovie().getId());
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        return super.onCreateView(inflater, container, savedInstanceState);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView(); // 1
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy(); // 2
+    }
+
+    @Override
+    public void onDetach() {
+
+        super.onDetach(); // 3
     }
 }

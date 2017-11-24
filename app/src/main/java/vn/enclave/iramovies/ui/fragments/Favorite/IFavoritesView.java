@@ -2,7 +2,7 @@ package vn.enclave.iramovies.ui.fragments.Favorite;
 
 import java.util.List;
 
-import vn.enclave.iramovies.services.response.Movie;
+import vn.enclave.iramovies.local.storage.entity.Movie;
 
 /**
  *

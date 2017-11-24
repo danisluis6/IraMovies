@@ -15,7 +15,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import vn.enclave.iramovies.R;
-import vn.enclave.iramovies.services.response.Movie;
+import vn.enclave.iramovies.local.storage.entity.Movie;
 import vn.enclave.iramovies.ui.fragments.Base.IRBaseFragment;
 import vn.enclave.iramovies.ui.fragments.Favorite.adapter.FavoriteAdapter;
 import vn.enclave.iramovies.ui.views.FailureLayout;

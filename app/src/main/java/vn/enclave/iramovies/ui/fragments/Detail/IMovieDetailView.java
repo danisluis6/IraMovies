@@ -1,8 +1,6 @@
 package vn.enclave.iramovies.ui.fragments.Detail;
 
-import java.util.List;
-
-import vn.enclave.iramovies.services.response.Movie;
+import vn.enclave.iramovies.services.response.CastAndCrewResponse;
 
 /**
  *
@@ -11,7 +9,7 @@ import vn.enclave.iramovies.services.response.Movie;
 
 interface IMovieDetailView {
 
-    void onSuccess(List<Movie> movies);
+    void onSuccess(CastAndCrewResponse castAndCrewResponse);
 
     void onFailure(String message);
 }

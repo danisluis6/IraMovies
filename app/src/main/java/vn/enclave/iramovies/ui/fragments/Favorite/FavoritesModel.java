@@ -10,8 +10,8 @@ import java.util.List;
 import vn.enclave.iramovies.IRApplication;
 import vn.enclave.iramovies.R;
 import vn.enclave.iramovies.local.storage.AppDatabase;
-import vn.enclave.iramovies.services.IraMoviesWebAPIs;
-import vn.enclave.iramovies.services.response.Movie;
+import vn.enclave.iramovies.services.IraMovieWebAPIs;
+import vn.enclave.iramovies.local.storage.entity.Movie;
 
 /**
  *
@@ -31,9 +31,9 @@ public class FavoritesModel implements IFavoritesModel {
     private IFavoritesPresenter mIFavoritesPresenter;
 
     /**
-     * IraMoviesWebAPIs
+     * IraMovieWebAPIs
      */
-    private IraMoviesWebAPIs mApiService;
+    private IraMovieWebAPIs mApiService;
 
     /**
      * AppDatabase

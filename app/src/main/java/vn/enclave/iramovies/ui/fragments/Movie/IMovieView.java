@@ -2,14 +2,14 @@ package vn.enclave.iramovies.ui.fragments.Movie;
 
 import java.util.List;
 
-import vn.enclave.iramovies.services.response.Movie;
+import vn.enclave.iramovies.local.storage.entity.Movie;
 
 /**
  *
  * Created by lorence on 13/11/2017.
  */
 
-public interface IMoviesView {
+public interface IMovieView {
 
     void showProgressDialog(boolean isLoadMore);
 

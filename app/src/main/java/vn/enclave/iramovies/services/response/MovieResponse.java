@@ -5,12 +5,14 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
+import vn.enclave.iramovies.local.storage.entity.Movie;
+
 /**
  *
  * Created by lorence on 13/11/2017.
  */
 
-public class MoviesResponse {
+public class MovieResponse {
 
     @SerializedName("page")
     @Expose

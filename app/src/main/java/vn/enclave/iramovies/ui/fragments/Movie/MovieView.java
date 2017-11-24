@@ -24,7 +24,7 @@ import butterknife.BindView;
 import vn.enclave.iramovies.R;
 import vn.enclave.iramovies.local.storage.DatabaseInfo;
 import vn.enclave.iramovies.local.storage.SessionManager;
-import vn.enclave.iramovies.services.response.Movie;
+import vn.enclave.iramovies.local.storage.entity.Movie;
 import vn.enclave.iramovies.ui.fragments.Base.IRBaseFragment;
 import vn.enclave.iramovies.ui.fragments.Detail.MovieDetailView;
 import vn.enclave.iramovies.ui.fragments.Movie.adapter.MovieAdapter;
@@ -37,15 +37,27 @@ import vn.enclave.iramovies.utilities.Utils;
  *
  * @Run: Apply Mode-View_Presenter : MVP
  * => Done
+ *
  * @Run: https://stackoverflow.com/questions/28494637/android-how-to-stop-refreshing-fragments-on-tab-change
  * => Done
+ *
  * @Run: https://www.coderefer.com/android-recyclerview-cardview-tutorial/
  * => @TODO
+ *
  * @Run: http://pointofandroid.blogspot.com/2016/12/recyclerviewhorizontal-and-vertical.html
  * => Done
+ *
+ * @Run: https://www.youtube.com/results?search_query=nested+fragment+viewpager
+ * => nested fragment viewpager
+ *
+ * @Run: https://stackoverflow.com/questions/39491655/communication-between-nested-fragments-in-android
+ * => Communicate between nested fragments
+ *
+ * @Run: https://tausiq.wordpress.com/2014/06/06/android-multiple-fragments-stack-in-each-viewpager-tab/
+ * => Research More
  */
 
-public class MovieView extends IRBaseFragment implements IMoviesView {
+public class MovieView extends IRBaseFragment implements IMovieView {
 
     @BindView(R.id.failureLayout)
     public FailureLayout mFailureLayout;
@@ -62,7 +74,7 @@ public class MovieView extends IRBaseFragment implements IMoviesView {
     /**
      * Work with MVP
      */
-    private MoviesPresenter mMoviesPresenter;
+    private MoviePresenter mMoviesPresenter;
     /**
      * Work with load more
      */
@@ -126,7 +138,7 @@ public class MovieView extends IRBaseFragment implements IMoviesView {
                 public void openDetailMovie(Movie movie) {
                     MovieDetailView mDetailView = new MovieDetailView();
                     mDetailView.setArguments(getMovieBundle(movie));
-                    switchDetailMovie(mDetailView, false, R.id.fragment_movies);
+                    switchDetailMovie(mDetailView, R.id.fragment_movies);
                 }
             });
         }
@@ -182,7 +194,7 @@ public class MovieView extends IRBaseFragment implements IMoviesView {
     }
 
     private void initAttributes() {
-        mMoviesPresenter = new MoviesPresenter(mActivity);
+        mMoviesPresenter = new MoviePresenter(mActivity);
         mMoviesPresenter.attachView(this);
 
         mPageIndex = Constants.FIRST_PAGE;
@@ -289,11 +301,11 @@ public class MovieView extends IRBaseFragment implements IMoviesView {
     /**
      * Initialize object FragmentManger to manager fragment
      */
-    private void switchDetailMovie(Fragment fragment, boolean addToBackStack, int id) {
+    private void switchDetailMovie(Fragment fragment, int id) {
         FragmentManager fm = mActivity.getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         if (ft.isEmpty()) {
-            ft.replace(id, fragment);
+            ft.add(id, fragment);
         }
         ft.addToBackStack(Constants.EMPTY_STRING);
         ft.commit();

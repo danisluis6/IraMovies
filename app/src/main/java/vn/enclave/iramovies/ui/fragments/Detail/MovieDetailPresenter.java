@@ -2,9 +2,7 @@ package vn.enclave.iramovies.ui.fragments.Detail;
 
 import android.content.Context;
 
-import java.util.List;
-
-import vn.enclave.iramovies.services.response.Movie;
+import vn.enclave.iramovies.services.response.CastAndCrewResponse;
 
 /**
  *
@@ -45,8 +43,8 @@ class MovieDetailPresenter implements IMovieDetailPresenter{
     }
 
     @Override
-    public void onSuccess(List<Movie> movies) {
-        mIMovieDetailView.onSuccess(movies);
+    public void onSuccess(CastAndCrewResponse castAndCrewResponse) {
+        mIMovieDetailView.onSuccess(castAndCrewResponse);
     }
 
     @Override

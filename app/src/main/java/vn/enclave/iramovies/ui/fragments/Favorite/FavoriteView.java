@@ -1,6 +1,9 @@
 package vn.enclave.iramovies.ui.fragments.Favorite;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
@@ -15,10 +18,13 @@ import java.util.List;
 
 import butterknife.BindView;
 import vn.enclave.iramovies.R;
+import vn.enclave.iramovies.local.storage.DatabaseInfo;
 import vn.enclave.iramovies.local.storage.entity.Movie;
 import vn.enclave.iramovies.ui.fragments.Base.IRBaseFragment;
+import vn.enclave.iramovies.ui.fragments.Detail.MovieDetailView;
 import vn.enclave.iramovies.ui.fragments.Favorite.adapter.FavoriteAdapter;
 import vn.enclave.iramovies.ui.views.FailureLayout;
+import vn.enclave.iramovies.ui.views.ToolbarLayout;
 import vn.enclave.iramovies.utilities.Constants;
 import vn.enclave.iramovies.utilities.Utils;
 
@@ -44,6 +50,8 @@ public class FavoriteView extends IRBaseFragment implements IFavoritesView{
     private FavoritesPresenter mFavoritesPresenter;
     public FavoriteInterface mFavoriteInterface;
     public UpdatedFavoriteScreen mInterfaceRefresh;
+    private ToolbarLayout mToolbar;
+    private Movie mMovie;
 
     @Override
     public View getViewLayout(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -55,7 +63,6 @@ public class FavoriteView extends IRBaseFragment implements IFavoritesView{
         initViews();
         initAttributes();
         getMoviesFromLocal();
-
     }
 
     private void initViews() {
@@ -64,7 +71,16 @@ public class FavoriteView extends IRBaseFragment implements IFavoritesView{
         rcvMovies.setLayoutManager(mLayoutManager);
 
         if (mFavoritesAdapter == null) {
-            mFavoritesAdapter = new FavoriteAdapter(mActivity,mActivity, mGroupMovies);
+            mFavoritesAdapter = new FavoriteAdapter(mActivity, mActivity, mGroupMovies, new FavoriteAdapter.IFavoriteAdapter() {
+                @Override
+                public void openDetailMovie(Movie movie) {
+                    MovieDetailView mDetailView = new MovieDetailView();
+                    mDetailView.setArguments(getMovieBundle(movie));
+                    mMovie = movie;
+                    openMovieDetail(mDetailView);
+                    updateTitleBar(movie.getTitle());
+                }
+            });
         }
         rcvMovies.setAdapter(mFavoritesAdapter);
 
@@ -78,6 +94,23 @@ public class FavoriteView extends IRBaseFragment implements IFavoritesView{
                 mFavoritesPresenter.deleteMovie(movie);
             }
         });
+    }
+
+    void updateTitleBar(String title) {
+        mToolbar.getToolbar().setTitle(title);
+        mToolbar.getToolbar().setNavigationIcon(R.drawable.ic_arrow_back);
+    }
+
+    private Bundle getMovieBundle(Movie movie) {
+        Bundle mBundle = new Bundle();
+        mBundle.putInt(DatabaseInfo.Movie.COLUMN_ID, movie.getId());
+        mBundle.putString(DatabaseInfo.Movie.COLUMN_TITLE, movie.getTitle());
+        mBundle.putString(DatabaseInfo.Movie.COLUMN_POSTER_PATH, movie.getPosterPath());
+        mBundle.putString(DatabaseInfo.Movie.COLUMN_RELEASE_DATE, movie.getReleaseDate());
+        mBundle.putDouble(DatabaseInfo.Movie.COLUMN_VOTE_AVERAGE, movie.getVoteAverage());
+        mBundle.putString(DatabaseInfo.Movie.COLUMN_OVERVIEW, movie.getOverview());
+        mBundle.putInt(DatabaseInfo.Movie.COLUMN_FAVORITE, movie.getFavorite());
+        return mBundle;
     }
 
     private void initAttributes() {
@@ -164,6 +197,10 @@ public class FavoriteView extends IRBaseFragment implements IFavoritesView{
         edtSearch.addTextChangedListener(mTextWatcher);
     }
 
+    public String getTitle() {
+        return mMovie.getTitle();
+    }
+
     public interface UpdatedFavoriteScreen {
         void onRefreshFavoriteOnMovieScreen(Movie movie);
     }
@@ -180,5 +217,21 @@ public class FavoriteView extends IRBaseFragment implements IFavoritesView{
 
     public void setOnRefreshFavoriteOnMovieScreen(UpdatedFavoriteScreen mInterfaceRefresh) {
         this.mInterfaceRefresh = mInterfaceRefresh;
+    }
+
+    public void setToolbar(ToolbarLayout toolbar) {
+        this.mToolbar = toolbar;
+    }
+
+    /**
+     * Initialize object FragmentManger to manager fragment
+     */
+    private void openMovieDetail(Fragment fragment) {
+        FragmentManager fragmentManager = getChildFragmentManager();
+        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+        transaction.add(R.id.fragment_favorites, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+        fragmentManager.executePendingTransactions();
     }
 }

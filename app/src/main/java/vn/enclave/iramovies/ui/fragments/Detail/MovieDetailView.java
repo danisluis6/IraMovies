@@ -24,6 +24,7 @@ import vn.enclave.iramovies.services.response.CastAndCrewResponse;
 import vn.enclave.iramovies.ui.fragments.Base.IRBaseFragment;
 import vn.enclave.iramovies.ui.fragments.Detail.adapter.MovieDetailAdapter;
 import vn.enclave.iramovies.ui.fragments.Movie.bean.CastCrew;
+import vn.enclave.iramovies.ui.views.ToolbarLayout;
 import vn.enclave.iramovies.utilities.Constants;
 
 /**
@@ -63,6 +64,7 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
     private MovieDetailPresenter mDetailMoviePresenter;
 
     private Movie mMovie;
+    private ToolbarLayout mToolbar;
 
     @Override
     public View getViewLayout(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -161,17 +163,23 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
 
     @Override
     public void onDestroyView() {
-        super.onDestroyView(); // 1
+        mToolbar.getToolbar().setTitle(getResources().getString(R.string.popular));
+        mToolbar.getToolbar().setNavigationIcon(R.drawable.ic_menu);
+        super.onDestroyView();
     }
 
     @Override
     public void onDestroy() {
-        super.onDestroy(); // 2
+        super.onDestroy();
     }
 
     @Override
     public void onDetach() {
 
-        super.onDetach(); // 3
+        super.onDetach();
+    }
+
+    public void setToolbar(ToolbarLayout toolbar) {
+        this.mToolbar = toolbar;
     }
 }

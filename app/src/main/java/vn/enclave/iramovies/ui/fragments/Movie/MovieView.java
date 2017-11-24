@@ -29,6 +29,7 @@ import vn.enclave.iramovies.ui.fragments.Base.IRBaseFragment;
 import vn.enclave.iramovies.ui.fragments.Detail.MovieDetailView;
 import vn.enclave.iramovies.ui.fragments.Movie.adapter.MovieAdapter;
 import vn.enclave.iramovies.ui.views.FailureLayout;
+import vn.enclave.iramovies.ui.views.ToolbarLayout;
 import vn.enclave.iramovies.utilities.Constants;
 import vn.enclave.iramovies.utilities.Utils;
 
@@ -55,6 +56,12 @@ import vn.enclave.iramovies.utilities.Utils;
  *
  * @Run: https://tausiq.wordpress.com/2014/06/06/android-multiple-fragments-stack-in-each-viewpager-tab/
  * => Research More
+ *
+ * @Run: https://stackoverflow.com/questions/14740445/what-is-difference-between-getsupportfragmentmanager-and-getchildfragmentmanag
+ *
+ *
+ * @Run: https://stackoverflow.com/questions/39885502/communication-between-nested-fragments-activities-both-ways
+ * => Done
  */
 
 public class MovieView extends IRBaseFragment implements IMovieView {
@@ -70,6 +77,7 @@ public class MovieView extends IRBaseFragment implements IMovieView {
     private MovieInterface mMovieInterface;
     private MovieAdapter mMoviesAdapter;
     private List<Movie> mGroupMovies;
+    private ToolbarLayout mToolbar;
 
     /**
      * Work with MVP
@@ -80,6 +88,7 @@ public class MovieView extends IRBaseFragment implements IMovieView {
      */
     private int mPageIndex;
     private boolean mIsLoadMore = false;
+    private Movie mMovie;
 
 
     public MovieView() {
@@ -138,7 +147,10 @@ public class MovieView extends IRBaseFragment implements IMovieView {
                 public void openDetailMovie(Movie movie) {
                     MovieDetailView mDetailView = new MovieDetailView();
                     mDetailView.setArguments(getMovieBundle(movie));
-                    switchDetailMovie(mDetailView, R.id.fragment_movies);
+                    mMovie = movie;
+                    mDetailView.setToolbar(mToolbar);
+                    openMovieDetail(mDetailView);
+                    updateTitleBar(movie.getTitle());
                 }
             });
         }
@@ -169,6 +181,11 @@ public class MovieView extends IRBaseFragment implements IMovieView {
                 mMoviesPresenter.deleteMovie(movie);
             }
         });
+    }
+
+    void updateTitleBar(String title) {
+        mToolbar.getToolbar().setTitle(title);
+        mToolbar.getToolbar().setNavigationIcon(R.drawable.ic_arrow_back);
     }
 
     private Bundle getMovieBundle(Movie movie) {
@@ -301,14 +318,21 @@ public class MovieView extends IRBaseFragment implements IMovieView {
     /**
      * Initialize object FragmentManger to manager fragment
      */
-    private void switchDetailMovie(Fragment fragment, int id) {
-        FragmentManager fm = mActivity.getSupportFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
-        if (ft.isEmpty()) {
-            ft.add(id, fragment);
-        }
-        ft.addToBackStack(Constants.EMPTY_STRING);
-        ft.commit();
+    private void openMovieDetail(Fragment fragment) {
+        FragmentManager fragmentManager = getChildFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.add(R.id.fragment_movies, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+        fragmentManager.executePendingTransactions();
+    }
+
+    public void setToolbar(ToolbarLayout toolbar) {
+        this.mToolbar = toolbar;
+    }
+
+    public String getTitle() {
+        return mMovie.getTitle();
     }
 
     enum MODE {

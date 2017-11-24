@@ -46,15 +46,17 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
     private List<Movie> mOriginalGroupMovies;
     private List<Movie> mFilterMovies;
     private BaseView mBaseView;
+    private IFavoriteAdapter mIFavoriteAdapter;
 
     /** Set Favorite start */
     private OnRemoveFavoriteListener mRemoveFavoriteListener;
 
-    public FavoriteAdapter(Context context, BaseView baseView, List<Movie> grouMovies) {
-        this.mContext = context;
-        this.mOriginalGroupMovies = grouMovies;
+    public FavoriteAdapter(Context context, BaseView baseView, List<Movie> grouMovies, IFavoriteAdapter iFavoriteAdapter) {
+        mContext = context;
+        mOriginalGroupMovies = grouMovies;
         mFilterMovies = mOriginalGroupMovies;
-        this.mBaseView = baseView;
+        mBaseView = baseView;
+        mIFavoriteAdapter = iFavoriteAdapter;
     }
 
     @Override
@@ -67,6 +69,12 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
     public void onBindViewHolder(final FavoriteAdapter.ViewHolder holder, int position){
         final int mPosition = position;
         final Movie movie = mFilterMovies.get(mPosition);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mIFavoriteAdapter.openDetailMovie(movie);
+            }
+        });
         holder.tvTitle.setText(movie.getTitle());
         holder.tvReleaseDate.setText(movie.getReleaseDate());
         holder.tvRating.setText(movie.getVoteAverage() + Constants.Keyboards.FORWARD_SLASH + "10.0");
@@ -75,7 +83,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
         holder.imvFavorite.setImageResource((movie.getFavorite() == Constants.Favorites.FAVORITE) ? R.drawable.ic_star_picked : R.drawable.ic_star);
         holder.imvFavorite.setTag(mFilterMovies.get(mPosition));
 
-        String poster = IraMovieInfoAPIs.Images.Thumbnail + movie.getBackdropPath();
+        String poster = IraMovieInfoAPIs.Images.Thumbnail + movie.getPosterPath();
         Glide.with(mContext)
                 .load(poster)
                 .placeholder(R.drawable.load)
@@ -122,6 +130,10 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
             }
         };
         this.notifyDataSetChanged();
+    }
+
+    public interface IFavoriteAdapter {
+        void openDetailMovie(Movie movie);
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{

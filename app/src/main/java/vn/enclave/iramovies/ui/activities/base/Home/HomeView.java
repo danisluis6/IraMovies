@@ -16,6 +16,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.SearchView;
 import android.text.SpannableStringBuilder;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -119,7 +120,9 @@ public class HomeView extends BaseView {
 
     private void initFragments() {
         mMovieView = (MovieView) MovieView.instantiate(mContext, MovieView.class.getName());
+        mMovieView.setToolbar(mToolbar);
         mFavoriteView = (FavoriteView) FavoriteView.instantiate(mContext, FavoriteView.class.getName());
+        mFavoriteView.setToolbar(mToolbar);
         mSettingView = (SettingView) SettingView.instantiate(mContext, SettingView.class.getName());
         mAboutView = (AboutView) AboutView.instantiate(mContext, AboutView.class.getName());
     }
@@ -216,16 +219,29 @@ public class HomeView extends BaseView {
 
             @Override
             public void onPageSelected(int position) {
+                mToolbar.getToolbar().setNavigationIcon(R.drawable.ic_menu);
                 switch (position) {
                     case 0:
-                        updateTitleBar(getResources().getString(R.string.popular));
+                        if (mMovieView.getChildFragmentManager().getBackStackEntryCount() == 0) {
+                            updateTitleBar(getResources().getString(R.string.popular));
+                            mToolbar.getToolbar().setNavigationIcon(R.drawable.ic_menu);
+                        } else {
+                            updateTitleBar(mMovieView.getTitle());
+                            mToolbar.getToolbar().setNavigationIcon(R.drawable.ic_arrow_back);
+                        }
                         mMenu.findItem(R.id.search).setVisible(false);
                         mMenu.findItem(R.id.search).setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
                         mMenu.findItem(R.id.view_list).setVisible(true);
                         mMenu.findItem(R.id.view_list).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
                         break;
                     case 1:
-                        updateTitleBar(getResources().getString(R.string.favorites));
+                        if (mFavoriteView.getChildFragmentManager().getBackStackEntryCount() == 0) {
+                            updateTitleBar(getResources().getString(R.string.favorites));
+                            mToolbar.getToolbar().setNavigationIcon(R.drawable.ic_menu);
+                        } else {
+                            updateTitleBar(mFavoriteView.getTitle());
+                            mToolbar.getToolbar().setNavigationIcon(R.drawable.ic_arrow_back);
+                        }
                         mMenu.findItem(R.id.search).setVisible(true);
                         mMenu.findItem(R.id.search).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
                         mMenu.findItem(R.id.view_list).setVisible(false);
@@ -405,6 +421,16 @@ public class HomeView extends BaseView {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        int curItem = mViewPager.getCurrentItem();
+        Fragment fragment = mPageAdapter.getItem(curItem);
+        FragmentManager fm = fragment.getChildFragmentManager();
+        if (fm != null) {
+            int count = fm.getBackStackEntryCount();
+            if (count > 0) {
+                fm.popBackStack();
+            } else {
+                super.onBackPressed();
+            }
+        }
     }
 }

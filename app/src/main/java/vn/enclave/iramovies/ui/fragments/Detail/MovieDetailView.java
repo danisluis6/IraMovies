@@ -163,8 +163,6 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
 
     @Override
     public void onDestroyView() {
-        mToolbar.getToolbar().setTitle(getResources().getString(R.string.popular));
-        mToolbar.getToolbar().setNavigationIcon(R.drawable.ic_menu);
         super.onDestroyView();
     }
 

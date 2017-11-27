@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -99,6 +100,18 @@ public class FavoriteView extends IRBaseFragment implements IFavoritesView{
     void updateTitleBar(String title) {
         mToolbar.getToolbar().setTitle(title);
         mToolbar.getToolbar().setNavigationIcon(R.drawable.ic_arrow_back);
+        mToolbar.getToolbar().setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (TextUtils.equals(mToolbar.getToolbar().getTitle(), getString(R.string.favorites))) {
+                    mFavoriteInterface.openNavigationDrawer();
+                } else {
+                    mToolbar.getToolbar().setTitle(getResources().getString(R.string.favorites));
+                    mToolbar.getToolbar().setNavigationIcon(R.drawable.ic_menu);
+                    mFavoriteInterface.onBack();
+                }
+            }
+        });
     }
 
     private Bundle getMovieBundle(Movie movie) {
@@ -209,6 +222,8 @@ public class FavoriteView extends IRBaseFragment implements IFavoritesView{
     public interface FavoriteInterface {
         void setTotalFavoritesOnMenu(int count);
         void updateCountFavoritesOnMenu(int value);
+        void onBack();
+        void openNavigationDrawer();
     }
 
     public void setFavoriteInterface(FavoriteInterface favoriteInterface) {

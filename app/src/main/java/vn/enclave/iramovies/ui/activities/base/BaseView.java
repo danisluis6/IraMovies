@@ -28,7 +28,7 @@ public abstract class BaseView extends AppCompatActivity{
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(getLayoutResId());
         setView();
-        activityCreated();
+        activityCreated(savedInstanceState);
     }
 
     private void setView() {
@@ -36,7 +36,7 @@ public abstract class BaseView extends AppCompatActivity{
     }
 
     public abstract int getLayoutResId();
-    public abstract void activityCreated();
+    public abstract void activityCreated(Bundle savedInstanceState);
 
     @Override
     protected void onDestroy() {

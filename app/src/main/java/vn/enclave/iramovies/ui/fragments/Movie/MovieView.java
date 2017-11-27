@@ -12,6 +12,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -186,6 +187,29 @@ public class MovieView extends IRBaseFragment implements IMovieView {
     void updateTitleBar(String title) {
         mToolbar.getToolbar().setTitle(title);
         mToolbar.getToolbar().setNavigationIcon(R.drawable.ic_arrow_back);
+        mToolbar.getToolbar().setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mToolbar.getToolbar().getNavigationIcon() != mActivity.getDrawable(R.drawable.ic_menu)) {
+                    mToolbar.getToolbar().setTitle(getResources().getString(R.string.popular));
+                    mToolbar.getToolbar().setNavigationIcon(R.drawable.ic_menu);
+                    mMovieInterface.onBack();
+                }
+
+                mToolbar.getToolbar().setNavigationOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (TextUtils.equals(mToolbar.getToolbar().getTitle(), getString(R.string.popular))) {
+                            mMovieInterface.openNavigationDrawer();
+                        } else {
+                            mToolbar.getToolbar().setTitle(getResources().getString(R.string.popular));
+                            mToolbar.getToolbar().setNavigationIcon(R.drawable.ic_menu);
+                            mMovieInterface.onBack();
+                        }
+                    }
+                });
+            }
+        });
     }
 
     private Bundle getMovieBundle(Movie movie) {
@@ -344,5 +368,9 @@ public class MovieView extends IRBaseFragment implements IMovieView {
         void refreshFavoriteInFavoriteScreen(Movie movie);
 
         void updateCountFavoritesOnMenu(int value);
+
+        void onBack();
+
+        void openNavigationDrawer();
     }
 }

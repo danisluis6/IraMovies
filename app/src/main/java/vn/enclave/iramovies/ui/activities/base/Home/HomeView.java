@@ -16,7 +16,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.SearchView;
 import android.text.SpannableStringBuilder;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -26,8 +25,6 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import com.bumptech.glide.util.Util;
 
 import java.util.List;
 import java.util.Vector;
@@ -106,7 +103,7 @@ public class HomeView extends BaseView {
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
-    public void activityCreated() {
+    public void activityCreated(Bundle savedInstanceState) {
         setSupportActionBar(mToolbar.getToolbar());
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         mDrawerLayout = findViewById(R.id.drawer_layout);
@@ -117,7 +114,7 @@ public class HomeView extends BaseView {
         initFragments();
         initialPages();
         initViews();
-        defineFragmentOnViewPaper();
+        defineFragmentOnViewPaper(savedInstanceState);
     }
 
     private void initFragments() {
@@ -186,8 +183,9 @@ public class HomeView extends BaseView {
      * => Done
      * @Run: Faxage => Shoot change view[read/un-read] update to NavigationBar => The same
      * => OnActivityForResult
+     * @param savedInstanceState
      */
-    private void defineFragmentOnViewPaper() {
+    private void defineFragmentOnViewPaper(final Bundle savedInstanceState) {
         mMovieView.setMovieInterface(new MovieView.MovieInterface() {
             @Override
             public void refreshFavoriteInFavoriteScreen(Movie movie) {
@@ -197,6 +195,17 @@ public class HomeView extends BaseView {
             @Override
             public void updateCountFavoritesOnMenu(int value) {
                 favoritesTab.updateNumberFavorites(value);
+            }
+
+            @Override
+            public void onBack() {
+                onBackPressed();
+            }
+
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+            @Override
+            public void openNavigationDrawer() {
+                setupDrawerToggle();
             }
         });
         mFavoriteView.setFavoriteInterface(new FavoriteView.FavoriteInterface() {
@@ -208,6 +217,17 @@ public class HomeView extends BaseView {
             @Override
             public void updateCountFavoritesOnMenu(int value) {
                 favoritesTab.updateNumberFavorites(value);
+            }
+
+            @Override
+            public void onBack() {
+                onBackPressed();
+            }
+
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+            @Override
+            public void openNavigationDrawer() {
+                setupDrawerToggle();
             }
         });
     }
@@ -222,18 +242,6 @@ public class HomeView extends BaseView {
             @Override
             public void onPageSelected(final int position) {
                 mToolbar.getToolbar().setNavigationIcon(R.drawable.ic_menu);
-//                mToolbar.getToolbar().setNavigationOnClickListener(new View.OnClickListener() {
-//                    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-//                    @Override
-//                    public void onClick(View v) {
-//                        Fragment fragment = mPageAdapter.getItem(position);
-//                        if (fragment.getChildFragmentManager().getBackStackEntryCount() > 0) {
-//                            onBackPressed();
-//                        } else {
-//                            setupDrawerToggle();
-//                        }
-//                    }
-//                });
                 switch (position) {
                     case 0:
                         if (mMovieView.getChildFragmentManager().getBackStackEntryCount() == 0) {

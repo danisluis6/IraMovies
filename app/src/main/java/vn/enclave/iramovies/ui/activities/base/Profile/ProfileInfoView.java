@@ -1,5 +1,6 @@
 package vn.enclave.iramovies.ui.activities.base.Profile;
 
+import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -54,7 +55,7 @@ public class ProfileInfoView extends BaseView{
     private User mUser;
 
     @Override
-    public void activityCreated() {
+    public void activityCreated(Bundle savedInstanceState) {
         getInfoUserFromIntent();
     }
 

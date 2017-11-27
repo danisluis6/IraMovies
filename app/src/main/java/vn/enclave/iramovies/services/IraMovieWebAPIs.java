@@ -16,6 +16,7 @@ import vn.enclave.iramovies.services.response.CastAndCrewResponse;
 import vn.enclave.iramovies.services.response.MovieResponse;
 
 /**
+ *
  * Created by lorence on 13/11/2017.
  */
 
@@ -32,7 +33,7 @@ public interface IraMovieWebAPIs {
 
     /**
      * Get Top Rated Movies
-     *
+     *q
      * @Run: http://api.themoviedb.org/3/movie/top_rated?api_key=2d390f2deaa23e8b65d42a80beb8c1bd
      * => Done
      */

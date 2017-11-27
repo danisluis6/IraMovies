@@ -1,6 +1,5 @@
 package vn.enclave.iramovies.ui.fragments.Detail;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -24,7 +23,6 @@ import vn.enclave.iramovies.services.response.CastAndCrewResponse;
 import vn.enclave.iramovies.ui.fragments.Base.IRBaseFragment;
 import vn.enclave.iramovies.ui.fragments.Detail.adapter.MovieDetailAdapter;
 import vn.enclave.iramovies.ui.fragments.Movie.bean.CastCrew;
-import vn.enclave.iramovies.ui.views.ToolbarLayout;
 import vn.enclave.iramovies.utilities.Constants;
 
 /**
@@ -35,7 +33,6 @@ import vn.enclave.iramovies.utilities.Constants;
 /**
  * @Run: https://stackoverflow.com/questions/13418436/android-4-2-back-stack-behaviour-with-nested-fragments
  * => Done
- *
  */
 
 public class MovieDetailView extends IRBaseFragment implements IMovieDetailView {
@@ -64,7 +61,6 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
     private MovieDetailPresenter mDetailMoviePresenter;
 
     private Movie mMovie;
-    private ToolbarLayout mToolbar;
 
     @Override
     public View getViewLayout(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -73,7 +69,7 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
 
     @Override
     public void fragmentCreated() {
-        setMovie(getMovieDetail());;
+        setMovie(getMovieDetail());
         displayMovieDetail(getMovie());
         initAtribute();
         getCastAndCrew();
@@ -157,11 +153,6 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-    }
-
-    @Override
     public void onDestroyView() {
         super.onDestroyView();
     }
@@ -173,11 +164,18 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
 
     @Override
     public void onDetach() {
-
         super.onDetach();
+        mMovieDetailInterface.onDestroy(getResources().getString(R.string.favorites), true);
     }
 
-    public void setToolbar(ToolbarLayout toolbar) {
-        this.mToolbar = toolbar;
+    public void setMovieDetailInterface(MovieDetailInterface movieDetailInterface) {
+        this.mMovieDetailInterface = movieDetailInterface;
     }
+
+    private  MovieDetailInterface  mMovieDetailInterface;
+
+    public interface MovieDetailInterface {
+        void onDestroy(String title, boolean isDestroy);
+    }
+
 }

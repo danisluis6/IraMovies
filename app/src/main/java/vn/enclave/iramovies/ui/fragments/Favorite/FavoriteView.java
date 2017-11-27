@@ -51,8 +51,6 @@ public class FavoriteView extends IRBaseFragment implements IFavoritesView{
     private FavoritesPresenter mFavoritesPresenter;
     public FavoriteInterface mFavoriteInterface;
     public UpdatedFavoriteScreen mInterfaceRefresh;
-    private ToolbarLayout mToolbar;
-    private Movie mMovie;
 
     @Override
     public View getViewLayout(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -77,9 +75,7 @@ public class FavoriteView extends IRBaseFragment implements IFavoritesView{
                 public void openDetailMovie(Movie movie) {
                     MovieDetailView mDetailView = new MovieDetailView();
                     mDetailView.setArguments(getMovieBundle(movie));
-                    mMovie = movie;
-                    openMovieDetail(mDetailView);
-                    updateTitleBar(movie.getTitle());
+                    mFavoriteInterface.getMovieDetailFragment(mDetailView, movie);
                 }
             });
         }
@@ -93,23 +89,6 @@ public class FavoriteView extends IRBaseFragment implements IFavoritesView{
                 }
                 mFavoriteInterface.updateCountFavoritesOnMenu(movie.getFavorite());
                 mFavoritesPresenter.deleteMovie(movie);
-            }
-        });
-    }
-
-    void updateTitleBar(String title) {
-        mToolbar.getToolbar().setTitle(title);
-        mToolbar.getToolbar().setNavigationIcon(R.drawable.ic_arrow_back);
-        mToolbar.getToolbar().setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (TextUtils.equals(mToolbar.getToolbar().getTitle(), getString(R.string.favorites))) {
-                    mFavoriteInterface.openNavigationDrawer();
-                } else {
-                    mToolbar.getToolbar().setTitle(getResources().getString(R.string.favorites));
-                    mToolbar.getToolbar().setNavigationIcon(R.drawable.ic_menu);
-                    mFavoriteInterface.onBack();
-                }
             }
         });
     }
@@ -210,10 +189,6 @@ public class FavoriteView extends IRBaseFragment implements IFavoritesView{
         edtSearch.addTextChangedListener(mTextWatcher);
     }
 
-    public String getTitle() {
-        return mMovie.getTitle();
-    }
-
     public interface UpdatedFavoriteScreen {
         void onRefreshFavoriteOnMovieScreen(Movie movie);
     }
@@ -222,8 +197,7 @@ public class FavoriteView extends IRBaseFragment implements IFavoritesView{
     public interface FavoriteInterface {
         void setTotalFavoritesOnMenu(int count);
         void updateCountFavoritesOnMenu(int value);
-        void onBack();
-        void openNavigationDrawer();
+        void getMovieDetailFragment(MovieDetailView movieDetailView, Movie movie);
     }
 
     public void setFavoriteInterface(FavoriteInterface favoriteInterface) {
@@ -234,14 +208,10 @@ public class FavoriteView extends IRBaseFragment implements IFavoritesView{
         this.mInterfaceRefresh = mInterfaceRefresh;
     }
 
-    public void setToolbar(ToolbarLayout toolbar) {
-        this.mToolbar = toolbar;
-    }
-
     /**
      * Initialize object FragmentManger to manager fragment
      */
-    private void openMovieDetail(Fragment fragment) {
+    public void openMovieDetail(Fragment fragment) {
         FragmentManager fragmentManager = getChildFragmentManager();
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
         transaction.add(R.id.fragment_favorites, fragment);

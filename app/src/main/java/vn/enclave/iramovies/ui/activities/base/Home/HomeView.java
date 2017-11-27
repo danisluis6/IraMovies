@@ -3,6 +3,7 @@ package vn.enclave.iramovies.ui.activities.base.Home;
 import android.annotation.SuppressLint;
 import android.app.SearchManager;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
@@ -35,6 +36,7 @@ import vn.enclave.iramovies.local.storage.entity.Movie;
 import vn.enclave.iramovies.ui.activities.base.BaseView;
 import vn.enclave.iramovies.ui.activities.base.Home.adapters.PaperAdapter;
 import vn.enclave.iramovies.ui.fragments.About.AboutView;
+import vn.enclave.iramovies.ui.fragments.Detail.MovieDetailView;
 import vn.enclave.iramovies.ui.fragments.Favorite.FavoriteView;
 import vn.enclave.iramovies.ui.fragments.Movie.MovieView;
 import vn.enclave.iramovies.ui.fragments.Setting.SettingView;
@@ -85,6 +87,7 @@ public class HomeView extends BaseView {
     private FavoriteView mFavoriteView;
     private SettingView mSettingView;
     private AboutView mAboutView;
+    private MovieDetailView mMovieDetailView;
     private boolean isModeView = true;
 
 
@@ -114,14 +117,12 @@ public class HomeView extends BaseView {
         initFragments();
         initialPages();
         initViews();
-        defineFragmentOnViewPaper(savedInstanceState);
+        defineFragmentOnViewPaper();
     }
 
     private void initFragments() {
         mMovieView = (MovieView) MovieView.instantiate(mContext, MovieView.class.getName());
-        mMovieView.setToolbar(mToolbar);
         mFavoriteView = (FavoriteView) FavoriteView.instantiate(mContext, FavoriteView.class.getName());
-        mFavoriteView.setToolbar(mToolbar);
         mSettingView = (SettingView) SettingView.instantiate(mContext, SettingView.class.getName());
         mAboutView = (AboutView) AboutView.instantiate(mContext, AboutView.class.getName());
     }
@@ -183,9 +184,8 @@ public class HomeView extends BaseView {
      * => Done
      * @Run: Faxage => Shoot change view[read/un-read] update to NavigationBar => The same
      * => OnActivityForResult
-     * @param savedInstanceState
      */
-    private void defineFragmentOnViewPaper(final Bundle savedInstanceState) {
+    private void defineFragmentOnViewPaper() {
         mMovieView.setMovieInterface(new MovieView.MovieInterface() {
             @Override
             public void refreshFavoriteInFavoriteScreen(Movie movie) {
@@ -198,16 +198,20 @@ public class HomeView extends BaseView {
             }
 
             @Override
-            public void onBack() {
-                onBackPressed();
-            }
-
-            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-            @Override
-            public void openNavigationDrawer() {
-                setupDrawerToggle();
+            public void getMovieDetailFragment(MovieDetailView movieDetailView, Movie movie) {
+                mMovieDetailView = movieDetailView;
+                movieDetailView.setMovieDetailInterface(new MovieDetailView.MovieDetailInterface() {
+                    @Override
+                    public void onDestroy(String title, boolean isDestroy) {
+                        updateTitleBar(title);
+                    }
+                });
+                mMovieView.openMovieDetail(mMovieDetailView);
+                updateTitleBar(movie.getTitle());
+                updateNavigationIcon(getDrawable(R.drawable.ic_arrow_back));
             }
         });
+
         mFavoriteView.setFavoriteInterface(new FavoriteView.FavoriteInterface() {
             @Override
             public void setTotalFavoritesOnMenu(int total) {
@@ -220,16 +224,17 @@ public class HomeView extends BaseView {
             }
 
             @Override
-            public void onBack() {
-                onBackPressed();
-            }
-
-            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-            @Override
-            public void openNavigationDrawer() {
-                setupDrawerToggle();
+            public void getMovieDetailFragment(MovieDetailView movieDetailView, Movie movie) {
+                mMovieDetailView = movieDetailView;
+                mFavoriteView.openMovieDetail(mMovieDetailView);
+                updateTitleBar(movie.getTitle());
+                updateNavigationIcon(getDrawable(R.drawable.ic_arrow_back));
             }
         });
+    }
+
+    private void updateNavigationIcon(Drawable drawable) {
+        mToolbar.getToolbar().setNavigationIcon(drawable);
     }
 
     private void updateFragmentOnViewPaper() {
@@ -248,7 +253,6 @@ public class HomeView extends BaseView {
                             updateTitleBar(getResources().getString(R.string.popular));
                             mToolbar.getToolbar().setNavigationIcon(R.drawable.ic_menu);
                         } else {
-                            updateTitleBar(mMovieView.getTitle());
                             mToolbar.getToolbar().setNavigationIcon(R.drawable.ic_arrow_back);
                         }
                         mMenu.findItem(R.id.search).setVisible(false);
@@ -261,7 +265,6 @@ public class HomeView extends BaseView {
                             updateTitleBar(getResources().getString(R.string.favorites));
                             mToolbar.getToolbar().setNavigationIcon(R.drawable.ic_menu);
                         } else {
-                            updateTitleBar(mFavoriteView.getTitle());
                             mToolbar.getToolbar().setNavigationIcon(R.drawable.ic_arrow_back);
                         }
                         mMenu.findItem(R.id.search).setVisible(true);
@@ -349,9 +352,6 @@ public class HomeView extends BaseView {
         mSearchView.setMaxWidth(getWidthTextToolbar());
         removeSearchIconAsHint(mSearchView);
         removeSearchPlateInSearchView(mSearchView);
-        /*final ImageView mCloseButton = mSearchView.findViewById(android.support.v7.appcompat.R.id.search_close_btn);
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(0, 0);
-        mCloseButton.setLayoutParams(layoutParams);*/
     }
 
     /**
@@ -443,12 +443,12 @@ public class HomeView extends BaseView {
 
     @Override
     public void onBackPressed() {
-        int curItem = mViewPager.getCurrentItem();
-        Fragment fragment = mPageAdapter.getItem(curItem);
+        Fragment fragment = mPageAdapter.getItem(mViewPager.getCurrentItem());
         FragmentManager fm = fragment.getChildFragmentManager();
         if (fm != null) {
             int count = fm.getBackStackEntryCount();
             if (count > 0) {
+                updateNavigationIcon(getDrawable(R.drawable.ic_menu));
                 fm.popBackStack();
             } else {
                 super.onBackPressed();

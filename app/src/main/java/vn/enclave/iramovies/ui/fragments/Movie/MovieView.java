@@ -78,7 +78,6 @@ public class MovieView extends IRBaseFragment implements IMovieView {
     private MovieInterface mMovieInterface;
     private MovieAdapter mMoviesAdapter;
     private List<Movie> mGroupMovies;
-    private ToolbarLayout mToolbar;
 
     /**
      * Work with MVP
@@ -89,8 +88,6 @@ public class MovieView extends IRBaseFragment implements IMovieView {
      */
     private int mPageIndex;
     private boolean mIsLoadMore = false;
-    private Movie mMovie;
-
 
     public MovieView() {
     }
@@ -148,10 +145,7 @@ public class MovieView extends IRBaseFragment implements IMovieView {
                 public void openDetailMovie(Movie movie) {
                     MovieDetailView mDetailView = new MovieDetailView();
                     mDetailView.setArguments(getMovieBundle(movie));
-                    mMovie = movie;
-                    mDetailView.setToolbar(mToolbar);
-                    openMovieDetail(mDetailView);
-                    updateTitleBar(movie.getTitle());
+                    mMovieInterface.getMovieDetailFragment(mDetailView, movie);
                 }
             });
         }
@@ -180,34 +174,6 @@ public class MovieView extends IRBaseFragment implements IMovieView {
             @Override
             public void onRemove(Movie movie) {
                 mMoviesPresenter.deleteMovie(movie);
-            }
-        });
-    }
-
-    void updateTitleBar(String title) {
-        mToolbar.getToolbar().setTitle(title);
-        mToolbar.getToolbar().setNavigationIcon(R.drawable.ic_arrow_back);
-        mToolbar.getToolbar().setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mToolbar.getToolbar().getNavigationIcon() != mActivity.getDrawable(R.drawable.ic_menu)) {
-                    mToolbar.getToolbar().setTitle(getResources().getString(R.string.popular));
-                    mToolbar.getToolbar().setNavigationIcon(R.drawable.ic_menu);
-                    mMovieInterface.onBack();
-                }
-
-                mToolbar.getToolbar().setNavigationOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (TextUtils.equals(mToolbar.getToolbar().getTitle(), getString(R.string.popular))) {
-                            mMovieInterface.openNavigationDrawer();
-                        } else {
-                            mToolbar.getToolbar().setTitle(getResources().getString(R.string.popular));
-                            mToolbar.getToolbar().setNavigationIcon(R.drawable.ic_menu);
-                            mMovieInterface.onBack();
-                        }
-                    }
-                });
             }
         });
     }
@@ -342,21 +308,13 @@ public class MovieView extends IRBaseFragment implements IMovieView {
     /**
      * Initialize object FragmentManger to manager fragment
      */
-    private void openMovieDetail(Fragment fragment) {
+    public void openMovieDetail(Fragment fragment) {
         FragmentManager fragmentManager = getChildFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.add(R.id.fragment_movies, fragment);
         transaction.addToBackStack(null);
         transaction.commit();
         fragmentManager.executePendingTransactions();
-    }
-
-    public void setToolbar(ToolbarLayout toolbar) {
-        this.mToolbar = toolbar;
-    }
-
-    public String getTitle() {
-        return mMovie.getTitle();
     }
 
     enum MODE {
@@ -369,8 +327,6 @@ public class MovieView extends IRBaseFragment implements IMovieView {
 
         void updateCountFavoritesOnMenu(int value);
 
-        void onBack();
-
-        void openNavigationDrawer();
+        void getMovieDetailFragment(MovieDetailView movieDetailView, Movie movie);
     }
 }

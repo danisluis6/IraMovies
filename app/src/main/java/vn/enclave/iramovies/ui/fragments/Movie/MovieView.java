@@ -27,7 +27,6 @@ import vn.enclave.iramovies.local.storage.SessionManager;
 import vn.enclave.iramovies.local.storage.entity.Movie;
 import vn.enclave.iramovies.ui.fragments.Base.IRBaseFragment;
 import vn.enclave.iramovies.ui.fragments.Detail.MovieDetailView;
-import vn.enclave.iramovies.ui.fragments.Favorite.FavoriteView;
 import vn.enclave.iramovies.ui.fragments.Movie.adapter.MovieAdapter;
 import vn.enclave.iramovies.ui.views.FailureLayout;
 import vn.enclave.iramovies.utilities.Constants;
@@ -38,28 +37,19 @@ import vn.enclave.iramovies.utilities.Utils;
  *
  * @Run: Apply Mode-View_Presenter : MVP
  * => Done
- *
  * @Run: https://stackoverflow.com/questions/28494637/android-how-to-stop-refreshing-fragments-on-tab-change
  * => Done
- *
  * @Run: https://www.coderefer.com/android-recyclerview-cardview-tutorial/
  * => @TODO
- *
  * @Run: http://pointofandroid.blogspot.com/2016/12/recyclerviewhorizontal-and-vertical.html
  * => Done
- *
  * @Run: https://www.youtube.com/results?search_query=nested+fragment+viewpager
  * => nested fragment viewpager
- *
  * @Run: https://stackoverflow.com/questions/39491655/communication-between-nested-fragments-in-android
  * => Communicate between nested fragments
- *
  * @Run: https://tausiq.wordpress.com/2014/06/06/android-multiple-fragments-stack-in-each-viewpager-tab/
  * => Research More
- *
  * @Run: https://stackoverflow.com/questions/14740445/what-is-difference-between-getsupportfragmentmanager-and-getchildfragmentmanag
- *
- *
  * @Run: https://stackoverflow.com/questions/39885502/communication-between-nested-fragments-activities-both-ways
  * => Done
  */
@@ -258,7 +248,9 @@ public class MovieView extends IRBaseFragment implements IMovieView {
     public void deleteMovieSuccess(Movie movie) {
         mMovieInterface.updateCountStarOnMenu(movie.getFavorite());
         mMovieInterface.refreshStarInFavoriteScreen(movie);
-        mInterfaceRefresh.onRefreshFavoriteOnDetailScreen(movie);
+        if (mInterfaceRefresh != null) {
+            mInterfaceRefresh.onRefreshFavoriteOnDetailScreen(movie);
+        }
     }
 
     @Override
@@ -309,11 +301,15 @@ public class MovieView extends IRBaseFragment implements IMovieView {
     }
 
     public void refreshStatusFavorite(Movie movie) {
-         mMoviesAdapter.refreshStatusFavorite(movie);
+        mMoviesAdapter.refreshStatusFavorite(movie);
     }
 
     public void deleteMovie(Movie movie) {
         mMoviesPresenter.deleteMovie(movie);
+    }
+
+    public void setOnRefreshFavoriteOnMovieScreen(UpdatedFavoriteScreen mInterfaceRefresh) {
+        this.mInterfaceRefresh = mInterfaceRefresh;
     }
 
     enum MODE {
@@ -331,9 +327,5 @@ public class MovieView extends IRBaseFragment implements IMovieView {
 
     public interface UpdatedFavoriteScreen {
         void onRefreshFavoriteOnDetailScreen(Movie movie);
-    }
-
-    public void setOnRefreshFavoriteOnMovieScreen(UpdatedFavoriteScreen mInterfaceRefresh) {
-        this.mInterfaceRefresh = mInterfaceRefresh;
     }
 }

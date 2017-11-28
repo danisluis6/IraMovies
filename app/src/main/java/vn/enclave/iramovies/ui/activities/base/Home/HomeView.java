@@ -64,6 +64,9 @@ import vn.enclave.iramovies.utilities.Utils;
  * => Done
  * @Run: https://stackoverflow.com/questions/4207880/android-how-do-i-prevent-the-soft-keyboard-from-pushing-my-view-up
  * => Done
+ *
+ * @Run: https://stackoverflow.com/questions/20639464/actionbaractivity-with-actionbardrawertoggle-not-using-drawerimageres
+ * => Done
  */
 
 public class HomeView extends BaseView {
@@ -87,7 +90,6 @@ public class HomeView extends BaseView {
     private FavoriteView mFavoriteView;
     private SettingView mSettingView;
     private AboutView mAboutView;
-    private MovieDetailView mMovieDetailView;
     private boolean isModeView = true;
 
 
@@ -108,7 +110,7 @@ public class HomeView extends BaseView {
     @Override
     public void activityCreated(Bundle savedInstanceState) {
         setSupportActionBar(mToolbar.getToolbar());
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mDrawerLayout = findViewById(R.id.drawer_layout);
         setupDrawerToggle();
         // noinspection deprecation
@@ -199,18 +201,27 @@ public class HomeView extends BaseView {
 
             @Override
             public void getMovieDetailFragment(MovieDetailView movieDetailView, Movie movie) {
-                mMovieDetailView = movieDetailView;
+                final String title = mToolbar.getToolbar().getTitle().toString();
                 movieDetailView.setMovieDetailInterface(new MovieDetailView.MovieDetailInterface() {
                     @Override
-                    public void onDestroy(String title, boolean isDestroy) {
+                    public void onDestroy() {
                         if (!isFinishing()) {
                             updateTitleBar(title);
                         }
                     }
+
+                    @Override
+                    public void updateCountFavoritesOnMenu(int value) {
+                        favoritesTab.updateNumberFavorites(value);
+                    }
+
+                    @Override
+                    public void refreshFavoriteInMovieScreen(Movie movie) {
+                        mFavoriteView.refreshStatusFavorite(movie);
+                    }
                 });
-                mMovieView.openMovieDetail(mMovieDetailView);
+                mMovieView.openMovieDetail(movieDetailView);
                 updateTitleBar(movie.getTitle());
-                updateNavigationIcon(getDrawable(R.drawable.ic_arrow_back));
             }
         });
 
@@ -227,18 +238,27 @@ public class HomeView extends BaseView {
 
             @Override
             public void getMovieDetailFragment(MovieDetailView movieDetailView, Movie movie) {
-                mMovieDetailView = movieDetailView;
+                final String title = mToolbar.getToolbar().getTitle().toString();
                 movieDetailView.setMovieDetailInterface(new MovieDetailView.MovieDetailInterface() {
                     @Override
-                    public void onDestroy(String title, boolean isDestroy) {
+                    public void onDestroy() {
                         if (!isFinishing()) {
                             updateTitleBar(title);
                         }
                     }
+
+                    @Override
+                    public void updateCountFavoritesOnMenu(int value) {
+                        favoritesTab.updateNumberFavorites(value);
+                    }
+
+                    @Override
+                    public void refreshFavoriteInMovieScreen(Movie movie) {
+                        mFavoriteView.refreshStatusFavorite(movie);
+                    }
                 });
-                mFavoriteView.openMovieDetail(mMovieDetailView);
+                mFavoriteView.openMovieDetail(movieDetailView);
                 updateTitleBar(movie.getTitle());
-                updateNavigationIcon(getDrawable(R.drawable.ic_arrow_back));
             }
         });
     }
@@ -317,7 +337,7 @@ public class HomeView extends BaseView {
     }
 
     @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
+    protected void onPostCreate(final Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         mDrawerToggle.syncState();
         mToolbar.getToolbar().setNavigationIcon(R.drawable.ic_menu);
@@ -344,14 +364,13 @@ public class HomeView extends BaseView {
                 }
             }
         };
-        mDrawerToggle.syncState();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
-        mMenu = menu;
         initSearchView(menu);
+        mMenu = menu;
         return true;
     }
 
@@ -415,7 +434,6 @@ public class HomeView extends BaseView {
         SpannableStringBuilder ssb = new SpannableStringBuilder(Constants.EMPTY_STRING);
         ssb.append(getString(R.string.search_view));
         searchEditText.setHint(ssb);
-
         searchView.setIconifiedByDefault(true);
     }
 

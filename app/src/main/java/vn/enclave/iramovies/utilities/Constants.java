@@ -8,7 +8,7 @@ package vn.enclave.iramovies.utilities;
 public class Constants {
 
     public static final String EMPTY_STRING = "";
-    public static final int DOUBLE_CLICK_TIME_DELTA = 600;
+    public static final int DOUBLE_CLICK_TIME_DELTA = 400;
 
     /** Intent information */
     public static final int GALLERY_REQUEST = 11;

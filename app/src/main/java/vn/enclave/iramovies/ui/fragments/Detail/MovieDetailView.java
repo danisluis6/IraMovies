@@ -10,11 +10,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.TransformationUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import vn.enclave.iramovies.R;
 import vn.enclave.iramovies.local.storage.DatabaseInfo;
 import vn.enclave.iramovies.local.storage.entity.Movie;
@@ -63,6 +65,7 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
     private RecyclerView.LayoutManager mLayoutManager;
 
     private Movie mMovie;
+    private boolean mIsFavorite;
 
     @Override
     public View getViewLayout(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -73,8 +76,21 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
     public void fragmentCreated() {
         setMovie(getMovieDetail());
         displayMovieDetail(getMovie());
+        mIsFavorite = (getMovie().getFavorite() == Constants.Favorites.FAVORITE);
         initAtribute();
         getCastAndCrew();
+    }
+
+    @OnClick(R.id.imvFavorite)
+    public void onClick() {
+        if (Utils.isDoubleClick()) {
+            return;
+        }
+        mIsFavorite = !mIsFavorite;
+        imvFavorite.setImageResource(mIsFavorite ? R.drawable.ic_star_picked : R.drawable.ic_star);
+        getMovie().setFavorite(mIsFavorite ? Constants.Favorites.FAVORITE : Constants.Favorites.DEFAULT);
+        mMovieDetailInterface.updateCountFavoritesOnMenu(getMovie().getFavorite());
+        mMovieDetailInterface.refreshFavoriteInMovieScreen(getMovie());
     }
 
     private void initAtribute() {
@@ -86,7 +102,7 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
     private void displayMovieDetail(Movie movie) {
         imvFavorite.setImageResource((movie.getFavorite() == Constants.Favorites.FAVORITE) ? R.drawable.ic_star_picked : R.drawable.ic_star);
         tvReleaseDate.setText(movie.getReleaseDate());
-        tvRating.setText(String.valueOf(movie.getVoteAverage()));
+        tvRating.setText(String.valueOf(movie.getVoteAverage()) + Constants.Keyboards.FORWARD_SLASH + "10.0");
         tvOverview.setText(movie.getOverview());
         String poster = IraMovieInfoAPIs.Images.Thumbnail + movie.getPosterPath();
         Glide.with(mActivity)
@@ -169,8 +185,8 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
 
     @Override
     public void onDetach() {
+        mMovieDetailInterface.onDestroy();
         super.onDetach();
-        mMovieDetailInterface.onDestroy(getResources().getString(R.string.favorites), true);
     }
 
     public void setMovieDetailInterface(MovieDetailInterface movieDetailInterface) {
@@ -180,7 +196,10 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
     private  MovieDetailInterface  mMovieDetailInterface;
 
     public interface MovieDetailInterface {
-        void onDestroy(String title, boolean isDestroy);
+        void onDestroy();
+        void updateCountFavoritesOnMenu(int value);
+        // refresh in movie scren
+        void refreshFavoriteInMovieScreen(Movie movie);
     }
 
 }

@@ -181,8 +181,8 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
     }
 
     public void remove(Movie movie) {
-        mFilterMovies.remove(movie);
         mOriginalGroupMovies.remove(movie);
+        mFilterMovies = mOriginalGroupMovies;
         notifyDataSetChanged();
     }
 }

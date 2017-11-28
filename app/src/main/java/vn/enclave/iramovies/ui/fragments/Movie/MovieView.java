@@ -278,19 +278,6 @@ public class MovieView extends IRBaseFragment implements IMovieView {
         mMoviesAdapter.refreshFavorite(movie);
     }
 
-    public void reload(MODE mode) {
-        if (Utils.isInternetOn(mActivity)) {
-            mPageIndex = Constants.FIRST_PAGE;
-            mMoviesPresenter.getMoviesFromApi(mPageIndex, true, mode);
-        } else {
-            if (mGroupMovies.isEmpty()) {
-                mFailureLayout.setFailureMessage(getResources().getString(R.string.no_internet_connection));
-            } else {
-                Utils.Toast.showToast(mActivity, getString(R.string.no_internet_connection));
-            }
-        }
-    }
-
     public void setMovieInterface(MovieInterface movieInterface) {
         this.mMovieInterface = movieInterface;
     }

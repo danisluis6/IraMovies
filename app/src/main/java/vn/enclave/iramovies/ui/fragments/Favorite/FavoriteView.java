@@ -143,6 +143,7 @@ public class FavoriteView extends IRBaseFragment implements IFavoritesView{
     public void deleteSuccess(Movie movie) {
         mFavoritesAdapter.remove(movie);
         mInterfaceRefresh.onRefreshFavoriteOnMovieScreen(movie);
+        mInterfaceRefresh.onRefreshFavoriteOnDetailScreen(movie);
     }
 
     private void updateStatusFavorite(int count) {
@@ -191,6 +192,7 @@ public class FavoriteView extends IRBaseFragment implements IFavoritesView{
 
     public interface UpdatedFavoriteScreen {
         void onRefreshFavoriteOnMovieScreen(Movie movie);
+        void onRefreshFavoriteOnDetailScreen(Movie movie);
     }
 
     /* Interface */

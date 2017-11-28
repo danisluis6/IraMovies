@@ -224,16 +224,18 @@ public class HomeView extends BaseView {
 
                     @Override
                     public void refreshStarInMovieScreen(Movie movie) {
-//                        if (movie.getFavorite() == Constants.Favorites.DEFAULT) {
-//                            mMovieView.removeMovieFavorite(movie);
-//                        } else {
-//                            mMovieView.refreshStatusFavorite(movie);
-//                        }
+                        if (movie.getFavorite() == Constants.Favorites.DEFAULT) {
+                            mMovieView.removeMovieFavorite(movie);
+                        } else {
+                            mMovieView.refreshStatusFavorite(movie);
+                        }
                     }
 
                     @Override
                     public void refreshStarInDetailScreen(Movie movie) {
-
+                        if (mDetailViewMovie != null) {
+                            mDetailViewMovie.reload(movie);
+                        }
                     }
                 });
                 mDetailViewMovie = movieDetailView;
@@ -339,6 +341,13 @@ public class HomeView extends BaseView {
                             @Override
                             public void onRefreshFavoriteOnMovieScreen(Movie movie) {
                                 mMovieView.removeMovieFavorite(movie);
+                            }
+
+                            @Override
+                            public void onRefreshFavoriteOnDetailScreen(Movie movie) {
+                                if (mDetailViewMovie != null) {
+                                    mDetailViewMovie.reload(movie);
+                                }
                             }
                         });
                         break;

@@ -16,6 +16,7 @@ import vn.enclave.iramovies.services.IraMovieWebAPIs;
 import vn.enclave.iramovies.services.response.CastAndCrewResponse;
 import vn.enclave.iramovies.services.response.CastResponse;
 import vn.enclave.iramovies.services.response.CrewResponse;
+import vn.enclave.iramovies.utilities.Constants;
 
 /**
  *
@@ -39,15 +40,11 @@ public class MovieDetailModel implements IMovieDetailModel {
      */
     private IraMovieWebAPIs mApiService;
 
-    /**
-     * AppDatabase
-     */
-    private AppDatabase mAppDatabase;
+    private Call<CastAndCrewResponse> mCallerCastAndCrew;
 
     MovieDetailModel(Context context) {
         this.mContext = context;
         mApiService = IRApplication.getInstance().getEzFaxingWebAPIs();
-        mAppDatabase = Room.databaseBuilder(mContext, AppDatabase.class, AppDatabase.DB_NAME).build();
     }
 
     @Override
@@ -57,8 +54,8 @@ public class MovieDetailModel implements IMovieDetailModel {
 
     @Override
     public void getCastAndCrewFromApi(int movieId) {
-        Call<CastAndCrewResponse> call = mApiService.getMovieDetail(String.valueOf(movieId), BuildConfig.THE_MOVIE_DB_API_TOKEN);
-        call.enqueue(new Callback<CastAndCrewResponse>() {
+        mCallerCastAndCrew = mApiService.getMovieDetail(String.valueOf(movieId), BuildConfig.THE_MOVIE_DB_API_TOKEN);
+        mCallerCastAndCrew.enqueue(new Callback<CastAndCrewResponse>() {
             @Override
             public void onResponse(Call<CastAndCrewResponse> call, Response<CastAndCrewResponse> response) {
                 if (response.isSuccessful()) {
@@ -77,4 +74,13 @@ public class MovieDetailModel implements IMovieDetailModel {
             }
         });
     }
+
+    @Override
+    public void cancelProcessing() {
+        if (mCallerCastAndCrew != null && mCallerCastAndCrew.isExecuted() && !mCallerCastAndCrew.isCanceled()) {
+            mCallerCastAndCrew.cancel();
+            mIMovieDetailPresenter.onFailure(Constants.EMPTY_STRING);
+        }
+    }
+
 }

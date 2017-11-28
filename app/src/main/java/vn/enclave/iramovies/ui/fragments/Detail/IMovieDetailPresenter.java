@@ -18,4 +18,6 @@ public interface IMovieDetailPresenter extends IBasePresenter<IMovieDetailView> 
     void onFailure(String message);
 
     void getCastAndCrewFromApi(int movieId);
+
+    void cancelProcessing();
 }

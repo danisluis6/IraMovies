@@ -203,7 +203,9 @@ public class HomeView extends BaseView {
                 movieDetailView.setMovieDetailInterface(new MovieDetailView.MovieDetailInterface() {
                     @Override
                     public void onDestroy(String title, boolean isDestroy) {
-                        updateTitleBar(title);
+                        if (!isFinishing()) {
+                            updateTitleBar(title);
+                        }
                     }
                 });
                 mMovieView.openMovieDetail(mMovieDetailView);
@@ -226,6 +228,14 @@ public class HomeView extends BaseView {
             @Override
             public void getMovieDetailFragment(MovieDetailView movieDetailView, Movie movie) {
                 mMovieDetailView = movieDetailView;
+                movieDetailView.setMovieDetailInterface(new MovieDetailView.MovieDetailInterface() {
+                    @Override
+                    public void onDestroy(String title, boolean isDestroy) {
+                        if (!isFinishing()) {
+                            updateTitleBar(title);
+                        }
+                    }
+                });
                 mFavoriteView.openMovieDetail(mMovieDetailView);
                 updateTitleBar(movie.getTitle());
                 updateNavigationIcon(getDrawable(R.drawable.ic_arrow_back));

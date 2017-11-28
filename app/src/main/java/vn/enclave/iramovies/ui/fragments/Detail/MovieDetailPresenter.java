@@ -51,4 +51,9 @@ class MovieDetailPresenter implements IMovieDetailPresenter{
     public void onFailure(String message) {
         mIMovieDetailView.onFailure(message);
     }
+
+    @Override
+    public void cancelProcessing() {
+        mIMovieDetailModel.cancelProcessing();
+    }
 }

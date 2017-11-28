@@ -24,6 +24,7 @@ import vn.enclave.iramovies.ui.fragments.Base.IRBaseFragment;
 import vn.enclave.iramovies.ui.fragments.Detail.adapter.MovieDetailAdapter;
 import vn.enclave.iramovies.ui.fragments.Movie.bean.CastCrew;
 import vn.enclave.iramovies.utilities.Constants;
+import vn.enclave.iramovies.utilities.Utils;
 
 /**
  *
@@ -59,6 +60,7 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
      * Work with MVP
      */
     private MovieDetailPresenter mDetailMoviePresenter;
+    private RecyclerView.LayoutManager mLayoutManager;
 
     private Movie mMovie;
 
@@ -78,6 +80,7 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
     private void initAtribute() {
         mDetailMoviePresenter = new MovieDetailPresenter(mActivity);
         mDetailMoviePresenter.attachView(this);
+        mLayoutManager = new LinearLayoutManager(mActivity, LinearLayoutManager.HORIZONTAL, false);
     }
 
     private void displayMovieDetail(Movie movie) {
@@ -120,9 +123,10 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
         loadCastAndCrew(getPathOfCastAndCrew(castAndCrewResponse));
     }
 
+
+
     private void loadCastAndCrew(List<CastCrew> castCrewList) {
         MovieDetailAdapter movieDetailAdapter = new MovieDetailAdapter(mActivity, mActivity, castCrewList);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(mActivity, LinearLayoutManager.HORIZONTAL, false);
         rcvCast.setLayoutManager(mLayoutManager);
         rcvCast.setAdapter(movieDetailAdapter);
     }
@@ -154,6 +158,7 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
 
     @Override
     public void onDestroyView() {
+        mDetailMoviePresenter.cancelProcessing();
         super.onDestroyView();
     }
 

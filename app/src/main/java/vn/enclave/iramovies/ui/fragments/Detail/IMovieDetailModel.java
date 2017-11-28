@@ -10,4 +10,6 @@ import vn.enclave.iramovies.ui.interfaces.IBasePresenter;
 public interface IMovieDetailModel extends IBasePresenter<IMovieDetailPresenter> {
 
     void getCastAndCrewFromApi(int movieId);
+
+    void cancelProcessing();
 }

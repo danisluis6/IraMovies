@@ -22,6 +22,7 @@ import vn.enclave.iramovies.local.storage.entity.Movie;
 import vn.enclave.iramovies.ui.activities.base.BaseView;
 import vn.enclave.iramovies.utilities.Constants;
 import vn.enclave.iramovies.utilities.OverrideFonts;
+import vn.enclave.iramovies.utilities.Utils;
 
 /**
  * Created by lorence on 14/11/2017.
@@ -111,9 +112,9 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
     }
 
     public void setMovies(List<Movie> movies) {
-        this.mOriginalGroupMovies = movies;
-        this.mFilterMovies = mOriginalGroupMovies;
-        notifyDataSetChanged();
+        mOriginalGroupMovies = movies;
+        mFilterMovies = mOriginalGroupMovies;
+        this.notifyDataSetChanged();
     }
 
     public void filter(CharSequence search) {
@@ -167,6 +168,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
         }
 
     }
+
     public void setRemoveFavoriteListener (OnRemoveFavoriteListener removeFavoriteListener) {
         this.mRemoveFavoriteListener = removeFavoriteListener;
     }
@@ -174,6 +176,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
     public interface OnRemoveFavoriteListener {
         void onRemove(Movie movie);
     }
+
     public void add(Movie movie) {
         mOriginalGroupMovies.add(movie);
         mFilterMovies = mOriginalGroupMovies;
@@ -181,8 +184,12 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
     }
 
     public void remove(Movie movie) {
-        mOriginalGroupMovies.remove(movie);
+        for (int index = 0; index < mOriginalGroupMovies.size(); index++) {
+            if (mOriginalGroupMovies.get(index).getTitle().equals(movie.getTitle())) {
+                mOriginalGroupMovies.remove(index);
+            }
+        }
         mFilterMovies = mOriginalGroupMovies;
-        notifyDataSetChanged();
+        this.notifyDataSetChanged();
     }
 }

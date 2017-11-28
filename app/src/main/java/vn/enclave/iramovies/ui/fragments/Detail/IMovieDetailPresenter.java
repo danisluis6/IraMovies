@@ -1,7 +1,5 @@
 package vn.enclave.iramovies.ui.fragments.Detail;
 
-import java.util.List;
-
 import vn.enclave.iramovies.local.storage.entity.Movie;
 import vn.enclave.iramovies.services.response.CastAndCrewResponse;
 import vn.enclave.iramovies.ui.interfaces.IBasePresenter;
@@ -20,4 +18,10 @@ public interface IMovieDetailPresenter extends IBasePresenter<IMovieDetailView> 
     void getCastAndCrewFromApi(int movieId);
 
     void cancelProcessing();
+
+    void deleteMovie(Movie movie);
+
+    void deleteMovieSuccess(Movie movie);
+
+    void addMovieSuccess(Movie movie);
 }

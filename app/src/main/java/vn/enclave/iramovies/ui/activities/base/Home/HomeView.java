@@ -190,12 +190,12 @@ public class HomeView extends BaseView {
     private void defineFragmentOnViewPaper() {
         mMovieView.setMovieInterface(new MovieView.MovieInterface() {
             @Override
-            public void refreshFavoriteInFavoriteScreen(Movie movie) {
+            public void refreshStarInFavoriteScreen(Movie movie) {
                 mFavoriteView.refreshStatusFavorite(movie);
             }
 
             @Override
-            public void updateCountFavoritesOnMenu(int value) {
+            public void updateCountStarOnMenu(int value) {
                 favoritesTab.updateNumberFavorites(value);
             }
 
@@ -211,13 +211,24 @@ public class HomeView extends BaseView {
                     }
 
                     @Override
-                    public void updateCountFavoritesOnMenu(int value) {
-                        favoritesTab.updateNumberFavorites(value);
+                    public void updateCountStarOnMenu(int value) {
+                        // TODO
+                        // favoritesTab.updateNumberFavorites(value);
                     }
 
                     @Override
-                    public void refreshFavoriteInMovieScreen(Movie movie) {
-                        mFavoriteView.refreshStatusFavorite(movie);
+                    public void refreshStarInFavoriteScreen(Movie movie) {
+                        // TODO
+                        // mFavoriteView.refreshStatusFavorite(movie);
+                    }
+
+                    @Override
+                    public void refreshStarInMovieScreen(Movie movie) {
+//                        if (movie.getFavorite() == Constants.Favorites.DEFAULT) {
+//                            mMovieView.removeMovieFavorite(movie);
+//                        } else {
+//                            mMovieView.refreshStatusFavorite(movie);
+//                        }
                     }
                 });
                 mMovieView.openMovieDetail(movieDetailView);
@@ -248,13 +259,22 @@ public class HomeView extends BaseView {
                     }
 
                     @Override
-                    public void updateCountFavoritesOnMenu(int value) {
+                    public void updateCountStarOnMenu(int value) {
                         favoritesTab.updateNumberFavorites(value);
                     }
 
                     @Override
-                    public void refreshFavoriteInMovieScreen(Movie movie) {
+                    public void refreshStarInFavoriteScreen(Movie movie) {
                         mFavoriteView.refreshStatusFavorite(movie);
+                    }
+
+                    @Override
+                    public void refreshStarInMovieScreen(Movie movie) {
+                        if (movie.getFavorite() == Constants.Favorites.DEFAULT) {
+                            mMovieView.removeMovieFavorite(movie);
+                        } else {
+                            mMovieView.refreshStatusFavorite(movie);
+                        }
                     }
                 });
                 mFavoriteView.openMovieDetail(movieDetailView);

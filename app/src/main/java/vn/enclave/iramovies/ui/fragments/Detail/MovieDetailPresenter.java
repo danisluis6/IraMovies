@@ -2,6 +2,7 @@ package vn.enclave.iramovies.ui.fragments.Detail;
 
 import android.content.Context;
 
+import vn.enclave.iramovies.local.storage.entity.Movie;
 import vn.enclave.iramovies.services.response.CastAndCrewResponse;
 
 /**
@@ -55,5 +56,28 @@ class MovieDetailPresenter implements IMovieDetailPresenter{
     @Override
     public void cancelProcessing() {
         mIMovieDetailModel.cancelProcessing();
+    }
+
+    @Override
+    public void deleteMovie(Movie movie) {
+        mIMovieDetailModel.deleteMovie(movie);
+    }
+
+    @Override
+    public void deleteMovieSuccess(Movie movie) {
+        if (mIMovieDetailView != null) {
+            mIMovieDetailView.deleteMovieSuccess(movie);
+        }
+    }
+
+    @Override
+    public void addMovieSuccess(Movie movie) {
+        if (mIMovieDetailView != null) {
+            mIMovieDetailView.addMovieSuccess(movie);
+        }
+    }
+
+    public void addMovie(Movie movie) {
+        mIMovieDetailModel.addMovie(movie);
     }
 }

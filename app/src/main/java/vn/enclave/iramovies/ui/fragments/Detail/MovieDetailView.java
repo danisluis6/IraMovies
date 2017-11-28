@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.bitmap.TransformationUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -89,8 +88,14 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
         mIsFavorite = !mIsFavorite;
         imvFavorite.setImageResource(mIsFavorite ? R.drawable.ic_star_picked : R.drawable.ic_star);
         getMovie().setFavorite(mIsFavorite ? Constants.Favorites.FAVORITE : Constants.Favorites.DEFAULT);
-        mMovieDetailInterface.updateCountFavoritesOnMenu(getMovie().getFavorite());
-        mMovieDetailInterface.refreshFavoriteInMovieScreen(getMovie());
+        if (getMovie().getFavorite() == Constants.Favorites.DEFAULT) {
+            mDetailMoviePresenter.deleteMovie(getMovie());
+        } else {
+            mDetailMoviePresenter.addMovie(getMovie());
+        }
+        mMovieDetailInterface.updateCountStarOnMenu(getMovie().getFavorite());
+        mMovieDetailInterface.refreshStarInFavoriteScreen(getMovie());
+        mMovieDetailInterface.refreshStarInMovieScreen(getMovie());
     }
 
     private void initAtribute() {
@@ -163,6 +168,16 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
         // TODO
     }
 
+    @Override
+    public void deleteMovieSuccess(Movie movie) {
+        // TODO
+    }
+
+    @Override
+    public void addMovieSuccess(Movie movie) {
+        // TODO
+    }
+
     public void getCastAndCrew() {
         mDetailMoviePresenter.getCastAndCrewFromApi(getMovie().getId());
     }
@@ -197,9 +212,11 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
 
     public interface MovieDetailInterface {
         void onDestroy();
-        void updateCountFavoritesOnMenu(int value);
-        // refresh in movie scren
-        void refreshFavoriteInMovieScreen(Movie movie);
+        void updateCountStarOnMenu(int value);
+        // Refresh favorite in favorite screen
+        void refreshStarInFavoriteScreen(Movie movie);
+        // Refresh favorite in movie screen
+        void refreshStarInMovieScreen(Movie movie);
     }
 
 }

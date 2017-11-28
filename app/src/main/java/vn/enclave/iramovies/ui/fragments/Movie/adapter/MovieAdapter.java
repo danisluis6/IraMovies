@@ -17,8 +17,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import vn.enclave.iramovies.R;
-import vn.enclave.iramovies.services.IraMovieInfoAPIs;
 import vn.enclave.iramovies.local.storage.entity.Movie;
+import vn.enclave.iramovies.services.IraMovieInfoAPIs;
 import vn.enclave.iramovies.ui.activities.base.BaseView;
 import vn.enclave.iramovies.utilities.Constants;
 import vn.enclave.iramovies.utilities.OverrideFonts;
@@ -242,6 +242,15 @@ public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     public void setModeDisplay(boolean isModeDisplay) {
         this.isModeDisplay = isModeDisplay;
+    }
+
+    public void refreshStatusFavorite(Movie movie) {
+        for (int index = 0; index < mGrouMovies.size(); index++) {
+            if (mGrouMovies.get(index).getId().equals(movie.getId())) {
+                mGrouMovies.get(index).setFavorite(Constants.Favorites.FAVORITE);
+            }
+        }
+        this.notifyDataSetChanged();
     }
 
     public interface OnLoadMoreListener {

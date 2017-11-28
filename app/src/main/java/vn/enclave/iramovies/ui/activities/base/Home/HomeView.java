@@ -233,8 +233,8 @@ public class HomeView extends BaseView {
 
                     @Override
                     public void refreshStarInDetailScreen(Movie movie) {
-                        if (mDetailViewMovie != null) {
-                            mDetailViewMovie.reload(movie);
+                        if (mDetailViewFavorite != null) {
+                            mDetailViewFavorite.reload(movie);
                         }
                     }
                 });

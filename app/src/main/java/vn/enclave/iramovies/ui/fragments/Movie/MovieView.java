@@ -239,7 +239,9 @@ public class MovieView extends IRBaseFragment implements IMovieView {
     public void addMovieSuccess(Movie movie) {
         mMovieInterface.updateCountStarOnMenu(movie.getFavorite());
         mMovieInterface.refreshStarInFavoriteScreen(movie);
-        mInterfaceRefresh.onRefreshFavoriteOnDetailScreen(movie);
+        if (mInterfaceRefresh != null) {
+            mInterfaceRefresh.onRefreshFavoriteOnDetailScreen(movie);
+        }
     }
 
     private void updateListMovies(List<Movie> listMovies) {

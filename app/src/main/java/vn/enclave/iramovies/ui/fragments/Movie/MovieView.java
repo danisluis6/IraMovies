@@ -27,6 +27,7 @@ import vn.enclave.iramovies.local.storage.SessionManager;
 import vn.enclave.iramovies.local.storage.entity.Movie;
 import vn.enclave.iramovies.ui.fragments.Base.IRBaseFragment;
 import vn.enclave.iramovies.ui.fragments.Detail.MovieDetailView;
+import vn.enclave.iramovies.ui.fragments.Favorite.FavoriteView;
 import vn.enclave.iramovies.ui.fragments.Movie.adapter.MovieAdapter;
 import vn.enclave.iramovies.ui.views.FailureLayout;
 import vn.enclave.iramovies.utilities.Constants;
@@ -86,6 +87,7 @@ public class MovieView extends IRBaseFragment implements IMovieView {
      */
     private int mPageIndex;
     private boolean mIsLoadMore = false;
+    private UpdatedFavoriteScreen mInterfaceRefresh;
 
     public MovieView() {
     }
@@ -237,6 +239,7 @@ public class MovieView extends IRBaseFragment implements IMovieView {
     public void addMovieSuccess(Movie movie) {
         mMovieInterface.updateCountStarOnMenu(movie.getFavorite());
         mMovieInterface.refreshStarInFavoriteScreen(movie);
+        mInterfaceRefresh.onRefreshFavoriteOnDetailScreen(movie);
     }
 
     private void updateListMovies(List<Movie> listMovies) {
@@ -253,6 +256,7 @@ public class MovieView extends IRBaseFragment implements IMovieView {
     public void deleteMovieSuccess(Movie movie) {
         mMovieInterface.updateCountStarOnMenu(movie.getFavorite());
         mMovieInterface.refreshStarInFavoriteScreen(movie);
+        mInterfaceRefresh.onRefreshFavoriteOnDetailScreen(movie);
     }
 
     @Override
@@ -321,5 +325,13 @@ public class MovieView extends IRBaseFragment implements IMovieView {
         void updateCountStarOnMenu(int value);
 
         void getMovieDetailFragment(MovieDetailView movieDetailView, Movie movie);
+    }
+
+    public interface UpdatedFavoriteScreen {
+        void onRefreshFavoriteOnDetailScreen(Movie movie);
+    }
+
+    public void setOnRefreshFavoriteOnMovieScreen(UpdatedFavoriteScreen mInterfaceRefresh) {
+        this.mInterfaceRefresh = mInterfaceRefresh;
     }
 }

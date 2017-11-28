@@ -325,6 +325,14 @@ public class HomeView extends BaseView {
                         mMenu.findItem(R.id.search).setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
                         mMenu.findItem(R.id.view_list).setVisible(true);
                         mMenu.findItem(R.id.view_list).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+                        mMovieView.setOnRefreshFavoriteOnMovieScreen(new MovieView.UpdatedFavoriteScreen() {
+                            @Override
+                            public void onRefreshFavoriteOnDetailScreen(Movie movie) {
+                                if (mDetailViewFavorite != null) {
+                                    mDetailViewFavorite.reload(movie);
+                                }
+                            }
+                        });
                         break;
                     case 1:
                         if (mFavoriteView.getChildFragmentManager().getBackStackEntryCount() == 0) {

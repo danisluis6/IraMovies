@@ -64,7 +64,6 @@ import vn.enclave.iramovies.utilities.Utils;
  * => Done
  * @Run: https://stackoverflow.com/questions/4207880/android-how-do-i-prevent-the-soft-keyboard-from-pushing-my-view-up
  * => Done
- *
  * @Run: https://stackoverflow.com/questions/20639464/actionbaractivity-with-actionbardrawertoggle-not-using-drawerimageres
  * => Done
  */
@@ -97,6 +96,9 @@ public class HomeView extends BaseView {
     private TabItem favoritesTab;
     private TabItem settingsTab;
     private TabItem aboutsTab;
+
+    private MovieDetailView mDetailViewMovie;
+    private MovieDetailView mDetailViewFavorite;
 
     private PaperAdapter mPageAdapter;
     private Menu mMenu;
@@ -212,14 +214,12 @@ public class HomeView extends BaseView {
 
                     @Override
                     public void updateCountStarOnMenu(int value) {
-                        // TODO
-                        // favoritesTab.updateNumberFavorites(value);
+                        favoritesTab.updateNumberFavorites(value);
                     }
 
                     @Override
                     public void refreshStarInFavoriteScreen(Movie movie) {
-                        // TODO
-                        // mFavoriteView.refreshStatusFavorite(movie);
+                        mFavoriteView.refreshStatusFavorite(movie);
                     }
 
                     @Override
@@ -230,7 +230,13 @@ public class HomeView extends BaseView {
 //                            mMovieView.refreshStatusFavorite(movie);
 //                        }
                     }
+
+                    @Override
+                    public void refreshStarInDetailScreen(Movie movie) {
+
+                    }
                 });
+                mDetailViewMovie = movieDetailView;
                 mMovieView.openMovieDetail(movieDetailView);
                 updateTitleBar(movie.getTitle());
             }
@@ -248,7 +254,7 @@ public class HomeView extends BaseView {
             }
 
             @Override
-            public void getMovieDetailFragment(MovieDetailView movieDetailView, Movie movie) {
+            public void getMovieDetailFragment(final MovieDetailView movieDetailView, Movie movie) {
                 final String title = mToolbar.getToolbar().getTitle().toString();
                 movieDetailView.setMovieDetailInterface(new MovieDetailView.MovieDetailInterface() {
                     @Override
@@ -276,7 +282,15 @@ public class HomeView extends BaseView {
                             mMovieView.refreshStatusFavorite(movie);
                         }
                     }
+
+                    @Override
+                    public void refreshStarInDetailScreen(Movie movie) {
+                        if (mDetailViewMovie != null) {
+                            mDetailViewMovie.reload(movie);
+                        }
+                    }
                 });
+                mDetailViewFavorite = movieDetailView;
                 mFavoriteView.openMovieDetail(movieDetailView);
                 updateTitleBar(movie.getTitle());
             }

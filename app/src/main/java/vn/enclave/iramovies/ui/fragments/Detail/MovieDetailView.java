@@ -96,6 +96,7 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
         mMovieDetailInterface.updateCountStarOnMenu(getMovie().getFavorite());
         mMovieDetailInterface.refreshStarInFavoriteScreen(getMovie());
         mMovieDetailInterface.refreshStarInMovieScreen(getMovie());
+        mMovieDetailInterface.refreshStarInDetailScreen(getMovie());
     }
 
     private void initAtribute() {
@@ -210,6 +211,11 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
 
     private  MovieDetailInterface  mMovieDetailInterface;
 
+    public void reload(Movie movie) {
+        imvFavorite.setImageResource((movie.getFavorite() == Constants.Favorites.FAVORITE) ? R.drawable.ic_star_picked : R.drawable.ic_star);
+        onResume();
+    }
+
     public interface MovieDetailInterface {
         void onDestroy();
         void updateCountStarOnMenu(int value);
@@ -217,6 +223,8 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
         void refreshStarInFavoriteScreen(Movie movie);
         // Refresh favorite in movie screen
         void refreshStarInMovieScreen(Movie movie);
+        // Refresh favorite in Detail screen
+        void refreshStarInDetailScreen(Movie movie);
     }
 
 }

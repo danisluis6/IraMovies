@@ -3,6 +3,7 @@ package vn.enclave.iramovies.ui.fragments.Movie;
 import android.arch.persistence.room.Room;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.Toast;
 
 import java.util.List;

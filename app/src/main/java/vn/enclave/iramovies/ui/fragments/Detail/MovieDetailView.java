@@ -212,7 +212,7 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
     private  MovieDetailInterface  mMovieDetailInterface;
 
     public void reload(Movie movie) {
-        if (imvFavorite != null) {
+        if (imvFavorite != null && getMovie().getId().equals(movie.getId())) {
             imvFavorite.setImageResource((movie.getFavorite() == Constants.Favorites.FAVORITE) ? R.drawable.ic_star_picked : R.drawable.ic_star);
         }
         onResume();

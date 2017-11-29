@@ -237,6 +237,7 @@ public class MovieView extends IRBaseFragment implements IMovieView {
     private void updateListMovies(List<Movie> listMovies) {
         mMoviesAdapter.remove(mMoviesAdapter.getItemCount() - 1);
         mMoviesAdapter.addAll(listMovies);
+        mIsLoadMore = false;
     }
 
     @Override

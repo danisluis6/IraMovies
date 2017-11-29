@@ -155,7 +155,11 @@ public class HomeView extends BaseView {
         aboutsTab.setTabText(getResources().getStringArray(R.array.menu_bottom_nav)[3]);
         tabNavigationBottomMenu.getTabAt(3).setCustomView(aboutsTab.getView());
 
-        updateTitleBar(getResources().getString(R.string.popular));
+        if (TextUtils.equals(SessionManager.getInstance(mContext).getCategory(), Constants.EMPTY_STRING)) {
+            updateTitleBar(getResources().getString(R.string.popular));
+        } else {
+            updateTitleBar(SessionManager.getInstance(mContext).getCategory());
+        }
     }
 
     public void initialPages() {
@@ -310,6 +314,11 @@ public class HomeView extends BaseView {
             public void onReloadRating() {
                 mMovieView.reloadRating();
             }
+
+            @Override
+            public void onReloadReleaseYear() {
+                mMovieView.onReloadReleaseYear();
+            }
         });
     }
 
@@ -337,7 +346,11 @@ public class HomeView extends BaseView {
                             }
                             mToolbar.getToolbar().setNavigationIcon(R.drawable.ic_menu);
                         } else {
-                            mToolbar.getToolbar().setNavigationIcon(R.drawable.ic_arrow_back);
+                            if (!TextUtils.equals(SessionManager.getInstance(mContext).getCategory(), Constants.EMPTY_STRING)) {
+                                updateTitleBar(SessionManager.getInstance(mContext).getCategory());
+                            } else {
+                                updateTitleBar(getResources().getString(R.string.popular));
+                            }
                         }
                         mMenu.findItem(R.id.search).setVisible(false);
                         mMenu.findItem(R.id.search).setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
@@ -353,12 +366,8 @@ public class HomeView extends BaseView {
                         });
                         break;
                     case 1:
-                        if (mFavoriteView.getChildFragmentManager().getBackStackEntryCount() == 0) {
-                            updateTitleBar(getResources().getString(R.string.favorites));
-                            mToolbar.getToolbar().setNavigationIcon(R.drawable.ic_menu);
-                        } else {
-                            mToolbar.getToolbar().setNavigationIcon(R.drawable.ic_arrow_back);
-                        }
+                        updateTitleBar(getResources().getString(R.string.favorites));
+                        mToolbar.getToolbar().setNavigationIcon(R.drawable.ic_menu);
                         mMenu.findItem(R.id.search).setVisible(true);
                         mMenu.findItem(R.id.search).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
                         mMenu.findItem(R.id.view_list).setVisible(false);

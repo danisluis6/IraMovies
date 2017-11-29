@@ -1,10 +1,10 @@
 package vn.enclave.iramovies.ui.fragments.Movie.adapter;
 
 import android.content.Context;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,14 +13,11 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import vn.enclave.iramovies.R;
-import vn.enclave.iramovies.local.storage.SessionManager;
 import vn.enclave.iramovies.local.storage.entity.Movie;
 import vn.enclave.iramovies.services.IraMovieInfoAPIs;
 import vn.enclave.iramovies.ui.activities.base.BaseView;

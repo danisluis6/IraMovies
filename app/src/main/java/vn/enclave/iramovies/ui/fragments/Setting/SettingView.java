@@ -83,7 +83,14 @@ public class SettingView extends IRBaseFragment {
 
     @Override
     public void fragmentCreated() {
-        edtCategory.setText(getString(R.string.category_popular));
+        if (!TextUtils.equals(SessionManager.getInstance(mActivity).getCategory(), Constants.EMPTY_STRING)) {
+            edtCategory.setText(SessionManager.getInstance(mActivity).getCategory());
+        } else {
+            edtCategory.setText(getString(R.string.category_popular));
+        }
+        if (!TextUtils.equals(SessionManager.getInstance(mActivity).getRate(), Constants.EMPTY_STRING)) {
+            edtMovieWithRate.setText(SessionManager.getInstance(mActivity).getRate());
+        }
         edtReleaseDate.setText(getString(R.string.label_rating_movies));
     }
 
@@ -133,6 +140,7 @@ public class SettingView extends IRBaseFragment {
                 );
                 edtReleaseYear.setText(text);
                 SessionManager.getInstance(mActivity).setReleaseYear(text);
+                mSettingInterface.onReloadReleaseYear();
             }
         }, getValueFromEditText());
         releaseYearDialog.show();
@@ -206,5 +214,6 @@ public class SettingView extends IRBaseFragment {
     public interface SettingInterface {
         void onReloadCategory(String category);
         void onReloadRating();
+        void onReloadReleaseYear();
     }
 }

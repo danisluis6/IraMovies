@@ -13,14 +13,12 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import butterknife.BindView;
@@ -40,20 +38,35 @@ import vn.enclave.iramovies.utilities.Utils;
  *
  * @Run: Apply Mode-View_Presenter : MVP
  * => Done
+ *
  * @Run: https://stackoverflow.com/questions/28494637/android-how-to-stop-refreshing-fragments-on-tab-change
  * => Done
+ *
  * @Run: https://www.coderefer.com/android-recyclerview-cardview-tutorial/
  * => @TODO
+ *
  * @Run: http://pointofandroid.blogspot.com/2016/12/recyclerviewhorizontal-and-vertical.html
  * => Done
+ *
  * @Run: https://www.youtube.com/results?search_query=nested+fragment+viewpager
  * => nested fragment viewpager
+ *
  * @Run: https://stackoverflow.com/questions/39491655/communication-between-nested-fragments-in-android
  * => Communicate between nested fragments
+ *
  * @Run: https://tausiq.wordpress.com/2014/06/06/android-multiple-fragments-stack-in-each-viewpager-tab/
  * => Research More
+ *
  * @Run: https://stackoverflow.com/questions/14740445/what-is-difference-between-getsupportfragmentmanager-and-getchildfragmentmanag
+ * => Done
+ *
  * @Run: https://stackoverflow.com/questions/39885502/communication-between-nested-fragments-activities-both-ways
+ * => Done
+ *
+ * @Run: http://panavtec.me/retain-restore-recycler-view-scroll-position
+ * => Done
+ *
+ * @Run: https://stackoverflow.com/questions/38611348/recyclerview-keep-scrolling-position-after-changing-layout
  * => Done
  */
 
@@ -66,7 +79,6 @@ public class MovieView extends IRBaseFragment implements IMovieView {
     @BindView(R.id.rcvMovies)
     public RecyclerView rcvMovies;
 
-    private RecyclerView.LayoutManager mLayoutManager;
     private MovieInterface mMovieInterface;
     private MovieAdapter mMoviesAdapter;
     private List<Movie> mGroupMovies;
@@ -143,7 +155,7 @@ public class MovieView extends IRBaseFragment implements IMovieView {
                 }
             });
         }
-        mLayoutManager = new LinearLayoutManager(mActivity);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(mActivity);
         rcvMovies.setLayoutManager(mLayoutManager);
         rcvMovies.setAdapter(mMoviesAdapter);
         mMoviesAdapter.setMoreDataAvailable(true);
@@ -170,6 +182,11 @@ public class MovieView extends IRBaseFragment implements IMovieView {
                 mMoviesPresenter.deleteMovie(movie);
             }
         });
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
     }
 
     private Bundle getMovieBundle(Movie movie) {
@@ -298,6 +315,7 @@ public class MovieView extends IRBaseFragment implements IMovieView {
     }
 
     public void setOnDisplay(boolean onDisplay) {
+        // TODO
         rcvMovies.setAdapter(mMoviesAdapter);
         if (onDisplay) {
             rcvMovies.setLayoutManager(new LinearLayoutManager(mActivity));
@@ -305,6 +323,7 @@ public class MovieView extends IRBaseFragment implements IMovieView {
             rcvMovies.setLayoutManager(new GridLayoutManager(mActivity, 2));
         }
         mMoviesAdapter.setModeDisplay(onDisplay);
+        rcvMovies.scrollToPosition(15);
     }
 
     /**
@@ -373,6 +392,11 @@ public class MovieView extends IRBaseFragment implements IMovieView {
     }
 
     public void reloadRating() {
+        resetPageIndex(Constants.FIRST_PAGE);
+        mMoviesPresenter.getMoviesFromApi(mPageIndex, false, mType);
+    }
+
+    public void onReloadReleaseYear() {
         resetPageIndex(Constants.FIRST_PAGE);
         mMoviesPresenter.getMoviesFromApi(mPageIndex, false, mType);
     }

@@ -7,6 +7,9 @@
 > **Major:** Programmer
 
 > **Address:** VietNam
+
+> **Schedule** #[Schedule](#schedule)
+
 # [Recycler View](#recycler-view)
 ## [Load More](#load-more)
 ### [Index Page](#index-page)
@@ -32,3 +35,12 @@
     <color name="White">#FFFFFF</color>
  
 ##How to make editText without line at bottom
+
+## Schedule
+
+> **Version: ** ver22
+
+> **Update list when change release date**
+
+> **
+

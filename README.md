@@ -15,7 +15,7 @@
     - [How to organizate folder in android-studio](#how-to-organizate-folder-in-android-studio)
     - [How to cutomize activity on more device](#How to cutomize activity on more device)
 
-## Recycle View Load More
+##Recycle View Load More
 
     <color name="White">#FFFFFF</color>
     <color name="Ivory">#FFFFF0</color>

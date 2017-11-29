@@ -5,6 +5,15 @@ Hobby: Soccer and Chess
 > Major: Programmer
 > Address: VietName
 
+
+1- To create Entire in Room Persistence
+1.1- Create a Entire
+---> @PrimaryKey
+A primary key is a special relational database table column (or combination of columns) designated to uniquely identify all table records. A primary key's main features are: It must contain a unique value for each row of data. It cannot contain null values.
+-
+---> @How can we have annotation Android?
+
+
 - [Library Color](#library-color)
 
 - [Widget Android](#widget-android)

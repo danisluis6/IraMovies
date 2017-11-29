@@ -16,6 +16,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.SearchView;
 import android.text.SpannableStringBuilder;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -32,6 +33,7 @@ import java.util.Vector;
 
 import butterknife.BindView;
 import vn.enclave.iramovies.R;
+import vn.enclave.iramovies.local.storage.SessionManager;
 import vn.enclave.iramovies.local.storage.entity.Movie;
 import vn.enclave.iramovies.ui.activities.base.BaseView;
 import vn.enclave.iramovies.ui.activities.base.Home.adapters.PaperAdapter;
@@ -297,6 +299,18 @@ public class HomeView extends BaseView {
                 updateTitleBar(movie.getTitle());
             }
         });
+
+        mSettingView.setSettingInterface(new SettingView.SettingInterface() {
+            @Override
+            public void onReloadCategory(String title) {
+                mMovieView.reloadCategory(title);
+            }
+
+            @Override
+            public void onReloadRating() {
+                mMovieView.reloadRating();
+            }
+        });
     }
 
     private void updateNavigationIcon(Drawable drawable) {
@@ -316,7 +330,11 @@ public class HomeView extends BaseView {
                 switch (position) {
                     case 0:
                         if (mMovieView.getChildFragmentManager().getBackStackEntryCount() == 0) {
-                            updateTitleBar(getResources().getString(R.string.popular));
+                            if (!TextUtils.equals(SessionManager.getInstance(mContext).getCategory(), Constants.EMPTY_STRING)) {
+                                updateTitleBar(SessionManager.getInstance(mContext).getCategory());
+                            } else {
+                                updateTitleBar(getResources().getString(R.string.popular));
+                            }
                             mToolbar.getToolbar().setNavigationIcon(R.drawable.ic_menu);
                         } else {
                             mToolbar.getToolbar().setNavigationIcon(R.drawable.ic_arrow_back);

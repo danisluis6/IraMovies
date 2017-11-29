@@ -9,7 +9,7 @@
         android:id="@+id/imvSmallThumbnail"
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:scaleType="fitCenter"
+        android:scaleType="fitXY"
         android:src="@drawable/load"
         android:contentDescription="@string/app_name"
         app:layout_constraintLeft_toLeftOf="parent"

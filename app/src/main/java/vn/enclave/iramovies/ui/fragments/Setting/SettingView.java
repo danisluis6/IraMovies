@@ -12,6 +12,7 @@ import android.widget.EditText;
 import butterknife.BindView;
 import butterknife.OnClick;
 import vn.enclave.iramovies.R;
+import vn.enclave.iramovies.local.storage.SessionManager;
 import vn.enclave.iramovies.ui.dialog.DialogCategory;
 import vn.enclave.iramovies.ui.dialog.DialogReleaseDate;
 import vn.enclave.iramovies.ui.dialog.DialogReleaseYear;
@@ -73,6 +74,8 @@ public class SettingView extends IRBaseFragment {
     @BindView(R.id.edtReleaseDate)
     EditText edtReleaseDate;
 
+    private SettingInterface mSettingInterface;
+
     @Override
     public View getViewLayout(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_setting, container, false);
@@ -115,6 +118,7 @@ public class SettingView extends IRBaseFragment {
             @Override
             public void onRadioSelected(String text) {
                 edtReleaseDate.setText(text);
+                SessionManager.getInstance(mActivity).setReleaseDate(text);
             }
         }, getRadioSelectedRelease());
         releaseDateDialog.show();
@@ -128,6 +132,7 @@ public class SettingView extends IRBaseFragment {
                         WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
                 );
                 edtReleaseYear.setText(text);
+                SessionManager.getInstance(mActivity).setReleaseYear(text);
             }
         }, getValueFromEditText());
         releaseYearDialog.show();
@@ -138,6 +143,8 @@ public class SettingView extends IRBaseFragment {
             @Override
             public void onGetValueSeekBar(String value) {
                 edtMovieWithRate.setText(TextUtils.equals(value, "0") ? "0.0" : value);
+                SessionManager.getInstance(mActivity).setRate(edtMovieWithRate.getText().toString());
+                mSettingInterface.onReloadRating();
             }
         }, getValueFromSeekBar());
         seekBarDialog.show();
@@ -149,6 +156,8 @@ public class SettingView extends IRBaseFragment {
             @Override
             public void onRadioSelected(String text) {
                 edtCategory.setText(text);
+                SessionManager.getInstance(mActivity).setCategory(text);
+                mSettingInterface.onReloadCategory(text);
             }
         }, getRadioSelectedCategory());
         categoryDialog.show();
@@ -188,5 +197,14 @@ public class SettingView extends IRBaseFragment {
             return DialogReleaseDate.TYPE.RATING_MOVIES;
         }
         return null;
+    }
+
+    public void setSettingInterface(SettingInterface settingInterface) {
+        this.mSettingInterface = settingInterface;
+    }
+
+    public interface SettingInterface {
+        void onReloadCategory(String category);
+        void onReloadRating();
     }
 }

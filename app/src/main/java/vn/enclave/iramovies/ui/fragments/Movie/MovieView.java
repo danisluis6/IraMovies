@@ -12,12 +12,15 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import butterknife.BindView;
@@ -78,6 +81,7 @@ public class MovieView extends IRBaseFragment implements IMovieView {
     private int mPageIndex;
     private boolean mIsLoadMore = false;
     private UpdatedFavoriteScreen mInterfaceRefresh;
+    private MODE mType;
 
     public MovieView() {
     }
@@ -112,7 +116,7 @@ public class MovieView extends IRBaseFragment implements IMovieView {
 
     private void handleData(List<Movie> movies) {
         if (Utils.isInternetOn(mActivity)) {
-            mMoviesPresenter.getMoviesFromApi(mPageIndex, true, MODE.POPULAR);
+            mMoviesPresenter.getMoviesFromApi(mPageIndex, true, mType);
         } else {
             if (movies.isEmpty()) {
                 mFailureLayout.setFailureMessage(getResources().getString(R.string.no_internet_connection));
@@ -187,7 +191,7 @@ public class MovieView extends IRBaseFragment implements IMovieView {
         mMoviesAdapter.add(new Movie(Constants.Objects.LOAD));
         mIsLoadMore = true;
         mMoviesAdapter.updateStatusLoading(false);
-        mMoviesPresenter.getMoviesFromApi(mPageIndex, false, MODE.POPULAR);
+        mMoviesPresenter.getMoviesFromApi(mPageIndex, false, mType);
     }
 
     private void initAttributes() {
@@ -195,6 +199,7 @@ public class MovieView extends IRBaseFragment implements IMovieView {
         mMoviesPresenter.attachView(this);
 
         mPageIndex = Constants.FIRST_PAGE;
+        mType = MODE.POPULAR;
         mMoviesAdapter.setMoreDataAvailable(true);
     }
 
@@ -218,11 +223,24 @@ public class MovieView extends IRBaseFragment implements IMovieView {
         ++mPageIndex; /* End fix */
         if (mIsLoadMore) {
             // Handle the dismiss loadingMore if there is another caller API is executing
-            updateListMovies(movies);
+            updateListMovies(getListMovies(movies));
         } else {
             dismissProgressDialog();
-            mMoviesAdapter.setMovies(movies);
+            mMoviesAdapter.setMovies(getListMovies(movies));
         }
+    }
+
+    private List<Movie> getListMovies(List<Movie> movies) {
+        List<Movie> temps = new ArrayList<>();
+        if (TextUtils.equals(SessionManager.getInstance(mActivity).getRate(), Constants.EMPTY_STRING)) {
+            return movies;
+        }
+        for (int index = 0; index < movies.size(); index++ ) {
+            if (movies.get(index).getVoteAverage() >= Double.parseDouble(SessionManager.getInstance(mActivity).getRate())) {
+                temps.add(movies.get(index));
+            }
+        }
+        return temps;
     }
 
     @Override
@@ -311,6 +329,52 @@ public class MovieView extends IRBaseFragment implements IMovieView {
 
     public void setOnRefreshFavoriteOnMovieScreen(UpdatedFavoriteScreen mInterfaceRefresh) {
         this.mInterfaceRefresh = mInterfaceRefresh;
+    }
+
+    public void reloadCategory(String category) {
+        if (!TextUtils.equals(category, Constants.EMPTY_STRING)) {
+            resetPageIndex(Constants.FIRST_PAGE);
+            switch (getType(category)) {
+                case POPULAR:
+                    mMoviesPresenter.getMoviesFromApi(mPageIndex, false, MODE.POPULAR);
+                    break;
+                case TOP_RATED:
+                    mMoviesPresenter.getMoviesFromApi(mPageIndex, false, MODE.TOP_RATED);
+                    break;
+                case UPCOMING:
+                    mMoviesPresenter.getMoviesFromApi(mPageIndex, false, MODE.UPCOMING);
+                    break;
+                case NOW_PLAYING:
+                    mMoviesPresenter.getMoviesFromApi(mPageIndex, false, MODE.NOW_PLAYING);
+                    break;
+                default:
+                    mMoviesPresenter.getMoviesFromApi(mPageIndex, false, MODE.POPULAR);
+                    break;
+            }
+        }
+    }
+
+    private void resetPageIndex(int firstPage) {
+        mPageIndex = firstPage;
+        mIsLoadMore = false;
+    }
+
+    public MODE getType(String category) {
+        if (TextUtils.equals(category, getString(R.string.category_popular))) {
+            return MODE.POPULAR;
+        } else if (TextUtils.equals(category, getString(R.string.category_top_rated))) {
+            return MODE.TOP_RATED;
+        } else if (TextUtils.equals(category, getString(R.string.category_up_coming))) {
+            return MODE.UPCOMING;
+        } else if (TextUtils.equals(category, getString(R.string.category_now_playing))) {
+            return MODE.NOW_PLAYING;
+        }
+        return MODE.POPULAR;
+    }
+
+    public void reloadRating() {
+        resetPageIndex(Constants.FIRST_PAGE);
+        mMoviesPresenter.getMoviesFromApi(mPageIndex, false, mType);
     }
 
     enum MODE {

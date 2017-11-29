@@ -1,6 +1,6 @@
 # WELCOME YOU TUTORIAL LEARNING ANDROID [![Build Status](https://travis-ci.org/nomensa/jquery.hide-show.svg)](https://travis-ci.org/nomensa/jquery.hide-show.svg?branch=master)
 - [Resolve](#resolve)
-    - [Recycle View Load More](recycle_view_load_more)
+    - [Recycle View Load More](recycle-view-load-more)
 
 - [Widget Android](#widget-android)
   - [EditText](#edittext)

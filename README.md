@@ -1,6 +1,6 @@
 # WELCOME YOU TUTORIAL LEARNING ANDROID [![Build Status](https://travis-ci.org/nomensa/jquery.hide-show.svg)](https://travis-ci.org/nomensa/jquery.hide-show.svg?branch=master)
 
-> **Nickname:** "Lorence"
+> **Nickname:** Lorence
 
 > **Hobby:** Soccer and Chess
 

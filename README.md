@@ -26,6 +26,8 @@
 ### [Check Load More](#check-load-more)
 
 ## Recycler View
+## Check Load More
+   > Update list in Adapter. We should upgrade value of isLoadMore = false at onSuccess();
 
     <color name="White">#FFFFFF</color>
  

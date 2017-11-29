@@ -1,9 +1,9 @@
 # WELCOME YOU TUTORIAL LEARNING ANDROID [![Build Status](https://travis-ci.org/nomensa/jquery.hide-show.svg)](https://travis-ci.org/nomensa/jquery.hide-show.svg?branch=master)
 
-- Nickname: "Lorence"
-- Hobby: Soccer and Chess
-- Major: Programmer
-- Address: VietName
+!-- Nickname: "Lorence"
+!-- Hobby: Soccer and Chess
+!-- Major: Programmer
+!-- Address: VietName
 
 - [Library Color](#library-color)
 

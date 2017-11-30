@@ -308,9 +308,11 @@ public class HomeView extends BaseView {
         mSettingView.setSettingInterface(new SettingView.SettingInterface() {
             @Override
             public void onReloadCategory(String category) {
+                Log.i("AAA", category);
+                Log.i("BBB", SessionManager.getInstance(mContext).getCategory());
                 if (!TextUtils.equals(SessionManager.getInstance(mContext).getCategory(), Constants.EMPTY_STRING) && !TextUtils.equals(SessionManager.getInstance(mContext).getCategory(), category)) {
                     SessionManager.getInstance(mContext).setCategory(category);
-                    mMovieView.reloadCategory(category);
+                    mMovieView.reloadCategory(category, true);
                 }
             }
 
@@ -318,7 +320,7 @@ public class HomeView extends BaseView {
             public void onReloadRating(String rate) {
                 if (!TextUtils.equals(SessionManager.getInstance(mContext).getRate(), Constants.EMPTY_STRING) && !TextUtils.equals(SessionManager.getInstance(mContext).getRate(), rate)) {
                     SessionManager.getInstance(mContext).setRate(rate);
-                    mMovieView.reloadRating();
+                    mMovieView.reloadRating(true);
                 }
             }
 
@@ -326,7 +328,7 @@ public class HomeView extends BaseView {
             public void onReloadReleaseYear(String releaseYear) {
                 if (!TextUtils.equals(SessionManager.getInstance(mContext).getReleaseYear(), Constants.EMPTY_STRING) && !TextUtils.equals(SessionManager.getInstance(mContext).getReleaseYear(), releaseYear)) {
                     SessionManager.getInstance(mContext).setReleaseYear(releaseYear);
-                    mMovieView.onReloadReleaseYear();
+                    mMovieView.onReloadReleaseYear(true);
                 }
             }
 
@@ -334,7 +336,7 @@ public class HomeView extends BaseView {
             public void onSortByDateAndRating(String type) {
                 if (!TextUtils.equals(SessionManager.getInstance(mContext).getReleaseDate(), Constants.EMPTY_STRING) && !TextUtils.equals(SessionManager.getInstance(mContext).getReleaseDate(), type)) {
                     SessionManager.getInstance(mContext).setReleaseYear(type);
-                    mMovieView.onReloadSorting();
+                    mMovieView.onReloadSorting(true);
                 }
             }
         });

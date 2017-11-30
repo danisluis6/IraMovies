@@ -13,7 +13,6 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +20,6 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.zip.DeflaterOutputStream;
 
 import butterknife.BindView;
 import vn.enclave.iramovies.R;
@@ -96,7 +94,11 @@ public class MovieView extends IRBaseFragment implements IMovieView {
     private boolean mIsLoadMore = false;
     private UpdatedFavoriteScreen mInterfaceRefresh;
     private MODE mType;
-    private boolean mIsReleaseYear = false;
+
+    private boolean isSetting;
+    private boolean isReloadRate;
+    private boolean isReloadReleaseYear;
+    private boolean isReloadSorting;
 
     public MovieView() {
     }
@@ -220,6 +222,10 @@ public class MovieView extends IRBaseFragment implements IMovieView {
 
         mPageIndex = Constants.FIRST_PAGE;
         mType = MODE.POPULAR;
+        isSetting = false;
+        isReloadRate = false;
+        isReloadSorting = false;
+        isReloadReleaseYear = false;
         mMoviesAdapter.setMoreDataAvailable(true);
     }
 
@@ -237,21 +243,47 @@ public class MovieView extends IRBaseFragment implements IMovieView {
         }
     }
 
-    public void reloadRating() {
+    public void reloadCategory(String category, boolean load) {
+        if (!TextUtils.equals(category, Constants.EMPTY_STRING)) {
+            resetPageIndex(Constants.FIRST_PAGE);
+            switch (getType(category)) {
+                case POPULAR:
+                    mMoviesPresenter.getMoviesFromApi(mPageIndex, false, MODE.POPULAR);
+                    break;
+                case TOP_RATED:
+                    mMoviesPresenter.getMoviesFromApi(mPageIndex, false, MODE.TOP_RATED);
+                    break;
+                case UPCOMING:
+                    mMoviesPresenter.getMoviesFromApi(mPageIndex, false, MODE.UPCOMING);
+                    break;
+                case NOW_PLAYING:
+                    mMoviesPresenter.getMoviesFromApi(mPageIndex, false, MODE.NOW_PLAYING);
+                    break;
+                default:
+                    mMoviesPresenter.getMoviesFromApi(mPageIndex, false, MODE.POPULAR);
+                    break;
+            }
+        }
+    }
+
+    public void reloadRating(boolean load) {
+        isReloadRate = load;
+        isSetting = true;
         resetPageIndex(Constants.FIRST_PAGE);
-        setReleaseYear(false);
         mMoviesPresenter.getMoviesFromApi(mPageIndex, false, mType);
     }
 
-    public void onReloadReleaseYear() {
+    public void onReloadReleaseYear(boolean load) {
+        isReloadReleaseYear = load;
+        isSetting = true;
         resetPageIndex(Constants.FIRST_PAGE);
-        setReleaseYear(true);
         mMoviesPresenter.getMoviesFromApi(mPageIndex, false, mType);
     }
 
-    public void onReloadSorting() {
+    public void onReloadSorting(boolean load) {
+        isReloadSorting = load;
+        isSetting = true;
         resetPageIndex(Constants.FIRST_PAGE);
-        setReleaseYear(true);
         mMoviesPresenter.getMoviesFromApi(mPageIndex, false, mType);
     }
 
@@ -261,19 +293,31 @@ public class MovieView extends IRBaseFragment implements IMovieView {
         ++mPageIndex; /* End fix */
         if (mIsLoadMore) {
             // Handle the dismiss loadingMore if there is another caller API is executing
-            if (getReleaseYear()) {
-                updateListMovies(getListMoviesByReleaseYear(movies));
+            if (isSetting) {
+                updateListMovies(getMovieBySetting(movies));
             } else {
-                updateListMovies(getListMoviesByRate(movies));
+                updateListMovies(movies);
             }
         } else {
             dismissProgressDialog();
-            if (getReleaseYear()) {
-                mMoviesAdapter.setMovies(getListMoviesByReleaseYear(movies));
+            if (isSetting) {
+                mMoviesAdapter.setMovies(getMovieBySetting(movies));
             } else {
-                mMoviesAdapter.setMovies(getListMoviesByRate(movies));
+                mMoviesAdapter.setMovies(movies);
             }
         }
+    }
+
+    private List<Movie> getMovieBySetting(List<Movie> movies) {
+        List<Movie> temps = new ArrayList<>();
+        if (isReloadRate) {
+            temps = getListMoviesByRate(movies);
+        }
+        if (isReloadReleaseYear)
+        {
+            temps = getListMoviesByReleaseYear(temps);
+        }
+        return temps;
     }
 
     private List<Movie> getListMoviesByRate(List<Movie> movies) {
@@ -285,6 +329,7 @@ public class MovieView extends IRBaseFragment implements IMovieView {
         }
         return temps;
     }
+
 
     private List<Movie> getListMoviesByReleaseYear(List<Movie> movies) {
         List<Movie> temps = new ArrayList<>();
@@ -386,29 +431,6 @@ public class MovieView extends IRBaseFragment implements IMovieView {
         this.mInterfaceRefresh = mInterfaceRefresh;
     }
 
-    public void reloadCategory(String category) {
-        if (!TextUtils.equals(category, Constants.EMPTY_STRING)) {
-            resetPageIndex(Constants.FIRST_PAGE);
-            switch (getType(category)) {
-                case POPULAR:
-                    mMoviesPresenter.getMoviesFromApi(mPageIndex, false, MODE.POPULAR);
-                    break;
-                case TOP_RATED:
-                    mMoviesPresenter.getMoviesFromApi(mPageIndex, false, MODE.TOP_RATED);
-                    break;
-                case UPCOMING:
-                    mMoviesPresenter.getMoviesFromApi(mPageIndex, false, MODE.UPCOMING);
-                    break;
-                case NOW_PLAYING:
-                    mMoviesPresenter.getMoviesFromApi(mPageIndex, false, MODE.NOW_PLAYING);
-                    break;
-                default:
-                    mMoviesPresenter.getMoviesFromApi(mPageIndex, false, MODE.POPULAR);
-                    break;
-            }
-        }
-    }
-
     private void resetPageIndex(int firstPage) {
         mPageIndex = firstPage;
         mIsLoadMore = false;
@@ -425,14 +447,6 @@ public class MovieView extends IRBaseFragment implements IMovieView {
             return MODE.NOW_PLAYING;
         }
         return MODE.POPULAR;
-    }
-
-    public boolean getReleaseYear() {
-        return mIsReleaseYear;
-    }
-
-    public void setReleaseYear(boolean mIsReleaseYear) {
-        this.mIsReleaseYear = mIsReleaseYear;
     }
 
     enum MODE {

@@ -264,7 +264,7 @@ public class HomeView extends BaseView {
 
             @Override
             public void getMovieDetailFragment(final MovieDetailView movieDetailView, Movie movie) {
-                final String title = mToolbar.getToolbar().getTitle().toString();
+                final String title = SessionManager.getInstance(mContext).getCategory();
                 movieDetailView.setMovieDetailInterface(new MovieDetailView.MovieDetailInterface() {
                     @Override
                     public void onDestroy() {
@@ -308,36 +308,26 @@ public class HomeView extends BaseView {
         mSettingView.setSettingInterface(new SettingView.SettingInterface() {
             @Override
             public void onReloadCategory(String category) {
-                Log.i("AAA", category);
-                Log.i("BBB", SessionManager.getInstance(mContext).getCategory());
-                if (!TextUtils.equals(SessionManager.getInstance(mContext).getCategory(), Constants.EMPTY_STRING) && !TextUtils.equals(SessionManager.getInstance(mContext).getCategory(), category)) {
-                    SessionManager.getInstance(mContext).setCategory(category);
-                    mMovieView.reloadCategory(category, true);
-                }
+                SessionManager.getInstance(mContext).setCategory(category);
+                mMovieView.reloadCategory(category, true);
             }
 
             @Override
             public void onReloadRating(String rate) {
-                if (!TextUtils.equals(SessionManager.getInstance(mContext).getRate(), Constants.EMPTY_STRING) && !TextUtils.equals(SessionManager.getInstance(mContext).getRate(), rate)) {
-                    SessionManager.getInstance(mContext).setRate(rate);
-                    mMovieView.reloadRating(true);
-                }
+                SessionManager.getInstance(mContext).setRate(rate);
+                mMovieView.reloadRating(true);
             }
 
             @Override
             public void onReloadReleaseYear(String releaseYear) {
-                if (!TextUtils.equals(SessionManager.getInstance(mContext).getReleaseYear(), Constants.EMPTY_STRING) && !TextUtils.equals(SessionManager.getInstance(mContext).getReleaseYear(), releaseYear)) {
-                    SessionManager.getInstance(mContext).setReleaseYear(releaseYear);
-                    mMovieView.onReloadReleaseYear(true);
-                }
+                SessionManager.getInstance(mContext).setReleaseYear(releaseYear);
+                mMovieView.onReloadReleaseYear(true);
             }
 
             @Override
             public void onSortByDateAndRating(String type) {
-                if (!TextUtils.equals(SessionManager.getInstance(mContext).getReleaseDate(), Constants.EMPTY_STRING) && !TextUtils.equals(SessionManager.getInstance(mContext).getReleaseDate(), type)) {
-                    SessionManager.getInstance(mContext).setReleaseYear(type);
-                    mMovieView.onReloadSorting(true);
-                }
+                SessionManager.getInstance(mContext).setReleaseDate(type);
+                mMovieView.onReloadSorting(true);
             }
         });
     }
@@ -359,17 +349,13 @@ public class HomeView extends BaseView {
                 switch (position) {
                     case 0:
                         if (mMovieView.getChildFragmentManager().getBackStackEntryCount() == 0) {
-                            if (!TextUtils.equals(SessionManager.getInstance(mContext).getCategory(), Constants.EMPTY_STRING)) {
-                                updateTitleBar(SessionManager.getInstance(mContext).getCategory());
-                            } else {
-                                updateTitleBar(getResources().getString(R.string.popular));
-                            }
+                            updateTitleBar(SessionManager.getInstance(mContext).getCategory());
                             mToolbar.getToolbar().setNavigationIcon(R.drawable.ic_menu);
                         } else {
                             if (!TextUtils.equals(SessionManager.getInstance(mContext).getCategory(), Constants.EMPTY_STRING)) {
-                                updateTitleBar(SessionManager.getInstance(mContext).getCategory());
+                                updateTitleBar(mDetailViewMovie.getTitle());
                             } else {
-                                updateTitleBar(getResources().getString(R.string.popular));
+                                updateTitleBar(SessionManager.getInstance(mContext).getCategory());
                             }
                         }
                         mMenu.findItem(R.id.search).setVisible(false);

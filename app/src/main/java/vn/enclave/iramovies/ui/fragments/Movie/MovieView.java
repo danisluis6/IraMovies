@@ -13,12 +13,15 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import butterknife.BindView;
@@ -99,6 +102,7 @@ public class MovieView extends IRBaseFragment implements IMovieView {
     private boolean isReloadRate;
     private boolean isReloadReleaseYear;
     private boolean isReloadSorting;
+    private int lastFirstVisiblePosition;
 
     public MovieView() {
     }
@@ -317,7 +321,35 @@ public class MovieView extends IRBaseFragment implements IMovieView {
         {
             temps = getListMoviesByReleaseYear(temps);
         }
+        if (isReloadSorting) {
+            String type = SessionManager.getInstance(mActivity).getReleaseDate();
+            if (TextUtils.equals(type, mActivity.getString(R.string.label_rating_movies))) {
+                temps = sortByRating(temps);
+            } else {
+                temps = sortByDate(temps);
+            }
+        }
         return temps;
+    }
+
+    private List<Movie> sortByDate(List<Movie> list) {
+        Collections.sort(list, new Comparator<Movie>() {
+            @Override
+            public int compare(Movie mv1, Movie mv2) {
+                return Double.compare(Utils.getTime(mv2.getReleaseDate()), Utils.getTime(mv1.getReleaseDate()));
+            }
+        });
+        return list;
+    }
+
+    private List<Movie> sortByRating(List<Movie> list) {
+        Collections.sort(list, new Comparator<Movie>() {
+            @Override
+            public int compare(Movie mv1, Movie mv2) {
+                return Double.compare(mv2.getVoteAverage(), mv1.getVoteAverage());
+            }
+        });
+        return list;
     }
 
     private List<Movie> getListMoviesByRate(List<Movie> movies) {
@@ -396,7 +428,11 @@ public class MovieView extends IRBaseFragment implements IMovieView {
     }
 
     public void setOnDisplay(boolean onDisplay) {
-        // TODO
+        if (onDisplay) {
+            lastFirstVisiblePosition = ((GridLayoutManager)rcvMovies.getLayoutManager()).findFirstCompletelyVisibleItemPosition();
+        } else {
+            lastFirstVisiblePosition = ((LinearLayoutManager)rcvMovies.getLayoutManager()).findFirstCompletelyVisibleItemPosition();
+        }
         rcvMovies.setAdapter(mMoviesAdapter);
         if (onDisplay) {
             rcvMovies.setLayoutManager(new LinearLayoutManager(mActivity));
@@ -404,7 +440,7 @@ public class MovieView extends IRBaseFragment implements IMovieView {
             rcvMovies.setLayoutManager(new GridLayoutManager(mActivity, 2));
         }
         mMoviesAdapter.setModeDisplay(onDisplay);
-        rcvMovies.scrollToPosition(15);
+        rcvMovies.scrollToPosition(lastFirstVisiblePosition);
     }
 
     /**

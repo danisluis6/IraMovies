@@ -44,7 +44,9 @@
 
 >> **We need to refresh API when change value. So, we need check condition before calling API**
 
->> **Done**
+>> **Fix when save RecyclerView's scroll position using RecyclerView.State**
+
+>> **Hello**
 
 > **Update list when change release year**
 

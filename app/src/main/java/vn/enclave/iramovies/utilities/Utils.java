@@ -1,5 +1,6 @@
 package vn.enclave.iramovies.utilities;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
@@ -10,7 +11,10 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
-import java.io.ByteArrayOutputStream;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import vn.enclave.iramovies.ui.activities.base.BaseView;
 
@@ -39,6 +43,20 @@ public class Utils {
 
     public static Double getYear(String releaseDate) {
         return Double.parseDouble(releaseDate.substring(0, 4));
+    }
+
+    @SuppressLint("SimpleDateFormat")
+    public static long getTime(String releaseDate) {
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        Date startDate = null;
+        try {
+            startDate = df.parse(releaseDate);
+            String newDateString = df.format(startDate);
+            System.out.println(newDateString);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return startDate.getTime();
     }
 
     public static class Toast {

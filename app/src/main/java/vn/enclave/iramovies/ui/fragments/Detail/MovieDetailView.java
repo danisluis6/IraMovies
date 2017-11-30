@@ -218,6 +218,10 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
         onResume();
     }
 
+    public String getTitle() {
+        return mMovie.getTitle();
+    }
+
     public interface MovieDetailInterface {
         void onDestroy();
         void updateCountStarOnMenu(int value);

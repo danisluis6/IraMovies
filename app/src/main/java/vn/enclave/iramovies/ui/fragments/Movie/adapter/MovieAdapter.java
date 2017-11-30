@@ -257,25 +257,6 @@ public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         this.notifyDataSetChanged();
     }
 
-    public void sortFollowDate() {
-        String type = SessionManager.getInstance(mContext).getReleaseDate();
-        if (TextUtils.equals(type, mContext.getString(R.string.label_rating_movies))) {
-            sortByRating();
-        } else {
-
-        }
-        this.notifyDataSetChanged();
-    }
-
-    private void sortByRating() {
-        Collections.sort(this.mGrouMovies, new Comparator<Movie>() {
-            @Override
-            public int compare(Movie mv1, Movie mv2) {
-                return Double.compare(mv1.getVoteAverage(), mv2.getVoteAverage());
-            }
-        });
-    }
-
     public interface OnLoadMoreListener {
         void onLoadMore();
     }

@@ -13,11 +13,14 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import vn.enclave.iramovies.R;
+import vn.enclave.iramovies.local.storage.SessionManager;
 import vn.enclave.iramovies.local.storage.entity.Movie;
 import vn.enclave.iramovies.services.IraMovieInfoAPIs;
 import vn.enclave.iramovies.ui.activities.base.BaseView;
@@ -252,6 +255,25 @@ public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             }
         }
         this.notifyDataSetChanged();
+    }
+
+    public void sortFollowDate() {
+        String type = SessionManager.getInstance(mContext).getReleaseDate();
+        if (TextUtils.equals(type, mContext.getString(R.string.label_rating_movies))) {
+            sortByRating();
+        } else {
+
+        }
+        this.notifyDataSetChanged();
+    }
+
+    private void sortByRating() {
+        Collections.sort(this.mGrouMovies, new Comparator<Movie>() {
+            @Override
+            public int compare(Movie mv1, Movie mv2) {
+                return Double.compare(mv1.getVoteAverage(), mv2.getVoteAverage());
+            }
+        });
     }
 
     public interface OnLoadMoreListener {

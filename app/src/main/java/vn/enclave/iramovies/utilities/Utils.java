@@ -37,6 +37,10 @@ public class Utils {
         return false;
     }
 
+    public static Double getYear(String releaseDate) {
+        return Double.parseDouble(releaseDate.substring(0, 4));
+    }
+
     public static class Toast {
 
         public static void showToast(Context context, String message) {
@@ -46,12 +50,6 @@ public class Utils {
 
     public static Bitmap convertToBitmap(byte[] bitmapdata) {
         return BitmapFactory.decodeByteArray(bitmapdata, 0, bitmapdata.length);
-    }
-
-    public static byte[] convertToByteArray(Bitmap bitmap) {
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-        return stream.toByteArray();
     }
 
     public static boolean isInternetOn(Context context) {

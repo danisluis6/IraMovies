@@ -123,9 +123,9 @@ public class SettingView extends IRBaseFragment {
     private void openReleaseDateDialog() {
         DialogReleaseDate releaseDateDialog = new DialogReleaseDate(mActivity, new DialogReleaseDate.OnRadioSelected() {
             @Override
-            public void onRadioSelected(String text) {
-                edtReleaseDate.setText(text);
-                SessionManager.getInstance(mActivity).setReleaseDate(text);
+            public void onRadioSelected(String sort) {
+                edtReleaseDate.setText(sort);
+                mSettingInterface.onSortByDateAndRating(sort);
             }
         }, getRadioSelectedRelease());
         releaseDateDialog.show();
@@ -139,8 +139,7 @@ public class SettingView extends IRBaseFragment {
                         WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
                 );
                 edtReleaseYear.setText(text);
-                SessionManager.getInstance(mActivity).setReleaseYear(text);
-                mSettingInterface.onReloadReleaseYear();
+                mSettingInterface.onReloadReleaseYear(text);
             }
         }, getValueFromEditText());
         releaseYearDialog.show();
@@ -151,8 +150,7 @@ public class SettingView extends IRBaseFragment {
             @Override
             public void onGetValueSeekBar(String value) {
                 edtMovieWithRate.setText(TextUtils.equals(value, "0") ? "0.0" : value);
-                SessionManager.getInstance(mActivity).setRate(edtMovieWithRate.getText().toString());
-                mSettingInterface.onReloadRating();
+                mSettingInterface.onReloadRating(edtMovieWithRate.getText().toString());
             }
         }, getValueFromSeekBar());
         seekBarDialog.show();
@@ -164,7 +162,6 @@ public class SettingView extends IRBaseFragment {
             @Override
             public void onRadioSelected(String text) {
                 edtCategory.setText(text);
-                SessionManager.getInstance(mActivity).setCategory(text);
                 mSettingInterface.onReloadCategory(text);
             }
         }, getRadioSelectedCategory());
@@ -213,7 +210,9 @@ public class SettingView extends IRBaseFragment {
 
     public interface SettingInterface {
         void onReloadCategory(String category);
-        void onReloadRating();
-        void onReloadReleaseYear();
+        void onReloadRating(String rate);
+        void onReloadReleaseYear(String releaseYear);
+        // Sort
+        void onSortByDateAndRating(String type);
     }
 }

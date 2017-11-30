@@ -18,6 +18,7 @@ import android.support.v7.widget.SearchView;
 import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -306,18 +307,35 @@ public class HomeView extends BaseView {
 
         mSettingView.setSettingInterface(new SettingView.SettingInterface() {
             @Override
-            public void onReloadCategory(String title) {
-                mMovieView.reloadCategory(title);
+            public void onReloadCategory(String category) {
+                if (!TextUtils.equals(SessionManager.getInstance(mContext).getCategory(), Constants.EMPTY_STRING) && !TextUtils.equals(SessionManager.getInstance(mContext).getCategory(), category)) {
+                    SessionManager.getInstance(mContext).setCategory(category);
+                    mMovieView.reloadCategory(category);
+                }
             }
 
             @Override
-            public void onReloadRating() {
-                mMovieView.reloadRating();
+            public void onReloadRating(String rate) {
+                if (!TextUtils.equals(SessionManager.getInstance(mContext).getRate(), Constants.EMPTY_STRING) && !TextUtils.equals(SessionManager.getInstance(mContext).getRate(), rate)) {
+                    SessionManager.getInstance(mContext).setRate(rate);
+                    mMovieView.reloadRating();
+                }
             }
 
             @Override
-            public void onReloadReleaseYear() {
-                mMovieView.onReloadReleaseYear();
+            public void onReloadReleaseYear(String releaseYear) {
+                if (!TextUtils.equals(SessionManager.getInstance(mContext).getReleaseYear(), Constants.EMPTY_STRING) && !TextUtils.equals(SessionManager.getInstance(mContext).getReleaseYear(), releaseYear)) {
+                    SessionManager.getInstance(mContext).setReleaseYear(releaseYear);
+                    mMovieView.onReloadReleaseYear();
+                }
+            }
+
+            @Override
+            public void onSortByDateAndRating(String type) {
+                if (!TextUtils.equals(SessionManager.getInstance(mContext).getReleaseDate(), Constants.EMPTY_STRING) && !TextUtils.equals(SessionManager.getInstance(mContext).getReleaseDate(), type)) {
+                    SessionManager.getInstance(mContext).setReleaseYear(type);
+                    mMovieView.onReloadSorting();
+                }
             }
         });
     }

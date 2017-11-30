@@ -13,6 +13,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.zip.DeflaterOutputStream;
 
 import butterknife.BindView;
 import vn.enclave.iramovies.R;
@@ -94,6 +96,7 @@ public class MovieView extends IRBaseFragment implements IMovieView {
     private boolean mIsLoadMore = false;
     private UpdatedFavoriteScreen mInterfaceRefresh;
     private MODE mType;
+    private boolean mIsReleaseYear = false;
 
     public MovieView() {
     }
@@ -234,26 +237,59 @@ public class MovieView extends IRBaseFragment implements IMovieView {
         }
     }
 
+    public void reloadRating() {
+        resetPageIndex(Constants.FIRST_PAGE);
+        setReleaseYear(false);
+        mMoviesPresenter.getMoviesFromApi(mPageIndex, false, mType);
+    }
+
+    public void onReloadReleaseYear() {
+        resetPageIndex(Constants.FIRST_PAGE);
+        setReleaseYear(true);
+        mMoviesPresenter.getMoviesFromApi(mPageIndex, false, mType);
+    }
+
+    public void onReloadSorting() {
+        resetPageIndex(Constants.FIRST_PAGE);
+        setReleaseYear(true);
+        mMoviesPresenter.getMoviesFromApi(mPageIndex, false, mType);
+    }
+
     @Override
     public void onSuccess(List<Movie> movies) {
         mMoviesAdapter.setMoreDataAvailable(mPageIndex < SessionManager.getInstance(mActivity).getTotalPages());
         ++mPageIndex; /* End fix */
         if (mIsLoadMore) {
             // Handle the dismiss loadingMore if there is another caller API is executing
-            updateListMovies(getListMovies(movies));
+            if (getReleaseYear()) {
+                updateListMovies(getListMoviesByReleaseYear(movies));
+            } else {
+                updateListMovies(getListMoviesByRate(movies));
+            }
         } else {
             dismissProgressDialog();
-            mMoviesAdapter.setMovies(getListMovies(movies));
+            if (getReleaseYear()) {
+                mMoviesAdapter.setMovies(getListMoviesByReleaseYear(movies));
+            } else {
+                mMoviesAdapter.setMovies(getListMoviesByRate(movies));
+            }
         }
     }
 
-    private List<Movie> getListMovies(List<Movie> movies) {
+    private List<Movie> getListMoviesByRate(List<Movie> movies) {
         List<Movie> temps = new ArrayList<>();
-        if (TextUtils.equals(SessionManager.getInstance(mActivity).getRate(), Constants.EMPTY_STRING)) {
-            return movies;
-        }
         for (int index = 0; index < movies.size(); index++ ) {
             if (movies.get(index).getVoteAverage() >= Double.parseDouble(SessionManager.getInstance(mActivity).getRate())) {
+                temps.add(movies.get(index));
+            }
+        }
+        return temps;
+    }
+
+    private List<Movie> getListMoviesByReleaseYear(List<Movie> movies) {
+        List<Movie> temps = new ArrayList<>();
+        for (int index = 0; index < movies.size(); index++ ) {
+            if (Utils.getYear(movies.get(index).getReleaseDate()) >= Double.parseDouble(SessionManager.getInstance(mActivity).getReleaseYear())) {
                 temps.add(movies.get(index));
             }
         }
@@ -391,14 +427,12 @@ public class MovieView extends IRBaseFragment implements IMovieView {
         return MODE.POPULAR;
     }
 
-    public void reloadRating() {
-        resetPageIndex(Constants.FIRST_PAGE);
-        mMoviesPresenter.getMoviesFromApi(mPageIndex, false, mType);
+    public boolean getReleaseYear() {
+        return mIsReleaseYear;
     }
 
-    public void onReloadReleaseYear() {
-        resetPageIndex(Constants.FIRST_PAGE);
-        mMoviesPresenter.getMoviesFromApi(mPageIndex, false, mType);
+    public void setReleaseYear(boolean mIsReleaseYear) {
+        this.mIsReleaseYear = mIsReleaseYear;
     }
 
     enum MODE {

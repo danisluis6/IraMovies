@@ -42,5 +42,9 @@
 
 > **Update list when change release date**
 
-> **
+>> **We need to refresh API when change value. So, we need check condition before calling API**
+
+>> **Done**
+
+> **Update list when change release year**
 

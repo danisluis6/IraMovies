@@ -257,6 +257,26 @@ public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         this.notifyDataSetChanged();
     }
 
+    public void refreshBySoftRate() {
+        Collections.sort(mGrouMovies, new Comparator<Movie>() {
+            @Override
+            public int compare(Movie mv1, Movie mv2) {
+                return Double.compare(mv2.getVoteAverage(), mv1.getVoteAverage());
+            }
+        });
+        notifyDataSetChanged();
+    }
+
+    public void refreshBySoftDate() {
+        Collections.sort(mGrouMovies, new Comparator<Movie>() {
+            @Override
+            public int compare(Movie mv1, Movie mv2) {
+                return Double.compare(Utils.getTime(mv2.getReleaseDate()), Utils.getTime(mv1.getReleaseDate()));
+            }
+        });
+        notifyDataSetChanged();
+    }
+
     public interface OnLoadMoreListener {
         void onLoadMore();
     }

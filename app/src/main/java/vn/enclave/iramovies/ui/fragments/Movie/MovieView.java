@@ -13,7 +13,6 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -247,7 +246,7 @@ public class MovieView extends IRBaseFragment implements IMovieView {
         }
     }
 
-    public void reloadCategory(String category, boolean load) {
+    public void reloadCategory(String category) {
         if (!TextUtils.equals(category, Constants.EMPTY_STRING)) {
             resetPageIndex(Constants.FIRST_PAGE);
             switch (getType(category)) {
@@ -319,15 +318,29 @@ public class MovieView extends IRBaseFragment implements IMovieView {
         }
         if (isReloadReleaseYear)
         {
-            temps = getListMoviesByReleaseYear(temps);
+            // temps = (isReloadRate ? getListMoviesByReleaseYear(temps) : movies);
+            if (isReloadRate) {
+                temps = getListMoviesByReleaseYear(temps);
+            } else {
+                temps = getListMoviesByReleaseYear(movies);
+            }
         }
         if (isReloadSorting) {
-            String type = SessionManager.getInstance(mActivity).getReleaseDate();
-            if (TextUtils.equals(type, mActivity.getString(R.string.label_rating_movies))) {
-                temps = sortByRating(temps);
+            if (!isReloadRate && !isReloadReleaseYear) {
+                temps = getListAfterSorting(movies);
             } else {
-                temps = sortByDate(temps);
+                temps = getListAfterSorting(temps);
             }
+        }
+        return temps;
+    }
+
+    public List<Movie> getListAfterSorting(List<Movie> temps) {
+        String type = SessionManager.getInstance(mActivity).getReleaseDate();
+        if (TextUtils.equals(type, mActivity.getString(R.string.label_rating_movies))) {
+            temps = sortByRating(temps);
+        } else {
+            temps = sortByDate(temps);
         }
         return temps;
     }
@@ -385,6 +398,15 @@ public class MovieView extends IRBaseFragment implements IMovieView {
     private void updateListMovies(List<Movie> listMovies) {
         mMoviesAdapter.remove(mMoviesAdapter.getItemCount() - 1);
         mMoviesAdapter.addAll(listMovies);
+        if (isReloadSorting) {
+            // Sort all in list
+            String type = SessionManager.getInstance(mActivity).getReleaseDate();
+            if (TextUtils.equals(type, mActivity.getString(R.string.label_rating_movies))) {
+                mMoviesAdapter.refreshBySoftRate();
+            } else {
+                mMoviesAdapter.refreshBySoftDate();
+            }
+        }
         mIsLoadMore = false;
     }
 

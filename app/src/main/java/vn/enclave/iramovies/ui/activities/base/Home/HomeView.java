@@ -210,7 +210,7 @@ public class HomeView extends BaseView {
 
             @Override
             public void getMovieDetailFragment(MovieDetailView movieDetailView, Movie movie) {
-                final String title = mToolbar.getToolbar().getTitle().toString();
+                final String title = SessionManager.getInstance(mContext).getCategory();
                 movieDetailView.setMovieDetailInterface(new MovieDetailView.MovieDetailInterface() {
                     @Override
                     public void onDestroy() {
@@ -309,7 +309,7 @@ public class HomeView extends BaseView {
             @Override
             public void onReloadCategory(String category) {
                 SessionManager.getInstance(mContext).setCategory(category);
-                mMovieView.reloadCategory(category, true);
+                mMovieView.reloadCategory(category);
             }
 
             @Override

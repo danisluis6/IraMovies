@@ -2,4 +2,69 @@
     <string name="app_name">IraMovies</string>
     <string name="image_description">Informations about image</string>
     <string name="announce_update_info_account">Please update your information before using application!</string>
+
+    <array name="menu_bottom_nav">
+        <item name="movies">Movies</item>
+        <item name="favorites">Favorites</item>
+        <item name="settings">Settings</item>
+        <item name="about">About</item>
+    </array>
+
+    <!-- Category -->
+    <string name="category_popular">Popular Movies</string>
+    <string name="category_top_rated">Top Rated Movies</string>
+    <string name="category_up_coming">Upcoming Movies</string>
+    <string name="category_now_playing">Now Playing Movies</string>
+
+    <!-- menu -->
+    <string name="search">Search</string>
+    <string name="movies">Movies</string>
+    <string name="popular">Popular</string>
+    <string name="top_rated">Top Rated</string>
+    <string name="up_coming">Up Coming</string>
+    <string name="now_playing">Now Playing</string>
+    <string name="favorites">Favorites</string>
+    <string name="settings">Settings</string>
+    <string name="about">About</string>
+
+    <!-- Info movie_card_view -->
+    <string name="release_date">Release date:</string>
+    <string name="rating">Rating:</string>
+    <string name="overview">Overview:</string>
+
+    <!-- Info failure layout -->
+    <string name="btn_retry">Retry</string>
+
+
+    <!-- Failure messages -->
+    <string name="no_internet_connection">No Internet Connection</string>
+    <string name="cannot_get_data">Something went wrong on server</string>
+    <string name="no_more_data">No more data</string>
+
+    <!-- Filter -->
+    <string name="popular_movies">Popular Movies</string>
+    <string name="top_rated_movies">Top Rated Movies</string>
+    <string name="upcoming_movies">Upcoming Movies</string>
+    <string name="nowplaying_movies">NowPlaying Movies</string>
+    <string name="movie_with_rate_from">Movie with rate from:</string>
+    <string name="from_release_year">From Release Year:</string>
+
+    <!-- lable -->
+    <string name="label_filter">Filter:</string>
+    <string name="label_category">Category</string>
+    <string name="label_movie_with_rate">Movie with rate from</string>
+    <string name="label_from_release_year">From Release year</string>
+    <string name="label_sort_by">Sort By</string>
+    <string name="label_release_date">Release Date</string>
+    <string name="label_rating_movies">Rating Movies</string>
+
+    <!-- button -->
+    <string name="btn_cancel">Cancel</string>
+    <string name="btn_yes">Yes</string>
+    <string name="btn_no">No</string>
+    <string name="btn_ok">OK</string>
+
+    <!-- Search -->
+    <string name="search_view">Search…</string>
+
 </resources>

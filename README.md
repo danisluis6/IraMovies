@@ -46,7 +46,9 @@
 
 >> **Fix when save RecyclerView's scroll position using RecyclerView.State**
 
->> **Hello**
+>> **Update list when change release year**
 
-> **Update list when change release year**
 
+> **Version: ** ver24
+
+>> **Change the font on the profile screen**

@@ -14,6 +14,10 @@ public class Constants {
     public static final int GALLERY_REQUEST = 11;
     public static final int REVIEW_IMAGE = 22;
     public static final int VIEW_IMAGE = 33;
+    public static final int CAMERA = 44;
+
+    /* Dialog show pick image and gallery in Android */
+    public final static String DIALOG_CHOOSER = "Dialog_Chooser";
 
     /** Intent argument */
     public static final String IMAGE_PATH = "path_image";
@@ -37,8 +41,8 @@ public class Constants {
 
     /* Check permission */
     public static class Permissions {
-        public static final int ACCESS_INTERNET = 1;
-        public static final int ACCESS_EXTERNAL_STORAGE = 2;
+        public static final int CAMERA = 1;
+        public static final int INTERNET = 2;
     }
 
     public static class Keyboards {

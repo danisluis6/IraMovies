@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -44,5 +45,13 @@ public abstract class BaseView extends AppCompatActivity{
             mUnbinder.unbind();
         }
         super.onDestroy();
+    }
+
+    protected View getRootView() {
+        return getWindow().getDecorView().findViewById(android.R.id.content);
+    }
+
+    protected Unbinder getBinder() {
+        return mUnbinder;
     }
 }

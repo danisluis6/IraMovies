@@ -1,12 +1,15 @@
 package vn.enclave.iramovies.utilities;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
+import android.support.v4.app.ActivityCompat;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -79,6 +82,20 @@ public class Utils {
         NO_DATA, NO_DATA_FOUND, NO_CONECTION
     }
 
+    public static void clearFocusOnSearchView(View view) {
+        if (view instanceof EditText) {
+            if (view.isFocused()) {
+                view.clearFocus();
+            }
+        }
+    }
+
+    public static boolean isVisibleSoftKeyBoardAndroid(Activity activity) {
+        InputMethodManager imm = (InputMethodManager) activity
+                .getSystemService(Context.INPUT_METHOD_SERVICE);
+        return imm.isAcceptingText();
+    }
+
     // Close keyboard in android
     public static void dimissKeyBoard(Activity activity) {
         View view = activity.getCurrentFocus();
@@ -88,11 +105,18 @@ public class Utils {
         }
     }
 
-    public static void clearFocusOnSearchView(View view) {
-        if (view instanceof EditText) {
-            if (view.isFocused()) {
-                view.clearFocus();
-            }
-        }
+    public static boolean checkPermissionCamera(Context context) {
+        return ActivityCompat.checkSelfPermission(context, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
     }
+
+    public static void settingPermissionCamera(Activity activity) {
+        ActivityCompat.requestPermissions(activity,
+                new String[]{
+                        Manifest.permission.CAMERA,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE
+                }, Constants.Permissions.CAMERA
+        );
+    }
+
 }

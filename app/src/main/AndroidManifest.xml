@@ -3,6 +3,8 @@
     package="vn.enclave.iramovies">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
@@ -22,10 +24,7 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".ui.activities.base.Profile.PlaceHolderView"
-            android:theme="@style/ImageHolderView" />
-        <activity android:name=".ui.activities.base.Profile.ProfileInfoView" />
+        <activity android:name=".ui.activities.base.Profile.EditUserProfileView" />
     </application>
 
 </manifest>

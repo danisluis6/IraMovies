@@ -67,8 +67,18 @@
     <string name="btn_ok">OK</string>
     <string name="btn_edit">Edit</string>
     <string name="btn_show_all">Show All</string>
+    <string name="btn_done">Done</string>
+
+    <!-- Value Radio -->
+    <string name="male">Male</string>
+    <string name="female">Female</string>
 
     <!-- Search -->
     <string name="search_view">Search…</string>
+
+    <string name="feature_take_photo_camera">Take Photo</string>
+    <string name="feature_take_photo_gallery">Gallery</string>
+
+    <string name="permission">Permission denied!</string>
 
 </resources>

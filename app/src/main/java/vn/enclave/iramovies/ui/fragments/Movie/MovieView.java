@@ -101,7 +101,6 @@ public class MovieView extends IRBaseFragment implements IMovieView {
     private boolean isReloadRate;
     private boolean isReloadReleaseYear;
     private boolean isReloadSorting;
-    private int lastFirstVisiblePosition;
 
     public MovieView() {
     }
@@ -121,7 +120,7 @@ public class MovieView extends IRBaseFragment implements IMovieView {
         } else {
             ActivityCompat.requestPermissions(mActivity,
                     new String[]{Manifest.permission.INTERNET, Manifest.permission.ACCESS_NETWORK_STATE},
-                    Constants.Permissions.ACCESS_INTERNET);
+                    Constants.Permissions.INTERNET);
         }
     }
 
@@ -427,7 +426,7 @@ public class MovieView extends IRBaseFragment implements IMovieView {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull int[] grantResults) {
         switch (requestCode) {
-            case Constants.Permissions.ACCESS_INTERNET: {
+            case Constants.Permissions.INTERNET: {
                 // If request is cancelled, the result arrays are empty.
                 for (int permissionId : grantResults) {
                     if (permissionId != PackageManager.PERMISSION_GRANTED) {
@@ -450,6 +449,7 @@ public class MovieView extends IRBaseFragment implements IMovieView {
     }
 
     public void setOnDisplay(boolean onDisplay) {
+        int lastFirstVisiblePosition;
         if (onDisplay) {
             lastFirstVisiblePosition = ((GridLayoutManager)rcvMovies.getLayoutManager()).findFirstCompletelyVisibleItemPosition();
         } else {

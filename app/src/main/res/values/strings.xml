@@ -57,12 +57,16 @@
     <string name="label_sort_by">Sort By</string>
     <string name="label_release_date">Release Date</string>
     <string name="label_rating_movies">Rating Movies</string>
+    <string name="label_reminder_list">Reminder List:</string>
+    <string name="label_copyright">Copyright@Enc 2017</string>
 
     <!-- button -->
     <string name="btn_cancel">Cancel</string>
     <string name="btn_yes">Yes</string>
     <string name="btn_no">No</string>
     <string name="btn_ok">OK</string>
+    <string name="btn_edit">Edit</string>
+    <string name="btn_show_all">Show All</string>
 
     <!-- Search -->
     <string name="search_view">Search…</string>

@@ -8,7 +8,7 @@ import android.webkit.WebView;
 
 import butterknife.BindView;
 import vn.enclave.iramovies.R;
-import vn.enclave.iramovies.ui.fragments.Base.IRBaseFragment;
+import vn.enclave.iramovies.ui.fragments.IRBaseFragment;
 import vn.enclave.iramovies.ui.views.FailureLayout;
 import vn.enclave.iramovies.utilities.Constants;
 import vn.enclave.iramovies.utilities.Utils;

@@ -28,7 +28,7 @@ import vn.enclave.iramovies.R;
 import vn.enclave.iramovies.local.storage.DatabaseInfo;
 import vn.enclave.iramovies.local.storage.SessionManager;
 import vn.enclave.iramovies.local.storage.entity.Movie;
-import vn.enclave.iramovies.ui.fragments.Base.IRBaseFragment;
+import vn.enclave.iramovies.ui.fragments.IRBaseFragment;
 import vn.enclave.iramovies.ui.fragments.Detail.MovieDetailView;
 import vn.enclave.iramovies.ui.fragments.Movie.adapter.MovieAdapter;
 import vn.enclave.iramovies.ui.views.FailureLayout;

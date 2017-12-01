@@ -17,7 +17,7 @@ import vn.enclave.iramovies.ui.dialog.DialogCategory;
 import vn.enclave.iramovies.ui.dialog.DialogReleaseDate;
 import vn.enclave.iramovies.ui.dialog.DialogReleaseYear;
 import vn.enclave.iramovies.ui.dialog.DialogSeekBar;
-import vn.enclave.iramovies.ui.fragments.Base.IRBaseFragment;
+import vn.enclave.iramovies.ui.fragments.IRBaseFragment;
 import vn.enclave.iramovies.utilities.Constants;
 import vn.enclave.iramovies.utilities.Utils;
 

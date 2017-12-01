@@ -21,7 +21,7 @@ import vn.enclave.iramovies.local.storage.DatabaseInfo;
 import vn.enclave.iramovies.local.storage.entity.Movie;
 import vn.enclave.iramovies.services.IraMovieInfoAPIs;
 import vn.enclave.iramovies.services.response.CastAndCrewResponse;
-import vn.enclave.iramovies.ui.fragments.Base.IRBaseFragment;
+import vn.enclave.iramovies.ui.fragments.IRBaseFragment;
 import vn.enclave.iramovies.ui.fragments.Detail.adapter.MovieDetailAdapter;
 import vn.enclave.iramovies.ui.fragments.Movie.bean.CastCrew;
 import vn.enclave.iramovies.utilities.Constants;

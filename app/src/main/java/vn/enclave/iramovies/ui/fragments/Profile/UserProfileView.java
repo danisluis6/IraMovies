@@ -3,16 +3,21 @@ package vn.enclave.iramovies.ui.fragments.Profile;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.BitmapImageViewTarget;
+
+import java.io.ByteArrayOutputStream;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -24,6 +29,8 @@ import vn.enclave.iramovies.utilities.Constants;
 import vn.enclave.iramovies.utilities.OverrideFonts;
 import vn.enclave.iramovies.utilities.Utils;
 
+import static android.app.Activity.RESULT_OK;
+
 /**
  * Created by lorence on 08/11/2017.
  *
@@ -31,18 +38,18 @@ import vn.enclave.iramovies.utilities.Utils;
  * => Done
  * @Run: https://stackoverflow.com/questions/5608720/android-preventing-double-click-on-a-button
  * => Done
- *
  * @Run: https://stackoverflow.com/questions/37861575/what-is-pick-contact-argument-in-startactivityforresult-function
  * => Done
- *
  * @Run: https://stackoverflow.com/questions/23003867/android-passing-an-object-to-another-activity
+ * => Done
+ * @Run: https://stackoverflow.com/questions/38893042/pass-interface-between-activities-in-intent-interface-fails-to-be-serializable
  * => Done
  */
 
 public class UserProfileView extends IRBaseFragment {
 
-    @BindView(R.id.imvPlaceHolder)
-    ImageView imvPlaceHolder;
+    @BindView(R.id.imvAvatar)
+    ImageView imvAvatar;
 
     @BindView(R.id.tvName)
     TextView tvName;
@@ -137,10 +144,46 @@ public class UserProfileView extends IRBaseFragment {
         switch (view.getId()) {
             case R.id.btnEdit:
                 Intent intent = new Intent(mActivity, EditUserProfileView.class);
-                startActivity(intent);
+                startActivityForResult(intent, Constants.Activities_Result.USER);
                 break;
             case R.id.btnShowAll:
                 break;
         }
+    }
+
+    private void updateUserOnUI(User user) {
+        tvName.setText(user.getName());
+        tvEmail.setText(user.getEmail());
+        tvGender.setText(Utils.convertIntToGender(mActivity, user.getMale()));
+        tvDateOfTheDate.setText(user.getBirthday());
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        if (user.getAvatar() != null) {
+            Utils.convertToBitmap(user.getAvatar()).compress(Bitmap.CompressFormat.PNG, 100, stream);
+            Glide.with(mActivity)
+                .load(stream.toByteArray())
+                .asBitmap().centerCrop()
+                .error(R.drawable.placeholder)
+                .into(new BitmapImageViewTarget(imvAvatar) {
+                    @Override
+                    protected void setResource(Bitmap resource) {
+                        RoundedBitmapDrawable circularBitmapDrawable =
+                                RoundedBitmapDrawableFactory.create(mActivity.getResources(), resource);
+                        circularBitmapDrawable.setCircular(true);
+                        imvAvatar.setImageDrawable(circularBitmapDrawable);
+                    }
+            });
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK) {
+            switch (requestCode) {
+                case Constants.Activities_Result.USER:
+                    updateUserOnUI((User) data.getParcelableExtra(Constants.Parcelable.USER));
+                    break;
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }

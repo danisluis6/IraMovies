@@ -38,17 +38,14 @@
 
 ## Schedule
 
-> **Version: ** ver22
-
-> **Update list when change release date**
-
->> **We need to refresh API when change value. So, we need check condition before calling API**
-
->> **Fix when save RecyclerView's scroll position using RecyclerView.State**
-
->> **Update list when change release year**
-
-
 > **Version: ** ver24
 
->> **Change the font on the profile screen**
+        // To start the camera for this, add an extra to your Intent:
+        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        
+        // get output media file Uri
+        Uri x = null;
+        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, x);
+        startActivityForResult(cameraIntent, Constants.Activities_Result.CAMERA);
+
+>> **x = ? [Create temporary for save image and get path]**

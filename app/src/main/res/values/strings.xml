@@ -81,4 +81,8 @@
 
     <string name="permission">Permission denied!</string>
 
+    <string name="hint_birthday">Birthday</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_gender">Female</string>
+
 </resources>

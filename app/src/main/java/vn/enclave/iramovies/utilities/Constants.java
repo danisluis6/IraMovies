@@ -11,10 +11,11 @@ public class Constants {
     public static final int DOUBLE_CLICK_TIME_DELTA = 400;
 
     /** Intent information */
-    public static final int GALLERY_REQUEST = 11;
-    public static final int REVIEW_IMAGE = 22;
-    public static final int VIEW_IMAGE = 33;
-    public static final int CAMERA = 44;
+    public static class Activities_Result {
+        public static final int GALLERY = 1;
+        public static final int CAMERA = 2;
+        public static final int USER = 3;
+    }
 
     /* Dialog show pick image and gallery in Android */
     public final static String DIALOG_CHOOSER = "Dialog_Chooser";
@@ -33,6 +34,10 @@ public class Constants {
         public static int About = 3;
     }
 
+    public static class Parcelable {
+        public static String USER = "user";
+    }
+
     /* Toolbar Information */
     public static class ToolbarLayoutInfo {
         public static String _TITLE = "Home";
@@ -43,6 +48,7 @@ public class Constants {
     public static class Permissions {
         public static final int CAMERA = 1;
         public static final int INTERNET = 2;
+        public static final int STORAGE = 3;
     }
 
     public static class Keyboards {
@@ -60,4 +66,6 @@ public class Constants {
     }
 
     public static String URL = "https://www.themoviedb.org/";
+
+    public static String IMAGE_FOLDER = "IraMovies";
 }

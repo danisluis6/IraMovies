@@ -60,32 +60,17 @@ public class User implements Parcelable {
         male = in.readInt();
     }
 
-    public static final Creator<vn.enclave.iramovies.local.storage.entity.User> CREATOR = new Creator<vn.enclave.iramovies.local.storage.entity.User>() {
+    public static final Creator<User> CREATOR = new Creator<User>() {
         @Override
-        public vn.enclave.iramovies.local.storage.entity.User createFromParcel(Parcel in) {
-            return new vn.enclave.iramovies.local.storage.entity.User(in);
+        public User createFromParcel(Parcel in) {
+            return new User(in);
         }
 
         @Override
-        public vn.enclave.iramovies.local.storage.entity.User[] newArray(int size) {
-            return new vn.enclave.iramovies.local.storage.entity.User[size];
+        public User[] newArray(int size) {
+            return new User[size];
         }
     };
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(id);
-        dest.writeString(name);
-        dest.writeString(birthday);
-        dest.writeByteArray(avatar);
-        dest.writeString(email);
-        dest.writeInt(male);
-    }
 
     public int getId() {
         return id;
@@ -133,5 +118,20 @@ public class User implements Parcelable {
 
     public void setMale(int male) {
         this.male = male;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeString(name);
+        dest.writeString(birthday);
+        dest.writeByteArray(avatar);
+        dest.writeString(email);
+        dest.writeInt(male);
     }
 }

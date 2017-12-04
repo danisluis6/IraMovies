@@ -71,7 +71,7 @@ public class SnackBarLayout extends LinearLayout {
     }
 
     private void openGallery() {
-        mSnackInterface.openCamera();
+        mSnackInterface.openGallery();
     }
 
     @Override

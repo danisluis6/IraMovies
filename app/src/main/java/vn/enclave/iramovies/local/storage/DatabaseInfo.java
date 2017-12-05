@@ -30,6 +30,7 @@ public class DatabaseInfo {
         public static final String COLUMN_BIRTHDAY = "birthday";
         public static final String COLUMN_EMAIL = "email";
         public static final String COLUMN_GENDER = "gender";
+        public static final String COLUMN_AVATAR = "avatar";
     }
 
     public static class Movie {

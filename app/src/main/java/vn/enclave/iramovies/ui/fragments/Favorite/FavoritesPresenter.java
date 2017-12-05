@@ -11,7 +11,7 @@ import vn.enclave.iramovies.local.storage.entity.Movie;
  * Created by lorence on 13/11/2017.
  */
 
-public class FavoritesPresenter implements IFavoritesPresenter {
+public class FavoritesPresenter implements IFavoritePresenter {
 
     /**
      * Context
@@ -26,11 +26,11 @@ public class FavoritesPresenter implements IFavoritesPresenter {
     /**
      * IInboxModel
      */
-    private IFavoritesModel mFavoritesModel;
+    private IFavoriteModel mFavoritesModel;
 
     FavoritesPresenter(Context context) {
         this.mContext = context;
-        mFavoritesModel = new FavoritesModel(mContext);
+        mFavoritesModel = new FavoriteModel(mContext);
         mFavoritesModel.attachView(this);
     }
 

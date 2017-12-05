@@ -8,11 +8,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffXfermode;
-import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -27,7 +22,6 @@ import android.support.v4.content.FileProvider;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -42,6 +36,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -120,6 +115,7 @@ public class EditUserProfileView extends BaseView implements IEditUserProfileVie
     private String mCurrentPhotoPath;
     private String mGender;
     private String mPathImage;
+    private User mUser;
 
     /**
      * Work with MVP
@@ -133,7 +129,7 @@ public class EditUserProfileView extends BaseView implements IEditUserProfileVie
 
     @Override
     public void activityCreated(Bundle savedInstanceState) {
-        initAtributes();
+        initAttributes();
 
         mRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -142,9 +138,11 @@ public class EditUserProfileView extends BaseView implements IEditUserProfileVie
                 mGender = radioButton.getText().toString();
             }
         });
+        getUserFromStorage();
+        updateUserOnUI(getUser());
     }
 
-    private void initAtributes() {
+    private void initAttributes() {
 
         mEditUserProfilePresenter = new EditUserProfilePresenter(this);
         mEditUserProfilePresenter.attachView(this);
@@ -376,12 +374,51 @@ public class EditUserProfileView extends BaseView implements IEditUserProfileVie
         return mUser;
     }
 
+    private void updateUserOnUI(User user) {
+        edtName.setText(user.getName());
+        edtEmail.setText(user.getEmail());
+        rdMale.setChecked(user.getMale() == 0);
+        rdFemale.setChecked(user.getMale() == 1);
+        tvDateOfBirth.setText(user.getBirthday());
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        if (user.getAvatar() != null) {
+            Utils.convertToBitmap(user.getAvatar()).compress(Bitmap.CompressFormat.PNG, 100, stream);
+            Glide.with(this)
+                .load(stream.toByteArray())
+                .asBitmap().centerCrop()
+                .error(R.drawable.placeholder)
+                .into(new BitmapImageViewTarget(imvPlaceHolder) {
+                    @Override
+                    protected void setResource(Bitmap resource) {
+                        RoundedBitmapDrawable circularBitmapDrawable =
+                                RoundedBitmapDrawableFactory.create(getResources(), resource);
+                        circularBitmapDrawable.setCircular(true);
+                        imvPlaceHolder.setImageDrawable(circularBitmapDrawable);
+                    }
+            });
+        }
+    }
+
     public String getPathImage() {
         return mPathImage;
     }
 
     public void setPathImage(String mPathImage) {
         this.mPathImage = mPathImage;
+    }
+
+    public User getUserFromStorage() {
+        User user = getIntent().getParcelableExtra(Constants.Parcelable.USER);
+        setUser(user);
+        return user;
+    }
+
+    public User getUser() {
+        return mUser;
+    }
+
+    public void setUser(User mUser) {
+        this.mUser = mUser;
     }
 
     private static class ExecuteFileFromPicked {

@@ -7,6 +7,8 @@ import android.arch.persistence.room.PrimaryKey;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.SerializedName;
+
 import vn.enclave.iramovies.local.storage.DatabaseInfo;
 import vn.enclave.iramovies.utilities.Constants;
 
@@ -21,21 +23,27 @@ public class User implements Parcelable {
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = DatabaseInfo.User.COLUMN_ID)
+    @SerializedName(DatabaseInfo.User.COLUMN_ID)
     private int id;
 
     @ColumnInfo(name = DatabaseInfo.User.COLUMN_NAME)
+    @SerializedName(DatabaseInfo.User.COLUMN_NAME)
     private String name;
 
     @ColumnInfo(name = DatabaseInfo.User.COLUMN_BIRTHDAY)
+    @SerializedName(DatabaseInfo.User.COLUMN_BIRTHDAY)
     private String birthday;
 
     @ColumnInfo(typeAffinity = ColumnInfo.BLOB)
+    @SerializedName(DatabaseInfo.User.COLUMN_AVATAR)
     private byte[] avatar;
 
     @ColumnInfo(name = DatabaseInfo.User.COLUMN_EMAIL)
+    @SerializedName(DatabaseInfo.User.COLUMN_EMAIL)
     private String email;
 
     @ColumnInfo(name = DatabaseInfo.User.COLUMN_GENDER)
+    @SerializedName(DatabaseInfo.User.COLUMN_GENDER)
     private int male;
 
     @Ignore

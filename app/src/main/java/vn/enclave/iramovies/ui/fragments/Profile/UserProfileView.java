@@ -18,11 +18,14 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 
 import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 import vn.enclave.iramovies.R;
 import vn.enclave.iramovies.local.storage.entity.User;
+import vn.enclave.iramovies.ui.activities.base.Profile.EditUserProfilePresenter;
 import vn.enclave.iramovies.ui.activities.base.Profile.EditUserProfileView;
 import vn.enclave.iramovies.ui.fragments.IRBaseFragment;
 import vn.enclave.iramovies.utilities.Constants;
@@ -46,7 +49,7 @@ import static android.app.Activity.RESULT_OK;
  * => Done
  */
 
-public class UserProfileView extends IRBaseFragment {
+public class UserProfileView extends IRBaseFragment implements IUserProfileView {
 
     @BindView(R.id.imvAvatar)
     ImageView imvAvatar;
@@ -75,6 +78,13 @@ public class UserProfileView extends IRBaseFragment {
     @BindView(R.id.tvCopyright)
     TextView tvCopyright;
 
+    private User mUser;
+
+    /**
+     * Work with MVP
+     */
+    private UserProfilePresenter mUserProfilePresenter;
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -88,7 +98,9 @@ public class UserProfileView extends IRBaseFragment {
 
     @Override
     public void fragmentCreated() {
-        // loadUserFromStorage();
+        mUserProfilePresenter = new UserProfilePresenter(mActivity);
+        mUserProfilePresenter.attachView(this);
+        loadUserFromStorage();
     }
 
     @Override
@@ -104,37 +116,9 @@ public class UserProfileView extends IRBaseFragment {
         btnShowAll.setTypeface(OverrideFonts.getTypeFace(mActivity, OverrideFonts.TYPE_FONT_NAME.HELVETICANEUE, OverrideFonts.TYPE_STYLE.BLACK));
     }
 
-//    private void loadUserFromStorage() {
-//        new AsyncTask<Void, Void, List<User>>() {
-//            @Override
-//            protected List<User> doInBackground(Void... params) {
-//                return mAppDatabase.getUserDao().getUsers();
-//            }
-//
-//            @Override
-//            protected void onPostExecute(List<User> groupUsers) {
-//                loadUserOnView(groupUsers);
-//            }
-//        }.execute();
-//    }
-//
-//    private void loadUserOnView(List<User> groupUsers) {
-//        if (groupUsers.size() > 0) {
-//            mUser = groupUsers.get(0);
-//            showUserOnView(mUser);
-//        }
-//    }
-//
-//    private void showUserOnView(User mUser) {
-//        if (mUser != null) {
-//            return;
-//        }
-//        imvPlaceHolder.setImageBitmap(Utils.convertToBitmap(mUser.getAvatar()));
-//        tvName.setText(mUser.getName());
-//        tvEmail.setText(mUser.getEmail());
-//        tvDateOfTheDate.setText(mUser.getBirthday());
-//        tvGender.setText((mUser.getMale() == 1) ? "Male" : "Female");
-//    }
+    private void loadUserFromStorage() {
+        mUserProfilePresenter.getUser();
+    }
 
     @OnClick({R.id.btnEdit, R.id.btnShowAll})
     public void onClick(View view) {
@@ -144,6 +128,7 @@ public class UserProfileView extends IRBaseFragment {
         switch (view.getId()) {
             case R.id.btnEdit:
                 Intent intent = new Intent(mActivity, EditUserProfileView.class);
+                intent.putExtra(Constants.Parcelable.USER, getUser());
                 startActivityForResult(intent, Constants.Activities_Result.USER);
                 break;
             case R.id.btnShowAll:
@@ -185,5 +170,24 @@ public class UserProfileView extends IRBaseFragment {
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void onSuccess(List<User> users) {
+        setUser(users.get(0));
+        updateUserOnUI(users.get(0));
+    }
+
+    @Override
+    public void onFailure(String message) {
+        Utils.Toast.showToast(mActivity, message);
+    }
+
+    public User getUser() {
+        return mUser;
+    }
+
+    public void setUser(User mUser) {
+        this.mUser = mUser;
     }
 }

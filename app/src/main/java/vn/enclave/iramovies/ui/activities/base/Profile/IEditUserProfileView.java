@@ -1,7 +1,5 @@
 package vn.enclave.iramovies.ui.activities.base.Profile;
 
-import java.util.List;
-
 import vn.enclave.iramovies.local.storage.entity.User;
 
 /**

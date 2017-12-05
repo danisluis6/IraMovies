@@ -75,7 +75,7 @@
 <ImageView
     android:id="@+id/imvThumnail"
     android:layout_width="134dp"
-    android:layout_height="174dp"
+    android:layout_height="160dp"
     android:layout_marginLeft="11dp"
     android:layout_marginStart="11dp"
     android:layout_marginTop="5dp"
@@ -84,6 +84,15 @@
     android:src="@drawable/load"
     app:layout_constraintLeft_toLeftOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/lbRating" />
+
+<TextView
+    android:id="@+id/tvReminder"
+    android:text="fdhsfjhdskj"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:layout_constraintTop_toBottomOf="@+id/imvThumnail"
+    app:layout_constraintRight_toLeftOf="@+id/lnOverview"
+    app:layout_constraintLeft_toLeftOf="parent"/>
 
 <Button
     android:id="@+id/btnReminder"
@@ -96,7 +105,7 @@
     android:textSize="12sp"
     app:layout_constraintLeft_toLeftOf="parent"
     app:layout_constraintRight_toLeftOf="@+id/lnOverview"
-    app:layout_constraintTop_toBottomOf="@+id/imvThumnail" />
+    app:layout_constraintTop_toBottomOf="@+id/tvReminder" />
 
 <TextView
     android:id="@+id/lbOverview"

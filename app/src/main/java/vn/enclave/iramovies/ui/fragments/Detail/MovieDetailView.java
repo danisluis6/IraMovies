@@ -1,17 +1,20 @@
 package vn.enclave.iramovies.ui.fragments.Detail;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import butterknife.BindView;
@@ -21,6 +24,7 @@ import vn.enclave.iramovies.local.storage.DatabaseInfo;
 import vn.enclave.iramovies.local.storage.entity.Movie;
 import vn.enclave.iramovies.services.IraMovieInfoAPIs;
 import vn.enclave.iramovies.services.response.CastAndCrewResponse;
+import vn.enclave.iramovies.ui.activities.base.Profile.EditUserProfileView;
 import vn.enclave.iramovies.ui.fragments.IRBaseFragment;
 import vn.enclave.iramovies.ui.fragments.Detail.adapter.MovieDetailAdapter;
 import vn.enclave.iramovies.ui.fragments.Movie.bean.CastCrew;
@@ -78,6 +82,27 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
         mIsFavorite = (getMovie().getFavorite() == Constants.Favorites.FAVORITE);
         initAtribute();
         getCastAndCrew();
+    }
+
+    @OnClick(R.id.btnReminder)
+    public void openDatePicker() {
+        final Calendar myCalendar = Calendar.getInstance();
+
+        DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                  int dayOfMonth) {
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, monthOfYear);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            }
+
+        };
+
+        new DatePickerDialog(mActivity, date, myCalendar
+                .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                myCalendar.get(Calendar.DAY_OF_MONTH)).show();
     }
 
     @OnClick(R.id.imvFavorite)

@@ -116,6 +116,7 @@ public class EditUserProfileView extends BaseView implements IEditUserProfileVie
     private String mGender;
     private String mPathImage;
     private User mUser;
+    private boolean isUpdated;
 
     /**
      * Work with MVP
@@ -139,7 +140,9 @@ public class EditUserProfileView extends BaseView implements IEditUserProfileVie
             }
         });
         getUserFromStorage();
-        updateUserOnUI(getUser());
+        if (isUpdated) {
+            updateUserOnUI(getUser());
+        }
     }
 
     private void initAttributes() {
@@ -147,6 +150,7 @@ public class EditUserProfileView extends BaseView implements IEditUserProfileVie
         mEditUserProfilePresenter = new EditUserProfilePresenter(this);
         mEditUserProfilePresenter.attachView(this);
         mPathImage = mCurrentPhotoPath = Constants.EMPTY_STRING;
+        isUpdated = false;
 
         edtName.setTypeface(OverrideFonts.getTypeFace(mContext, OverrideFonts.TYPE_FONT_NAME.HELVETICANEUE, OverrideFonts.TYPE_STYLE.REGULAR));
         tvDateOfBirth.setTypeface(OverrideFonts.getTypeFace(mContext, OverrideFonts.TYPE_FONT_NAME.HELVETICANEUE, OverrideFonts.TYPE_STYLE.LIGHT));
@@ -167,7 +171,11 @@ public class EditUserProfileView extends BaseView implements IEditUserProfileVie
                 finish();
                 break;
             case R.id.btnDone:
-                saveUserInStorage();
+                if (isUpdated) {
+                    updateUserInStorage();
+                } else {
+                    addUserInStorage();
+                }
                 break;
             case R.id.imvPlaceHolder:
                 showDialog();
@@ -175,7 +183,11 @@ public class EditUserProfileView extends BaseView implements IEditUserProfileVie
         }
     }
 
-    private void saveUserInStorage() {
+    private void updateUserInStorage() {
+        mEditUserProfilePresenter.updateUser(getInfoUser());
+    }
+
+    private void addUserInStorage() {
         mEditUserProfilePresenter.addUser(getInfoUser());
     }
 
@@ -366,6 +378,9 @@ public class EditUserProfileView extends BaseView implements IEditUserProfileVie
 
     public User getInfoUser() {
         User mUser = new User();
+        if (isUpdated) {
+            mUser.setId(getUser().getId());
+        }
         mUser.setName(edtName.getText().toString());
         mUser.setEmail(edtEmail.getText().toString());
         mUser.setBirthday(tvDateOfBirth.getText().toString());
@@ -409,7 +424,12 @@ public class EditUserProfileView extends BaseView implements IEditUserProfileVie
 
     public User getUserFromStorage() {
         User user = getIntent().getParcelableExtra(Constants.Parcelable.USER);
-        setUser(user);
+        if (user != null) {
+            isUpdated = true;
+            setUser(user);
+        } else {
+            isUpdated = false;
+        }
         return user;
     }
 

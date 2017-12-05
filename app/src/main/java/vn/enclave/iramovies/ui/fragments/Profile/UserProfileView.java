@@ -165,7 +165,9 @@ public class UserProfileView extends IRBaseFragment implements IUserProfileView 
         if (resultCode == RESULT_OK) {
             switch (requestCode) {
                 case Constants.Activities_Result.USER:
-                    updateUserOnUI((User) data.getParcelableExtra(Constants.Parcelable.USER));
+                    User user = data.getParcelableExtra(Constants.Parcelable.USER);
+                    updateUserOnUI(user);
+                    setUser(user);
                     break;
             }
         }
@@ -180,6 +182,7 @@ public class UserProfileView extends IRBaseFragment implements IUserProfileView 
 
     @Override
     public void onFailure(String message) {
+        setUser(null);
         Utils.Toast.showToast(mActivity, message);
     }
 

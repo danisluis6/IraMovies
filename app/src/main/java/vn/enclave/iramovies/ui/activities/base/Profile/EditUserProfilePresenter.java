@@ -43,6 +43,11 @@ public class EditUserProfilePresenter implements IEditUserProfilePresenter{
     }
 
     @Override
+    public void updateUser(User user) {
+        mEditUserProfileModel.updateUser(user);
+    }
+
+    @Override
     public void onSuccess(User user) {
         mEditUserProfileView.onSuccess(user);
     }

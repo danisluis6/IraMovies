@@ -84,5 +84,6 @@
     <string name="hint_birthday">Birthday</string>
     <string name="hint_email">Email</string>
     <string name="hint_gender">Female</string>
+    <string name="hint_name">Name</string>
 
 </resources>

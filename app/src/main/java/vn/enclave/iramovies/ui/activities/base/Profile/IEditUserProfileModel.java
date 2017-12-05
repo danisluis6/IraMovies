@@ -14,4 +14,6 @@ import vn.enclave.iramovies.ui.interfaces.IBasePresenter;
 public interface IEditUserProfileModel extends IBasePresenter<IEditUserProfilePresenter> {
 
     void addUser(User user);
+
+    void updateUser(User user);
 }

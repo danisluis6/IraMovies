@@ -4,7 +4,6 @@ import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
-import android.arch.persistence.room.Update;
 
 import java.util.List;
 
@@ -24,9 +23,6 @@ public interface MovieDao {
 
     @Insert
     long insertMovies(Movie movie);
-
-    @Update
-    int updateMovies(Movie... movies);
 
     @Delete
     int deleteMovies(Movie... movies);

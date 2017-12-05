@@ -2,10 +2,10 @@
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mainLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:focusable="true"
-    android:id="@+id/mainLayout"
     android:focusableInTouchMode="true"
     android:orientation="vertical">
 
@@ -37,6 +37,7 @@
         android:imeOptions="actionNext"
         android:inputType="textCapWords"
         android:maxLines="1"
+        android:hint="@string/hint_name"
         android:textAlignment="center"
         android:textColor="#000000"
         android:textSize="20sp"
@@ -77,6 +78,7 @@
             android:layout_marginStart="22dp"
             android:backgroundTint="#bebebe"
             android:clickable="false"
+            android:hint="@string/hint_birthday"
             android:maxLines="1"
             android:textColor="#000000"
             android:textSize="18sp"
@@ -117,6 +119,7 @@
             android:layout_marginLeft="22dp"
             android:layout_marginStart="22dp"
             android:backgroundTint="#bebebe"
+            android:hint="@string/hint_email"
             android:imeOptions="actionNext"
             android:inputType="text|textEmailAddress"
             android:maxLines="1"
@@ -183,8 +186,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:checked="true"
                     android:buttonTint="@color/colorCircleRadio"
+                    android:checked="true"
                     android:text="@string/female"
                     android:textSize="18sp"/>
 
@@ -211,6 +214,7 @@
             android:layout_width="0dp"
             android:layout_height="36dp"
             android:orientation="horizontal"
+            android:layout_marginTop="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"

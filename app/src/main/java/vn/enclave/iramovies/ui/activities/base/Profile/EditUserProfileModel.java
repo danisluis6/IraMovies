@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.widget.Toast;
 
 import vn.enclave.iramovies.local.storage.AppDatabase;
+import vn.enclave.iramovies.local.storage.DatabaseInfo;
 import vn.enclave.iramovies.local.storage.entity.User;
 
 /**
@@ -13,7 +14,7 @@ import vn.enclave.iramovies.local.storage.entity.User;
  * Created by lorence on 04/12/2017.
  */
 
-public class EditUserProfileModel implements IEditUserProfileModel{
+class EditUserProfileModel implements IEditUserProfileModel {
 
     /**
      * Context
@@ -42,15 +43,43 @@ public class EditUserProfileModel implements IEditUserProfileModel{
 
     @Override
     public void addUser(User user) {
-        AddAsyncTask mAddAsyncTask = new AddAsyncTask(user);
+        AddUserAsyncTask mAddAsyncTask = new AddUserAsyncTask(user);
         mAddAsyncTask.execute(user);
     }
 
-    private class AddAsyncTask extends AsyncTask<User, Void, Long> {
+    @Override
+    public void updateUser(User user) {
+        EditUserAsyncTask mEditAsyncTask = new EditUserAsyncTask(user);
+        mEditAsyncTask.execute(user);
+    }
+
+    private class EditUserAsyncTask extends AsyncTask<User, Void, Integer> {
+        private User mUser;
+
+        EditUserAsyncTask(User user) {
+            this.mUser = user;
+        }
+
+        @Override
+        protected Integer doInBackground(User... params) {
+            return mAppDatabase.getUserDao().updateUsers(params[0]);
+        }
+
+        @Override
+        protected void onPostExecute(Integer id) {
+            if (id > 0) {
+                mIEditUserProfilePresenter.onSuccess(mUser);
+            } else {
+                Toast.makeText(mContext, "Update user failed", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    private class AddUserAsyncTask extends AsyncTask<User, Void, Long> {
 
         private User mUser;
 
-        AddAsyncTask(User user) {
+        AddUserAsyncTask(User user) {
             this.mUser = user;
         }
 
@@ -64,7 +93,7 @@ public class EditUserProfileModel implements IEditUserProfileModel{
             if (id > 0) {
                 mIEditUserProfilePresenter.onSuccess(mUser);
             } else {
-                Toast.makeText(mContext, "Add Movie failed", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "Add new user failed", Toast.LENGTH_SHORT).show();
             }
         }
     }

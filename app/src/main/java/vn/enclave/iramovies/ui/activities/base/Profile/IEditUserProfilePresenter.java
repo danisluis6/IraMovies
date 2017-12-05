@@ -18,4 +18,6 @@ public interface IEditUserProfilePresenter extends IBasePresenter<IEditUserProfi
     void onFailure(String message);
 
     void addUser(User user);
+
+    void updateUser(User user);
 }

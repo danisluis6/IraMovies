@@ -1,11 +1,9 @@
 package vn.enclave.iramovies.local.storage.dao;
 
 import android.arch.persistence.room.Dao;
-import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
-
 
 import java.util.List;
 
@@ -28,7 +26,4 @@ public interface UserDao {
 
     @Update
     int updateUsers(User... users);
-
-    @Delete
-    int deleteUsers(User... users);
 }

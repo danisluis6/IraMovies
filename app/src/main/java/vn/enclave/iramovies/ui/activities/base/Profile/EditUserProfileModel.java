@@ -91,6 +91,8 @@ class EditUserProfileModel implements IEditUserProfileModel {
         @Override
         protected void onPostExecute(Long id) {
             if (id > 0) {
+                // Update id for user
+                mUser.setId(Integer.parseInt(String.valueOf(id)));
                 mIEditUserProfilePresenter.onSuccess(mUser);
             } else {
                 Toast.makeText(mContext, "Add new user failed", Toast.LENGTH_SHORT).show();

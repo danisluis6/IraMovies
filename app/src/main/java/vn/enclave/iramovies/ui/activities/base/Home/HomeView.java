@@ -18,7 +18,6 @@ import android.support.v7.widget.SearchView;
 import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -249,10 +248,15 @@ public class HomeView extends BaseView {
                         }
                     }
                 });
-                movieDetailView.setUpdateReminderInterface(new MovieDetailView.UpdateReminderInterface() {
+                movieDetailView.setUpdateReminderInterface(new MovieDetailView.ReminderInterface() {
+                    @Override
+                    public void addReminder(Reminder reminder) {
+                        mUserProfileView.reload(reminder, false);
+                    }
+
                     @Override
                     public void updateReminder(Reminder reminder) {
-                        mUserProfileView.reload(reminder);
+                        mUserProfileView.reload(reminder, true);
                     }
                 });
                 mDetailViewMovie = movieDetailView;

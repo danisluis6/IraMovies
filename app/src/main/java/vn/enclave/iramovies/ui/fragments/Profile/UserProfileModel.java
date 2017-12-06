@@ -8,6 +8,7 @@ import java.util.List;
 
 import vn.enclave.iramovies.R;
 import vn.enclave.iramovies.local.storage.AppDatabase;
+import vn.enclave.iramovies.local.storage.entity.Reminder;
 import vn.enclave.iramovies.local.storage.entity.User;
 
 /**
@@ -54,6 +55,25 @@ public class UserProfileModel implements IUserProfileModel{
             protected void onPostExecute(List<User> groupMovies) {
                 if (!groupMovies.isEmpty()) {
                     mUserProfilePresenter.onSuccess(groupMovies);
+                } else {
+                    mUserProfilePresenter.onFailure(mContext.getResources().getString(R.string.cannot_get_data));
+                }
+            }
+        }.execute();
+    }
+
+    @Override
+    public void getListReminder() {
+        new AsyncTask<Void, Void, List<Reminder>>() {
+            @Override
+            protected List<Reminder> doInBackground(Void... params) {
+                return mAppDatabase.getReminderDao().getReminders();
+            }
+
+            @Override
+            protected void onPostExecute(List<Reminder> groupReminders) {
+                if (!groupReminders.isEmpty()) {
+                    mUserProfilePresenter.onReminderSuccess(groupReminders);
                 } else {
                     mUserProfilePresenter.onFailure(mContext.getResources().getString(R.string.cannot_get_data));
                 }

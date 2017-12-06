@@ -4,8 +4,8 @@ import android.content.Context;
 
 import java.util.List;
 
+import vn.enclave.iramovies.local.storage.entity.Reminder;
 import vn.enclave.iramovies.local.storage.entity.User;
-import vn.enclave.iramovies.ui.activities.base.Profile.IEditUserProfileModel;
 
 /**
  *
@@ -53,5 +53,15 @@ public class UserProfilePresenter implements IUserProfilePresenter{
     @Override
     public void onFailure(String message) {
         mUserProfileView.onFailure(message);
+    }
+
+    @Override
+    public void getListReminder() {
+        mUserProfileModel.getListReminder();
+    }
+
+    @Override
+    public void onReminderSuccess(List<Reminder> reminders) {
+        mUserProfileView.onReminderSuccess(reminders);
     }
 }

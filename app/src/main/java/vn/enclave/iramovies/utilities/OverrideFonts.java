@@ -47,7 +47,7 @@ public class OverrideFonts {
             case LIGHT_ITALIC:
                 return Typeface.createFromAsset(context.getAssets(),"fonts/helveticaneue/helveticaneuelightitalic.ttf");
             case MEDIUM:
-                return Typeface.createFromAsset(context.getAssets(),"fonts/helveticaneue/helveticaneuelightmedium.ttf");
+                return Typeface.createFromAsset(context.getAssets(),"fonts/helveticaneue/helveticaneuemedium.ttf");
             case ULTRALIGHT:
                 return Typeface.createFromAsset(context.getAssets(),"fonts/helveticaneue/helveticaneueultralight.ttf");
             case ULTRALIGHT_ITALIC:

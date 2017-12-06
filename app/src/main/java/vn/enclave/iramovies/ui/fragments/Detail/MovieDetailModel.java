@@ -2,8 +2,11 @@ package vn.enclave.iramovies.ui.fragments.Detail;
 
 import android.arch.persistence.room.Room;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.widget.Toast;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -106,6 +109,55 @@ public class MovieDetailModel implements IMovieDetailModel {
         AddReminderAsyncTask mAddAsyncTask = new AddReminderAsyncTask(reminder);
         mAddAsyncTask.execute(reminder);
     }
+
+    @Override
+    public void getReminderMovie(int id) {
+        new FindReminderAsyncTask().execute(id);
+    }
+
+    @Override
+    public void updateReminder(Reminder reminder) {
+        // Update reminder
+        EditReminderAsyncTask mEditAsyncTask = new EditReminderAsyncTask(reminder);
+        mEditAsyncTask.execute(reminder);
+    }
+
+    private class EditReminderAsyncTask extends AsyncTask<Reminder, Void, Integer> {
+
+        private Reminder mReminder;
+
+        EditReminderAsyncTask(Reminder reminder) {
+            this.mReminder = reminder;
+        }
+
+        @Override
+        protected Integer doInBackground(Reminder... params) {
+            return mAppDatabase.getReminderDao().updateReminders(params[0]);
+        }
+
+        @Override
+        protected void onPostExecute(Integer id) {
+            if (id > 0) {
+                mIMovieDetailPresenter.updateReminderSuccess(mReminder);
+            } else {
+                Toast.makeText(mContext, "Update reminder failed", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    private class FindReminderAsyncTask extends AsyncTask<Integer, Void, Reminder> {
+
+        @Override
+        protected Reminder doInBackground(Integer... params) {
+            return mAppDatabase.getReminderDao().getReminderMovie(params[0]);
+        }
+
+        @Override
+        protected void onPostExecute(Reminder reminder) {
+            mIMovieDetailPresenter.findReminderSuccess(reminder);
+        }
+    }
+
 
     private class AddReminderAsyncTask extends AsyncTask<Reminder, Void, Long> {
 

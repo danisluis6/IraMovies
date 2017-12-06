@@ -11,4 +11,6 @@ import vn.enclave.iramovies.ui.interfaces.IBasePresenter;
 public interface IUserProfileModel extends IBasePresenter<IUserProfilePresenter> {
 
     void getUser();
+
+    void getListReminder();
 }

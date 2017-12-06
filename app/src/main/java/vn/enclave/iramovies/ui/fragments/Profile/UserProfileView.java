@@ -7,6 +7,8 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,9 +28,9 @@ import butterknife.OnClick;
 import vn.enclave.iramovies.R;
 import vn.enclave.iramovies.local.storage.entity.Reminder;
 import vn.enclave.iramovies.local.storage.entity.User;
-import vn.enclave.iramovies.ui.activities.base.Profile.EditUserProfilePresenter;
 import vn.enclave.iramovies.ui.activities.base.Profile.EditUserProfileView;
 import vn.enclave.iramovies.ui.fragments.IRBaseFragment;
+import vn.enclave.iramovies.ui.fragments.Profile.adapter.ReminderAdapter;
 import vn.enclave.iramovies.utilities.Constants;
 import vn.enclave.iramovies.utilities.OverrideFonts;
 import vn.enclave.iramovies.utilities.Utils;
@@ -81,18 +83,21 @@ public class UserProfileView extends IRBaseFragment implements IUserProfileView 
     @BindView(R.id.tvCopyright)
     TextView tvCopyright;
 
+    @BindView(R.id.rcvReminders)
+    RecyclerView rcvReminders;
+
     private User mUser;
 
     /**
      * Work with MVP
      */
     private UserProfilePresenter mUserProfilePresenter;
+    private ReminderAdapter mReminderAdapter;
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
     }
-
 
     @Override
     public View getViewLayout(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -103,7 +108,23 @@ public class UserProfileView extends IRBaseFragment implements IUserProfileView 
     public void fragmentCreated() {
         mUserProfilePresenter = new UserProfilePresenter(mActivity);
         mUserProfilePresenter.attachView(this);
+        initViews();
         loadUserFromStorage();
+        loadReminderFromStorage();
+    }
+
+    private void initViews() {
+        //Use this setting to improve performance if you know that changes in
+        //the content do not change the layout size of the RecyclerView
+        if (rcvReminders != null) {
+            rcvReminders.setHasFixedSize(true);
+        }
+        if (mReminderAdapter == null) {
+            mReminderAdapter = new ReminderAdapter(mActivity, new ArrayList<Reminder>());
+        }
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(mActivity);
+        rcvReminders.setLayoutManager(mLayoutManager);
+        rcvReminders.setAdapter(mReminderAdapter);
     }
 
     @Override
@@ -113,14 +134,26 @@ public class UserProfileView extends IRBaseFragment implements IUserProfileView 
         tvDateOfTheDate.setTypeface(OverrideFonts.getTypeFace(mActivity, OverrideFonts.TYPE_FONT_NAME.HELVETICANEUE, OverrideFonts.TYPE_STYLE.LIGHT));
         tvEmail.setTypeface(OverrideFonts.getTypeFace(mActivity, OverrideFonts.TYPE_FONT_NAME.HELVETICANEUE, OverrideFonts.TYPE_STYLE.LIGHT));
         tvGender.setTypeface(OverrideFonts.getTypeFace(mActivity, OverrideFonts.TYPE_FONT_NAME.HELVETICANEUE, OverrideFonts.TYPE_STYLE.LIGHT));
-        tvReminderList.setTypeface(OverrideFonts.getTypeFace(mActivity, OverrideFonts.TYPE_FONT_NAME.HELVETICANEUE, OverrideFonts.TYPE_STYLE.LIGHT));
+        tvReminderList.setTypeface(OverrideFonts.getTypeFace(mActivity, OverrideFonts.TYPE_FONT_NAME.HELVETICANEUE, OverrideFonts.TYPE_STYLE.MEDIUM));
         tvCopyright.setTypeface(OverrideFonts.getTypeFace(mActivity, OverrideFonts.TYPE_FONT_NAME.HELVETICANEUE, OverrideFonts.TYPE_STYLE.LIGHT));
         btnEdit.setTypeface(OverrideFonts.getTypeFace(mActivity, OverrideFonts.TYPE_FONT_NAME.HELVETICANEUE, OverrideFonts.TYPE_STYLE.BLACK));
         btnShowAll.setTypeface(OverrideFonts.getTypeFace(mActivity, OverrideFonts.TYPE_FONT_NAME.HELVETICANEUE, OverrideFonts.TYPE_STYLE.BLACK));
     }
 
     private void loadUserFromStorage() {
-        mUserProfilePresenter.getUser();
+        if (Utils.isInternetOn(mActivity)) {
+            mUserProfilePresenter.getUser();
+        } else {
+            Utils.Toast.showToast(mActivity, getString(R.string.no_internet_connection));
+        }
+    }
+
+    private void loadReminderFromStorage() {
+        if (Utils.isInternetOn(mActivity)) {
+            mUserProfilePresenter.getListReminder();
+        } else {
+            Utils.Toast.showToast(mActivity, getString(R.string.no_internet_connection));
+        }
     }
 
     @OnClick({R.id.btnEdit, R.id.btnShowAll})
@@ -189,6 +222,11 @@ public class UserProfileView extends IRBaseFragment implements IUserProfileView 
         Utils.Toast.showToast(mActivity, message);
     }
 
+    @Override
+    public void onReminderSuccess(List<Reminder> reminders) {
+        mReminderAdapter.setReminders(reminders);
+    }
+
     public User getUser() {
         return mUser;
     }
@@ -197,8 +235,12 @@ public class UserProfileView extends IRBaseFragment implements IUserProfileView 
         this.mUser = mUser;
     }
 
-    public void reload(Reminder reminder) {
-        Utils.Toast.showToast(mActivity, "Hello World");
+    public void reload(Reminder reminder, boolean isUpdate) {
+        if (isUpdate) {
+            mReminderAdapter.updateReminder(reminder);
+        } else {
+            mReminderAdapter.addReminder(reminder);
+        }
         onResume();
     }
 }

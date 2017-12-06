@@ -21,7 +21,7 @@
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="14dp"
             android:contentDescription="@string/image_description"
             android:scaleType="fitXY"
             android:src="@drawable/placeholder"
@@ -37,7 +37,7 @@
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:ellipsize="marquee"
             android:maxLines="1"
             android:textColor="#000"
@@ -54,7 +54,7 @@
             android:layout_marginLeft="19dp"
             android:layout_marginRight="22dp"
             android:layout_marginStart="19dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="10dp"
             android:orientation="horizontal"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -91,11 +91,16 @@
 
         <android.support.constraint.ConstraintLayout
             android:id="@+id/emailConstrainLayout"
-            android:layout_width="368dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="19dp"
+            android:layout_marginRight="22dp"
+            android:layout_marginEnd="22dp"
             android:layout_marginStart="19dp"
-            android:layout_marginTop="13dp"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/dataOfBirthConstrainLayout">
 
@@ -127,12 +132,15 @@
 
         <android.support.constraint.ConstraintLayout
             android:id="@+id/genderConstrainLayout"
-            android:layout_width="368dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="19dp"
+            android:layout_marginRight="22dp"
+            android:layout_marginEnd="22dp"
             android:layout_marginStart="19dp"
-            android:layout_marginTop="13dp"
+            android:layout_marginTop="10dp"
             app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/emailConstrainLayout">
 
             <TextView
@@ -165,7 +173,7 @@
         <Button
             android:id="@+id/btnEdit"
             android:layout_width="100dp"
-            android:layout_height="30dp"
+            android:layout_height="36dp"
             android:layout_marginEnd="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
@@ -174,8 +182,7 @@
             android:background="@drawable/shape_button"
             android:text="@string/btn_edit"
             android:textColor="#FFFFFF"
-            android:textSize="16sp"
-            app:layout_constraintHorizontal_bias="0.501"
+            android:textSize="14sp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/genderConstrainLayout"/>
@@ -194,84 +201,44 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btnEdit"/>
 
-        <LinearLayout
+        <android.support.constraint.ConstraintLayout
             android:id="@+id/lytReminder1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="22dp"
-            android:layout_marginLeft="22dp"
+            android:layout_marginLeft="18dp"
             android:layout_marginRight="22dp"
-            android:layout_marginStart="22dp"
+            android:layout_marginStart="18dp"
             android:layout_marginTop="4dp"
-            android:background="#20BCBC"
             android:orientation="vertical"
-            android:padding="8dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvReminderList">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rcvReminders"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ellipsize="marquee"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp"/>
+                android:clipToPadding="false"
+                android:scrollbars="vertical"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ellipsize="marquee"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/lytReminder2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="22dp"
-            android:layout_marginLeft="22dp"
-            android:layout_marginRight="22dp"
-            android:layout_marginStart="22dp"
-            android:layout_marginTop="9dp"
-            android:background="#20BCBC"
-            android:orientation="vertical"
-            android:padding="8dp"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lytReminder1">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Annabelle: Creation - 2017 - 6.4/10"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="2017-09-03 10:06"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp"/>
-
-        </LinearLayout>
+        </android.support.constraint.ConstraintLayout>
 
         <Button
             android:id="@+id/btnShowAll"
             android:layout_width="100dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="18dp"
+            android:layout_height="36dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/shape_button"
             android:text="@string/btn_show_all"
             android:textColor="#FFFFFF"
-            android:textSize="16sp"
-            app:layout_constraintHorizontal_bias="0.5"
+            android:textSize="14sp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lytReminder2"/>
+            app:layout_constraintTop_toBottomOf="@+id/lytReminder1"/>
 
         <TextView
             android:id="@+id/tvCopyright"
@@ -280,7 +247,6 @@
             android:text="@string/label_copyright"
             android:textColor="#000000"
             android:textSize="16sp"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btnShowAll"/>

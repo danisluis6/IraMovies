@@ -2,6 +2,7 @@ package vn.enclave.iramovies.ui.fragments.Profile;
 
 import java.util.List;
 
+import vn.enclave.iramovies.local.storage.entity.Reminder;
 import vn.enclave.iramovies.local.storage.entity.User;
 
 /**
@@ -14,4 +15,6 @@ public interface IUserProfileView {
     void onSuccess(List<User> users);
 
     void onFailure(String message);
+
+    void onReminderSuccess(List<Reminder> reminders);
 }

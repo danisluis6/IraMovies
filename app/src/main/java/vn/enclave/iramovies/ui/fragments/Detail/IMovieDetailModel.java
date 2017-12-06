@@ -20,4 +20,8 @@ public interface IMovieDetailModel extends IBasePresenter<IMovieDetailPresenter>
     void addMovie(Movie movie);
 
     void addReminder(Reminder reminder);
+
+    void getReminderMovie(int id);
+
+    void updateReminder(Reminder reminder);
 }

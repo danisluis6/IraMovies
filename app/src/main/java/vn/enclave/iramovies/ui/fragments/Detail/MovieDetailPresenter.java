@@ -2,6 +2,8 @@ package vn.enclave.iramovies.ui.fragments.Detail;
 
 import android.content.Context;
 
+import java.util.List;
+
 import vn.enclave.iramovies.local.storage.entity.Movie;
 import vn.enclave.iramovies.local.storage.entity.Reminder;
 import vn.enclave.iramovies.services.response.CastAndCrewResponse;
@@ -89,9 +91,33 @@ class MovieDetailPresenter implements IMovieDetailPresenter{
     }
 
     @Override
+    public void updateReminder(Reminder reminder) {
+        mMovieDetailModel.updateReminder(reminder);
+    }
+
+    @Override
+    public void updateReminderSuccess(Reminder reminder) {
+        if (mIMovieDetailView != null) {
+            mIMovieDetailView.updateReminderSuccess(reminder);
+        }
+    }
+
+    @Override
     public void addReminderSuccess(Reminder reminder) {
         if (mIMovieDetailView != null) {
             mIMovieDetailView.addReminderSuccess(reminder);
+        }
+    }
+
+    @Override
+    public void getReminderMovie(int id) {
+        mMovieDetailModel.getReminderMovie(id);
+    }
+
+    @Override
+    public void findReminderSuccess(Reminder reminder) {
+        if (mIMovieDetailView != null) {
+            mIMovieDetailView.findReminderSuccess(reminder);
         }
     }
 }

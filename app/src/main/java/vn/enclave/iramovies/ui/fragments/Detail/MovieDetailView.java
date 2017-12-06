@@ -5,7 +5,6 @@ import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +18,6 @@ import com.bumptech.glide.Glide;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -78,11 +76,12 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
      */
     private MovieDetailPresenter mDetailMoviePresenter;
     private RecyclerView.LayoutManager mLayoutManager;
-    private UpdateReminderInterface mUpdateReminderInterface;
+    private ReminderInterface mReminderInterface;
 
     private Movie mMovie;
     private Reminder mReminder;
     private boolean mIsFavorite;
+    private boolean mIsUpdateReminder;
 
     @Override
     public View getViewLayout(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -93,12 +92,15 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
     public void fragmentCreated() {
         setMovie(getMovieDetail());
         displayMovieDetail(getMovie());
-        mIsFavorite = (getMovie().getFavorite() == Constants.Favorites.FAVORITE);
         initAtribute();
         getCastAndCrew();
+        getReminderMovie(getMovie().getId());
     }
 
-    private DatePickerDialog mDatePickerDialog;
+    private void getReminderMovie(int id) {
+        mDetailMoviePresenter.getReminderMovie(id);
+    }
+
     private TimePickerDialog mTimePickerDialog;
 
     @OnClick(R.id.btnReminder)
@@ -127,7 +129,7 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
             }
         };
 
-        mDatePickerDialog = new DatePickerDialog(mActivity, date, myCalendar
+        DatePickerDialog mDatePickerDialog = new DatePickerDialog(mActivity, date, myCalendar
                 .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                 myCalendar.get(Calendar.DAY_OF_MONTH));
 
@@ -151,7 +153,11 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
     private void saveReminderInStorage(String timeReminder) {
         setReminder(getInfoReminder(timeReminder));
         if (Utils.isInternetOn(mActivity)) {
-            mDetailMoviePresenter.addReminder(getReminder());
+            if (mIsUpdateReminder) {
+                mDetailMoviePresenter.updateReminder(getReminder());
+            } else {
+                mDetailMoviePresenter.addReminder(getReminder());
+            }
         } else {
             Utils.Toast.showToast(mActivity, getString(R.string.no_internet_connection));
         }
@@ -176,6 +182,9 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
         mDetailMoviePresenter = new MovieDetailPresenter(mActivity);
         mDetailMoviePresenter.attachView(this);
         mLayoutManager = new LinearLayoutManager(mActivity, LinearLayoutManager.HORIZONTAL, false);
+        mIsUpdateReminder = false;
+
+        mIsFavorite = (getMovie().getFavorite() == Constants.Favorites.FAVORITE);
     }
 
     private void displayMovieDetail(Movie movie) {
@@ -237,7 +246,6 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
 
     @Override
     public void onFailure(String message) {
-        // TODO
     }
 
     @Override
@@ -258,7 +266,23 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
 
     @Override
     public void addReminderSuccess(Reminder reminder) {
-        mUpdateReminderInterface.updateReminder(reminder);
+        mReminderInterface.addReminder(reminder);
+    }
+
+    @Override
+    public void findReminderSuccess(Reminder reminder) {
+        if (reminder != null) {
+            setReminder(reminder);
+            mIsUpdateReminder = true;
+            tvReminder.setText(getReminder().getReminderDate());
+        } else {
+            mIsUpdateReminder = false;
+        }
+    }
+
+    @Override
+    public void updateReminderSuccess(Reminder reminder) {
+        mReminderInterface.updateReminder(reminder);
     }
 
     public void getCastAndCrew() {
@@ -333,12 +357,13 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
         void refreshStarInDetailScreen(Movie movie);
     }
 
-    public interface UpdateReminderInterface {
+    public interface ReminderInterface {
+        void addReminder(Reminder reminder);
         void updateReminder(Reminder reminder);
     }
 
-    public void setUpdateReminderInterface(UpdateReminderInterface updateReminderInterface) {
-        this.mUpdateReminderInterface = updateReminderInterface;
+    public void setUpdateReminderInterface(ReminderInterface reminderInterface) {
+        this.mReminderInterface = reminderInterface;
     }
 
 }

@@ -252,11 +252,17 @@ public class HomeView extends BaseView {
                     @Override
                     public void addReminder(Reminder reminder) {
                         mUserProfileView.reload(reminder, false);
+                        if (mDetailViewFavorite != null) {
+                            mDetailViewFavorite.reloadReminder(reminder);
+                        }
                     }
 
                     @Override
                     public void updateReminder(Reminder reminder) {
                         mUserProfileView.reload(reminder, true);
+                        if (mDetailViewFavorite != null) {
+                            mDetailViewFavorite.reloadReminder(reminder);
+                        }
                     }
                 });
                 mDetailViewMovie = movieDetailView;
@@ -310,6 +316,23 @@ public class HomeView extends BaseView {
                     public void refreshStarInDetailScreen(Movie movie) {
                         if (mDetailViewMovie != null) {
                             mDetailViewMovie.reload(movie);
+                        }
+                    }
+                });
+                movieDetailView.setUpdateReminderInterface(new MovieDetailView.ReminderInterface() {
+                    @Override
+                    public void addReminder(Reminder reminder) {
+                        mUserProfileView.reload(reminder, false);
+                        if (mDetailViewMovie != null) {
+                            mDetailViewMovie.reloadReminder(reminder);
+                        }
+                    }
+
+                    @Override
+                    public void updateReminder(Reminder reminder) {
+                        mUserProfileView.reload(reminder, true);
+                        if (mDetailViewMovie != null) {
+                            mDetailViewMovie.reloadReminder(reminder);
                         }
                     }
                 });

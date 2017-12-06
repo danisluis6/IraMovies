@@ -346,6 +346,13 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
         return reminder;
     }
 
+    public void reloadReminder(Reminder reminder) {
+        if (reminder.getId().equals(getReminder().getId())) {
+            tvReminder.setText(reminder.getReminderDate());
+        }
+        onResume();
+    }
+
     public interface MovieDetailInterface {
         void onDestroy();
         void updateCountStarOnMenu(int value);

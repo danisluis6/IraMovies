@@ -206,8 +206,6 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
         loadCastAndCrew(getPathOfCastAndCrew(castAndCrewResponse));
     }
 
-
-
     private void loadCastAndCrew(List<CastCrew> castCrewList) {
         MovieDetailAdapter movieDetailAdapter = new MovieDetailAdapter(mActivity, mActivity, castCrewList);
         rcvCast.setLayoutManager(mLayoutManager);

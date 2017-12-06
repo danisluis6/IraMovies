@@ -10,42 +10,51 @@
 
 > **Schedule** #[Schedule](#schedule)
 
-# [Recycler View](#recycler-view)
-## [Load More](#load-more)
-### [Index Page](#index-page)
-  - [Widget Android](#widget-android)
-  - [EditText](#edittext)
-    - [How to make editText without line at bottom](#how-to-make-edittext-without-line-at-bottom)
-    - [How to create EditText with rounded corners](#how-to-create-edittext-with-rounded-corners)
-    - [How to add icon inside EditText view in Android](#how-to-add-icon-inside-edittext-view-in-android)
-    - [How to set any image for ImageView](#how-to-set-any-image-for-imageview)
-    - [How to set dimesion of icon inside EditText](#how-to-set-dimesion-of-icon-inside-edittext)
-    - [How to make any html color code semi transparent](#how-to-make-any-html-color-code-semi-transparent)
-    - [Load image from url](#load-image-from-url)
-    - [Draw GridLayout](#draw-gridLayout)
-    - [How to organizate folder in android-studio](#how-to-organizate-folder-in-android-studio)
-    - [How to cutomize activity on more device](#How to cutomize activity on more device)
-### [Total Page](#total-page)
-### [Check Load More](#check-load-more)
+## Task
 
-## Recycler View
-## Check Load More
-   > Update list in Adapter. We should upgrade value of isLoadMore = false at onSuccess();
+> **Version: ** ver25
+>> **Load DatePickerDialog and TimePickerDialog**
 
-    <color name="White">#FFFFFF</color>
- 
-##How to make editText without line at bottom
+private DatePickerDialog mDatePickerDialog;
+    private TimePickerDialog mTimePickerDialog;
 
-## Schedule
+    @OnClick(R.id.btnReminder)
+    public void openDatePicker() {
+        final Calendar myCalendar = Calendar.getInstance();
 
-> **Version: ** ver24
+        DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
 
-        // To start the camera for this, add an extra to your Intent:
-        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                  int dayOfMonth) {
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, monthOfYear);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                mTimePickerDialog.show();
+            }
+
+        };
+
+        TimePickerDialog.OnTimeSetListener time = new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                myCalendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                myCalendar.set(Calendar.MINUTE, minute);
+                updateDisplay(myCalendar);
+            }
+        };
+
+        mDatePickerDialog = new DatePickerDialog(mActivity, date, myCalendar
+                .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                myCalendar.get(Calendar.DAY_OF_MONTH));
+        mDatePickerDialog.getDatePicker().setMinDate(new Date().getTime()-(new Date().getTime()%(24*60*60*1000)));
         
-        // get output media file Uri
-        Uri x = null;
-        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, x);
-        startActivityForResult(cameraIntent, Constants.Activities_Result.CAMERA);
+        mTimePickerDialog = new TimePickerDialog(getActivity(), time,
+                myCalendar.get(Calendar.HOUR_OF_DAY), myCalendar.get(Calendar.MINUTE), true);
+        mDatePickerDialog.show();
+    }
+    
+    => Disable past dates: mDatePickerDialog.getDatePicker().setMinDate(new Date().getTime()-(new Date().getTime()%(24*60*60*1000)));
 
->> **x = ? [Create temporary for save image and get path]**
+>> **Validate date/time when picked from user**
+

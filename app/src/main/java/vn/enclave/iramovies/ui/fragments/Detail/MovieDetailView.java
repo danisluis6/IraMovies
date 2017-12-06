@@ -1,21 +1,27 @@
 package vn.enclave.iramovies.ui.fragments.Detail;
 
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import com.bumptech.glide.Glide;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -24,9 +30,8 @@ import vn.enclave.iramovies.local.storage.DatabaseInfo;
 import vn.enclave.iramovies.local.storage.entity.Movie;
 import vn.enclave.iramovies.services.IraMovieInfoAPIs;
 import vn.enclave.iramovies.services.response.CastAndCrewResponse;
-import vn.enclave.iramovies.ui.activities.base.Profile.EditUserProfileView;
-import vn.enclave.iramovies.ui.fragments.IRBaseFragment;
 import vn.enclave.iramovies.ui.fragments.Detail.adapter.MovieDetailAdapter;
+import vn.enclave.iramovies.ui.fragments.IRBaseFragment;
 import vn.enclave.iramovies.ui.fragments.Movie.bean.CastCrew;
 import vn.enclave.iramovies.utilities.Constants;
 import vn.enclave.iramovies.utilities.Utils;
@@ -38,6 +43,9 @@ import vn.enclave.iramovies.utilities.Utils;
 
 /**
  * @Run: https://stackoverflow.com/questions/13418436/android-4-2-back-stack-behaviour-with-nested-fragments
+ * => Done
+ *
+ * @Run: How to disable past dates in Android date picker?
  * => Done
  */
 
@@ -60,6 +68,9 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
 
     @BindView(R.id.tvOverview)
     TextView tvOverview;
+
+    @BindView(R.id.tvReminder)
+    TextView tvReminder;
 
     /**
      * Work with MVP
@@ -84,6 +95,9 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
         getCastAndCrew();
     }
 
+    private DatePickerDialog mDatePickerDialog;
+    private TimePickerDialog mTimePickerDialog;
+
     @OnClick(R.id.btnReminder)
     public void openDatePicker() {
         final Calendar myCalendar = Calendar.getInstance();
@@ -96,13 +110,38 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
                 myCalendar.set(Calendar.YEAR, year);
                 myCalendar.set(Calendar.MONTH, monthOfYear);
                 myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                mTimePickerDialog.show();
             }
 
         };
 
-        new DatePickerDialog(mActivity, date, myCalendar
+        TimePickerDialog.OnTimeSetListener time = new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                myCalendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                myCalendar.set(Calendar.MINUTE, minute);
+                updateDisplay(myCalendar);
+            }
+        };
+
+        mDatePickerDialog = new DatePickerDialog(mActivity, date, myCalendar
                 .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+                myCalendar.get(Calendar.DAY_OF_MONTH));
+
+        mTimePickerDialog = new TimePickerDialog(getActivity(), time,
+                myCalendar.get(Calendar.HOUR_OF_DAY), myCalendar.get(Calendar.MINUTE), true);
+        mDatePickerDialog.show();
+    }
+
+    private void updateDisplay(Calendar myCalendar) {
+        // Check invalid
+        if (System.currentTimeMillis() > myCalendar.getTime().getTime()) {
+            Utils.Toast.showToast(mActivity, getString(R.string.error_pick_date));
+        } else {
+            String myFormat = "yyyy/MM/dd HH:mm"; // In which you need put here
+            SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+            tvReminder.setText(sdf.format(myCalendar.getTime()));
+        }
     }
 
     @OnClick(R.id.imvFavorite)

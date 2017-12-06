@@ -28,6 +28,7 @@ import butterknife.OnClick;
 import vn.enclave.iramovies.R;
 import vn.enclave.iramovies.local.storage.DatabaseInfo;
 import vn.enclave.iramovies.local.storage.entity.Movie;
+import vn.enclave.iramovies.local.storage.entity.Reminder;
 import vn.enclave.iramovies.services.IraMovieInfoAPIs;
 import vn.enclave.iramovies.services.response.CastAndCrewResponse;
 import vn.enclave.iramovies.ui.fragments.Detail.adapter.MovieDetailAdapter;
@@ -77,8 +78,10 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
      */
     private MovieDetailPresenter mDetailMoviePresenter;
     private RecyclerView.LayoutManager mLayoutManager;
+    private UpdateReminderInterface mUpdateReminderInterface;
 
     private Movie mMovie;
+    private Reminder mReminder;
     private boolean mIsFavorite;
 
     @Override
@@ -141,6 +144,16 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
             String myFormat = "yyyy/MM/dd HH:mm"; // In which you need put here
             SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
             tvReminder.setText(sdf.format(myCalendar.getTime()));
+            saveReminderInStorage(tvReminder.getText().toString());
+        }
+    }
+
+    private void saveReminderInStorage(String timeReminder) {
+        setReminder(getInfoReminder(timeReminder));
+        if (Utils.isInternetOn(mActivity)) {
+            mDetailMoviePresenter.addReminder(getReminder());
+        } else {
+            Utils.Toast.showToast(mActivity, getString(R.string.no_internet_connection));
         }
     }
 
@@ -150,7 +163,6 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
             return;
         }
         mIsFavorite = !mIsFavorite;
-        Log.i("TAG", String.valueOf(mIsFavorite));
         imvFavorite.setImageResource(mIsFavorite ? R.drawable.ic_star_picked : R.drawable.ic_star);
         getMovie().setFavorite(mIsFavorite ? Constants.Favorites.FAVORITE : Constants.Favorites.DEFAULT);
         if (getMovie().getFavorite() == Constants.Favorites.DEFAULT) {
@@ -244,6 +256,11 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
         mMovieDetailInterface.refreshStarInDetailScreen(getMovie());
     }
 
+    @Override
+    public void addReminderSuccess(Reminder reminder) {
+        mUpdateReminderInterface.updateReminder(reminder);
+    }
+
     public void getCastAndCrew() {
         mDetailMoviePresenter.getCastAndCrewFromApi(getMovie().getId());
     }
@@ -288,6 +305,23 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
         return mMovie.getTitle();
     }
 
+    public Reminder getReminder() {
+        return mReminder;
+    }
+
+    public void setReminder(Reminder mReminder) {
+        this.mReminder = mReminder;
+    }
+
+    public Reminder getInfoReminder(String timeReminder) {
+        Reminder reminder = new Reminder();
+        reminder.setId(getMovie().getId());
+        reminder.setTitle(getMovie().getTitle());
+        reminder.setPosterPath(getMovie().getPosterPath());
+        reminder.setReminderDate(timeReminder);
+        return reminder;
+    }
+
     public interface MovieDetailInterface {
         void onDestroy();
         void updateCountStarOnMenu(int value);
@@ -297,6 +331,14 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
         void refreshStarInMovieScreen(Movie movie);
         // Refresh favorite in Detail screen
         void refreshStarInDetailScreen(Movie movie);
+    }
+
+    public interface UpdateReminderInterface {
+        void updateReminder(Reminder reminder);
+    }
+
+    public void setUpdateReminderInterface(UpdateReminderInterface updateReminderInterface) {
+        this.mUpdateReminderInterface = updateReminderInterface;
     }
 
 }

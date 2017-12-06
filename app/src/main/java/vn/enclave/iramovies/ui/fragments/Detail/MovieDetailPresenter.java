@@ -3,6 +3,7 @@ package vn.enclave.iramovies.ui.fragments.Detail;
 import android.content.Context;
 
 import vn.enclave.iramovies.local.storage.entity.Movie;
+import vn.enclave.iramovies.local.storage.entity.Reminder;
 import vn.enclave.iramovies.services.response.CastAndCrewResponse;
 
 /**
@@ -25,12 +26,12 @@ class MovieDetailPresenter implements IMovieDetailPresenter{
     /**
      * IMovieDetailModel
      */
-    private IMovieDetailModel mIMovieDetailModel;
+    private IMovieDetailModel mMovieDetailModel;
 
     MovieDetailPresenter(Context context) {
         this.mContext = context;
-        mIMovieDetailModel = new MovieDetailModel(mContext);
-        mIMovieDetailModel.attachView(this);
+        mMovieDetailModel = new MovieDetailModel(mContext);
+        mMovieDetailModel.attachView(this);
     }
 
     @Override
@@ -40,7 +41,7 @@ class MovieDetailPresenter implements IMovieDetailPresenter{
 
     @Override
     public void getCastAndCrewFromApi(int movieId) {
-        mIMovieDetailModel.getCastAndCrewFromApi(movieId);
+        mMovieDetailModel.getCastAndCrewFromApi(movieId);
     }
 
     @Override
@@ -55,12 +56,12 @@ class MovieDetailPresenter implements IMovieDetailPresenter{
 
     @Override
     public void cancelProcessing() {
-        mIMovieDetailModel.cancelProcessing();
+        mMovieDetailModel.cancelProcessing();
     }
 
     @Override
     public void deleteMovie(Movie movie) {
-        mIMovieDetailModel.deleteMovie(movie);
+        mMovieDetailModel.deleteMovie(movie);
     }
 
     @Override
@@ -77,7 +78,20 @@ class MovieDetailPresenter implements IMovieDetailPresenter{
         }
     }
 
+    @Override
     public void addMovie(Movie movie) {
-        mIMovieDetailModel.addMovie(movie);
+        mMovieDetailModel.addMovie(movie);
+    }
+
+    @Override
+    public void addReminder(Reminder reminder) {
+        mMovieDetailModel.addReminder(reminder);
+    }
+
+    @Override
+    public void addReminderSuccess(Reminder reminder) {
+        if (mIMovieDetailView != null) {
+            mIMovieDetailView.addReminderSuccess(reminder);
+        }
     }
 }

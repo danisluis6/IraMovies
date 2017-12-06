@@ -13,6 +13,7 @@ import vn.enclave.iramovies.IRApplication;
 import vn.enclave.iramovies.R;
 import vn.enclave.iramovies.local.storage.AppDatabase;
 import vn.enclave.iramovies.local.storage.entity.Movie;
+import vn.enclave.iramovies.local.storage.entity.Reminder;
 import vn.enclave.iramovies.services.IraMovieWebAPIs;
 import vn.enclave.iramovies.services.response.CastAndCrewResponse;
 import vn.enclave.iramovies.utilities.Constants;
@@ -82,7 +83,7 @@ public class MovieDetailModel implements IMovieDetailModel {
 
     @Override
     public void deleteMovie(final Movie movie) {
-        DeleteAsyncTask mDeleteAsyncTask = new DeleteAsyncTask(movie);
+        DeleteMovieAsyncTask mDeleteAsyncTask = new DeleteMovieAsyncTask(movie);
         mDeleteAsyncTask.execute(movie);
     }
 
@@ -96,15 +97,45 @@ public class MovieDetailModel implements IMovieDetailModel {
 
     @Override
     public void addMovie(Movie movie) {
-        AddAsyncTask mAddAsyncTask = new AddAsyncTask(movie);
+        AddMovieAsyncTask mAddAsyncTask = new AddMovieAsyncTask(movie);
         mAddAsyncTask.execute(movie);
     }
 
-    private class AddAsyncTask extends AsyncTask<Movie, Void, Long> {
+    @Override
+    public void addReminder(Reminder reminder) {
+        AddReminderAsyncTask mAddAsyncTask = new AddReminderAsyncTask(reminder);
+        mAddAsyncTask.execute(reminder);
+    }
+
+    private class AddReminderAsyncTask extends AsyncTask<Reminder, Void, Long> {
+
+        private Reminder reminder;
+
+        AddReminderAsyncTask(Reminder reminder) {
+            this.reminder = reminder;
+        }
+
+        @Override
+        protected Long doInBackground(Reminder... params) {
+            return mAppDatabase.getReminderDao().insertReminders(params[0]);
+        }
+
+        @Override
+        protected void onPostExecute(Long id) {
+            if (id > 0) {
+                reminder.setId(Integer.parseInt(String.valueOf(id)));
+                mIMovieDetailPresenter.addReminderSuccess(reminder);
+            } else {
+                Toast.makeText(mContext, "Add reminder failed", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    private class AddMovieAsyncTask extends AsyncTask<Movie, Void, Long> {
 
         private Movie movie;
 
-        AddAsyncTask(Movie movie) {
+        AddMovieAsyncTask(Movie movie) {
             this.movie = movie;
         }
 
@@ -116,18 +147,19 @@ public class MovieDetailModel implements IMovieDetailModel {
         @Override
         protected void onPostExecute(Long id) {
             if (id > 0) {
+                movie.setId(Integer.parseInt(String.valueOf(id)));
                 mIMovieDetailPresenter.addMovieSuccess(movie);
             } else {
-                Toast.makeText(mContext, "Add Movie failed", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "Add movie failed", Toast.LENGTH_SHORT).show();
             }
         }
     }
 
-    private class DeleteAsyncTask extends AsyncTask<Movie, Void, Integer> {
+    private class DeleteMovieAsyncTask extends AsyncTask<Movie, Void, Integer> {
 
         private Movie movie;
 
-        DeleteAsyncTask(Movie movie) {
+        DeleteMovieAsyncTask(Movie movie) {
             this.movie = movie;
         }
 

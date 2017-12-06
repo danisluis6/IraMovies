@@ -36,12 +36,14 @@ import butterknife.BindView;
 import vn.enclave.iramovies.R;
 import vn.enclave.iramovies.local.storage.SessionManager;
 import vn.enclave.iramovies.local.storage.entity.Movie;
+import vn.enclave.iramovies.local.storage.entity.Reminder;
 import vn.enclave.iramovies.ui.activities.base.BaseView;
 import vn.enclave.iramovies.ui.activities.base.Home.adapters.PaperAdapter;
 import vn.enclave.iramovies.ui.fragments.About.AboutView;
 import vn.enclave.iramovies.ui.fragments.Detail.MovieDetailView;
 import vn.enclave.iramovies.ui.fragments.Favorite.FavoriteView;
 import vn.enclave.iramovies.ui.fragments.Movie.MovieView;
+import vn.enclave.iramovies.ui.fragments.Profile.UserProfileView;
 import vn.enclave.iramovies.ui.fragments.Setting.SettingView;
 import vn.enclave.iramovies.ui.views.TabItem;
 import vn.enclave.iramovies.ui.views.ToolbarLayout;
@@ -92,6 +94,7 @@ public class HomeView extends BaseView {
     private FavoriteView mFavoriteView;
     private SettingView mSettingView;
     private AboutView mAboutView;
+    private UserProfileView mUserProfileView;
     private boolean isModeView = true;
 
 
@@ -132,6 +135,7 @@ public class HomeView extends BaseView {
         mFavoriteView = (FavoriteView) FavoriteView.instantiate(mContext, FavoriteView.class.getName());
         mSettingView = (SettingView) SettingView.instantiate(mContext, SettingView.class.getName());
         mAboutView = (AboutView) AboutView.instantiate(mContext, AboutView.class.getName());
+        mUserProfileView = (UserProfileView) getSupportFragmentManager().findFragmentById(R.id.fragment_user_profile);
     }
 
     private void initViews() {
@@ -243,6 +247,12 @@ public class HomeView extends BaseView {
                         if (mDetailViewFavorite != null) {
                             mDetailViewFavorite.reload(movie);
                         }
+                    }
+                });
+                movieDetailView.setUpdateReminderInterface(new MovieDetailView.UpdateReminderInterface() {
+                    @Override
+                    public void updateReminder(Reminder reminder) {
+                        mUserProfileView.reload(reminder);
                     }
                 });
                 mDetailViewMovie = movieDetailView;

@@ -1,6 +1,7 @@
 package vn.enclave.iramovies.ui.fragments.Detail;
 
 import vn.enclave.iramovies.local.storage.entity.Movie;
+import vn.enclave.iramovies.local.storage.entity.Reminder;
 import vn.enclave.iramovies.services.response.CastAndCrewResponse;
 
 /**
@@ -17,4 +18,6 @@ interface IMovieDetailView {
     void deleteMovieSuccess(Movie movie);
 
     void addMovieSuccess(Movie movie);
+
+    void addReminderSuccess(Reminder reminder);
 }

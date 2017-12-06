@@ -24,6 +24,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 import vn.enclave.iramovies.R;
+import vn.enclave.iramovies.local.storage.entity.Reminder;
 import vn.enclave.iramovies.local.storage.entity.User;
 import vn.enclave.iramovies.ui.activities.base.Profile.EditUserProfilePresenter;
 import vn.enclave.iramovies.ui.activities.base.Profile.EditUserProfileView;
@@ -47,6 +48,8 @@ import static android.app.Activity.RESULT_OK;
  * => Done
  * @Run: https://stackoverflow.com/questions/38893042/pass-interface-between-activities-in-intent-interface-fails-to-be-serializable
  * => Done
+ *
+ * @Run: https://stackoverflow.com/questions/13911261/how-to-get-a-fragment-added-in-an-xml-layout
  */
 
 public class UserProfileView extends IRBaseFragment implements IUserProfileView {
@@ -192,5 +195,10 @@ public class UserProfileView extends IRBaseFragment implements IUserProfileView 
 
     public void setUser(User mUser) {
         this.mUser = mUser;
+    }
+
+    public void reload(Reminder reminder) {
+        Utils.Toast.showToast(mActivity, "Hello World");
+        onResume();
     }
 }

@@ -21,6 +21,7 @@ public class DatabaseInfo {
     public static class Tables {
         public static final String User = "user";
         public static final String Movie = "movie";
+        public static final String Reminder = "reminder";
     }
 
     // Columns of Video table
@@ -44,5 +45,12 @@ public class DatabaseInfo {
         public static final String COLUMN_BACKDROP_PATH = "backdrop_path";
         public static final String COLUMN_VOTE_AVERAGE = "vote_average";
         public static final String COLUMN_FAVORITE = "favorite";
+    }
+
+    public static class Reminder {
+        public static final String COLUMN_ID = "id";
+        public static final String COLUMN_TITLE = "title";
+        public static final String COLUMN_POSTER_PATH = "poster_path";
+        public static final String COLUMN_REMINDER_DATE = "release_date";
     }
 }

@@ -150,6 +150,7 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
             return;
         }
         mIsFavorite = !mIsFavorite;
+        Log.i("TAG", String.valueOf(mIsFavorite));
         imvFavorite.setImageResource(mIsFavorite ? R.drawable.ic_star_picked : R.drawable.ic_star);
         getMovie().setFavorite(mIsFavorite ? Constants.Favorites.FAVORITE : Constants.Favorites.DEFAULT);
         if (getMovie().getFavorite() == Constants.Favorites.DEFAULT) {
@@ -157,10 +158,6 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
         } else {
             mDetailMoviePresenter.addMovie(getMovie());
         }
-        mMovieDetailInterface.updateCountStarOnMenu(getMovie().getFavorite());
-        mMovieDetailInterface.refreshStarInFavoriteScreen(getMovie());
-        mMovieDetailInterface.refreshStarInMovieScreen(getMovie());
-        mMovieDetailInterface.refreshStarInDetailScreen(getMovie());
     }
 
     private void initAtribute() {
@@ -235,12 +232,18 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
 
     @Override
     public void deleteMovieSuccess(Movie movie) {
-        // TODO
+        mMovieDetailInterface.updateCountStarOnMenu(getMovie().getFavorite());
+        mMovieDetailInterface.refreshStarInFavoriteScreen(getMovie());
+        mMovieDetailInterface.refreshStarInMovieScreen(getMovie());
+        mMovieDetailInterface.refreshStarInDetailScreen(getMovie());
     }
 
     @Override
     public void addMovieSuccess(Movie movie) {
-        // TODO
+        mMovieDetailInterface.updateCountStarOnMenu(getMovie().getFavorite());
+        mMovieDetailInterface.refreshStarInFavoriteScreen(getMovie());
+        mMovieDetailInterface.refreshStarInMovieScreen(getMovie());
+        mMovieDetailInterface.refreshStarInDetailScreen(getMovie());
     }
 
     public void getCastAndCrew() {
@@ -278,6 +281,7 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
     public void reload(Movie movie) {
         if (imvFavorite != null && getMovie().getId().equals(movie.getId())) {
             imvFavorite.setImageResource((movie.getFavorite() == Constants.Favorites.FAVORITE) ? R.drawable.ic_star_picked : R.drawable.ic_star);
+            mIsFavorite = !mIsFavorite;
         }
         onResume();
     }

@@ -71,6 +71,10 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.ViewHo
         notifyDataSetChanged();
     }
 
+    public List<Reminder> getList() {
+        return mGroupReminders;
+    }
+
     class ViewHolder extends RecyclerView.ViewHolder{
 
         @BindView(R.id.tvTitle)

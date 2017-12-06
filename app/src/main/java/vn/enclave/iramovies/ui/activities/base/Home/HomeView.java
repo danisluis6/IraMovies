@@ -135,6 +135,13 @@ public class HomeView extends BaseView {
         mSettingView = (SettingView) SettingView.instantiate(mContext, SettingView.class.getName());
         mAboutView = (AboutView) AboutView.instantiate(mContext, AboutView.class.getName());
         mUserProfileView = (UserProfileView) getSupportFragmentManager().findFragmentById(R.id.fragment_user_profile);
+        mUserProfileView.setReminderListInterface(new UserProfileView.ReminderListInterface() {
+            @Override
+            public void openReminderList(List<Reminder> reminders) {
+                mDrawerLayout.closeDrawers();
+                mViewPager.setCurrentItem(2);
+            }
+        });
     }
 
     private void initViews() {

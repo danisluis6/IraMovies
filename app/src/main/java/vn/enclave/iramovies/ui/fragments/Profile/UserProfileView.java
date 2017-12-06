@@ -92,6 +92,7 @@ public class UserProfileView extends IRBaseFragment implements IUserProfileView 
      * Work with MVP
      */
     private UserProfilePresenter mUserProfilePresenter;
+    private ReminderListInterface mReminderListInterface;
     private ReminderAdapter mReminderAdapter;
 
     @Override
@@ -154,6 +155,11 @@ public class UserProfileView extends IRBaseFragment implements IUserProfileView 
         } else {
             Utils.Toast.showToast(mActivity, getString(R.string.no_internet_connection));
         }
+    }
+
+    @OnClick(R.id.btnShowAll)
+    public void openReminderList() {
+        mReminderListInterface.openReminderList(mReminderAdapter.getList());
     }
 
     @OnClick({R.id.btnEdit, R.id.btnShowAll})
@@ -242,5 +248,13 @@ public class UserProfileView extends IRBaseFragment implements IUserProfileView 
             mReminderAdapter.addReminder(reminder);
         }
         onResume();
+    }
+
+    public void setReminderListInterface(ReminderListInterface reminderListInterface) {
+        this.mReminderListInterface = reminderListInterface;
+    }
+
+    public interface ReminderListInterface {
+        void openReminderList(List<Reminder> reminders);
     }
 }

@@ -246,12 +246,11 @@ public class HomeView extends BaseView {
 
             @Override
             public void getMovieDetailFragment(MovieDetailView movieDetailView, Movie movie) {
-                final String title = SessionManager.getInstance(mContext).getCategory();
                 movieDetailView.setMovieDetailInterface(new MovieDetailView.MovieDetailInterface() {
                     @Override
                     public void onDestroy() {
                         if (!isFinishing()) {
-                            updateTitleBar(title);
+                            updateTitleBar(SessionManager.getInstance(mContext).getCategory());
                         }
                     }
 
@@ -296,9 +295,9 @@ public class HomeView extends BaseView {
                     @Override
                     public void updateReminder(Reminder reminder) {
                         mUserProfileView.reload(reminder, true);
-//                        if (mDetailViewFavorite != null) {
-//                            mDetailViewFavorite.reloadReminder(reminder);
-//                        }
+                        if (mDetailViewFavorite != null) {
+                            mDetailViewFavorite.reloadReminder(reminder);
+                        }
                         if (mReminderView != null) {
                             mReminderView.reload(reminder, true);
                         }
@@ -323,12 +322,11 @@ public class HomeView extends BaseView {
 
             @Override
             public void getMovieDetailFragment(final MovieDetailView movieDetailView, Movie movie) {
-                final String title = SessionManager.getInstance(mContext).getCategory();
                 movieDetailView.setMovieDetailInterface(new MovieDetailView.MovieDetailInterface() {
                     @Override
                     public void onDestroy() {
                         if (!isFinishing()) {
-                            updateTitleBar(title);
+                            updateTitleBar(getResources().getString(R.string.favorites));
                         }
                     }
 
@@ -429,11 +427,14 @@ public class HomeView extends BaseView {
                             mToolbar.getToolbar().setNavigationIcon(R.drawable.ic_menu);
                         } else {
                             if (!TextUtils.equals(SessionManager.getInstance(mContext).getCategory(), Constants.EMPTY_STRING)) {
-                                updateTitleBar(mDetailViewMovie.getTitle());
+                                if (mDetailViewMovie != null) {
+                                    updateTitleBar(mDetailViewMovie.getTitle());
+                                }
                             } else {
                                 updateTitleBar(SessionManager.getInstance(mContext).getCategory());
                             }
                         }
+
                         mMenu.findItem(R.id.search).setVisible(false);
                         mMenu.findItem(R.id.search).setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
                         mMenu.findItem(R.id.view_list).setVisible(true);
@@ -448,7 +449,13 @@ public class HomeView extends BaseView {
                         });
                         break;
                     case 1:
-                        updateTitleBar(getResources().getString(R.string.favorites));
+                        if (mFavoriteView.getChildFragmentManager().getBackStackEntryCount() == 0) {
+                            updateTitleBar(getResources().getString(R.string.favorites));
+                        } else {
+                            if (mDetailViewFavorite != null) {
+                                updateTitleBar(mDetailViewFavorite.getTitle());
+                            }
+                        }
                         mToolbar.getToolbar().setNavigationIcon(R.drawable.ic_menu);
                         mMenu.findItem(R.id.search).setVisible(true);
                         mMenu.findItem(R.id.search).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
@@ -469,7 +476,11 @@ public class HomeView extends BaseView {
                         });
                         break;
                     case 2:
-                        updateTitleBar(getResources().getString(R.string.settings));
+                        if (mSettingView.getChildFragmentManager().getBackStackEntryCount() > 0) {
+                            updateTitleBar(getResources().getString(R.string.reminders));
+                        } else {
+                            updateTitleBar(getResources().getString(R.string.settings));
+                        }
                         mMenu.findItem(R.id.search).setVisible(false);
                         mMenu.findItem(R.id.search).setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
                         mMenu.findItem(R.id.view_list).setVisible(false);

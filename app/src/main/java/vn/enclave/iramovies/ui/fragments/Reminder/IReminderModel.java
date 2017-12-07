@@ -1,6 +1,7 @@
 package vn.enclave.iramovies.ui.fragments.Reminder;
 
 import vn.enclave.iramovies.local.storage.entity.Movie;
+import vn.enclave.iramovies.local.storage.entity.Reminder;
 import vn.enclave.iramovies.ui.interfaces.IBasePresenter;
 
 /**
@@ -10,10 +11,5 @@ import vn.enclave.iramovies.ui.interfaces.IBasePresenter;
 
 public interface IReminderModel extends IBasePresenter<IReminderPresenter> {
 
-    // Copy IMovieView and paste it in here
-    void onSuccess(Movie movie);
-
-    void onFailure(String message);
-
-    void getReminderDetail(int id);
+    void updateReminder(Reminder reminder);
 }

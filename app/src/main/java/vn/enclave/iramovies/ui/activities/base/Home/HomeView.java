@@ -106,6 +106,7 @@ public class HomeView extends BaseView {
 
     private MovieDetailView mDetailViewMovie;
     private MovieDetailView mDetailViewFavorite;
+    private MovieDetailView mDetailReminder;
     private ReminderView mReminderView;
 
     private PaperAdapter mPageAdapter;
@@ -144,7 +145,6 @@ public class HomeView extends BaseView {
             public void openReminderList(ArrayList<Reminder> reminders) {
                 mDrawerLayout.closeDrawers();
                 mViewPager.setCurrentItem(2);
-                updateTitleBar(getResources().getString(R.string.reminders));
                 if (mSettingView != null) {
                     if (mReminderView == null) {
                         mReminderView = new ReminderView();
@@ -153,6 +153,13 @@ public class HomeView extends BaseView {
                         @Override
                         public void onDestroy() {
                             updateTitleBar(getResources().getString(R.string.settings));
+                        }
+
+                        @Override
+                        public void getMovieDetailFragment(MovieDetailView movieDetailView, Reminder reminder) {
+                            mDetailReminder = movieDetailView;
+                            mReminderView.openReminderDetail(mDetailReminder);
+                            updateTitleBar(reminder.getTitle());
                         }
                     });
                     mReminderView.setArguments(getReminderListBundle(reminders));
@@ -250,7 +257,11 @@ public class HomeView extends BaseView {
                     @Override
                     public void onDestroy() {
                         if (!isFinishing()) {
-                            updateTitleBar(SessionManager.getInstance(mContext).getCategory());
+                            if (TextUtils.equals(SessionManager.getInstance(mContext).getCategory(), Constants.EMPTY_STRING)) {
+                                updateTitleBar(getResources().getString(R.string.popular));
+                            } else {
+                                updateTitleBar(SessionManager.getInstance(mContext).getCategory());
+                            }
                         }
                     }
 
@@ -277,6 +288,17 @@ public class HomeView extends BaseView {
                     public void refreshStarInDetailScreen(Movie movie) {
                         if (mDetailViewFavorite != null) {
                             mDetailViewFavorite.reload(movie);
+                        }
+                    }
+
+                    @Override
+                    public void refreshStarInReminderDetail(Movie movie, String reminderDate) {
+                        if (mDetailReminder != null) {
+                            mDetailReminder.refreshStar(movie, reminderDate);
+                        }
+                        // Update reminder and show reminder
+                        if (mReminderView != null) {
+                            mReminderView.updateStarOnStorage(movie, reminderDate);
                         }
                     }
                 });
@@ -355,6 +377,17 @@ public class HomeView extends BaseView {
                             mDetailViewMovie.reload(movie);
                         }
                     }
+
+                    @Override
+                    public void refreshStarInReminderDetail(Movie movie, String reminderDate) {
+                        if (mDetailReminder != null) {
+                            mDetailReminder.refreshStar(movie, reminderDate);
+                        }
+                        // Update reminder and show reminder
+                        if (mReminderView != null) {
+                            mReminderView.updateStarOnStorage(movie, reminderDate);
+                        }
+                    }
                 });
                 movieDetailView.setUpdateReminderInterface(new MovieDetailView.ReminderInterface() {
                     @Override
@@ -423,16 +456,14 @@ public class HomeView extends BaseView {
                 switch (position) {
                     case 0:
                         if (mMovieView.getChildFragmentManager().getBackStackEntryCount() == 0) {
-                            updateTitleBar(SessionManager.getInstance(mContext).getCategory());
-                            mToolbar.getToolbar().setNavigationIcon(R.drawable.ic_menu);
-                        } else {
-                            if (!TextUtils.equals(SessionManager.getInstance(mContext).getCategory(), Constants.EMPTY_STRING)) {
-                                if (mDetailViewMovie != null) {
-                                    updateTitleBar(mDetailViewMovie.getTitle());
-                                }
+                            if (TextUtils.equals(SessionManager.getInstance(mContext).getCategory(), Constants.EMPTY_STRING)) {
+                                updateTitleBar(getResources().getString(R.string.popular));
                             } else {
                                 updateTitleBar(SessionManager.getInstance(mContext).getCategory());
+                                mToolbar.getToolbar().setNavigationIcon(R.drawable.ic_menu);
                             }
+                        } else {
+                            updateTitleBar(mDetailViewMovie.getTitle());
                         }
 
                         mMenu.findItem(R.id.search).setVisible(false);
@@ -477,7 +508,11 @@ public class HomeView extends BaseView {
                         break;
                     case 2:
                         if (mSettingView.getChildFragmentManager().getBackStackEntryCount() > 0) {
-                            updateTitleBar(getResources().getString(R.string.reminders));
+                            if (mReminderView != null && mReminderView.getChildFragmentManager().getBackStackEntryCount() > 0) {
+                                updateTitleBar(mDetailReminder.getTitle());
+                            } else {
+                                updateTitleBar(getResources().getString(R.string.reminders));
+                            }
                         } else {
                             updateTitleBar(getResources().getString(R.string.settings));
                         }
@@ -504,7 +539,9 @@ public class HomeView extends BaseView {
     }
 
     void updateTitleBar(String title) {
-        mToolbar.getToolbar().setTitle(title);
+        if (mToolbar != null) {
+            mToolbar.getToolbar().setTitle(title);
+        }
     }
 
     @Override
@@ -642,13 +679,22 @@ public class HomeView extends BaseView {
 
     @Override
     public void onBackPressed() {
+        updateNavigationIcon(getDrawable(R.drawable.ic_menu));
         Fragment fragment = mPageAdapter.getItem(mViewPager.getCurrentItem());
         FragmentManager fm = fragment.getChildFragmentManager();
         if (fm != null) {
             int count = fm.getBackStackEntryCount();
             if (count > 0) {
-                updateNavigationIcon(getDrawable(R.drawable.ic_menu));
-                fm.popBackStack();
+                if (mViewPager.getCurrentItem() == Constants.Tab.Setting) {
+                    int childCount = mReminderView.getChildFragmentManager().getBackStackEntryCount();
+                    if (childCount > 0) {
+                        mReminderView.getChildFragmentManager().popBackStack();
+                    } else {
+                        fm.popBackStack();
+                    }
+                } else {
+                    fm.popBackStack();
+                }
             } else {
                 super.onBackPressed();
             }

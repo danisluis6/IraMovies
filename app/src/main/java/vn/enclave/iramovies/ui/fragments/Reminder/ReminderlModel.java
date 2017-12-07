@@ -2,11 +2,11 @@ package vn.enclave.iramovies.ui.fragments.Reminder;
 
 import android.arch.persistence.room.Room;
 import android.content.Context;
+import android.os.AsyncTask;
+import android.widget.Toast;
 
-import vn.enclave.iramovies.IRApplication;
 import vn.enclave.iramovies.local.storage.AppDatabase;
-import vn.enclave.iramovies.local.storage.entity.Movie;
-import vn.enclave.iramovies.services.IraMovieWebAPIs;
+import vn.enclave.iramovies.local.storage.entity.Reminder;
 
 /**
  *
@@ -26,18 +26,12 @@ public class ReminderlModel implements IReminderModel {
     private IReminderPresenter mReminderPresenter;
 
     /**
-     * IraMovieWebAPIs
-     */
-    private IraMovieWebAPIs mApiService;
-
-    /**
      * AppDatabase
      */
     private AppDatabase mAppDatabase;
 
     public ReminderlModel(Context context) {
-        this.mContext = context;
-        mApiService = IRApplication.getInstance().getEzFaxingWebAPIs();
+        mContext = context;
         mAppDatabase = Room.databaseBuilder(mContext, AppDatabase.class, AppDatabase.DB_NAME).build();
     }
 
@@ -47,17 +41,31 @@ public class ReminderlModel implements IReminderModel {
     }
 
     @Override
-    public void getReminderDetail(int id) {
-
+    public void updateReminder(Reminder reminder) {
+        EditUserAsyncTask mEditAsyncTask = new EditUserAsyncTask(reminder);
+        mEditAsyncTask.execute(reminder);
     }
 
-    @Override
-    public void onSuccess(Movie movie) {
+    private class EditUserAsyncTask extends AsyncTask<Reminder, Void, Integer> {
 
-    }
+        private Reminder mReminder;
 
-    @Override
-    public void onFailure(String message) {
+        EditUserAsyncTask(Reminder reminder) {
+            this.mReminder = reminder;
+        }
 
+        @Override
+        protected Integer doInBackground(Reminder... params) {
+            return mAppDatabase.getReminderDao().updateReminders(params[0]);
+        }
+
+        @Override
+        protected void onPostExecute(Integer id) {
+            if (id > 0) {
+                mReminderPresenter.onSuccess(mReminder);
+            } else {
+                Toast.makeText(mContext, "Update reminder failed", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 }

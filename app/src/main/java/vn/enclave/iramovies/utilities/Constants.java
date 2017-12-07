@@ -67,6 +67,12 @@ public class Constants {
         public static int FAVORITE = 1;
     }
 
+    public static class Bundle {
+        public static String TYPE = "type";
+        public static String MOVIE = "movie";
+        public static String REMINDER = "reminder";
+    }
+
     public static String URL = "https://www.themoviedb.org/";
 
     public static String IMAGE_FOLDER = "IraMovies";

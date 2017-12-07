@@ -1,6 +1,9 @@
 package vn.enclave.iramovies.ui.fragments.Reminder;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,6 +15,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import vn.enclave.iramovies.R;
+import vn.enclave.iramovies.local.storage.DatabaseInfo;
 import vn.enclave.iramovies.local.storage.entity.Movie;
 import vn.enclave.iramovies.local.storage.entity.Reminder;
 import vn.enclave.iramovies.ui.fragments.Detail.MovieDetailView;
@@ -20,14 +24,13 @@ import vn.enclave.iramovies.ui.fragments.Movie.MoviePresenter;
 import vn.enclave.iramovies.ui.fragments.Reminder.adapter.ReminderListAdapter;
 import vn.enclave.iramovies.ui.views.FailureLayout;
 import vn.enclave.iramovies.utilities.Constants;
-import vn.enclave.iramovies.utilities.Utils;
 
 /**
  * Created by lorence on 08/11/2017.
  * @Run: https://www.mkyong.com/android/android-webview-example/
  */
 
-public class ReminderView extends IRBaseFragment implements IReminderView {
+public class ReminderView extends IRBaseFragment implements IReminderView{
 
     @BindView(R.id.rcvReminders)
     RecyclerView rcvReminders;
@@ -65,15 +68,29 @@ public class ReminderView extends IRBaseFragment implements IReminderView {
             mReminderListAdapter = new ReminderListAdapter(mActivity, new ArrayList<Reminder>(), new ReminderListAdapter.OpenReminderDetail() {
                 @Override
                 public void openReminder(Reminder reminder) {
-                    if (Utils.isInternetOn(mActivity)) {
-                        mReminderPresenter.getReminderDetail(reminder.getId());
-                    }
+                    MovieDetailView movieDetailView = new MovieDetailView();
+                    movieDetailView.setArguments(getMovieBundle(reminder));
+                    mReminderViewInterface.getMovieDetailFragment(movieDetailView, reminder);
                 }
             });
         }
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(mActivity);
         rcvReminders.setLayoutManager(mLayoutManager);
         rcvReminders.setAdapter(mReminderListAdapter);
+    }
+
+    private Bundle getMovieBundle(Reminder reminder) {
+        Bundle mBundle = new Bundle();
+        mBundle.putString(Constants.Bundle.TYPE, Constants.Bundle.REMINDER);
+        mBundle.putInt(DatabaseInfo.Reminder.COLUMN_ID, reminder.getId());
+        mBundle.putString(DatabaseInfo.Reminder.COLUMN_TITLE, reminder.getTitle());
+        mBundle.putString(DatabaseInfo.Reminder.COLUMN_POSTER_PATH, reminder.getPosterPath());
+        mBundle.putString(DatabaseInfo.Reminder.COLUMN_RELEASE_DATE, reminder.getReleaseDate());
+        mBundle.putDouble(DatabaseInfo.Reminder.COLUMN_VOTE_AVERAGE, reminder.getVoteAverage());
+        mBundle.putString(DatabaseInfo.Reminder.COLUMN_OVERVIEW, reminder.getOverview());
+        mBundle.putInt(DatabaseInfo.Reminder.COLUMN_FAVORITE, reminder.getFavorite());
+        mBundle.putString(DatabaseInfo.Reminder.COLUMN_REMINDER_DATE, reminder.getReminderDate());
+        return mBundle;
     }
 
     public void getReminderList() {
@@ -101,18 +118,46 @@ public class ReminderView extends IRBaseFragment implements IReminderView {
         }
     }
 
+    public void openReminderDetail(Fragment fragment) {
+        FragmentManager fragmentManager = getChildFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.add(R.id.fragment_reminder_detail, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+        fragmentManager.executePendingTransactions();
+    }
+
+    public void updateStarOnStorage(Movie movie, String reminderDate) {
+        if (mReminderPresenter != null) {
+            mReminderPresenter.updateReminder(getReminderUpdated(movie, reminderDate));
+        }
+    }
+
+    public Reminder getReminderUpdated(Movie movie, String reminderDate) {
+        Reminder reminder = new Reminder();
+        reminder.setId(movie.getId());
+        reminder.setFavorite(movie.getFavorite());
+        reminder.setVoteAverage(movie.getVoteAverage());
+        reminder.setPosterPath(movie.getPosterPath());
+        reminder.setOverview(movie.getOverview());
+        reminder.setReleaseDate(movie.getReleaseDate());
+        reminder.setTitle(movie.getTitle());
+        reminder.setReminderDate(reminderDate);
+        return reminder;
+    }
+
     @Override
-    public void onSuccess(Movie movie) {
-        MovieDetailView mDetailView = new MovieDetailView();
+    public void onSuccess(Reminder reminder) {
+        mReminderListAdapter.updateReminder(reminder);
     }
 
     @Override
     public void onFailure(String message) {
-
     }
 
     public interface ReminderViewInterface {
         void onDestroy();
+        void getMovieDetailFragment(MovieDetailView movieDetailView, Reminder reminder);
     }
 
     public void setReminderViewInterface(ReminderViewInterface reminderViewInterface) {

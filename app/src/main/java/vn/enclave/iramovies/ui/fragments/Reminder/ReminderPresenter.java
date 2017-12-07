@@ -2,7 +2,7 @@ package vn.enclave.iramovies.ui.fragments.Reminder;
 
 import android.content.Context;
 
-import vn.enclave.iramovies.local.storage.entity.Movie;
+import vn.enclave.iramovies.local.storage.entity.Reminder;
 
 /**
  *
@@ -39,13 +39,15 @@ class ReminderPresenter implements IReminderPresenter{
 
 
     @Override
-    public void getReminderDetail(int id) {
-        mReminderModel.getReminderDetail(id);
+    public void updateReminder(Reminder reminder) {
+        mReminderModel.updateReminder(reminder);
     }
 
     @Override
-    public void onSuccess(Movie movie) {
-
+    public void onSuccess(Reminder reminder) {
+        if (mReminderView != null) {
+            mReminderView.onSuccess(reminder);
+        }
     }
 
     @Override

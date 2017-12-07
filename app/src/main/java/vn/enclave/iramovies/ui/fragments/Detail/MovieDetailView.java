@@ -5,6 +5,7 @@ import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -82,6 +83,7 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
     private Reminder mReminder;
     private boolean mIsFavorite;
     private boolean mIsUpdateReminder;
+    private boolean mIsReminder = false;
 
     @Override
     public View getViewLayout(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -91,10 +93,12 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
     @Override
     public void fragmentCreated() {
         setMovie(getMovieDetail());
-        displayMovieDetail(getMovie());
         initAtribute();
+        displayMovieDetail(getMovie());
         getCastAndCrew();
-        getReminderMovie(getMovie().getId());
+        if (!mIsReminder) {
+            getReminderMovie(getMovie().getId());
+        }
     }
 
     private void getReminderMovie(int id) {
@@ -183,7 +187,6 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
         mDetailMoviePresenter.attachView(this);
         mLayoutManager = new LinearLayoutManager(mActivity, LinearLayoutManager.HORIZONTAL, false);
         mIsUpdateReminder = false;
-
         mIsFavorite = (getMovie().getFavorite() == Constants.Favorites.FAVORITE);
     }
 
@@ -211,15 +214,32 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
         Movie movie = new Movie();
         if (getArguments() != null) {
             Bundle bundle = getArguments();
-            movie.setId(bundle.getInt(DatabaseInfo.Movie.COLUMN_ID));
-            movie.setTitle(bundle.getString(DatabaseInfo.Movie.COLUMN_TITLE));
-            movie.setPosterPath(bundle.getString(DatabaseInfo.Movie.COLUMN_POSTER_PATH));
-            movie.setOverview(bundle.getString(DatabaseInfo.Movie.COLUMN_OVERVIEW));
-            movie.setReleaseDate(bundle.getString(DatabaseInfo.Movie.COLUMN_RELEASE_DATE));
-            movie.setVoteAverage(bundle.getDouble(DatabaseInfo.Movie.COLUMN_VOTE_AVERAGE));
-            movie.setFavorite(bundle.getInt(DatabaseInfo.Movie.COLUMN_FAVORITE));
+            if (TextUtils.equals(bundle.getString(Constants.Bundle.TYPE), Constants.Bundle.MOVIE)) {
+                movie.setId(bundle.getInt(DatabaseInfo.Movie.COLUMN_ID));
+                movie.setTitle(bundle.getString(DatabaseInfo.Movie.COLUMN_TITLE));
+                movie.setPosterPath(bundle.getString(DatabaseInfo.Movie.COLUMN_POSTER_PATH));
+                movie.setOverview(bundle.getString(DatabaseInfo.Movie.COLUMN_OVERVIEW));
+                movie.setReleaseDate(bundle.getString(DatabaseInfo.Movie.COLUMN_RELEASE_DATE));
+                movie.setVoteAverage(bundle.getDouble(DatabaseInfo.Movie.COLUMN_VOTE_AVERAGE));
+                movie.setFavorite(bundle.getInt(DatabaseInfo.Movie.COLUMN_FAVORITE));
+                mIsReminder = false;
+            } else {
+                movie.setId(bundle.getInt(DatabaseInfo.Reminder.COLUMN_ID));
+                movie.setTitle(bundle.getString(DatabaseInfo.Reminder.COLUMN_TITLE));
+                movie.setPosterPath(bundle.getString(DatabaseInfo.Reminder.COLUMN_POSTER_PATH));
+                movie.setOverview(bundle.getString(DatabaseInfo.Reminder.COLUMN_OVERVIEW));
+                movie.setReleaseDate(bundle.getString(DatabaseInfo.Reminder.COLUMN_RELEASE_DATE));
+                movie.setVoteAverage(bundle.getDouble(DatabaseInfo.Reminder.COLUMN_VOTE_AVERAGE));
+                movie.setFavorite(bundle.getInt(DatabaseInfo.Reminder.COLUMN_FAVORITE));
+                updateReminderOnUI(bundle.getString(DatabaseInfo.Reminder.COLUMN_REMINDER_DATE));
+                mIsReminder = true;
+            }
         }
         return movie;
+    }
+
+    private void updateReminderOnUI(String title) {
+        tvReminder.setText(title);
     }
 
     @Override
@@ -254,6 +274,7 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
         mMovieDetailInterface.refreshStarInFavoriteScreen(getMovie());
         mMovieDetailInterface.refreshStarInMovieScreen(getMovie());
         mMovieDetailInterface.refreshStarInDetailScreen(getMovie());
+        mMovieDetailInterface.refreshStarInReminderDetail(getMovie(), getReminder().getReminderDate());
     }
 
     @Override
@@ -262,6 +283,9 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
         mMovieDetailInterface.refreshStarInFavoriteScreen(getMovie());
         mMovieDetailInterface.refreshStarInMovieScreen(getMovie());
         mMovieDetailInterface.refreshStarInDetailScreen(getMovie());
+        if (getReminder() != null) {
+            mMovieDetailInterface.refreshStarInReminderDetail(getMovie(), getReminder().getReminderDate());
+        }
     }
 
     @Override
@@ -307,7 +331,9 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
 
     @Override
     public void onDetach() {
-        mMovieDetailInterface.onDestroy();
+        if (!mIsReminder) {
+            mMovieDetailInterface.onDestroy();
+        }
         super.onDetach();
     }
 
@@ -343,12 +369,26 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
         reminder.setTitle(getMovie().getTitle());
         reminder.setPosterPath(getMovie().getPosterPath());
         reminder.setReminderDate(timeReminder);
+        reminder.setOverview(getMovie().getOverview());
+        reminder.setReleaseDate(getMovie().getReleaseDate());
+        reminder.setFavorite(getMovie().getFavorite());
+        reminder.setVoteAverage(getMovie().getVoteAverage());
         return reminder;
     }
 
     public void reloadReminder(Reminder reminder) {
         if (reminder.getId().equals(getReminder().getId())) {
             tvReminder.setText(reminder.getReminderDate());
+        }
+        onResume();
+    }
+
+    public void refreshStar(Movie movie, String reminderDate) {
+        if (imvFavorite != null) {
+            imvFavorite.setImageResource((movie.getFavorite() == Constants.Favorites.FAVORITE) ? R.drawable.ic_star_picked : R.drawable.ic_star);
+        }
+        if (tvReminder != null) {
+            tvReminder.setText(reminderDate);
         }
         onResume();
     }
@@ -362,6 +402,9 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
         void refreshStarInMovieScreen(Movie movie);
         // Refresh favorite in Detail screen
         void refreshStarInDetailScreen(Movie movie);
+
+        // Refresh favorite in Reminder Detail
+        void refreshStarInReminderDetail(Movie movie, String reminderDate);
     }
 
     public interface ReminderInterface {

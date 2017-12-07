@@ -3,6 +3,7 @@ package vn.enclave.iramovies.ui.fragments.Movie;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
@@ -198,6 +199,7 @@ public class MovieView extends IRBaseFragment implements IMovieView {
 
     private Bundle getMovieBundle(Movie movie) {
         Bundle mBundle = new Bundle();
+        mBundle.putString(Constants.Bundle.TYPE, Constants.Bundle.MOVIE);
         mBundle.putInt(DatabaseInfo.Movie.COLUMN_ID, movie.getId());
         mBundle.putString(DatabaseInfo.Movie.COLUMN_TITLE, movie.getTitle());
         mBundle.putString(DatabaseInfo.Movie.COLUMN_POSTER_PATH, movie.getPosterPath());

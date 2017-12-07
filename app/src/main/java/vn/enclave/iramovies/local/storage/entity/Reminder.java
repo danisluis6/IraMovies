@@ -9,6 +9,7 @@ import android.os.Parcelable;
 import com.google.gson.annotations.SerializedName;
 
 import vn.enclave.iramovies.local.storage.DatabaseInfo;
+import vn.enclave.iramovies.utilities.Constants;
 
 /**
  *
@@ -35,6 +36,21 @@ public class Reminder implements Parcelable {
     @SerializedName(DatabaseInfo.Reminder.COLUMN_POSTER_PATH)
     private String posterPath;
 
+    @ColumnInfo(name = DatabaseInfo.Reminder.COLUMN_OVERVIEW)
+    @SerializedName(DatabaseInfo.Reminder.COLUMN_OVERVIEW)
+    private String overview;
+
+    @ColumnInfo(name = DatabaseInfo.Reminder.COLUMN_RELEASE_DATE)
+    @SerializedName(DatabaseInfo.Reminder.COLUMN_RELEASE_DATE)
+    private String releaseDate;
+
+    @ColumnInfo(typeAffinity = ColumnInfo.REAL)
+    @SerializedName(DatabaseInfo.Reminder.COLUMN_VOTE_AVERAGE)
+    private Double voteAverage;
+
+    @ColumnInfo(name = DatabaseInfo.Reminder.COLUMN_FAVORITE)
+    private Integer favorite = Constants.Favorites.DEFAULT;
+
     public Reminder(){}
 
     protected Reminder(Parcel in) {
@@ -42,6 +58,10 @@ public class Reminder implements Parcelable {
         this.title = in.readString();
         this.reminderDate = in.readString();
         this.posterPath = in.readString();
+        this.overview = in.readString();
+        this.releaseDate = in.readString();
+        this.voteAverage = (Double) in.readValue(Double.class.getClassLoader());
+        this.favorite = (Integer) in.readValue(Integer.class.getClassLoader());
     }
 
     public static final Creator<Reminder> CREATOR = new Creator<Reminder>() {
@@ -67,6 +87,10 @@ public class Reminder implements Parcelable {
         dest.writeString(this.title);
         dest.writeString(this.reminderDate);
         dest.writeString(this.posterPath);
+        dest.writeString(this.releaseDate);
+        dest.writeString(this.overview);
+        dest.writeValue(this.voteAverage);
+        dest.writeValue(this.favorite);
     }
 
     public Integer getId() {
@@ -99,5 +123,37 @@ public class Reminder implements Parcelable {
 
     public void setPosterPath(String posterPath) {
         this.posterPath = posterPath;
+    }
+
+    public String getOverview() {
+        return overview;
+    }
+
+    public void setOverview(String overview) {
+        this.overview = overview;
+    }
+
+    public String getReleaseDate() {
+        return releaseDate;
+    }
+
+    public void setReleaseDate(String releaseDate) {
+        this.releaseDate = releaseDate;
+    }
+
+    public Double getVoteAverage() {
+        return voteAverage;
+    }
+
+    public void setVoteAverage(Double voteAverage) {
+        this.voteAverage = voteAverage;
+    }
+
+    public Integer getFavorite() {
+        return favorite;
+    }
+
+    public void setFavorite(Integer favorite) {
+        this.favorite = favorite;
     }
 }

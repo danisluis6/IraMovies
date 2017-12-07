@@ -12,18 +12,22 @@ import java.util.List;
 
 import butterknife.BindView;
 import vn.enclave.iramovies.R;
+import vn.enclave.iramovies.local.storage.entity.Movie;
 import vn.enclave.iramovies.local.storage.entity.Reminder;
+import vn.enclave.iramovies.ui.fragments.Detail.MovieDetailView;
 import vn.enclave.iramovies.ui.fragments.IRBaseFragment;
+import vn.enclave.iramovies.ui.fragments.Movie.MoviePresenter;
 import vn.enclave.iramovies.ui.fragments.Reminder.adapter.ReminderListAdapter;
 import vn.enclave.iramovies.ui.views.FailureLayout;
 import vn.enclave.iramovies.utilities.Constants;
+import vn.enclave.iramovies.utilities.Utils;
 
 /**
  * Created by lorence on 08/11/2017.
  * @Run: https://www.mkyong.com/android/android-webview-example/
  */
 
-public class ReminderView extends IRBaseFragment{
+public class ReminderView extends IRBaseFragment implements IReminderView {
 
     @BindView(R.id.rcvReminders)
     RecyclerView rcvReminders;
@@ -31,6 +35,10 @@ public class ReminderView extends IRBaseFragment{
     @BindView(R.id.failureLayout)
     public FailureLayout mFailureLayout;
 
+    /**
+     * Work with MVP
+     */
+    private ReminderPresenter mReminderPresenter;
     private ReminderViewInterface mReminderViewInterface;
     private ReminderListAdapter mReminderListAdapter;
 
@@ -46,6 +54,8 @@ public class ReminderView extends IRBaseFragment{
     }
 
     private void initViews() {
+        mReminderPresenter = new ReminderPresenter(mActivity);
+        mReminderPresenter.attachView(this);
         //Use this setting to improve performance if you know that changes in
         //the content do not change the layout size of the RecyclerView
         if (rcvReminders != null) {
@@ -55,7 +65,9 @@ public class ReminderView extends IRBaseFragment{
             mReminderListAdapter = new ReminderListAdapter(mActivity, new ArrayList<Reminder>(), new ReminderListAdapter.OpenReminderDetail() {
                 @Override
                 public void openReminder(Reminder reminder) {
-                    // TODO
+                    if (Utils.isInternetOn(mActivity)) {
+                        mReminderPresenter.getReminderDetail(reminder.getId());
+                    }
                 }
             });
         }
@@ -89,6 +101,16 @@ public class ReminderView extends IRBaseFragment{
         }
     }
 
+    @Override
+    public void onSuccess(Movie movie) {
+        MovieDetailView mDetailView = new MovieDetailView();
+    }
+
+    @Override
+    public void onFailure(String message) {
+
+    }
+
     public interface ReminderViewInterface {
         void onDestroy();
     }
@@ -97,3 +119,4 @@ public class ReminderView extends IRBaseFragment{
         this.mReminderViewInterface = reminderViewInterface;
     }
 }
+

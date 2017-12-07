@@ -37,6 +37,7 @@ public class Constants {
     public static class Parcelable {
         public static String USER = "user";
         public static String LIST_REMINDER = "reminders";
+        public static String REMINDER = "reminder";
     }
 
     /* Toolbar Information */

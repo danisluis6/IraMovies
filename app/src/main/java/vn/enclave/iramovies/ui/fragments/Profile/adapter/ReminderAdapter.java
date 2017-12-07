@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -71,8 +72,8 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.ViewHo
         notifyDataSetChanged();
     }
 
-    public List<Reminder> getList() {
-        return mGroupReminders;
+    public ArrayList<Reminder> getList() {
+        return (ArrayList<Reminder>) mGroupReminders;
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{

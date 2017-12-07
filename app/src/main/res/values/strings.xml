@@ -25,6 +25,7 @@
     <string name="now_playing">Now Playing</string>
     <string name="favorites">Favorites</string>
     <string name="settings">Settings</string>
+    <string name="reminders">All Reminders</string>
     <string name="about">About</string>
 
     <!-- Info movie_card_view -->

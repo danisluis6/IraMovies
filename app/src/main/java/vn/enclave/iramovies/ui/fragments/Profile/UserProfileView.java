@@ -255,6 +255,6 @@ public class UserProfileView extends IRBaseFragment implements IUserProfileView 
     }
 
     public interface ReminderListInterface {
-        void openReminderList(List<Reminder> reminders);
+        void openReminderList(ArrayList<Reminder> reminders);
     }
 }

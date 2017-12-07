@@ -2,6 +2,9 @@ package vn.enclave.iramovies.ui.fragments.Setting;
 
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -214,5 +217,17 @@ public class SettingView extends IRBaseFragment {
         void onReloadReleaseYear(String releaseYear);
         // Sort
         void onSortByDateAndRating(String type);
+    }
+
+    /**
+     * Initialize object FragmentManger to manager fragment
+     */
+    public void openReminderList(Fragment fragment) {
+        FragmentManager fragmentManager = getChildFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.add(R.id.fragment_reminder, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+        fragmentManager.executePendingTransactions();
     }
 }

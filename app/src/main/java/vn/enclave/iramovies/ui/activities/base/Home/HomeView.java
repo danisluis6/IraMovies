@@ -28,6 +28,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
@@ -43,6 +44,7 @@ import vn.enclave.iramovies.ui.fragments.Detail.MovieDetailView;
 import vn.enclave.iramovies.ui.fragments.Favorite.FavoriteView;
 import vn.enclave.iramovies.ui.fragments.Movie.MovieView;
 import vn.enclave.iramovies.ui.fragments.Profile.UserProfileView;
+import vn.enclave.iramovies.ui.fragments.Reminder.ReminderView;
 import vn.enclave.iramovies.ui.fragments.Setting.SettingView;
 import vn.enclave.iramovies.ui.views.TabItem;
 import vn.enclave.iramovies.ui.views.ToolbarLayout;
@@ -104,6 +106,7 @@ public class HomeView extends BaseView {
 
     private MovieDetailView mDetailViewMovie;
     private MovieDetailView mDetailViewFavorite;
+    private ReminderView mReminderView;
 
     private PaperAdapter mPageAdapter;
     private Menu mMenu;
@@ -134,14 +137,37 @@ public class HomeView extends BaseView {
         mFavoriteView = (FavoriteView) FavoriteView.instantiate(mContext, FavoriteView.class.getName());
         mSettingView = (SettingView) SettingView.instantiate(mContext, SettingView.class.getName());
         mAboutView = (AboutView) AboutView.instantiate(mContext, AboutView.class.getName());
+        mReminderView = new ReminderView();
         mUserProfileView = (UserProfileView) getSupportFragmentManager().findFragmentById(R.id.fragment_user_profile);
         mUserProfileView.setReminderListInterface(new UserProfileView.ReminderListInterface() {
             @Override
-            public void openReminderList(List<Reminder> reminders) {
+            public void openReminderList(ArrayList<Reminder> reminders) {
                 mDrawerLayout.closeDrawers();
                 mViewPager.setCurrentItem(2);
+                updateTitleBar(getResources().getString(R.string.reminders));
+                if (mSettingView != null) {
+                    if (mReminderView == null) {
+                        mReminderView = new ReminderView();
+                    }
+                    mReminderView.setReminderViewInterface(new ReminderView.ReminderViewInterface() {
+                        @Override
+                        public void onDestroy() {
+                            updateTitleBar(getResources().getString(R.string.settings));
+                        }
+                    });
+                    mReminderView.setArguments(getReminderListBundle(reminders));
+                    if (mSettingView.getChildFragmentManager().getBackStackEntryCount() == 0) {
+                        mSettingView.openReminderList(mReminderView);
+                    }
+                }
             }
         });
+    }
+
+    private Bundle getReminderListBundle(ArrayList<Reminder> reminders) {
+        Bundle bundle = new Bundle();
+        bundle.putParcelableArrayList(Constants.Parcelable.LIST_REMINDER, reminders);
+        return bundle;
     }
 
     private void initViews() {
@@ -262,13 +288,19 @@ public class HomeView extends BaseView {
                         if (mDetailViewFavorite != null) {
                             mDetailViewFavorite.reloadReminder(reminder);
                         }
+                        if (mReminderView != null) {
+                            mReminderView.reload(reminder, false);
+                        }
                     }
 
                     @Override
                     public void updateReminder(Reminder reminder) {
                         mUserProfileView.reload(reminder, true);
-                        if (mDetailViewFavorite != null) {
-                            mDetailViewFavorite.reloadReminder(reminder);
+//                        if (mDetailViewFavorite != null) {
+//                            mDetailViewFavorite.reloadReminder(reminder);
+//                        }
+                        if (mReminderView != null) {
+                            mReminderView.reload(reminder, true);
                         }
                     }
                 });

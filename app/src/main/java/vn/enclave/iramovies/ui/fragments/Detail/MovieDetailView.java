@@ -98,7 +98,22 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
         getCastAndCrew();
         if (!mIsReminder) {
             getReminderMovie(getMovie().getId());
+        } else {
+            updatedReminder(getMovie());
         }
+    }
+
+    private void updatedReminder(Movie movie) {
+        Reminder reminder = new Reminder();
+        reminder.setId(movie.getId());
+        reminder.setTitle(movie.getTitle());
+        reminder.setReminderDate(tvReminder.getText().toString());
+        reminder.setOverview(movie.getOverview());
+        reminder.setPosterPath(movie.getPosterPath());
+        reminder.setFavorite(movie.getFavorite());
+        reminder.setReleaseDate(movie.getReleaseDate());
+        reminder.setVoteAverage(movie.getVoteAverage());
+        setReminder(reminder);
     }
 
     private void getReminderMovie(int id) {
@@ -214,16 +229,7 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
         Movie movie = new Movie();
         if (getArguments() != null) {
             Bundle bundle = getArguments();
-            if (TextUtils.equals(bundle.getString(Constants.Bundle.TYPE), Constants.Bundle.MOVIE)) {
-                movie.setId(bundle.getInt(DatabaseInfo.Movie.COLUMN_ID));
-                movie.setTitle(bundle.getString(DatabaseInfo.Movie.COLUMN_TITLE));
-                movie.setPosterPath(bundle.getString(DatabaseInfo.Movie.COLUMN_POSTER_PATH));
-                movie.setOverview(bundle.getString(DatabaseInfo.Movie.COLUMN_OVERVIEW));
-                movie.setReleaseDate(bundle.getString(DatabaseInfo.Movie.COLUMN_RELEASE_DATE));
-                movie.setVoteAverage(bundle.getDouble(DatabaseInfo.Movie.COLUMN_VOTE_AVERAGE));
-                movie.setFavorite(bundle.getInt(DatabaseInfo.Movie.COLUMN_FAVORITE));
-                mIsReminder = false;
-            } else {
+            if (TextUtils.equals(bundle.getString(Constants.Bundle.TYPE), Constants.Bundle.REMINDER)) {
                 movie.setId(bundle.getInt(DatabaseInfo.Reminder.COLUMN_ID));
                 movie.setTitle(bundle.getString(DatabaseInfo.Reminder.COLUMN_TITLE));
                 movie.setPosterPath(bundle.getString(DatabaseInfo.Reminder.COLUMN_POSTER_PATH));
@@ -233,6 +239,15 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
                 movie.setFavorite(bundle.getInt(DatabaseInfo.Reminder.COLUMN_FAVORITE));
                 updateReminderOnUI(bundle.getString(DatabaseInfo.Reminder.COLUMN_REMINDER_DATE));
                 mIsReminder = true;
+            } else {
+                movie.setId(bundle.getInt(DatabaseInfo.Movie.COLUMN_ID));
+                movie.setTitle(bundle.getString(DatabaseInfo.Movie.COLUMN_TITLE));
+                movie.setPosterPath(bundle.getString(DatabaseInfo.Movie.COLUMN_POSTER_PATH));
+                movie.setOverview(bundle.getString(DatabaseInfo.Movie.COLUMN_OVERVIEW));
+                movie.setReleaseDate(bundle.getString(DatabaseInfo.Movie.COLUMN_RELEASE_DATE));
+                movie.setVoteAverage(bundle.getDouble(DatabaseInfo.Movie.COLUMN_VOTE_AVERAGE));
+                movie.setFavorite(bundle.getInt(DatabaseInfo.Movie.COLUMN_FAVORITE));
+                mIsReminder = false;
             }
         }
         return movie;
@@ -290,6 +305,7 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
 
     @Override
     public void addReminderSuccess(Reminder reminder) {
+        mIsUpdateReminder = true;
         mReminderInterface.addReminder(reminder);
     }
 
@@ -306,6 +322,7 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
 
     @Override
     public void updateReminderSuccess(Reminder reminder) {
+        mIsUpdateReminder = true;
         mReminderInterface.updateReminder(reminder);
     }
 
@@ -384,11 +401,13 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
     }
 
     public void refreshStar(Movie movie, String reminderDate) {
-        if (imvFavorite != null) {
-            imvFavorite.setImageResource((movie.getFavorite() == Constants.Favorites.FAVORITE) ? R.drawable.ic_star_picked : R.drawable.ic_star);
-        }
-        if (tvReminder != null) {
-            tvReminder.setText(reminderDate);
+        if (movie.getId().equals(getReminder().getId())) {
+            if (imvFavorite != null) {
+                imvFavorite.setImageResource((movie.getFavorite() == Constants.Favorites.FAVORITE) ? R.drawable.ic_star_picked : R.drawable.ic_star);
+            }
+            if (tvReminder != null) {
+                tvReminder.setText(reminderDate);
+            }
         }
         onResume();
     }

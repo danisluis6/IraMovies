@@ -306,7 +306,7 @@ public class HomeView extends BaseView {
                     @Override
                     public void addReminder(Reminder reminder) {
                         mUserProfileView.reload(reminder, false);
-                        if (mDetailViewFavorite != null) {
+                        if (mDetailViewFavorite != null && reminder != null) {
                             mDetailViewFavorite.reloadReminder(reminder);
                         }
                         if (mReminderView != null) {
@@ -317,11 +317,16 @@ public class HomeView extends BaseView {
                     @Override
                     public void updateReminder(Reminder reminder) {
                         mUserProfileView.reload(reminder, true);
-                        if (mDetailViewFavorite != null) {
+                        // Reload reminder date
+                        if (mDetailViewFavorite != null && reminder != null) {
                             mDetailViewFavorite.reloadReminder(reminder);
                         }
+                        // Reload star
                         if (mReminderView != null) {
                             mReminderView.reload(reminder, true);
+                        }
+                        if (mDetailReminder != null) {
+                            mDetailReminder.reloadReminder(reminder);
                         }
                     }
                 });
@@ -393,16 +398,28 @@ public class HomeView extends BaseView {
                     @Override
                     public void addReminder(Reminder reminder) {
                         mUserProfileView.reload(reminder, false);
-                        if (mDetailViewMovie != null) {
+                        if (mDetailViewMovie != null && reminder != null) {
                             mDetailViewMovie.reloadReminder(reminder);
+                        }
+                        if (mReminderView != null) {
+                            mReminderView.reload(reminder, false);
                         }
                     }
 
                     @Override
                     public void updateReminder(Reminder reminder) {
                         mUserProfileView.reload(reminder, true);
-                        if (mDetailViewMovie != null) {
+                        // Reload reminder date
+                        if (mDetailViewMovie != null && reminder != null) {
                             mDetailViewMovie.reloadReminder(reminder);
+                        }
+                        // Reload star
+                        if (mReminderView != null) {
+                            mReminderView.reload(reminder, true);
+                        }
+                        // Reload reminder on ReminderDetailView
+                        if (mDetailReminder != null) {
+                            mDetailReminder.reloadReminder(reminder);
                         }
                     }
                 });

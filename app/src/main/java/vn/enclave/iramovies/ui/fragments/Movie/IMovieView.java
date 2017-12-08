@@ -3,6 +3,7 @@ package vn.enclave.iramovies.ui.fragments.Movie;
 import java.util.List;
 
 import vn.enclave.iramovies.local.storage.entity.Movie;
+import vn.enclave.iramovies.local.storage.entity.Reminder;
 
 /**
  *
@@ -22,4 +23,6 @@ public interface IMovieView {
     void addMovieSuccess(Movie movie);
 
     void deleteMovieSuccess(Movie movie);
+
+    void onUpdatedReminderSuccess(Reminder reminder);
 }

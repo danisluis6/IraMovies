@@ -412,6 +412,15 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
         onResume();
     }
 
+    public void refreshStar(Reminder reminder) {
+        if (reminder.getId().equals(getReminder().getId())) {
+            if (imvFavorite != null) {
+                imvFavorite.setImageResource((reminder.getFavorite() == Constants.Favorites.FAVORITE) ? R.drawable.ic_star_picked : R.drawable.ic_star);
+            }
+        }
+        onResume();
+    }
+
     public interface MovieDetailInterface {
         void onDestroy();
         void updateCountStarOnMenu(int value);

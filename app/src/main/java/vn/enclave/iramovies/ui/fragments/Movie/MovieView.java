@@ -29,6 +29,7 @@ import vn.enclave.iramovies.R;
 import vn.enclave.iramovies.local.storage.DatabaseInfo;
 import vn.enclave.iramovies.local.storage.SessionManager;
 import vn.enclave.iramovies.local.storage.entity.Movie;
+import vn.enclave.iramovies.local.storage.entity.Reminder;
 import vn.enclave.iramovies.ui.fragments.IRBaseFragment;
 import vn.enclave.iramovies.ui.fragments.Detail.MovieDetailView;
 import vn.enclave.iramovies.ui.fragments.Movie.adapter.MovieAdapter;
@@ -391,10 +392,34 @@ public class MovieView extends IRBaseFragment implements IMovieView {
     public void addMovieSuccess(Movie movie) {
         mMovieInterface.updateCountStarOnMenu(movie.getFavorite());
         mMovieInterface.refreshStarInFavoriteScreen(movie);
-        mMovieInterface.refreshStarInReminderView(movie);
         if (mInterfaceRefresh != null) {
             mInterfaceRefresh.onRefreshFavoriteOnDetailScreen(movie);
         }
+        // Update reminder in db
+        mMoviesPresenter.updateReminder(getReminder(movie));
+    }
+
+    @Override
+    public void deleteMovieSuccess(Movie movie) {
+        mMovieInterface.updateCountStarOnMenu(movie.getFavorite());
+        mMovieInterface.refreshStarInFavoriteScreen(movie);
+        if (mInterfaceRefresh != null) {
+            mInterfaceRefresh.onRefreshFavoriteOnDetailScreen(movie);
+        }
+        // Update reminder in db
+        mMoviesPresenter.updateReminder(getReminder(movie));
+    }
+
+    @Override
+    public void onUpdatedReminderSuccess(Reminder reminder) {
+        mMovieInterface.refreshStarInReminderView(reminder);
+    }
+
+    public Reminder getReminder(Movie movie) {
+        Reminder reminder = new Reminder();
+        reminder.setId(movie.getId());
+        reminder.setFavorite(movie.getFavorite());
+        return reminder;
     }
 
     private void updateListMovies(List<Movie> listMovies) {
@@ -415,16 +440,6 @@ public class MovieView extends IRBaseFragment implements IMovieView {
     @Override
     public void onFailure(String message) {
         Utils.Toast.showToast(mActivity, message);
-    }
-
-    @Override
-    public void deleteMovieSuccess(Movie movie) {
-        mMovieInterface.updateCountStarOnMenu(movie.getFavorite());
-        mMovieInterface.refreshStarInFavoriteScreen(movie);
-        mMovieInterface.refreshStarInReminderView(movie);
-        if (mInterfaceRefresh != null) {
-            mInterfaceRefresh.onRefreshFavoriteOnDetailScreen(movie);
-        }
     }
 
     @Override
@@ -523,7 +538,7 @@ public class MovieView extends IRBaseFragment implements IMovieView {
 
         void getMovieDetailFragment(MovieDetailView movieDetailView, Movie movie);
 
-        void refreshStarInReminderView(Movie movie);
+        void refreshStarInReminderView(Reminder reminder);
     }
 
     public interface UpdatedFavoriteScreen {

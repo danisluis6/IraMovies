@@ -12,4 +12,6 @@ import vn.enclave.iramovies.ui.interfaces.IBasePresenter;
 public interface IReminderModel extends IBasePresenter<IReminderPresenter> {
 
     void updateReminder(Reminder reminder);
+
+    void getListReminder();
 }

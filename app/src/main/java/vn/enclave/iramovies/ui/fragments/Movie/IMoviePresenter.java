@@ -3,6 +3,7 @@ package vn.enclave.iramovies.ui.fragments.Movie;
 import java.util.List;
 
 import vn.enclave.iramovies.local.storage.entity.Movie;
+import vn.enclave.iramovies.local.storage.entity.Reminder;
 import vn.enclave.iramovies.ui.interfaces.IBasePresenter;
 
 /*
@@ -25,4 +26,8 @@ public interface IMoviePresenter extends IBasePresenter<IMovieView> {
     void addMovieSuccess(Movie movie);
 
     void deleteMovieSuccess(Movie movie);
+
+    void updateReminder(Reminder reminder);
+
+    void onUpdatedReminderSuccess(Reminder mReminder);
 }

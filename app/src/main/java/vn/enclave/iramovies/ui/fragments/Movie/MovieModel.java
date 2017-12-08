@@ -16,6 +16,8 @@ import vn.enclave.iramovies.IRApplication;
 import vn.enclave.iramovies.R;
 import vn.enclave.iramovies.local.storage.AppDatabase;
 import vn.enclave.iramovies.local.storage.SessionManager;
+import vn.enclave.iramovies.local.storage.entity.Reminder;
+import vn.enclave.iramovies.local.storage.entity.User;
 import vn.enclave.iramovies.services.IraMovieWebAPIs;
 import vn.enclave.iramovies.local.storage.entity.Movie;
 import vn.enclave.iramovies.services.response.MovieResponse;
@@ -186,6 +188,34 @@ class MovieModel implements IMovieModel {
     public void deleteMovie(final Movie movie) {
         DeleteAsyncTask mDeleteAsyncTask = new DeleteAsyncTask(movie);
         mDeleteAsyncTask.execute(movie);
+    }
+
+    // Update star in reminder table
+    @Override
+    public void updateReminder(Reminder reminder) {
+        EditReminderAsyncTask mEditReminderAsyncTask = new EditReminderAsyncTask(reminder);
+        mEditReminderAsyncTask.execute(reminder);
+    }
+
+    private class EditReminderAsyncTask extends AsyncTask<Reminder, Void, Integer> {
+
+        private Reminder mReminder;
+
+        EditReminderAsyncTask(Reminder reminder) {
+            this.mReminder = reminder;
+        }
+
+        @Override
+        protected Integer doInBackground(Reminder... params) {
+            return mAppDatabase.getReminderDao().updateReminder(params[0].getFavorite(), params[0].getId());
+        }
+
+        @Override
+        protected void onPostExecute(Integer id) {
+            if (id > 0) {
+                mIMoviesPresenter.onUpdatedReminderSuccess(mReminder);
+            }
+        }
     }
 
     private class AddAsyncTask extends AsyncTask<Movie, Void, Long> {

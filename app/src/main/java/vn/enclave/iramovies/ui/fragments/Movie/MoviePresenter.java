@@ -5,6 +5,7 @@ import android.content.Context;
 import java.util.List;
 
 import vn.enclave.iramovies.local.storage.entity.Movie;
+import vn.enclave.iramovies.local.storage.entity.Reminder;
 
 /**
  *
@@ -87,6 +88,18 @@ public class MoviePresenter implements IMoviePresenter {
         if (mIMoviesView != null) {
             mIMoviesView.dismissProgressDialog();
             mIMoviesView.deleteMovieSuccess(movie);
+        }
+    }
+
+    @Override
+    public void updateReminder(Reminder reminder) {
+        mMovieModel.updateReminder(reminder);
+    }
+
+    @Override
+    public void onUpdatedReminderSuccess(Reminder reminder) {
+        if (mIMoviesView != null) {
+            mIMoviesView.onUpdatedReminderSuccess(reminder);
         }
     }
 }

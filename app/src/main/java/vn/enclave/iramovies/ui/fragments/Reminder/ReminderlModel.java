@@ -5,6 +5,9 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
+import java.util.List;
+
+import vn.enclave.iramovies.R;
 import vn.enclave.iramovies.local.storage.AppDatabase;
 import vn.enclave.iramovies.local.storage.entity.Reminder;
 
@@ -44,6 +47,25 @@ public class ReminderlModel implements IReminderModel {
     public void updateReminder(Reminder reminder) {
         EditUserAsyncTask mEditAsyncTask = new EditUserAsyncTask(reminder);
         mEditAsyncTask.execute(reminder);
+    }
+
+    @Override
+    public void getListReminder() {
+        new AsyncTask<Void, Void, List<Reminder>>() {
+            @Override
+            protected List<Reminder> doInBackground(Void... params) {
+                return mAppDatabase.getReminderDao().getReminders();
+            }
+
+            @Override
+            protected void onPostExecute(List<Reminder> groupReminders) {
+                if (!groupReminders.isEmpty()) {
+                    mReminderPresenter.onReminderSuccess(groupReminders);
+                } else {
+                    mReminderPresenter.onFailure(mContext.getResources().getString(R.string.cannot_get_data));
+                }
+            }
+        }.execute();
     }
 
     private class EditUserAsyncTask extends AsyncTask<Reminder, Void, Integer> {

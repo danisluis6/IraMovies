@@ -162,19 +162,12 @@ public class HomeView extends BaseView {
                             updateTitleBar(reminder.getTitle());
                         }
                     });
-                    mReminderView.setArguments(getReminderListBundle(reminders));
                     if (mSettingView.getChildFragmentManager().getBackStackEntryCount() == 0) {
                         mSettingView.openReminderList(mReminderView);
                     }
                 }
             }
         });
-    }
-
-    private Bundle getReminderListBundle(ArrayList<Reminder> reminders) {
-        Bundle bundle = new Bundle();
-        bundle.putParcelableArrayList(Constants.Parcelable.LIST_REMINDER, reminders);
-        return bundle;
     }
 
     private void initViews() {
@@ -336,8 +329,13 @@ public class HomeView extends BaseView {
             }
 
             @Override
-            public void refreshStarInReminderView(Movie movie) {
-                // TODO
+            public void refreshStarInReminderView(Reminder reminder) {
+                if (mReminderView != null) {
+                    mReminderView.onRefresh();
+                }
+                if (mDetailReminder != null) {
+                    mDetailReminder.refreshStar(reminder);
+                }
             }
         });
 

@@ -2,6 +2,8 @@ package vn.enclave.iramovies.ui.fragments.Reminder;
 
 import android.content.Context;
 
+import java.util.List;
+
 import vn.enclave.iramovies.local.storage.entity.Reminder;
 
 /**
@@ -53,5 +55,17 @@ class ReminderPresenter implements IReminderPresenter{
     @Override
     public void onFailure(String message) {
 
+    }
+
+    @Override
+    public void getListReminder() {
+        mReminderModel.getListReminder();
+    }
+
+    @Override
+    public void onReminderSuccess(List<Reminder> groupReminders) {
+        if (mReminderView != null) {
+            mReminderView.onReminderSuccess(groupReminders);
+        }
     }
 }

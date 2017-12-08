@@ -93,12 +93,7 @@ public class ReminderView extends IRBaseFragment implements IReminderView {
     }
 
     public void getReminderList() {
-        List<Reminder> groupReminders = new ArrayList<>();
-        if (getArguments() != null) {
-            Bundle bundle = getArguments();
-            groupReminders = bundle.getParcelableArrayList(Constants.Parcelable.LIST_REMINDER);
-        }
-        mReminderListAdapter.setReminders(groupReminders);
+        mReminderPresenter.getListReminder();
     }
 
     @Override
@@ -152,6 +147,17 @@ public class ReminderView extends IRBaseFragment implements IReminderView {
 
     @Override
     public void onFailure(String message) {
+    }
+
+    @Override
+    public void onReminderSuccess(List<Reminder> groupReminders) {
+        mReminderListAdapter.setReminders(groupReminders);
+    }
+
+    public void onRefresh() {
+        if (mReminderPresenter != null) {
+            mReminderPresenter.getListReminder();
+        }
     }
 
     public interface ReminderViewInterface {

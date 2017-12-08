@@ -1,5 +1,7 @@
 package vn.enclave.iramovies.ui.fragments.Reminder;
 
+import java.util.List;
+
 import vn.enclave.iramovies.local.storage.entity.Reminder;
 import vn.enclave.iramovies.ui.interfaces.IBasePresenter;
 
@@ -15,4 +17,8 @@ public interface IReminderPresenter extends IBasePresenter<IReminderView> {
     void onFailure(String message);
 
     void updateReminder(Reminder reminderUpdated);
+
+    void getListReminder();
+
+    void onReminderSuccess(List<Reminder> groupReminders);
 }

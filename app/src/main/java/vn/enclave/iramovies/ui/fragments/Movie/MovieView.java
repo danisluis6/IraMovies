@@ -391,6 +391,7 @@ public class MovieView extends IRBaseFragment implements IMovieView {
     public void addMovieSuccess(Movie movie) {
         mMovieInterface.updateCountStarOnMenu(movie.getFavorite());
         mMovieInterface.refreshStarInFavoriteScreen(movie);
+        mMovieInterface.refreshStarInReminderView(movie);
         if (mInterfaceRefresh != null) {
             mInterfaceRefresh.onRefreshFavoriteOnDetailScreen(movie);
         }
@@ -420,6 +421,7 @@ public class MovieView extends IRBaseFragment implements IMovieView {
     public void deleteMovieSuccess(Movie movie) {
         mMovieInterface.updateCountStarOnMenu(movie.getFavorite());
         mMovieInterface.refreshStarInFavoriteScreen(movie);
+        mMovieInterface.refreshStarInReminderView(movie);
         if (mInterfaceRefresh != null) {
             mInterfaceRefresh.onRefreshFavoriteOnDetailScreen(movie);
         }
@@ -520,6 +522,8 @@ public class MovieView extends IRBaseFragment implements IMovieView {
         void updateCountStarOnMenu(int value);
 
         void getMovieDetailFragment(MovieDetailView movieDetailView, Movie movie);
+
+        void refreshStarInReminderView(Movie movie);
     }
 
     public interface UpdatedFavoriteScreen {

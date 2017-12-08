@@ -20,7 +20,6 @@ import vn.enclave.iramovies.local.storage.entity.Movie;
 import vn.enclave.iramovies.local.storage.entity.Reminder;
 import vn.enclave.iramovies.ui.fragments.Detail.MovieDetailView;
 import vn.enclave.iramovies.ui.fragments.IRBaseFragment;
-import vn.enclave.iramovies.ui.fragments.Movie.MoviePresenter;
 import vn.enclave.iramovies.ui.fragments.Reminder.adapter.ReminderListAdapter;
 import vn.enclave.iramovies.ui.views.FailureLayout;
 import vn.enclave.iramovies.utilities.Constants;
@@ -30,7 +29,7 @@ import vn.enclave.iramovies.utilities.Constants;
  * @Run: https://www.mkyong.com/android/android-webview-example/
  */
 
-public class ReminderView extends IRBaseFragment implements IReminderView{
+public class ReminderView extends IRBaseFragment implements IReminderView {
 
     @BindView(R.id.rcvReminders)
     RecyclerView rcvReminders;

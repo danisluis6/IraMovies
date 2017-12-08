@@ -334,6 +334,11 @@ public class HomeView extends BaseView {
                 mMovieView.openMovieDetail(movieDetailView);
                 updateTitleBar(movie.getTitle());
             }
+
+            @Override
+            public void refreshStarInReminderView(Movie movie) {
+                // TODO
+            }
         });
 
         mFavoriteView.setFavoriteInterface(new FavoriteView.FavoriteInterface() {

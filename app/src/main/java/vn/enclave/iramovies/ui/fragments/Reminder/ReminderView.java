@@ -158,6 +158,7 @@ public class ReminderView extends IRBaseFragment implements IReminderView {
         if (mReminderPresenter != null) {
             mReminderPresenter.getListReminder();
         }
+        onResume();
     }
 
     public interface ReminderViewInterface {

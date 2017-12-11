@@ -165,6 +165,74 @@ public class HomeView extends BaseView {
                                     updateTitleBar(getResources().getString(R.string.reminders));
                                 }
                             });
+                            mDetailReminder.setUpdateReminderOnAllScreen(new MovieDetailView.UpdateReminderOnAllScreen() {
+                                @Override
+                                public void update(Reminder reminder) {
+                                    mUserProfileView.reload(reminder, true);
+                                    if (mDetailViewMovie != null) {
+                                        mDetailViewMovie.reloadReminder(reminder);
+                                    }
+                                    if (mDetailViewFavorite != null) {
+                                        mDetailViewFavorite.reloadReminder(reminder);
+                                    }
+                                    if (mReminderView != null) {
+                                        mReminderView.onRefresh();
+                                    }
+                                }
+                            });
+                            mDetailReminder.setUpdateStarOnAllScreen(new MovieDetailView.UpdateStarOnAllScreen() {
+                                @Override
+                                public void updateMovie(Movie movie, String reminderDate) {
+                                    if (mDetailViewMovie != null) {
+                                        mDetailViewMovie.refreshStar(movie, reminderDate);
+                                    }
+                                    if (mDetailViewFavorite != null) {
+                                        mDetailViewFavorite.refreshStar(movie, reminderDate);
+                                    }
+                                    // Update star on Bottom Menu
+                                    if (favoritesTab != null) {
+                                        favoritesTab.updateNumberFavorites(movie.getFavorite());
+                                    }
+                                    // Update star on ReminderView
+                                    if (mReminderView != null) {
+                                        mReminderView.reload(getReminder(movie, reminderDate));
+                                    }
+                                    // Update star on Favorite View
+                                    if (mFavoriteView != null) {
+                                        mFavoriteView.refreshStatusFavorite(movie);
+                                    }
+                                    // Update star on Movie View
+                                    if (mMovieView != null) {
+                                        mMovieView.refreshStatusFavorite(movie);
+                                    }
+                                }
+
+                                @Override
+                                public void addMovie(Movie movie, String reminderDate) {
+                                    if (mDetailViewMovie != null) {
+                                        mDetailViewMovie.refreshStar(movie, reminderDate);
+                                    }
+                                    if (mDetailViewFavorite != null) {
+                                        mDetailViewFavorite.refreshStar(movie, reminderDate);
+                                    }
+                                    // Update star on Bottom Menu
+                                    if (favoritesTab != null) {
+                                        favoritesTab.updateNumberFavorites(movie.getFavorite());
+                                    }
+                                    // Update star on ReminderView
+                                    if (mReminderView != null) {
+                                        mReminderView.reload(getReminder(movie, reminderDate));
+                                    }
+                                    // Update star on Favorite View
+                                    if (mFavoriteView != null) {
+                                        mFavoriteView.refreshStatusFavorite(movie);
+                                    }
+                                    // Update star on Movie View
+                                    if (mMovieView != null) {
+                                        mMovieView.refreshStatusFavorite(movie);
+                                    }
+                                }
+                            });
                             mReminderView.openReminderDetail(mDetailReminder);
                             updateTitleBar(reminder.getTitle());
                         }
@@ -175,6 +243,19 @@ public class HomeView extends BaseView {
                 }
             }
         });
+    }
+
+    private Reminder getReminder(Movie movie, String reminderDate) {
+        Reminder reminder = new Reminder();
+        reminder.setId(movie.getId());
+        reminder.setOverview(movie.getOverview());
+        reminder.setVoteAverage(movie.getVoteAverage());
+        reminder.setFavorite(movie.getFavorite());
+        reminder.setReleaseDate(movie.getReleaseDate());
+        reminder.setReminderDate(reminderDate);
+        reminder.setTitle(movie.getTitle());
+        reminder.setPosterPath(movie.getPosterPath());
+        return reminder;
     }
 
     private void initViews() {
@@ -236,7 +317,7 @@ public class HomeView extends BaseView {
     /**
      * @Run: seprate each child fragments
      * => Done
-     * @Run: Faxage => Shoot change view[read/un-read] update to NavigationBar => The same
+     * @Run: Faxage => Shoot change view[read/un-read] updateMovie to NavigationBar => The same
      * => OnActivityForResult
      */
     private void defineFragmentOnViewPaper() {

@@ -30,6 +30,7 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -194,10 +195,24 @@ public class Utils {
         );
     }
 
+    public static boolean isValidDateofBirth(String dateofBirth) {
+        return Calendar.getInstance().get(Calendar.YEAR) - Integer.parseInt(String.valueOf(dateofBirth.substring(0, 4))) >= 12
+                && Calendar.getInstance().get(Calendar.YEAR) - Integer.parseInt(String.valueOf(dateofBirth.substring(0, 4))) <= 120
+                && Calendar.getInstance().get(Calendar.YEAR) > Integer.parseInt(String.valueOf(dateofBirth.substring(0, 4)));
+    }
+
     public static class Toast {
 
         public static void showToast(Context context, String message) {
             android.widget.Toast.makeText(context, message, android.widget.Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public final static boolean isValidEmail(String target) {
+        if (target == null) {
+            return false;
+        } else {
+            return android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
         }
     }
 }

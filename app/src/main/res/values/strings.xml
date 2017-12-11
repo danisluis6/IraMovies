@@ -87,5 +87,7 @@
     <string name="hint_gender">Female</string>
     <string name="hint_name">Name</string>
     <string name="error_pick_date">Invalid date</string>
+    <string name="error_email_format">Email Address in invalid format</string>
+    <string name="error_date_of_birth_format">Invalid Birthday</string>
 
 </resources>

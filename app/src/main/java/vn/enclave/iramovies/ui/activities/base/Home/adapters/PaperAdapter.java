@@ -13,7 +13,7 @@ import vn.enclave.iramovies.R;
  *
  * Created by enclaveit on 27/12/2016.
  *
- * @Run: https://stackoverflow.com/questions/18088076/update-fragment-from-viewpager
+ * @Run: https://stackoverflow.com/questions/18088076/updateMovie-fragment-from-viewpager
  * => Done
  *
  * @Run: https://www.youtube.com/watch?v=8wAZ3uWioTk

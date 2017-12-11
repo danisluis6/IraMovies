@@ -23,6 +23,7 @@ import vn.enclave.iramovies.ui.fragments.IRBaseFragment;
 import vn.enclave.iramovies.ui.fragments.Reminder.adapter.ReminderListAdapter;
 import vn.enclave.iramovies.ui.views.FailureLayout;
 import vn.enclave.iramovies.utilities.Constants;
+import vn.enclave.iramovies.utilities.Utils;
 
 /**
  * Created by lorence on 08/11/2017.
@@ -106,7 +107,6 @@ public class ReminderView extends IRBaseFragment implements IReminderView {
         if (mReminderListAdapter != null) {
             mReminderListAdapter.updateReminder(reminder);
         }
-
         onResume();
     }
 

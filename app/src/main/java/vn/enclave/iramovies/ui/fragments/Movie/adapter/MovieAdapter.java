@@ -251,7 +251,7 @@ public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     public void refreshStatusFavorite(Movie movie) {
         for (int index = 0; index < mGrouMovies.size(); index++) {
             if (mGrouMovies.get(index).getId().equals(movie.getId())) {
-                mGrouMovies.get(index).setFavorite(Constants.Favorites.FAVORITE);
+                mGrouMovies.get(index).setFavorite(movie.getFavorite());
             }
         }
         this.notifyDataSetChanged();

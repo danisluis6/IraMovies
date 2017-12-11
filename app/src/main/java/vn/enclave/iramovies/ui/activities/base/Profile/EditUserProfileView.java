@@ -169,16 +169,30 @@ public class EditUserProfileView extends BaseView implements IEditUserProfileVie
                 finish();
                 break;
             case R.id.btnDone:
-                if (isUpdated) {
-                    updateUserInStorage();
-                } else {
-                    addUserInStorage();
+                if (validate()) {
+                    if (isUpdated) {
+                        updateUserInStorage();
+                    } else {
+                        addUserInStorage();
+                    }
                 }
                 break;
             case R.id.imvPlaceHolder:
                 showDialog();
                 break;
         }
+    }
+
+    private boolean validate() {
+        if (!Utils.isValidEmail(edtEmail.getText().toString())) {
+            Utils.Toast.showToast(mContext, getString(R.string.error_email_format));
+            return false;
+        }
+        if (!Utils.isValidDateofBirth(tvDateOfBirth.getText().toString())) {
+            Utils.Toast.showToast(mContext, getString(R.string.error_date_of_birth_format));
+            return false;
+        }
+        return true;
     }
 
     private void updateUserInStorage() {

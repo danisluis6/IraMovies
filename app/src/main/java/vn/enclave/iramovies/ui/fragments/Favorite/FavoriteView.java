@@ -208,7 +208,7 @@ public class FavoriteView extends IRBaseFragment implements IFavoritesView{
         void onRefreshFavoriteOnMovieScreen(Movie movie);
         void onRefreshFavoriteOnDetailScreen(Movie movie);
     }
-
+    
     /* Interface */
     public interface FavoriteInterface {
         void setTotalFavoritesOnMenu(int count);

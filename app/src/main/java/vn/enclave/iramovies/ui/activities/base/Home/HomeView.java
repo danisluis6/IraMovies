@@ -145,6 +145,7 @@ public class HomeView extends BaseView {
             public void openReminderList(ArrayList<Reminder> reminders) {
                 mDrawerLayout.closeDrawers();
                 mViewPager.setCurrentItem(2);
+                updateTitleBar(getResources().getString(R.string.reminders));
                 if (mSettingView != null) {
                     if (mReminderView == null) {
                         mReminderView = new ReminderView();
@@ -158,6 +159,12 @@ public class HomeView extends BaseView {
                         @Override
                         public void getMovieDetailFragment(MovieDetailView movieDetailView, Reminder reminder) {
                             mDetailReminder = movieDetailView;
+                            mDetailReminder.setUpdateTitleOnReminderView(new MovieDetailView.UpdateTitleOnReminderView() {
+                                @Override
+                                public void updateTitle() {
+                                    updateTitleBar(getResources().getString(R.string.reminders));
+                                }
+                            });
                             mReminderView.openReminderDetail(mDetailReminder);
                             updateTitleBar(reminder.getTitle());
                         }
@@ -303,7 +310,7 @@ public class HomeView extends BaseView {
                             mDetailViewFavorite.reloadReminder(reminder);
                         }
                         if (mReminderView != null) {
-                            mReminderView.reload(reminder, false);
+                            mReminderView.reload(reminder);
                         }
                     }
 
@@ -314,9 +321,9 @@ public class HomeView extends BaseView {
                         if (mDetailViewFavorite != null && reminder != null) {
                             mDetailViewFavorite.reloadReminder(reminder);
                         }
-                        // Reload star
+                        // Reload reminder
                         if (mReminderView != null) {
-                            mReminderView.reload(reminder, true);
+                            mReminderView.reload(reminder);
                         }
                         if (mDetailReminder != null) {
                             mDetailReminder.reloadReminder(reminder);
@@ -405,7 +412,7 @@ public class HomeView extends BaseView {
                             mDetailViewMovie.reloadReminder(reminder);
                         }
                         if (mReminderView != null) {
-                            mReminderView.reload(reminder, false);
+                            mReminderView.reload(reminder);
                         }
                     }
 
@@ -418,7 +425,7 @@ public class HomeView extends BaseView {
                         }
                         // Reload star
                         if (mReminderView != null) {
-                            mReminderView.reload(reminder, true);
+                            mReminderView.reload(reminder);
                         }
                         // Reload reminder on ReminderDetailView
                         if (mDetailReminder != null) {

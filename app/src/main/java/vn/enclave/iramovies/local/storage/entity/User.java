@@ -34,9 +34,9 @@ public class User implements Parcelable {
     @SerializedName(DatabaseInfo.User.COLUMN_BIRTHDAY)
     private String birthday;
 
-    @ColumnInfo(typeAffinity = ColumnInfo.BLOB)
+    @ColumnInfo(name = DatabaseInfo.User.COLUMN_AVATAR)
     @SerializedName(DatabaseInfo.User.COLUMN_AVATAR)
-    private byte[] avatar;
+    private String avatar;
 
     @ColumnInfo(name = DatabaseInfo.User.COLUMN_EMAIL)
     @SerializedName(DatabaseInfo.User.COLUMN_EMAIL)
@@ -51,7 +51,7 @@ public class User implements Parcelable {
         name = email = Constants.EMPTY_STRING;
     }
 
-    public User(String name, String birthday, byte[] avatar, String email, int male) {
+    public User(String name, String birthday, String avatar, String email, int male) {
         this.name = name;
         this.birthday = birthday;
         this.avatar = avatar;
@@ -63,7 +63,7 @@ public class User implements Parcelable {
         id = in.readInt();
         name = in.readString();
         birthday = in.readString();
-        avatar = in.createByteArray();
+        avatar = in.readString();
         email = in.readString();
         male = in.readInt();
     }
@@ -104,11 +104,11 @@ public class User implements Parcelable {
         this.birthday = birthday;
     }
 
-    public byte[] getAvatar() {
+    public String getAvatar() {
         return avatar;
     }
 
-    public void setAvatar(byte[] avatar) {
+    public void setAvatar(String avatar) {
         this.avatar = avatar;
     }
 
@@ -138,7 +138,7 @@ public class User implements Parcelable {
         dest.writeInt(id);
         dest.writeString(name);
         dest.writeString(birthday);
-        dest.writeByteArray(avatar);
+        dest.writeString(avatar);
         dest.writeString(email);
         dest.writeInt(male);
     }

@@ -102,14 +102,12 @@ public class ReminderView extends IRBaseFragment implements IReminderView {
         super.onDetach();
     }
 
-    public void reload(Reminder reminder, boolean isUpdated) {
+    public void reload(Reminder reminder) {
         if (mReminderListAdapter != null) {
-            if (isUpdated) {
-                mReminderListAdapter.updateReminder(reminder);
-            } else {
-                mReminderListAdapter.notifyDataSetChanged();
-            }
+            mReminderListAdapter.updateReminder(reminder);
         }
+
+        onResume();
     }
 
     public void openReminderDetail(Fragment fragment) {

@@ -78,6 +78,8 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
     private MovieDetailPresenter mDetailMoviePresenter;
     private RecyclerView.LayoutManager mLayoutManager;
     private ReminderInterface mReminderInterface;
+    private  MovieDetailInterface  mMovieDetailInterface;
+    private UpdateTitleOnReminderView mUpdateTitleOnReminderView;
 
     private Movie mMovie;
     private Reminder mReminder;
@@ -350,6 +352,8 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
     public void onDetach() {
         if (!mIsReminder) {
             mMovieDetailInterface.onDestroy();
+        } else {
+            mUpdateTitleOnReminderView.updateTitle();
         }
         super.onDetach();
     }
@@ -358,7 +362,13 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
         this.mMovieDetailInterface = movieDetailInterface;
     }
 
-    private  MovieDetailInterface  mMovieDetailInterface;
+    public interface UpdateTitleOnReminderView {
+        void updateTitle();
+    }
+
+    public void setUpdateTitleOnReminderView(UpdateTitleOnReminderView updateTitleOnReminderView) {
+        this.mUpdateTitleOnReminderView = updateTitleOnReminderView;
+    }
 
     public void reload(Movie movie) {
         if (imvFavorite != null && getMovie().getId().equals(movie.getId())) {

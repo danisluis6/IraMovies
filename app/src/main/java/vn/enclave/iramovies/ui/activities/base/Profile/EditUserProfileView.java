@@ -21,7 +21,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
-import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -36,7 +35,6 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -286,9 +284,9 @@ public class EditUserProfileView extends BaseView implements IEditUserProfileVie
             @Override
             public void openGallery() {
                 if (Utils.checkPermissionStorage(EditUserProfileView.this)) {
-                    Utils.settingPermissionStorage(EditUserProfileView.this);
-                } else {
                     takePhotoFromGallery();
+                } else {
+                    Utils.settingPermissionStorage(EditUserProfileView.this);
                 }
             }
         });
@@ -385,7 +383,7 @@ public class EditUserProfileView extends BaseView implements IEditUserProfileVie
         mUser.setEmail(edtEmail.getText().toString());
         mUser.setBirthday(tvDateOfBirth.getText().toString());
         mUser.setMale(Utils.convertGenderToInt(mContext, mGender));
-        mUser.setAvatar(TextUtils.equals(getPathImage(), Constants.EMPTY_STRING) ? null : Utils.convertPathToBlob(getPathImage()));
+        mUser.setAvatar(getPathImage());
         return mUser;
     }
 
@@ -395,11 +393,10 @@ public class EditUserProfileView extends BaseView implements IEditUserProfileVie
         rdMale.setChecked(user.getMale() == 0);
         rdFemale.setChecked(user.getMale() == 1);
         tvDateOfBirth.setText(user.getBirthday());
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
         if (user.getAvatar() != null) {
-            Utils.convertToBitmap(user.getAvatar()).compress(Bitmap.CompressFormat.PNG, 100, stream);
+            setPathImage(user.getAvatar());
             Glide.with(this)
-                .load(stream.toByteArray())
+                .load(getPathImage())
                 .asBitmap().centerCrop()
                 .error(R.drawable.placeholder)
                 .into(new BitmapImageViewTarget(imvPlaceHolder) {

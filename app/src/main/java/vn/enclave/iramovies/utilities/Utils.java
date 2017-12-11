@@ -183,7 +183,7 @@ public class Utils {
     }
 
     public static boolean checkPermissionStorage(Context context) {
-        return ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
+        return ActivityCompat.checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
     }
 
     public static void settingPermissionStorage(Activity activity) {
@@ -192,14 +192,6 @@ public class Utils {
                         Manifest.permission.READ_EXTERNAL_STORAGE
                 }, Constants.Permissions.STORAGE
         );
-    }
-
-    public static Bitmap getBitmap(byte[] byteArray) {
-        return BitmapFactory.decodeByteArray(byteArray, 0 ,byteArray.length);
-    }
-
-    public enum FAILURE_CASE {
-        NO_DATA, NO_DATA_FOUND, NO_CONECTION
     }
 
     public static class Toast {

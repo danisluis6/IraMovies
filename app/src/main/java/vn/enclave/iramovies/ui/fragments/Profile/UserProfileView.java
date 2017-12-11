@@ -142,24 +142,11 @@ public class UserProfileView extends IRBaseFragment implements IUserProfileView 
     }
 
     private void loadUserFromStorage() {
-        if (Utils.isInternetOn(mActivity)) {
-            mUserProfilePresenter.getUser();
-        } else {
-            Utils.Toast.showToast(mActivity, getString(R.string.no_internet_connection));
-        }
+        mUserProfilePresenter.getUser();
     }
 
     private void loadReminderFromStorage() {
-        if (Utils.isInternetOn(mActivity)) {
-            mUserProfilePresenter.getListReminder();
-        } else {
-            Utils.Toast.showToast(mActivity, getString(R.string.no_internet_connection));
-        }
-    }
-
-    @OnClick(R.id.btnShowAll)
-    public void openReminderList() {
-        mReminderListInterface.openReminderList(mReminderAdapter.getList());
+        mUserProfilePresenter.getListReminder();
     }
 
     @OnClick({R.id.btnEdit, R.id.btnShowAll})
@@ -174,6 +161,7 @@ public class UserProfileView extends IRBaseFragment implements IUserProfileView 
                 startActivityForResult(intent, Constants.Activities_Result.USER);
                 break;
             case R.id.btnShowAll:
+                mReminderListInterface.openReminderList(mReminderAdapter.getList());
                 break;
         }
     }
@@ -183,11 +171,9 @@ public class UserProfileView extends IRBaseFragment implements IUserProfileView 
         tvEmail.setText(user.getEmail());
         tvGender.setText(Utils.convertIntToGender(mActivity, user.getMale()));
         tvDateOfTheDate.setText(user.getBirthday());
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
         if (user.getAvatar() != null) {
-            Utils.convertToBitmap(user.getAvatar()).compress(Bitmap.CompressFormat.PNG, 100, stream);
             Glide.with(mActivity)
-                .load(stream.toByteArray())
+                .load(user.getAvatar())
                 .asBitmap().centerCrop()
                 .error(R.drawable.placeholder)
                 .into(new BitmapImageViewTarget(imvAvatar) {
@@ -224,7 +210,6 @@ public class UserProfileView extends IRBaseFragment implements IUserProfileView 
 
     @Override
     public void onFailure(String message) {
-        setUser(null);
         Utils.Toast.showToast(mActivity, message);
     }
 

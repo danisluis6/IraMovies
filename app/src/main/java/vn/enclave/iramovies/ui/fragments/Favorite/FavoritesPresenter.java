@@ -5,6 +5,7 @@ import android.content.Context;
 import java.util.List;
 
 import vn.enclave.iramovies.local.storage.entity.Movie;
+import vn.enclave.iramovies.local.storage.entity.Reminder;
 
 /**
  *
@@ -79,6 +80,18 @@ public class FavoritesPresenter implements IFavoritePresenter {
         if (mIFavoritesView != null) {
             mIFavoritesView.dismissProgressDialog();
             mIFavoritesView.deleteSuccess(movie);
+        }
+    }
+
+    @Override
+    public void updateReminder(Reminder reminder) {
+        mFavoritesModel.updateReminder(reminder);
+    }
+
+    @Override
+    public void onUpdatedReminderSuccess(Reminder reminder) {
+        if (mIFavoritesView != null) {
+            mIFavoritesView.onUpdatedReminderSuccess(reminder);
         }
     }
 }

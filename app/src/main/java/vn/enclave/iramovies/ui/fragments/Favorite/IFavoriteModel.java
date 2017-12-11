@@ -1,6 +1,7 @@
 package vn.enclave.iramovies.ui.fragments.Favorite;
 
 import vn.enclave.iramovies.local.storage.entity.Movie;
+import vn.enclave.iramovies.local.storage.entity.Reminder;
 import vn.enclave.iramovies.ui.interfaces.IBasePresenter;
 
 /**
@@ -15,4 +16,6 @@ public interface IFavoriteModel extends IBasePresenter<IFavoritePresenter> {
     void addMovie(Movie movie);
 
     void deleteMovie(Movie movie);
+
+    void updateReminder(Reminder reminder);
 }

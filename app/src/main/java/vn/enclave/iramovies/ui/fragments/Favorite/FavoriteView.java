@@ -20,6 +20,7 @@ import butterknife.BindView;
 import vn.enclave.iramovies.R;
 import vn.enclave.iramovies.local.storage.DatabaseInfo;
 import vn.enclave.iramovies.local.storage.entity.Movie;
+import vn.enclave.iramovies.local.storage.entity.Reminder;
 import vn.enclave.iramovies.ui.fragments.IRBaseFragment;
 import vn.enclave.iramovies.ui.fragments.Detail.MovieDetailView;
 import vn.enclave.iramovies.ui.fragments.Favorite.adapter.FavoriteAdapter;
@@ -142,6 +143,21 @@ public class FavoriteView extends IRBaseFragment implements IFavoritesView{
         mFavoritesAdapter.remove(movie);
         mInterfaceRefresh.onRefreshFavoriteOnMovieScreen(movie);
         mInterfaceRefresh.onRefreshFavoriteOnDetailScreen(movie);
+        if (mFavoritesPresenter != null) {
+            mFavoritesPresenter.updateReminder(getReminder(movie));
+        }
+    }
+
+    @Override
+    public void onUpdatedReminderSuccess(Reminder reminder) {
+        mFavoriteInterface.updateStarOnReminderView(reminder);
+    }
+
+    private Reminder getReminder(Movie movie) {
+        Reminder reminder = new Reminder();
+        reminder.setId(movie.getId());
+        reminder.setFavorite(movie.getFavorite());
+        return reminder;
     }
 
     private void updateStatusFavorite(int count) {
@@ -198,6 +214,7 @@ public class FavoriteView extends IRBaseFragment implements IFavoritesView{
         void setTotalFavoritesOnMenu(int count);
         void updateCountFavoritesOnMenu(int value);
         void getMovieDetailFragment(MovieDetailView movieDetailView, Movie movie);
+        void updateStarOnReminderView(Reminder reminder);
     }
 
     public void setFavoriteInterface(FavoriteInterface favoriteInterface) {

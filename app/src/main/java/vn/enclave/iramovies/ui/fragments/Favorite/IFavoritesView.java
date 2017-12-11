@@ -3,6 +3,7 @@ package vn.enclave.iramovies.ui.fragments.Favorite;
 import java.util.List;
 
 import vn.enclave.iramovies.local.storage.entity.Movie;
+import vn.enclave.iramovies.local.storage.entity.Reminder;
 
 /**
  *
@@ -20,4 +21,6 @@ public interface IFavoritesView {
     void onFailure(String message);
 
     void deleteSuccess(Movie movie);
+
+    void onUpdatedReminderSuccess(Reminder reminder);
 }

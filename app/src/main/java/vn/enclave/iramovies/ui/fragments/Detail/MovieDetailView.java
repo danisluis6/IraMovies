@@ -173,14 +173,14 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
 
     private void saveReminderInStorage(String timeReminder) {
         setReminder(getInfoReminder(timeReminder));
-        if (Utils.isInternetOn(mActivity)) {
+        if (!mIsReminder) {
             if (mIsUpdateReminder) {
                 mDetailMoviePresenter.updateReminder(getReminder());
             } else {
                 mDetailMoviePresenter.addReminder(getReminder());
             }
         } else {
-            Utils.Toast.showToast(mActivity, getString(R.string.no_internet_connection));
+            mDetailMoviePresenter.updateReminder(getReminder());
         }
     }
 
@@ -324,8 +324,12 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
 
     @Override
     public void updateReminderSuccess(Reminder reminder) {
-        mIsUpdateReminder = true;
-        mReminderInterface.updateReminder(reminder);
+        if (!mIsReminder) {
+            mIsUpdateReminder = true;
+            mReminderInterface.updateReminder(reminder);
+        } else {
+            Utils.Toast.showToast(mActivity, "Do my task");
+        }
     }
 
     public void getCastAndCrew() {
@@ -360,6 +364,16 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
 
     public void setMovieDetailInterface(MovieDetailInterface movieDetailInterface) {
         this.mMovieDetailInterface = movieDetailInterface;
+    }
+
+    public void refreshStarOnReminderDetailView(Reminder reminder) {
+        if (mIsReminder) {
+            if (imvFavorite != null && getMovie().getId().equals(reminder.getId())) {
+                imvFavorite.setImageResource((reminder.getFavorite() == Constants.Favorites.FAVORITE) ? R.drawable.ic_star_picked : R.drawable.ic_star);
+                mIsFavorite = !mIsFavorite;
+            }
+        }
+        onResume();
     }
 
     public interface UpdateTitleOnReminderView {

@@ -10,8 +10,9 @@ import java.util.List;
 import vn.enclave.iramovies.IRApplication;
 import vn.enclave.iramovies.R;
 import vn.enclave.iramovies.local.storage.AppDatabase;
-import vn.enclave.iramovies.services.IraMovieWebAPIs;
 import vn.enclave.iramovies.local.storage.entity.Movie;
+import vn.enclave.iramovies.local.storage.entity.Reminder;
+import vn.enclave.iramovies.services.IraMovieWebAPIs;
 
 /**
  *
@@ -28,7 +29,7 @@ public class FavoriteModel implements IFavoriteModel {
     /**
      * IMoviesPresenter
      */
-    private IFavoritePresenter mIFavoritesPresenter;
+    private IFavoritePresenter mFavoritesPresenter;
 
     /**
      * IraMovieWebAPIs
@@ -49,7 +50,7 @@ public class FavoriteModel implements IFavoriteModel {
 
     @Override
     public void attachView(IFavoritePresenter view) {
-        mIFavoritesPresenter = view;
+        mFavoritesPresenter = view;
     }
 
     @Override
@@ -63,9 +64,9 @@ public class FavoriteModel implements IFavoriteModel {
             @Override
             protected void onPostExecute(List<Movie> groupMovies) {
                 if (!groupMovies.isEmpty()) {
-                    mIFavoritesPresenter.onSuccess(groupMovies);
+                    mFavoritesPresenter.onSuccess(groupMovies);
                 } else {
-                    mIFavoritesPresenter.onFailure(mContext.getResources().getString(R.string.cannot_get_data));
+                    mFavoritesPresenter.onFailure(mContext.getResources().getString(R.string.cannot_get_data));
                 }
             }
         }.execute();
@@ -101,11 +102,39 @@ public class FavoriteModel implements IFavoriteModel {
             @Override
             protected void onPostExecute(Integer id) {
                 if (id > 0) {
-                    mIFavoritesPresenter.deleteSuccess(movie);
+                    mFavoritesPresenter.deleteSuccess(movie);
                 } else {
                     Toast.makeText(mContext, "Delete Movie failed", Toast.LENGTH_SHORT).show();
                 }
             }
         }.execute(movie);
     }
+
+    @Override
+    public void updateReminder(Reminder reminder) {
+        EditReminderAsyncTask mEditReminderAsyncTask = new EditReminderAsyncTask(reminder);
+        mEditReminderAsyncTask.execute(reminder);
+    }
+
+    private class EditReminderAsyncTask extends AsyncTask<Reminder, Void, Integer> {
+
+        private Reminder mReminder;
+
+        EditReminderAsyncTask(Reminder reminder) {
+            this.mReminder = reminder;
+        }
+
+        @Override
+        protected Integer doInBackground(Reminder... params) {
+            return mAppDatabase.getReminderDao().updateReminder(params[0].getFavorite(), params[0].getId());
+        }
+
+        @Override
+        protected void onPostExecute(Integer id) {
+            if (id > 0) {
+                mFavoritesPresenter.onUpdatedReminderSuccess(mReminder);
+            }
+        }
+    }
+
 }

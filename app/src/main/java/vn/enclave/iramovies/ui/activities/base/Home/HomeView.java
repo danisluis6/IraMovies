@@ -437,6 +437,17 @@ public class HomeView extends BaseView {
                 mFavoriteView.openMovieDetail(movieDetailView);
                 updateTitleBar(movie.getTitle());
             }
+
+            @Override
+            public void updateStarOnReminderView(Reminder reminder) {
+                // Reload reminder on ReminderDetailView
+                if (mDetailReminder != null) {
+                    mDetailReminder.refreshStar(reminder);
+                }
+                if (mReminderView != null) {
+                    mReminderView.onRefresh();
+                }
+            }
         });
 
         mSettingView.setSettingInterface(new SettingView.SettingInterface() {

@@ -7,12 +7,10 @@ import android.widget.Toast;
 
 import java.util.List;
 
-import vn.enclave.iramovies.IRApplication;
 import vn.enclave.iramovies.R;
 import vn.enclave.iramovies.local.storage.AppDatabase;
 import vn.enclave.iramovies.local.storage.entity.Movie;
 import vn.enclave.iramovies.local.storage.entity.Reminder;
-import vn.enclave.iramovies.services.IraMovieWebAPIs;
 
 /**
  *
@@ -32,18 +30,12 @@ public class FavoriteModel implements IFavoriteModel {
     private IFavoritePresenter mFavoritesPresenter;
 
     /**
-     * IraMovieWebAPIs
-     */
-    private IraMovieWebAPIs mApiService;
-
-    /**
      * AppDatabase
      */
     private AppDatabase mAppDatabase;
 
     FavoriteModel(Context context) {
         this.mContext = context;
-        mApiService = IRApplication.getInstance().getEzFaxingWebAPIs();
         mAppDatabase = Room.databaseBuilder(mContext, AppDatabase.class, AppDatabase.DB_NAME).build();
     }
 
@@ -63,10 +55,10 @@ public class FavoriteModel implements IFavoriteModel {
 
             @Override
             protected void onPostExecute(List<Movie> groupMovies) {
-                if (!groupMovies.isEmpty()) {
+                if (groupMovies.size() > 0) {
                     mFavoritesPresenter.onSuccess(groupMovies);
                 } else {
-                    mFavoritesPresenter.onFailure(mContext.getResources().getString(R.string.cannot_get_data));
+                    mFavoritesPresenter.onFailure(mContext.getString(R.string.cannot_get_data));
                 }
             }
         }.execute();

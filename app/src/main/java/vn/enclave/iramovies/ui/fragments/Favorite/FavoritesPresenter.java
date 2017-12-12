@@ -60,7 +60,6 @@ public class FavoritesPresenter implements IFavoritePresenter {
     public void onFailure(String message) {
         if (mIFavoritesView != null) {
             mIFavoritesView.dismissProgressDialog();
-            mIFavoritesView.onFailure(message);
         }
     }
 

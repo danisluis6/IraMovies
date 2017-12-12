@@ -52,7 +52,6 @@ public class UserProfilePresenter implements IUserProfilePresenter{
 
     @Override
     public void onFailure(String message) {
-        mUserProfileView.onFailure(message);
     }
 
     @Override

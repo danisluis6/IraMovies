@@ -72,14 +72,12 @@ public class MovieDetailModel implements IMovieDetailModel {
                     if (castAndCrewResponse != null) {
                         mIMovieDetailPresenter.onSuccess(castAndCrewResponse);
                     }
-                } else {
-                    mIMovieDetailPresenter.onFailure(mContext.getString(R.string.cannot_get_data));
                 }
             }
 
             @Override
             public void onFailure(Call<CastAndCrewResponse> call, Throwable t) {
-                mIMovieDetailPresenter.onFailure(mContext.getString(R.string.cannot_get_data));
+                mIMovieDetailPresenter.onFailure(t.getMessage());
             }
         });
     }

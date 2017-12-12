@@ -60,7 +60,6 @@ public class MoviePresenter implements IMoviePresenter {
     public void onFailure(String message) {
         if (mIMoviesView != null) {
             mIMoviesView.dismissProgressDialog();
-            mIMoviesView.onFailure(message);
         }
     }
 

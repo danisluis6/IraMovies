@@ -8,6 +8,7 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.SystemClock;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -176,27 +177,28 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
 
     private void initialAlarm(Calendar calendar) {
         Intent notificationIntent = new Intent(mActivity, NotificationPublisher.class);
-        notificationIntent.putExtra(NotificationPublisher.NOTIFICATION_ID, getReminder().getId());
+        notificationIntent.putExtra(NotificationPublisher.NOTIFICATION_ID, getMovie().getId());
         notificationIntent.putExtra(NotificationPublisher.NOTIFICATION, getNotification());
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(mActivity, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        final int _id = (int) System.currentTimeMillis();
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(mActivity, _id, notificationIntent, PendingIntent.FLAG_ONE_SHOT);
         AlarmManager alarmManager = (AlarmManager)mActivity.getSystemService(Context.ALARM_SERVICE);
         alarmManager.set(AlarmManager.RTC, calendar.getTimeInMillis(), pendingIntent);
     }
 
     private Notification getNotification() {
         Notification.Builder builder = new Notification.Builder(mActivity);
-        builder.setContentTitle(getContentTitle());
-        builder.setContentText(getContentNoti(getReminder()));
+        builder.setContentTitle(getContentTitle(getMovie()));
+        builder.setContentText(getContentNoti(getMovie()));
         builder.setSmallIcon(R.drawable.ic_alert);
         return builder.build();
     }
 
-    private String getContentNoti(Reminder alarm) {
-        return "Year: "+alarm.getReleaseDate().substring(0, 4) + " Rate: "+alarm.getVoteAverage();
+    private String getContentNoti(Movie movie) {
+        return "Year: "+movie.getReleaseDate().substring(0, 4) + " Rate: "+movie.getVoteAverage();
     }
 
-    private String getContentTitle() {
-        return "Title: "+getReminder().getTitle();
+    private String getContentTitle(Movie movie) {
+        return "Title: "+movie.getTitle();
     }
 
     private void updateDisplay(Calendar myCalendar) {

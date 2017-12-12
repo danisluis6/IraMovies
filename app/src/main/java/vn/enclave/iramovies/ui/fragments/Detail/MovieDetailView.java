@@ -1,8 +1,14 @@
 package vn.enclave.iramovies.ui.fragments.Detail;
 
+import android.app.AlarmManager;
 import android.app.DatePickerDialog;
+import android.app.Notification;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -34,11 +40,11 @@ import vn.enclave.iramovies.services.response.CastAndCrewResponse;
 import vn.enclave.iramovies.ui.fragments.Detail.adapter.MovieDetailAdapter;
 import vn.enclave.iramovies.ui.fragments.IRBaseFragment;
 import vn.enclave.iramovies.ui.fragments.Movie.bean.CastCrew;
+import vn.enclave.iramovies.ui.notifications.NotificationPublisher;
 import vn.enclave.iramovies.utilities.Constants;
 import vn.enclave.iramovies.utilities.Utils;
 
 /**
- *
  * Created by lorence on 23/11/2017.
  */
 
@@ -79,7 +85,7 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
     private MovieDetailPresenter mDetailMoviePresenter;
     private RecyclerView.LayoutManager mLayoutManager;
     private ReminderInterface mReminderInterface;
-    private  MovieDetailInterface  mMovieDetailInterface;
+    private MovieDetailInterface mMovieDetailInterface;
     private UpdateTitleOnReminderView mUpdateTitleOnReminderView;
     private UpdateReminderOnAllScreen mUpdateReminderOnAllScreen;
     private UpdateStarOnAllScreen mUpdateStarOnAllScreen;
@@ -89,7 +95,7 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
     private boolean mIsFavorite;
     private boolean mIsUpdateReminder;
     private boolean mIsReminder = false;
-    private boolean mDuplicateFavorite = false;
+    private TimePickerDialog mTimePickerDialog;
 
     @Override
     public View getViewLayout(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -126,8 +132,6 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
         mDetailMoviePresenter.getReminderMovie(id);
     }
 
-    private TimePickerDialog mTimePickerDialog;
-
     @OnClick(R.id.btnReminder)
     public void openDatePicker() {
         final Calendar myCalendar = Calendar.getInstance();
@@ -151,6 +155,7 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
                 myCalendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
                 myCalendar.set(Calendar.MINUTE, minute);
                 updateDisplay(myCalendar);
+                initialAlarm(myCalendar);
             }
         };
 
@@ -159,8 +164,39 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
                 myCalendar.get(Calendar.DAY_OF_MONTH));
 
         mTimePickerDialog = new TimePickerDialog(getActivity(), time,
-                myCalendar.get(Calendar.HOUR_OF_DAY), myCalendar.get(Calendar.MINUTE), true);
+                myCalendar.get(Calendar.HOUR_OF_DAY),
+                myCalendar.get(Calendar.MINUTE), true);
         mDatePickerDialog.show();
+    }
+
+    /**
+     * @Run: https://stackoverflow.com/questions/23567692/how-to-display-multiple-notification-at-the-same-time
+     * => Research
+     */
+
+    private void initialAlarm(Calendar calendar) {
+        Intent notificationIntent = new Intent(mActivity, NotificationPublisher.class);
+        notificationIntent.putExtra(NotificationPublisher.NOTIFICATION_ID, getReminder().getId());
+        notificationIntent.putExtra(NotificationPublisher.NOTIFICATION, getNotification());
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(mActivity, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        AlarmManager alarmManager = (AlarmManager)mActivity.getSystemService(Context.ALARM_SERVICE);
+        alarmManager.set(AlarmManager.RTC, calendar.getTimeInMillis(), pendingIntent);
+    }
+
+    private Notification getNotification() {
+        Notification.Builder builder = new Notification.Builder(mActivity);
+        builder.setContentTitle(getContentTitle());
+        builder.setContentText(getContentNoti(getReminder()));
+        builder.setSmallIcon(R.drawable.ic_alert);
+        return builder.build();
+    }
+
+    private String getContentNoti(Reminder alarm) {
+        return "Year: "+alarm.getReleaseDate().substring(0, 4) + " Rate: "+alarm.getVoteAverage();
+    }
+
+    private String getContentTitle() {
+        return "Title: "+getReminder().getTitle();
     }
 
     private void updateDisplay(Calendar myCalendar) {
@@ -357,15 +393,6 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
         }
     }
 
-    public interface UpdateReminderOnAllScreen {
-        void update(Reminder reminder);
-    }
-
-    public interface UpdateStarOnAllScreen {
-        void updateMovie(Movie movie, String reminderDate);
-        void addMovie(Movie movie, String reminderDate);
-    }
-
     public void setUpdateStarOnAllScreen(UpdateStarOnAllScreen updateStarOnAllScreen) {
         this.mUpdateStarOnAllScreen = updateStarOnAllScreen;
     }
@@ -373,7 +400,6 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
     public void setUpdateReminderOnAllScreen(UpdateReminderOnAllScreen updateReminderOnAllScreen) {
         this.mUpdateReminderOnAllScreen = updateReminderOnAllScreen;
     }
-
 
     public void getCastAndCrew() {
         mDetailMoviePresenter.getCastAndCrewFromApi(getMovie().getId());
@@ -407,11 +433,6 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
 
     public void setMovieDetailInterface(MovieDetailInterface movieDetailInterface) {
         this.mMovieDetailInterface = movieDetailInterface;
-    }
-
-
-    public interface UpdateTitleOnReminderView {
-        void updateTitle();
     }
 
     public void setUpdateTitleOnReminderView(UpdateTitleOnReminderView updateTitleOnReminderView) {
@@ -487,13 +508,35 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
         onResume();
     }
 
+    public void setUpdateReminderInterface(ReminderInterface reminderInterface) {
+        this.mReminderInterface = reminderInterface;
+    }
+
+    public interface UpdateReminderOnAllScreen {
+        void update(Reminder reminder);
+    }
+
+    public interface UpdateStarOnAllScreen {
+        void updateMovie(Movie movie, String reminderDate);
+
+        void addMovie(Movie movie, String reminderDate);
+    }
+
+    public interface UpdateTitleOnReminderView {
+        void updateTitle();
+    }
+
     public interface MovieDetailInterface {
         void onDestroy();
+
         void updateCountStarOnMenu(int value);
+
         // Refresh favorite in favorite screen
         void refreshStarInFavoriteScreen(Movie movie);
+
         // Refresh favorite in movie screen
         void refreshStarInMovieScreen(Movie movie);
+
         // Refresh favorite in Detail screen
         void refreshStarInDetailScreen(Movie movie);
 
@@ -503,11 +546,8 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
 
     public interface ReminderInterface {
         void addReminder(Reminder reminder);
-        void updateReminder(Reminder reminder);
-    }
 
-    public void setUpdateReminderInterface(ReminderInterface reminderInterface) {
-        this.mReminderInterface = reminderInterface;
+        void updateReminder(Reminder reminder);
     }
 
 }

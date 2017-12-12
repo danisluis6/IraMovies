@@ -15,6 +15,7 @@ public class Constants {
         public static final int GALLERY = 1;
         public static final int CAMERA = 2;
         public static final int USER = 3;
+        public static final int ALARM = 4;
     }
 
     /* Dialog show pick image and gallery in Android */
@@ -55,6 +56,7 @@ public class Constants {
 
     public static class Keyboards {
         public static final String FORWARD_SLASH = "/";
+        public static final String SPACE = " ";
     }
 
     public static class Objects {
@@ -71,6 +73,7 @@ public class Constants {
         public static String TYPE = "type";
         public static String MOVIE = "movie";
         public static String REMINDER = "reminder";
+        public static String ALARM = "alarm";
     }
 
     public static String URL = "https://www.themoviedb.org/";

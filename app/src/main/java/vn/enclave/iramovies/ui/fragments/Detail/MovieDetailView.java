@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Parcel;
 import android.os.SystemClock;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -155,8 +156,12 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                 myCalendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
                 myCalendar.set(Calendar.MINUTE, minute);
-                updateDisplay(myCalendar);
-                initialAlarm(myCalendar);
+                if (System.currentTimeMillis() > myCalendar.getTime().getTime()) {
+                    Utils.Toast.showToast(mActivity, getString(R.string.error_pick_date));
+                } else {
+                    updateDisplay(myCalendar);
+                    initialAlarm(myCalendar);
+                }
             }
         };
 
@@ -203,14 +208,10 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
 
     private void updateDisplay(Calendar myCalendar) {
         // Check invalid
-        if (System.currentTimeMillis() > myCalendar.getTime().getTime()) {
-            Utils.Toast.showToast(mActivity, getString(R.string.error_pick_date));
-        } else {
-            String myFormat = "yyyy/MM/dd HH:mm"; // In which you need put here
-            SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-            tvReminder.setText(sdf.format(myCalendar.getTime()));
-            saveReminderInStorage(tvReminder.getText().toString());
-        }
+        String myFormat = "yyyy/MM/dd HH:mm"; // In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+        tvReminder.setText(sdf.format(myCalendar.getTime()));
+        saveReminderInStorage(tvReminder.getText().toString());
     }
 
     private void saveReminderInStorage(String timeReminder) {

@@ -2,6 +2,7 @@ package vn.enclave.iramovies.ui.activities.base.Home;
 
 import android.annotation.SuppressLint;
 import android.app.SearchManager;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -18,6 +19,7 @@ import android.support.v7.widget.SearchView;
 import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -46,6 +48,7 @@ import vn.enclave.iramovies.ui.fragments.Movie.MovieView;
 import vn.enclave.iramovies.ui.fragments.Profile.UserProfileView;
 import vn.enclave.iramovies.ui.fragments.Reminder.ReminderView;
 import vn.enclave.iramovies.ui.fragments.Setting.SettingView;
+import vn.enclave.iramovies.ui.notifications.NotificationPublisher;
 import vn.enclave.iramovies.ui.views.TabItem;
 import vn.enclave.iramovies.ui.views.ToolbarLayout;
 import vn.enclave.iramovies.utilities.Constants;
@@ -131,6 +134,18 @@ public class HomeView extends BaseView {
         initialPages();
         initViews();
         defineFragmentOnViewPaper();
+    }
+
+    private void processExtraData() {
+        int id = getIntent().getIntExtra(NotificationPublisher.NOTIFICATION_ID, 0);
+        Log.i("TAG", id+Constants.EMPTY_STRING);
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+        processExtraData();
     }
 
     private void initFragments() {

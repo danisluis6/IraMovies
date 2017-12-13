@@ -22,10 +22,9 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Detail/MovieDetailModel.java" afterPath="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Detail/MovieDetailModel.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/activities/base/Home/HomeView.java" afterPath="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/activities/base/Home/HomeView.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Detail/MovieDetailView.java" afterPath="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Detail/MovieDetailView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Reminder/ReminderView.java" afterPath="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Reminder/ReminderView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_movie_list.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_movie_list.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_detail.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_detail.xml" />
     </list>
     <ignored path="IraMovies.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -74,32 +73,53 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="MovieDetailView.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="MovieDetailView.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Detail/MovieDetailView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="607">
-              <caret line="101" column="47" selection-start-line="101" selection-start-column="47" selection-end-line="101" selection-end-column="47" />
+            <state relative-caret-position="502">
+              <caret line="150" column="41" selection-start-line="150" selection-start-column="41" selection-end-line="150" selection-end-column="41" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#4912#5512#0" expanded="true" />
-                <element signature="e#5511#5512#0" expanded="true" />
-                <element signature="e#7790#7791#0" expanded="true" />
-                <element signature="e#7839#7840#0" expanded="true" />
-                <element signature="e#12576#12577#0" expanded="true" />
-                <element signature="e#12617#12618#0" expanded="true" />
+                <element signature="e#4202#4203#0" expanded="true" />
+                <element signature="e#4251#4252#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="fragment_detail.xml" pinned="false" current-in-tab="true">
+      <file leaf-file-name="HomeView.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/activities/base/Home/HomeView.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="292">
+              <caret line="186" column="37" selection-start-line="186" selection-start-column="37" selection-end-line="186" selection-end-column="37" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#6057#13288#0" expanded="true" />
+                <element signature="e#7129#7442#0" expanded="true" />
+                <element signature="e#7332#7376#0" expanded="true" />
+                <element signature="e#7441#7442#0" expanded="true" />
+                <element signature="e#13287#13288#0" expanded="true" />
+                <element signature="method#updateTitleBar#0;class#HomeView#0" expanded="false" />
+                <element signature="method#onPostCreate#0;class#HomeView#0" expanded="false" />
+                <element signature="method#setupDrawerToggle#0;class#HomeView#0" expanded="false" />
+                <element signature="method#onCreateOptionsMenu#0;class#HomeView#0" expanded="false" />
+                <element signature="method#initSearchView#0;class#HomeView#0" expanded="false" />
+                <element signature="method#removeSearchIconAsHint#0;class#HomeView#0" expanded="false" />
+                <element signature="method#onOptionsItemSelected#0;class#HomeView#0" expanded="false" />
+                <marker date="1513162158089" expanded="false" signature="17700:17742" ph="&quot;Popular&quot;" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="fragment_detail.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_detail.xml">
           <provider editor-type-id="android-designer2">
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="191">
-              <caret line="97" column="0" selection-start-line="97" selection-start-column="0" selection-end-line="97" selection-end-column="0" />
+            <state relative-caret-position="296">
+              <caret line="92" column="8" selection-start-line="92" selection-start-column="8" selection-end-line="92" selection-end-column="8" />
               <folding />
             </state>
           </provider>
@@ -1970,7 +1990,6 @@
         <option value="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/notifications/NotificationPublisher.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Reminder/adapter/ReminderListAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Profile/adapter/ReminderAdapter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/activities/base/Home/HomeView.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Profile/IUserProfileModel.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Profile/IUserProfilePresenter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/local/storage/dao/ReminderDao.java" />
@@ -1986,8 +2005,9 @@
         <option value="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Detail/MovieDetailModel.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/item_movie_list.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Reminder/ReminderView.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Detail/MovieDetailView.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_detail.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/activities/base/Home/HomeView.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Detail/MovieDetailView.java" />
       </list>
     </option>
   </component>
@@ -2044,6 +2064,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="ProjectPane" />
+      <pane id="PackagesPane" />
       <pane id="AndroidView">
         <subPane>
           <PATH>
@@ -2151,9 +2173,7 @@
         </subPane>
       </pane>
       <pane id="Scratches" />
-      <pane id="PackagesPane" />
       <pane id="Scope" />
-      <pane id="ProjectPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -2163,7 +2183,7 @@
     <property name="DEBUGGABLE_PROCESS" value="vn.enclave.iramovies" />
     <property name="SHOW_ALL_PROCESSES" value="false" />
     <property name="DEBUGGER_ID" value="Auto" />
-    <property name="SearchEverywhereHistoryKey" value="item_lis&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/res/layout/item_movie_list.xml&#10;itemV&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/res/layout/item_card_view_small.xml&#10;ReminderDao&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/local/storage/dao/ReminderDao.java&#10;MovieDao&#9;PSI&#9;JAVA://vn.enclave.iramovies.local.storage.dao.MovieDao&#10;UserProfileMO&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/fragments/Profile/UserProfileModel.java&#10;ReminderLis&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/fragments/Reminder/adapter/ReminderListAdapter.java&#10;HomeVie&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/activities/base/Home/HomeView.java&#10;Movie&#9;PSI&#9;JAVA://vn.enclave.iramovies.local.storage.entity.Movie&#10;HomeVi&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/activities/base/Home/HomeView.java&#10;colors&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/res/values/colors.xml&#10;MovieDetailVi&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/fragments/Detail/MovieDetailView.java&#10;str&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/res/values/strings.xml&#10;String&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/res/values/strings.xml&#10;MovieMo&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/fragments/Movie/MovieModel.java&#10;ReminderMo&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/fragments/Reminder/ReminderlModel.java&#10;UserMo&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/activities/base/Profile/EditUserProfileModel.java&#10;FavoriteMo&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/fragments/Favorite/FavoriteModel.java&#10;MovieDetailMo&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/fragments/Detail/MovieDetailModel.java&#10;Fav&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/fragments/Favorite/FavoriteView.java&#10;MovieVie&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/fragments/Movie/MovieView.java&#10;MovieDetai&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/fragments/Detail/MovieDetailView.java&#10;Utils&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/utilities/Utils.java&#10;EditUser&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/activities/base/Profile/EditUserProfileView.java&#10;MovieDetailVie&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/fragments/Detail/MovieDetailView.java&#10;ReminderDa&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/local/storage/dao/ReminderDao.java&#10;onreSume&#9;PSI&#9;JAVA://vn.enclave.iramovies.ui.fragments.Favorite.FavoriteView#onResume&#10;FavoritePres&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/fragments/Favorite/FavoritesPresenter.java&#10;MovieVi&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/fragments/Movie/MovieView.java&#10;HomeView&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/activities/base/Home/HomeView.java&#10;FavoriteVie&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/fragments/Favorite/FavoriteView.java&#10;MoviedEtai&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/fragments/Detail/MovieDetailView.java&#10;User&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/local/storage/entity/User.java&#10;EditPro&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/activities/base/Profile/EditUserProfileView.java&#10;Edit&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/activities/base/Profile/EditUserProfileModel.java&#10;Reminder&#9;PSI&#9;JAVA://vn.enclave.iramovies.local.storage.entity.Reminder&#10;UserDao&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/local/storage/dao/UserDao.java&#10;UserProfileMo&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/fragments/Profile/UserProfileModel.java&#10;user&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/fragments/Profile/UserProfileView.java&#10;UserPro&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/fragments/Profile/UserProfileModel.java&#10;ReminderVi&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/fragments/Reminder/ReminderView.java&#10;MovieDetailV&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/fragments/Detail/MovieDetailView.java&#10;userDao&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/local/storage/dao/UserDao.java&#10;ReminderVie&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/fragments/Reminder/ReminderView.java&#10;item_movi&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/res/layout/item_movie_list.xml&#10;Constant&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/utilities/Constants.java&#10;SettingVie&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/fragments/Setting/SettingView.java&#10;onDestr&#9;PSI&#9;JAVA://vn.enclave.iramovies.ui.activities.base.BaseView#onDestroy&#10;ReminderAda&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/fragments/Profile/adapter/ReminderAdapter.java&#10;ReminList&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/fragments/Reminder/adapter/ReminderListAdapter.java&#10;Cons&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/utilities/Constants.java" />
+    <property name="SearchEverywhereHistoryKey" value="HomeVi&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/activities/base/Home/HomeView.java&#10;item_lis&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/res/layout/item_movie_list.xml&#10;itemV&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/res/layout/item_card_view_small.xml&#10;ReminderDao&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/local/storage/dao/ReminderDao.java&#10;MovieDao&#9;PSI&#9;JAVA://vn.enclave.iramovies.local.storage.dao.MovieDao&#10;UserProfileMO&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/fragments/Profile/UserProfileModel.java&#10;ReminderLis&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/fragments/Reminder/adapter/ReminderListAdapter.java&#10;HomeVie&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/activities/base/Home/HomeView.java&#10;Movie&#9;PSI&#9;JAVA://vn.enclave.iramovies.local.storage.entity.Movie&#10;colors&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/res/values/colors.xml&#10;MovieDetailVi&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/fragments/Detail/MovieDetailView.java&#10;str&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/res/values/strings.xml&#10;String&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/res/values/strings.xml&#10;MovieMo&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/fragments/Movie/MovieModel.java&#10;ReminderMo&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/fragments/Reminder/ReminderlModel.java&#10;UserMo&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/activities/base/Profile/EditUserProfileModel.java&#10;FavoriteMo&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/fragments/Favorite/FavoriteModel.java&#10;MovieDetailMo&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/fragments/Detail/MovieDetailModel.java&#10;Fav&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/fragments/Favorite/FavoriteView.java&#10;MovieVie&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/fragments/Movie/MovieView.java&#10;MovieDetai&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/fragments/Detail/MovieDetailView.java&#10;Utils&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/utilities/Utils.java&#10;EditUser&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/activities/base/Profile/EditUserProfileView.java&#10;MovieDetailVie&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/fragments/Detail/MovieDetailView.java&#10;ReminderDa&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/local/storage/dao/ReminderDao.java&#10;onreSume&#9;PSI&#9;JAVA://vn.enclave.iramovies.ui.fragments.Favorite.FavoriteView#onResume&#10;FavoritePres&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/fragments/Favorite/FavoritesPresenter.java&#10;MovieVi&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/fragments/Movie/MovieView.java&#10;HomeView&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/activities/base/Home/HomeView.java&#10;FavoriteVie&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/fragments/Favorite/FavoriteView.java&#10;MoviedEtai&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/fragments/Detail/MovieDetailView.java&#10;User&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/local/storage/entity/User.java&#10;EditPro&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/activities/base/Profile/EditUserProfileView.java&#10;Edit&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/activities/base/Profile/EditUserProfileModel.java&#10;Reminder&#9;PSI&#9;JAVA://vn.enclave.iramovies.local.storage.entity.Reminder&#10;UserDao&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/local/storage/dao/UserDao.java&#10;UserProfileMo&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/fragments/Profile/UserProfileModel.java&#10;user&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/fragments/Profile/UserProfileView.java&#10;UserPro&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/fragments/Profile/UserProfileModel.java&#10;ReminderVi&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/fragments/Reminder/ReminderView.java&#10;MovieDetailV&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/fragments/Detail/MovieDetailView.java&#10;userDao&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/local/storage/dao/UserDao.java&#10;ReminderVie&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/fragments/Reminder/ReminderView.java&#10;item_movi&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/res/layout/item_movie_list.xml&#10;Constant&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/utilities/Constants.java&#10;SettingVie&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/fragments/Setting/SettingView.java&#10;onDestr&#9;PSI&#9;JAVA://vn.enclave.iramovies.ui.activities.base.BaseView#onDestroy&#10;ReminderAda&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/fragments/Profile/adapter/ReminderAdapter.java&#10;ReminList&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/ui/fragments/Reminder/adapter/ReminderListAdapter.java&#10;Cons&#9;FILE&#9;file:///home/lorence/Desktop/IraMovies/app/src/main/java/vn/enclave/iramovies/utilities/Constants.java" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="android.project.structure.last.selected" value="Notifications" />
@@ -2521,7 +2541,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="65" y="24" width="1855" height="1056" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32580644" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
@@ -2530,16 +2550,15 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.63225806" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="true" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3548922" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3548922" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32903227" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3268817" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="true" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2039801" sideWeight="0.49569893" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Dynamic Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32946378" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2498618" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32946378" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -2549,6 +2568,7 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Dynamic Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32946378" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32903227" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -2630,7 +2650,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2085">
           <caret line="171" column="16" selection-start-line="171" selection-start-column="16" selection-end-line="171" selection-end-column="16" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2638,7 +2657,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3255">
           <caret line="253" column="72" selection-start-line="253" selection-start-column="72" selection-end-line="253" selection-end-column="72" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2646,9 +2664,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1455">
           <caret line="97" column="52" selection-start-line="97" selection-start-column="52" selection-end-line="97" selection-end-column="52" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2656,7 +2671,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-24">
           <caret line="44" column="36" selection-start-line="44" selection-start-column="36" selection-end-line="44" selection-end-column="36" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2678,7 +2692,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-2367">
           <caret line="95" column="39" selection-start-line="95" selection-start-column="39" selection-end-line="95" selection-end-column="39" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2686,7 +2699,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
           <caret line="16" column="16" selection-start-line="16" selection-start-column="16" selection-end-line="16" selection-end-column="16" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2694,7 +2706,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="312">
           <caret line="55" column="16" selection-start-line="55" selection-start-column="16" selection-end-line="55" selection-end-column="16" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2702,7 +2713,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
           <caret line="16" column="9" selection-start-line="16" selection-start-column="9" selection-end-line="16" selection-end-column="9" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2710,7 +2720,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="199">
           <caret line="64" column="43" selection-start-line="64" selection-start-column="43" selection-end-line="64" selection-end-column="43" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2771,7 +2780,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
           <caret line="175" column="30" selection-start-line="175" selection-start-column="30" selection-end-line="175" selection-end-column="30" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2843,7 +2851,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="20" column="8" selection-start-line="20" selection-start-column="4" selection-end-line="20" selection-end-column="8" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2890,7 +2897,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="660">
           <caret line="369" column="88" selection-start-line="369" selection-start-column="88" selection-end-line="369" selection-end-column="88" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2898,7 +2904,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="375">
           <caret line="27" column="8" selection-start-line="27" selection-start-column="4" selection-end-line="27" selection-end-column="8" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2906,7 +2911,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
           <caret line="26" column="4" selection-start-line="26" selection-start-column="4" selection-end-line="27" selection-end-column="42" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2914,7 +2918,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
           <caret line="30" column="31" selection-start-line="30" selection-start-column="31" selection-end-line="30" selection-end-column="31" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2922,7 +2925,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="600">
           <caret line="45" column="0" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2938,7 +2940,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="375">
           <caret line="29" column="8" selection-start-line="29" selection-start-column="4" selection-end-line="29" selection-end-column="8" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2976,24 +2977,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/activities/base/Home/HomeView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
-          <caret line="401" column="0" selection-start-line="401" selection-start-column="0" selection-end-line="401" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#updateTitleBar#0;class#HomeView#0" expanded="false" />
-            <element signature="method#onPostCreate#0;class#HomeView#0" expanded="false" />
-            <element signature="method#setupDrawerToggle#0;class#HomeView#0" expanded="false" />
-            <element signature="method#onCreateOptionsMenu#0;class#HomeView#0" expanded="false" />
-            <element signature="method#initSearchView#0;class#HomeView#0" expanded="false" />
-            <element signature="method#removeSearchIconAsHint#0;class#HomeView#0" expanded="false" />
-            <element signature="method#onOptionsItemSelected#0;class#HomeView#0" expanded="false" />
-            <marker date="1513145061916" expanded="false" signature="16559:16601" ph="&quot;Popular&quot;" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Reminder/ReminderView.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="360">
@@ -3004,30 +2987,49 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Detail/MovieDetailView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="607">
-          <caret line="101" column="47" selection-start-line="101" selection-start-column="47" selection-end-line="101" selection-end-column="47" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#4912#5512#0" expanded="true" />
-            <element signature="e#5511#5512#0" expanded="true" />
-            <element signature="e#7790#7791#0" expanded="true" />
-            <element signature="e#7839#7840#0" expanded="true" />
-            <element signature="e#12576#12577#0" expanded="true" />
-            <element signature="e#12617#12618#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_detail.xml">
       <provider editor-type-id="android-designer2">
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="191">
-          <caret line="97" column="0" selection-start-line="97" selection-start-column="0" selection-end-line="97" selection-end-column="0" />
+        <state relative-caret-position="296">
+          <caret line="92" column="8" selection-start-line="92" selection-start-column="8" selection-end-line="92" selection-end-column="8" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/activities/base/Home/HomeView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="292">
+          <caret line="186" column="37" selection-start-line="186" selection-start-column="37" selection-end-line="186" selection-end-column="37" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#6057#13288#0" expanded="true" />
+            <element signature="e#7129#7442#0" expanded="true" />
+            <element signature="e#7332#7376#0" expanded="true" />
+            <element signature="e#7441#7442#0" expanded="true" />
+            <element signature="e#13287#13288#0" expanded="true" />
+            <element signature="method#updateTitleBar#0;class#HomeView#0" expanded="false" />
+            <element signature="method#onPostCreate#0;class#HomeView#0" expanded="false" />
+            <element signature="method#setupDrawerToggle#0;class#HomeView#0" expanded="false" />
+            <element signature="method#onCreateOptionsMenu#0;class#HomeView#0" expanded="false" />
+            <element signature="method#initSearchView#0;class#HomeView#0" expanded="false" />
+            <element signature="method#removeSearchIconAsHint#0;class#HomeView#0" expanded="false" />
+            <element signature="method#onOptionsItemSelected#0;class#HomeView#0" expanded="false" />
+            <marker date="1513162158089" expanded="false" signature="17700:17742" ph="&quot;Popular&quot;" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/vn/enclave/iramovies/ui/fragments/Detail/MovieDetailView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="502">
+          <caret line="150" column="41" selection-start-line="150" selection-start-column="41" selection-end-line="150" selection-end-column="41" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#4202#4203#0" expanded="true" />
+            <element signature="e#4251#4252#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

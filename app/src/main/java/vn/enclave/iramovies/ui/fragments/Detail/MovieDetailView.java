@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -126,6 +125,11 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView,
         reminder.setReleaseDate(movie.getReleaseDate());
         reminder.setVoteAverage(movie.getVoteAverage());
         setReminder(reminder);
+        updateViewReminder(View.VISIBLE);
+    }
+
+    private void updateViewReminder(int visible) {
+        tvReminder.setVisibility(visible);
     }
 
     private void getReminderMovie(int id) {
@@ -189,16 +193,16 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView,
         final int _id = (int) System.currentTimeMillis();
         PendingIntent pendingIntent = PendingIntent.getBroadcast(mActivity, _id, notificationIntent, PendingIntent.FLAG_ONE_SHOT);
         AlarmManager alarmManager = (AlarmManager)mActivity.getSystemService(Context.ALARM_SERVICE);
-        Log.i("TAG", "calendar.getTimeInMillis(): "+calendar.getTimeInMillis());
         alarmManager.set(AlarmManager.RTC, calendar.getTimeInMillis(), pendingIntent);
     }
 
     @Override
     public void onUpdate(int id) {
         if (mIsReminder) {
-
+            mUpdateReminderOnAllScreen.removeReminder(id);
         } else {
             mMovieDetailInterface.removeReminder(id);
+            updateViewReminder(View.GONE);
         }
     }
 
@@ -223,6 +227,7 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView,
         String myFormat = "yyyy/MM/dd HH:mm"; // In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
         tvReminder.setText(sdf.format(myCalendar.getTime()));
+        updateViewReminder(View.VISIBLE);
         saveReminderInStorage(tvReminder.getText().toString());
     }
 
@@ -324,6 +329,7 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView,
 
     private void updateReminderOnUI(String title) {
         tvReminder.setText(title);
+        updateViewReminder(View.VISIBLE);
     }
 
     @Override
@@ -394,6 +400,7 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView,
             setReminder(reminder);
             mIsUpdateReminder = true;
             tvReminder.setText(getReminder().getReminderDate());
+            updateViewReminder(View.VISIBLE);
         } else {
             mIsUpdateReminder = false;
         }
@@ -493,6 +500,7 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView,
             if (reminder.getId().equals(getReminder().getId())) {
                 if (tvReminder != null) {
                     tvReminder.setText(reminder.getReminderDate());
+                    updateViewReminder(View.VISIBLE);
                 }
             }
         }
@@ -507,6 +515,7 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView,
                 }
                 if (tvReminder != null) {
                     tvReminder.setText(reminderDate);
+                    updateViewReminder(View.VISIBLE);
                 }
             }
         }
@@ -533,6 +542,7 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView,
             if (id == getReminder().getId()) {
                 if (tvReminder != null) {
                     tvReminder.setText(Constants.EMPTY_STRING);
+                    updateViewReminder(View.VISIBLE);
                 }
             }
         }
@@ -540,6 +550,7 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView,
 
     public interface UpdateReminderOnAllScreen {
         void update(Reminder reminder);
+        void removeReminder(int id);
     }
 
     public interface UpdateStarOnAllScreen {

@@ -181,6 +181,26 @@ public class HomeView extends BaseView {
                                         mReminderView.onRefresh();
                                     }
                                 }
+
+                                @Override
+                                public void removeReminder(int id) {
+                                    // Notification announce when remove reminder
+                                    if (mDetailViewFavorite != null) {
+                                        mDetailViewFavorite.removeReminder(id);
+                                    }
+                                    if (mDetailViewMovie != null) {
+                                        mDetailViewMovie.removeReminder(id);
+                                    }
+                                    if (mDetailReminder != null) {
+                                        mDetailReminder.removeReminder(id);
+                                    }
+                                    if (mReminderView != null) {
+                                        mReminderView.removeReminder(id);
+                                    }
+                                    if (mUserProfileView != null) {
+                                        mUserProfileView.removeReminder(id);
+                                    }
+                                }
                             });
                             mDetailReminder.setUpdateStarOnAllScreen(new MovieDetailView.UpdateStarOnAllScreen() {
                                 @Override

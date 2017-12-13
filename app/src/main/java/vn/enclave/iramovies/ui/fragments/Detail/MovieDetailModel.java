@@ -117,6 +117,11 @@ public class MovieDetailModel implements IMovieDetailModel {
         mEditAsyncTask.execute(reminder);
     }
 
+    @Override
+    public void getMovie(Integer id) {
+        new FindMovieAsyncTask().execute(id);
+    }
+
     private class EditReminderAsyncTask extends AsyncTask<Reminder, Void, Integer> {
 
         private Reminder mReminder;
@@ -137,6 +142,19 @@ public class MovieDetailModel implements IMovieDetailModel {
             } else {
                 Toast.makeText(mContext, "Update reminder failed", Toast.LENGTH_SHORT).show();
             }
+        }
+    }
+
+    private class FindMovieAsyncTask extends AsyncTask<Integer, Void, Movie> {
+
+        @Override
+        protected Movie doInBackground(Integer... params) {
+            return mAppDatabase.getMovieDao().getMovie(params[0]);
+        }
+
+        @Override
+        protected void onPostExecute(Movie movie) {
+            mIMovieDetailPresenter.findMovieSuccess(movie);
         }
     }
 

@@ -13,4 +13,6 @@ public interface IUserProfileModel extends IBasePresenter<IUserProfilePresenter>
     void getUser();
 
     void getListReminder();
+
+    void removeReminder(int id);
 }

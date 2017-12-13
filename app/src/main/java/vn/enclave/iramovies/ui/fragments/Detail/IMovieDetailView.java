@@ -26,4 +26,6 @@ interface IMovieDetailView {
     void findReminderSuccess(Reminder reminder);
 
     void updateReminderSuccess(Reminder reminder);
+
+    void findMovieSuccess(Movie movie);
 }

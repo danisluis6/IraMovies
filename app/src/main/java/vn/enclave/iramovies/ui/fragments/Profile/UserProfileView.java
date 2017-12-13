@@ -19,7 +19,6 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 
-import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -237,6 +236,15 @@ public class UserProfileView extends IRBaseFragment implements IUserProfileView 
 
     public void setReminderListInterface(ReminderListInterface reminderListInterface) {
         this.mReminderListInterface = reminderListInterface;
+    }
+
+    public void removeReminder(int id) {
+        mUserProfilePresenter.removeReminder(id);
+    }
+
+    @Override
+    public void onDeleteReminderSuccess(Integer id) {
+        mReminderAdapter.removeReminder(id);
     }
 
     public interface ReminderListInterface {

@@ -159,6 +159,10 @@ public class ReminderView extends IRBaseFragment implements IReminderView {
         onResume();
     }
 
+    public void removeReminder(int id) {
+        mReminderListAdapter.removeReminder(id);
+    }
+
     public interface ReminderViewInterface {
         void onDestroy();
         void getMovieDetailFragment(MovieDetailView movieDetailView, Reminder reminder);

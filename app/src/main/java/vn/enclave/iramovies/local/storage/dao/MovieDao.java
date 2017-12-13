@@ -26,4 +26,7 @@ public interface MovieDao {
 
     @Delete
     int deleteMovies(Movie... movies);
+
+    @Query("SELECT * FROM "+DatabaseInfo.Tables.Movie+" WHERE "+DatabaseInfo.Movie.COLUMN_ID+" = :id")
+    Movie getMovie(Integer id);
 }

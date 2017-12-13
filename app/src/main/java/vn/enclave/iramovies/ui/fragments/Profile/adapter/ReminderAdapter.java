@@ -76,6 +76,15 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.ViewHo
         return (ArrayList<Reminder>) mGroupReminders;
     }
 
+    public void removeReminder(int id) {
+        for (int index = 0; index < mGroupReminders.size(); index++) {
+            if (mGroupReminders.get(index).getId().equals(id)) {
+                mGroupReminders.remove(mGroupReminders.get(index));
+            }
+        }
+        notifyDataSetChanged();
+    }
+
     class ViewHolder extends RecyclerView.ViewHolder{
 
         @BindView(R.id.tvTitle)

@@ -41,4 +41,8 @@ public interface IMovieDetailPresenter extends IBasePresenter<IMovieDetailView> 
     void updateReminder(Reminder reminder);
 
     void updateReminderSuccess(Reminder mReminder);
+
+    void getMovie(Integer id);
+
+    void findMovieSuccess(Movie movie);
 }

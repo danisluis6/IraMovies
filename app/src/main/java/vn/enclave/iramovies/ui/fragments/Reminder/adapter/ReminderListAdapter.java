@@ -73,6 +73,15 @@ public class ReminderListAdapter extends RecyclerView.Adapter<ReminderListAdapte
         notifyDataSetChanged();
     }
 
+    public void removeReminder(int id) {
+        for (int index = 0; index < mGroupReminders.size(); index++) {
+            if (mGroupReminders.get(index).getId().equals(id)) {
+                mGroupReminders.remove(mGroupReminders.get(index));
+            }
+        }
+        notifyDataSetChanged();
+    }
+
     public interface OpenReminderDetail {
         void openReminder(Reminder reminder);
     }

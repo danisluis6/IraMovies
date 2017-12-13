@@ -22,4 +22,8 @@ public interface IUserProfilePresenter extends IBasePresenter<IUserProfileView> 
     void getListReminder();
 
     void onReminderSuccess(List<Reminder> groupReminders);
+
+    void removeReminder(int id);
+
+    void onDeleteReminderSuccess(Integer id);
 }

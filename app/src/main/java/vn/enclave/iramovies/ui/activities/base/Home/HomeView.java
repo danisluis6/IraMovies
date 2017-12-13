@@ -336,6 +336,7 @@ public class HomeView extends BaseView {
 
             @Override
             public void getMovieDetailFragment(MovieDetailView movieDetailView, Movie movie) {
+                mDetailViewMovie = movieDetailView;
                 movieDetailView.setMovieDetailInterface(new MovieDetailView.MovieDetailInterface() {
                     @Override
                     public void onDestroy() {
@@ -384,6 +385,26 @@ public class HomeView extends BaseView {
                             mReminderView.updateStarOnStorage(movie, reminderDate);
                         }
                     }
+
+                    @Override
+                    public void removeReminder(int id) {
+                        // Notification announce when remove reminder
+                        if (mDetailViewFavorite != null) {
+                            mDetailViewFavorite.removeReminder(id);
+                        }
+                        if (mDetailViewMovie != null) {
+                            mDetailViewMovie.removeReminder(id);
+                        }
+                        if (mDetailReminder != null) {
+                            mDetailReminder.removeReminder(id);
+                        }
+                        if (mReminderView != null) {
+                            mReminderView.removeReminder(id);
+                        }
+                        if (mUserProfileView != null) {
+                            mUserProfileView.removeReminder(id);
+                        }
+                    }
                 });
                 movieDetailView.setUpdateReminderInterface(new MovieDetailView.ReminderInterface() {
                     @Override
@@ -413,7 +434,6 @@ public class HomeView extends BaseView {
                         }
                     }
                 });
-                mDetailViewMovie = movieDetailView;
                 mMovieView.openMovieDetail(movieDetailView);
                 updateTitleBar(movie.getTitle());
             }
@@ -442,6 +462,7 @@ public class HomeView extends BaseView {
 
             @Override
             public void getMovieDetailFragment(final MovieDetailView movieDetailView, Movie movie) {
+                mDetailViewFavorite = movieDetailView;
                 movieDetailView.setMovieDetailInterface(new MovieDetailView.MovieDetailInterface() {
                     @Override
                     public void onDestroy() {
@@ -486,6 +507,23 @@ public class HomeView extends BaseView {
                             mReminderView.updateStarOnStorage(movie, reminderDate);
                         }
                     }
+
+                    @Override
+                    public void removeReminder(int id) {
+                        // Notification announce when remove reminder
+                        if (mDetailViewFavorite != null) {
+                            mDetailViewFavorite.removeReminder(id);
+                        }
+                        if (mDetailViewMovie != null) {
+                            mDetailViewMovie.removeReminder(id);
+                        }
+                        if (mDetailReminder != null) {
+                            mDetailReminder.removeReminder(id);
+                        }
+                        if (mReminderView != null) {
+                            mReminderView.removeReminder(id);
+                        }
+                    }
                 });
                 movieDetailView.setUpdateReminderInterface(new MovieDetailView.ReminderInterface() {
                     @Override
@@ -516,7 +554,6 @@ public class HomeView extends BaseView {
                         }
                     }
                 });
-                mDetailViewFavorite = movieDetailView;
                 mFavoriteView.openMovieDetail(movieDetailView);
                 updateTitleBar(movie.getTitle());
             }

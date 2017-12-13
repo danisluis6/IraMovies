@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+import java.util.MissingFormatArgumentException;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -193,7 +194,7 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView,
 
     @Override
     public void onUpdate(int id) {
-        // TODO
+        mMovieDetailInterface.removeReminder(id);
     }
 
     private Notification getNotification() {
@@ -239,23 +240,24 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView,
             return;
         }
         if (!mIsReminder) {
-            mIsFavorite = !mIsFavorite;
-            imvFavorite.setImageResource(mIsFavorite ? R.drawable.ic_star_picked : R.drawable.ic_star);
-            getMovie().setFavorite(mIsFavorite ? Constants.Favorites.FAVORITE : Constants.Favorites.DEFAULT);
-            if (getMovie().getFavorite() == Constants.Favorites.DEFAULT) {
-                mDetailMoviePresenter.deleteMovie(getMovie());
-            } else {
-                mDetailMoviePresenter.addMovie(getMovie());
-            }
+            mDetailMoviePresenter.getMovie(getMovie().getId());
         } else {
-            mIsFavorite = !mIsFavorite;
-            imvFavorite.setImageResource(mIsFavorite ? R.drawable.ic_star_picked : R.drawable.ic_star);
-            getMovie().setFavorite(mIsFavorite ? Constants.Favorites.FAVORITE : Constants.Favorites.DEFAULT);
-            if (getMovie().getFavorite() == Constants.Favorites.DEFAULT) {
-                mDetailMoviePresenter.deleteMovie(getMovie());
-            } else {
-                mDetailMoviePresenter.addMovie(getMovie());
-            }
+            mDetailMoviePresenter.getMovie(getMovie().getId());
+        }
+    }
+
+    @Override
+    public void findMovieSuccess(Movie movie) {
+        if (movie != null) {
+            mIsFavorite = (movie.getFavorite() == Constants.Favorites.FAVORITE);
+        }
+        mIsFavorite = !mIsFavorite;
+        imvFavorite.setImageResource(mIsFavorite ? R.drawable.ic_star_picked : R.drawable.ic_star);
+        getMovie().setFavorite(mIsFavorite ? Constants.Favorites.FAVORITE : Constants.Favorites.DEFAULT);
+        if (getMovie().getFavorite() == Constants.Favorites.DEFAULT) {
+            mDetailMoviePresenter.deleteMovie(getMovie());
+        } else {
+            mDetailMoviePresenter.addMovie(getMovie());
         }
     }
 
@@ -521,6 +523,14 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView,
         this.mReminderInterface = reminderInterface;
     }
 
+    public void removeReminder(int id) {
+        if (getReminder() != null) {
+            if (id == getReminder().getId()) {
+                if (tvReminder != null) tvReminder.setText(Constants.EMPTY_STRING);
+            }
+        }
+    }
+
     public interface UpdateReminderOnAllScreen {
         void update(Reminder reminder);
     }
@@ -551,6 +561,9 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView,
 
         // Refresh favorite in Reminder Detail
         void refreshStarInReminderDetail(Movie movie, String reminderDate);
+
+        // Refresh reminder
+        void removeReminder(int id);
     }
 
     public interface ReminderInterface {

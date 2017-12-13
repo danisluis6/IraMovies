@@ -17,4 +17,6 @@ public interface IUserProfileView {
     void onFailure(String message);
 
     void onReminderSuccess(List<Reminder> reminders);
+
+    void onDeleteReminderSuccess(Integer id);
 }

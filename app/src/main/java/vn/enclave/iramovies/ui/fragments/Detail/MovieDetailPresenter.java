@@ -2,8 +2,6 @@ package vn.enclave.iramovies.ui.fragments.Detail;
 
 import android.content.Context;
 
-import java.util.List;
-
 import vn.enclave.iramovies.local.storage.entity.Movie;
 import vn.enclave.iramovies.local.storage.entity.Reminder;
 import vn.enclave.iramovies.services.response.CastAndCrewResponse;
@@ -23,7 +21,7 @@ class MovieDetailPresenter implements IMovieDetailPresenter{
     /**
      * IMovieDetailView
      */
-    private IMovieDetailView mIMovieDetailView;
+    private IMovieDetailView mMovieDetailView;
 
     /**
      * IMovieDetailModel
@@ -38,7 +36,7 @@ class MovieDetailPresenter implements IMovieDetailPresenter{
 
     @Override
     public void attachView(IMovieDetailView view) {
-        this.mIMovieDetailView = view;
+        this.mMovieDetailView = view;
     }
 
     @Override
@@ -48,12 +46,12 @@ class MovieDetailPresenter implements IMovieDetailPresenter{
 
     @Override
     public void onSuccess(CastAndCrewResponse castAndCrewResponse) {
-        mIMovieDetailView.onSuccess(castAndCrewResponse);
+        mMovieDetailView.onSuccess(castAndCrewResponse);
     }
 
     @Override
     public void onFailure(String message) {
-        mIMovieDetailView.onFailure(message);
+        mMovieDetailView.onFailure(message);
     }
 
     @Override
@@ -68,15 +66,15 @@ class MovieDetailPresenter implements IMovieDetailPresenter{
 
     @Override
     public void deleteMovieSuccess(Movie movie) {
-        if (mIMovieDetailView != null) {
-            mIMovieDetailView.deleteMovieSuccess(movie);
+        if (mMovieDetailView != null) {
+            mMovieDetailView.deleteMovieSuccess(movie);
         }
     }
 
     @Override
     public void addMovieSuccess(Movie movie) {
-        if (mIMovieDetailView != null) {
-            mIMovieDetailView.addMovieSuccess(movie);
+        if (mMovieDetailView != null) {
+            mMovieDetailView.addMovieSuccess(movie);
         }
     }
 
@@ -97,15 +95,15 @@ class MovieDetailPresenter implements IMovieDetailPresenter{
 
     @Override
     public void updateReminderSuccess(Reminder reminder) {
-        if (mIMovieDetailView != null) {
-            mIMovieDetailView.updateReminderSuccess(reminder);
+        if (mMovieDetailView != null) {
+            mMovieDetailView.updateReminderSuccess(reminder);
         }
     }
 
     @Override
     public void addReminderSuccess(Reminder reminder) {
-        if (mIMovieDetailView != null) {
-            mIMovieDetailView.addReminderSuccess(reminder);
+        if (mMovieDetailView != null) {
+            mMovieDetailView.addReminderSuccess(reminder);
         }
     }
 
@@ -116,8 +114,20 @@ class MovieDetailPresenter implements IMovieDetailPresenter{
 
     @Override
     public void findReminderSuccess(Reminder reminder) {
-        if (mIMovieDetailView != null) {
-            mIMovieDetailView.findReminderSuccess(reminder);
+        if (mMovieDetailView != null) {
+            mMovieDetailView.findReminderSuccess(reminder);
+        }
+    }
+
+    @Override
+    public void getMovie(Integer id) {
+        mMovieDetailModel.getMovie(id);
+    }
+
+    @Override
+    public void findMovieSuccess(Movie movie) {
+        if (mMovieDetailView != null) {
+            mMovieDetailView.findMovieSuccess(movie);
         }
     }
 }

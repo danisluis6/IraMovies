@@ -32,4 +32,7 @@ public interface ReminderDao {
 
     @Query("UPDATE "+DatabaseInfo.Tables.Reminder+" SET "+DatabaseInfo.Reminder.COLUMN_FAVORITE+" = :favorite WHERE "+DatabaseInfo.Reminder.COLUMN_ID+" = :id")
     int updateReminder(Integer favorite, Integer id);
+
+    @Query("DELETE FROM "+DatabaseInfo.Tables.Reminder+" WHERE "+DatabaseInfo.Reminder.COLUMN_ID+" = :id")
+    int deleteReminder(Integer id);
 }

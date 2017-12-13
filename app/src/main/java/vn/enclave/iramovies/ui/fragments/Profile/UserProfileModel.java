@@ -10,6 +10,7 @@ import vn.enclave.iramovies.R;
 import vn.enclave.iramovies.local.storage.AppDatabase;
 import vn.enclave.iramovies.local.storage.entity.Reminder;
 import vn.enclave.iramovies.local.storage.entity.User;
+import vn.enclave.iramovies.utilities.Utils;
 
 /**
  *
@@ -76,6 +77,23 @@ public class UserProfileModel implements IUserProfileModel{
                     mUserProfilePresenter.onReminderSuccess(groupReminders);
                 } else {
                     mUserProfilePresenter.onFailure(mContext.getResources().getString(R.string.cannot_get_data));
+                }
+            }
+        }.execute();
+    }
+
+    @Override
+    public void removeReminder(final int reminderId) {
+        new AsyncTask<Void, Void, Integer>() {
+            @Override
+            protected Integer doInBackground(Void... params) {
+                return mAppDatabase.getReminderDao().deleteReminder(Integer.parseInt(String.valueOf(reminderId)));
+            }
+
+            @Override
+            protected void onPostExecute(Integer id) {
+                if (id > 0) {
+                    mUserProfilePresenter.onDeleteReminderSuccess(reminderId);
                 }
             }
         }.execute();

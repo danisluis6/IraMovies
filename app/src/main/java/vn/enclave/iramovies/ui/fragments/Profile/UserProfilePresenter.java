@@ -63,4 +63,14 @@ public class UserProfilePresenter implements IUserProfilePresenter{
     public void onReminderSuccess(List<Reminder> reminders) {
         mUserProfileView.onReminderSuccess(reminders);
     }
+
+    @Override
+    public void removeReminder(int id) {
+        mUserProfileModel.removeReminder(id);
+    }
+
+    @Override
+    public void onDeleteReminderSuccess(Integer id) {
+        mUserProfileView.onDeleteReminderSuccess(id);
+    }
 }

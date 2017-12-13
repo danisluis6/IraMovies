@@ -214,8 +214,6 @@ public class MovieDetailModel implements IMovieDetailModel {
             if (id > 0) {
                 movie.setId(Integer.parseInt(String.valueOf(id)));
                 mIMovieDetailPresenter.addMovieSuccess(movie);
-            } else {
-                Toast.makeText(mContext, "Add movie failed", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -237,8 +235,6 @@ public class MovieDetailModel implements IMovieDetailModel {
         protected void onPostExecute(Integer id) {
             if (id > 0) {
                 mIMovieDetailPresenter.deleteMovieSuccess(movie);
-            } else {
-                Toast.makeText(mContext, "Delete Movie failed", Toast.LENGTH_SHORT).show();
             }
         }
     }

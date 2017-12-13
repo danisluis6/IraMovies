@@ -23,7 +23,6 @@ import vn.enclave.iramovies.ui.fragments.IRBaseFragment;
 import vn.enclave.iramovies.ui.fragments.Reminder.adapter.ReminderListAdapter;
 import vn.enclave.iramovies.ui.views.FailureLayout;
 import vn.enclave.iramovies.utilities.Constants;
-import vn.enclave.iramovies.utilities.Utils;
 
 /**
  * Created by lorence on 08/11/2017.
@@ -160,7 +159,9 @@ public class ReminderView extends IRBaseFragment implements IReminderView {
     }
 
     public void removeReminder(int id) {
-        mReminderListAdapter.removeReminder(id);
+        if (mReminderListAdapter != null) {
+            mReminderListAdapter.removeReminder(id);
+        }
     }
 
     public interface ReminderViewInterface {

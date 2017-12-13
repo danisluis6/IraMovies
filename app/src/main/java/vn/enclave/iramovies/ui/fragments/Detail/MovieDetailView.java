@@ -27,7 +27,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
-import java.util.MissingFormatArgumentException;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -45,6 +44,7 @@ import vn.enclave.iramovies.utilities.Constants;
 import vn.enclave.iramovies.utilities.Utils;
 
 /**
+ *
  * Created by lorence on 23/11/2017.
  */
 
@@ -189,12 +189,17 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView,
         final int _id = (int) System.currentTimeMillis();
         PendingIntent pendingIntent = PendingIntent.getBroadcast(mActivity, _id, notificationIntent, PendingIntent.FLAG_ONE_SHOT);
         AlarmManager alarmManager = (AlarmManager)mActivity.getSystemService(Context.ALARM_SERVICE);
+        Log.i("TAG", "calendar.getTimeInMillis(): "+calendar.getTimeInMillis());
         alarmManager.set(AlarmManager.RTC, calendar.getTimeInMillis(), pendingIntent);
     }
 
     @Override
     public void onUpdate(int id) {
-        mMovieDetailInterface.removeReminder(id);
+        if (mIsReminder) {
+
+        } else {
+            mMovieDetailInterface.removeReminder(id);
+        }
     }
 
     private Notification getNotification() {
@@ -526,7 +531,9 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView,
     public void removeReminder(int id) {
         if (getReminder() != null) {
             if (id == getReminder().getId()) {
-                if (tvReminder != null) tvReminder.setText(Constants.EMPTY_STRING);
+                if (tvReminder != null) {
+                    tvReminder.setText(Constants.EMPTY_STRING);
+                }
             }
         }
     }

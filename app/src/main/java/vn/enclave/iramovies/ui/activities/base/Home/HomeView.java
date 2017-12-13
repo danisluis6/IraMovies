@@ -48,7 +48,6 @@ import vn.enclave.iramovies.ui.fragments.Movie.MovieView;
 import vn.enclave.iramovies.ui.fragments.Profile.UserProfileView;
 import vn.enclave.iramovies.ui.fragments.Reminder.ReminderView;
 import vn.enclave.iramovies.ui.fragments.Setting.SettingView;
-import vn.enclave.iramovies.ui.notifications.NotificationPublisher;
 import vn.enclave.iramovies.ui.views.TabItem;
 import vn.enclave.iramovies.ui.views.ToolbarLayout;
 import vn.enclave.iramovies.utilities.Constants;
@@ -134,18 +133,6 @@ public class HomeView extends BaseView {
         initialPages();
         initViews();
         defineFragmentOnViewPaper();
-    }
-
-    private void processExtraData() {
-        int id = getIntent().getIntExtra(NotificationPublisher.NOTIFICATION_ID, 0);
-        Log.i("TAG", id+Constants.EMPTY_STRING);
-    }
-
-    @Override
-    protected void onNewIntent(Intent intent) {
-        super.onNewIntent(intent);
-        setIntent(intent);
-        processExtraData();
     }
 
     private void initFragments() {

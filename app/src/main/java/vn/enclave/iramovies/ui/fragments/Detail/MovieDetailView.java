@@ -8,9 +8,6 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Parcel;
-import android.os.SystemClock;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -58,7 +55,7 @@ import vn.enclave.iramovies.utilities.Utils;
  * => Done
  */
 
-public class MovieDetailView extends IRBaseFragment implements IMovieDetailView {
+public class MovieDetailView extends IRBaseFragment implements IMovieDetailView, NotificationPublisher.UpdateReminder {
 
     @BindView(R.id.imvFavorite)
     ImageView imvFavorite;
@@ -178,9 +175,13 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
     /**
      * @Run: https://stackoverflow.com/questions/23567692/how-to-display-multiple-notification-at-the-same-time
      * => Research
+     *
+     * @Run: https://stackoverflow.com/questions/20705691/calling-a-method-inside-activity-from-broadcastreceiver
+     * => Thanks
      */
 
     private void initialAlarm(Calendar calendar) {
+        NotificationPublisher.setUpdateReminder(this);
         Intent notificationIntent = new Intent(mActivity, NotificationPublisher.class);
         notificationIntent.putExtra(NotificationPublisher.NOTIFICATION_ID, getMovie().getId());
         notificationIntent.putExtra(NotificationPublisher.NOTIFICATION, getNotification());
@@ -188,6 +189,11 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView 
         PendingIntent pendingIntent = PendingIntent.getBroadcast(mActivity, _id, notificationIntent, PendingIntent.FLAG_ONE_SHOT);
         AlarmManager alarmManager = (AlarmManager)mActivity.getSystemService(Context.ALARM_SERVICE);
         alarmManager.set(AlarmManager.RTC, calendar.getTimeInMillis(), pendingIntent);
+    }
+
+    @Override
+    public void onUpdate(int id) {
+        // TODO
     }
 
     private Notification getNotification() {

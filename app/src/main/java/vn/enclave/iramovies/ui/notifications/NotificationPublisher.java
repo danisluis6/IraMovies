@@ -6,8 +6,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
-import vn.enclave.iramovies.ui.activities.base.Home.HomeView;
-
 /**
  *
  * Created by Lorence on 12/12/17.
@@ -20,6 +18,7 @@ public class NotificationPublisher extends BroadcastReceiver {
 
     public static String NOTIFICATION_ID = "notification-id";
     public static String NOTIFICATION = "notification";
+    private static UpdateReminder mUpdateReminder;
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -27,11 +26,17 @@ public class NotificationPublisher extends BroadcastReceiver {
         Notification notification = intent.getParcelableExtra(NOTIFICATION);
         int id = intent.getIntExtra(NOTIFICATION_ID, 0);
         notificationManager.notify(id, notification);
-
-        Intent activityIntent = new Intent(context, HomeView.class);
-        activityIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        activityIntent.putExtra(NOTIFICATION_ID, id);
-        context.startActivity(activityIntent);
+        if(mUpdateReminder != null)
+        {
+            mUpdateReminder.onUpdate(id);
+        }
     }
 
+    public interface UpdateReminder {
+        void onUpdate(int id);
+    }
+
+    public static void setUpdateReminder(UpdateReminder updateReminder) {
+        NotificationPublisher.mUpdateReminder = updateReminder;
+    }
 }

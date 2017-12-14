@@ -38,6 +38,8 @@
 
         <receiver android:name=".ui.notifications.NotificationPublisher" >
         </receiver>
+
+        <service android:name=".services.OnClearFromRecentService" android:stopWithTask="false"/>
     </application>
 
 </manifest>

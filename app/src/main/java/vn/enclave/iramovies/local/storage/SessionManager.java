@@ -117,4 +117,12 @@ public class SessionManager {
         editor.apply();
     }
 
+    public void clear() {
+        editor.remove(CATEGORY);
+        editor.remove(TOTAL_PAGES);
+        editor.remove(RELEASE_YEAR);
+        editor.remove(RELEASE_DATE);
+        editor.remove(RATE);
+        editor.apply();
+    }
 }

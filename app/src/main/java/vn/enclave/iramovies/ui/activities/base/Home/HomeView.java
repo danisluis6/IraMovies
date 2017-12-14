@@ -2,7 +2,6 @@ package vn.enclave.iramovies.ui.activities.base.Home;
 
 import android.annotation.SuppressLint;
 import android.app.SearchManager;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -19,7 +18,6 @@ import android.support.v7.widget.SearchView;
 import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;

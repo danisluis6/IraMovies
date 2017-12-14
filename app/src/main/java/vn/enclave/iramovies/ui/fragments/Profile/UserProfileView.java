@@ -19,7 +19,11 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -214,7 +218,27 @@ public class UserProfileView extends IRBaseFragment implements IUserProfileView 
 
     @Override
     public void onReminderSuccess(List<Reminder> reminders) {
+        for (int index = 0; index < reminders.size(); index++) {
+            if (getTime(reminders.get(index).getReminderDate()) < System.currentTimeMillis()) {
+                mUserProfilePresenter.removeReminder(reminders.get(index).getId());
+                reminders.remove(reminders.get(index));
+            }
+        }
         mReminderAdapter.setReminders(reminders);
+    }
+
+    public static long getTime(String releaseDate) {
+        // 2017/12/22 09:18
+        DateFormat df = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+        Date startDate = null;
+        try {
+            startDate = df.parse(releaseDate);
+            String newDateString = df.format(startDate);
+            System.out.println(newDateString);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return startDate.getTime();
     }
 
     public User getUser() {

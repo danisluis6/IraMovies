@@ -91,7 +91,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:textColor="#F50057"
-        android:visibility="gone"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/lnOverview"
         app:layout_constraintTop_toBottomOf="@+id/imvThumnail"/>

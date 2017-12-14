@@ -140,7 +140,7 @@ public class MovieDetailModel implements IMovieDetailModel {
             if (id > 0) {
                 mIMovieDetailPresenter.updateReminderSuccess(mReminder);
             } else {
-                Toast.makeText(mContext, "Update reminder failed", Toast.LENGTH_SHORT).show();
+                new AddReminderAsyncTask(mReminder).execute(mReminder);
             }
         }
     }

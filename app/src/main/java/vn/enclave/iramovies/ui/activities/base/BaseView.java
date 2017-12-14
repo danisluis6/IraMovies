@@ -1,7 +1,6 @@
 package vn.enclave.iramovies.ui.activities.base;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -10,7 +9,6 @@ import android.view.View;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import vn.enclave.iramovies.local.storage.SessionManager;
-import vn.enclave.iramovies.services.OnClearFromRecentService;
 import vn.enclave.iramovies.utilities.Utils;
 
 
@@ -28,7 +26,6 @@ public abstract class BaseView extends AppCompatActivity{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mContext = getApplicationContext();
-        startService(new Intent(mContext, OnClearFromRecentService.class));
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(getLayoutResId());
         setView();

@@ -17,11 +17,6 @@
         android:theme="@style/AppTheme">
         <activity android:name=".ui.activities.base.Home.HomeView"
             android:windowSoftInputMode="adjustPan">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <activity android:name=".ui.activities.base.Profile.EditUserProfileView" />
@@ -38,6 +33,14 @@
 
         <receiver android:name=".ui.notifications.NotificationPublisher" >
         </receiver>
+
+        <activity android:name=".ui.activities.base.Splash.SplashScreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
     </application>
 

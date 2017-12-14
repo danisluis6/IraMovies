@@ -1,6 +1,5 @@
 package vn.enclave.iramovies.ui.fragments.Profile;
 
-import vn.enclave.iramovies.local.storage.entity.User;
 import vn.enclave.iramovies.ui.interfaces.IBasePresenter;
 
 /**

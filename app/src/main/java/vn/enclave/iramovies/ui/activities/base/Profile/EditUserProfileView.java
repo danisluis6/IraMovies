@@ -53,31 +53,8 @@ import vn.enclave.iramovies.utilities.OverrideFonts;
 import vn.enclave.iramovies.utilities.Utils;
 
 /**
+ *
  * Created by lorence on 10/11/2017.
- *
- * @Run: https://stackoverflow.com/questions/5056734/android-force-edittext-to-remove-focus
- * => Dismiss focus DONE
- *
- * @Run: https://stackoverflow.com/questions/15005551/androidplacing-the-radio-buttons-horizontally
- * => Setting horizontal in Radio Group
- *
- * @Run: https://stackoverflow.com/questions/17120199/change-circle-color-of-radio-button-android
- * => Done
- *
- * @Run: Process image
- * @Run: https://stackoverflow.com/questions/25278821/how-to-round-an-image-with-glide-library
- * => Done
- *
- * @Run: https://stackoverflow.com/questions/6448856/android-camera-intent-how-to-get-full-sized-photo
- * => How to get full sized of photo.
- * @Run: https://stackoverflow.com/questions/38555301/android-taking-picture-with-fileprovider
- * => FileProvider
- *
- * @Run: https://stackoverflow.com/questions/14933330/datepicker-how-to-popup-datepicker-when-click-on-edittext
- * => DateDialogPicker
- *
- * @Run: https://stackoverflow.com/questions/11932805/cropping-circular-area-from-bitmap-in-android
- * => Crop Image
  */
 
 public class EditUserProfileView extends BaseView implements IEditUserProfileView{

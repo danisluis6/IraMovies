@@ -10,7 +10,6 @@ import vn.enclave.iramovies.R;
 import vn.enclave.iramovies.local.storage.AppDatabase;
 import vn.enclave.iramovies.local.storage.entity.Reminder;
 import vn.enclave.iramovies.local.storage.entity.User;
-import vn.enclave.iramovies.utilities.Utils;
 
 /**
  *

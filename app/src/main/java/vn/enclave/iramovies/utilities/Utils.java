@@ -3,16 +3,8 @@ package vn.enclave.iramovies.utilities;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffXfermode;
-import android.graphics.Rect;
 import android.net.ConnectivityManager;
 import android.os.Environment;
 import android.support.v4.app.ActivityCompat;
@@ -22,10 +14,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -35,19 +24,15 @@ import java.util.Date;
 import java.util.Locale;
 
 import vn.enclave.iramovies.R;
-import vn.enclave.iramovies.ui.activities.base.BaseView;
 
 /**
  * Created by lorence on 03/11/2017.
+ *
  */
 
 public class Utils {
 
     private static long sLastClickTime = 0;
-
-    public static String makeLogTag(Class<BaseView> activityClass) throws ActivityNotFoundException {
-        return activityClass.getSimpleName();
-    }
 
     public static boolean isDoubleClick() {
         long clickTime = System.currentTimeMillis();
@@ -106,39 +91,6 @@ public class Utils {
 
     public static String convertIntToGender(Context context, int gender) {
         return gender == 0 ? context.getString(R.string.male) : context.getString(R.string.female);
-    }
-
-    public static byte[] convertPathToBlob(String pathImage){
-        Bitmap bitmap = getCroppedBitmap(BitmapFactory.decodeFile(pathImage));
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-        return stream.toByteArray();
-    }
-
-    private static Bitmap getCroppedBitmap(Bitmap bitmap) {
-        Bitmap output = Bitmap.createBitmap(bitmap.getWidth(),
-                bitmap.getHeight(), Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(output);
-
-        final int color = 0xff424242;
-        final Paint paint = new Paint();
-        final Rect rect = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
-
-        paint.setAntiAlias(true);
-        canvas.drawARGB(0, 0, 0, 0);
-        paint.setColor(color);
-        // canvas.drawRoundRect(rectF, roundPx, roundPx, paint);
-        canvas.drawCircle(150, 150,
-                150, paint);
-        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
-        canvas.drawBitmap(bitmap, rect, rect, paint);
-        //Bitmap _bmp = Bitmap.createScaledBitmap(output, 60, 60, false);
-        //return _bmp;
-        return output;
-    }
-
-    public static Bitmap convertToBitmap(byte[] bitmapdata) {
-        return BitmapFactory.decodeByteArray(bitmapdata, 0, bitmapdata.length);
     }
 
     public static boolean isInternetOn(Context context) {
@@ -208,11 +160,7 @@ public class Utils {
         }
     }
 
-    public final static boolean isValidEmail(String target) {
-        if (target == null) {
-            return false;
-        } else {
-            return android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
-        }
+    public static boolean isValidEmail(String target) {
+        return target != null && android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
     }
 }

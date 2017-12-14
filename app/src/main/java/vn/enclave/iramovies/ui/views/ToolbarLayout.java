@@ -9,8 +9,6 @@ import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.lang.reflect.Field;
@@ -21,16 +19,8 @@ import vn.enclave.iramovies.R;
 import vn.enclave.iramovies.utilities.Constants;
 
 /**
- * @Run: https://stackoverflow.com/questions/2335813/how-to-inflate-one-view-with-a-layout
- * => Inflate layout => DONE
+ * Created by lorence on 13/11/2017.
  *
- * @Run: https://stackoverflow.com/questions/10776764/what-is-the-right-way-to-communicate-from-a-custom-view-to-the-activity-in-which
- * => Communicate between Custom View and Activity
- *
- * @Run: https://stackoverflow.com/questions/15444375/how-to-create-interface-between-fragment-and-adapter
- *
- * @Run: https://stackoverflow.com/questions/9737101/padding-between-actionbars-home-icon-and-title
- * => Remove padding betwwen title and navigation home icon
  */
 
 public class ToolbarLayout extends ConstraintLayout{

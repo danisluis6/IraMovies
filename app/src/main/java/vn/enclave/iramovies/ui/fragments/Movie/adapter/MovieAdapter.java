@@ -1,7 +1,6 @@
 package vn.enclave.iramovies.ui.fragments.Movie.adapter;
 
 import android.content.Context;
-import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -20,7 +19,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import vn.enclave.iramovies.R;
-import vn.enclave.iramovies.local.storage.SessionManager;
 import vn.enclave.iramovies.local.storage.entity.Movie;
 import vn.enclave.iramovies.services.IraMovieInfoAPIs;
 import vn.enclave.iramovies.ui.activities.base.BaseView;
@@ -31,17 +29,6 @@ import vn.enclave.iramovies.utilities.Utils;
 /**
  * Created by lorence on 14/11/2017.
  *
- * @Run:
- * @Run: http://www.devexchanges.info/2017/02/android-recyclerview-dynamically-load.html
- * => Done
- * @Run: https://stackoverflow.com/questions/32040798/recyclerview-oncreateviewholder-return-type-incompatibility-with-multiple-custom
- * => Done
- * @Run: https://codentrick.com/load-more-recyclerview-bottom-progressbar/
- * => Done
- * @Run: http://android-pratap.blogspot.in/2015/01/recyclerview-with-checkbox-example.html
- * => Fix save the states when scroll view in Recycler View
- * @Run: https://stackoverflow.com/questions/28581712/android-recyclerview-change-layout-file-list-to-grid-onoptionitemselected
- * => Done
  */
 
 public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {

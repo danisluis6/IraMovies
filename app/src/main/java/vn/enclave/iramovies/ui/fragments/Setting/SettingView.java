@@ -27,28 +27,6 @@ import vn.enclave.iramovies.utilities.Utils;
 /**
  * Created by lorence on 08/11/2017.
  *
- * @Run: https://developer.android.com/guide/topics/ui/settings.html
- * => Done
- *
- * @Run: http://www.androidinterview.com/android-custom-listview-with-checkbox-example/
- * => Done
- *
- * @Run: https://stackoverflow.com/questions/16163215/android-styling-seek-bar
- * => Done
- *
- * @Run: https://stackoverflow.com/questions/34932963/android-seekbar-with-custom-drawable
- * => android:left = "2dp"
- *
- * @Run: https://stackoverflow.com/questions/26097513/android-simple-alert-dialog
- * => Done
- *
- * @Run: https://developer.android.com/guide/topics/ui/settings.html
- * => Implement
- *
- * @Run: https://www.youtube.com/watch?v=0-7YvU9fz8k
- * => Follow
- *
- * @Run: https://developer.android.com/guide/topics/ui/settings.html
  */
 
 public class SettingView extends IRBaseFragment {

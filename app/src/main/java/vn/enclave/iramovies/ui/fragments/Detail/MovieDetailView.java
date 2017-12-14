@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,17 +45,6 @@ import vn.enclave.iramovies.utilities.Utils;
 /**
  *
  * Created by lorence on 23/11/2017.
- */
-
-/**
- * @Run: https://stackoverflow.com/questions/13418436/android-4-2-back-stack-behaviour-with-nested-fragments
- * => Done
- *
- * @Run: How to disable past dates in Android date picker?
- * => Done
- *
- * @Question: Alarm taking too long to trigger android studio
- * @Run: https://stackoverflow.com/questions/32799444/android-alarms-too-early
  */
 
 public class MovieDetailView extends IRBaseFragment implements IMovieDetailView, NotificationPublisher.UpdateReminder {
@@ -175,14 +163,6 @@ public class MovieDetailView extends IRBaseFragment implements IMovieDetailView,
                 myCalendar.get(Calendar.MINUTE), true);
         mDatePickerDialog.show();
     }
-
-    /**
-     * @Run: https://stackoverflow.com/questions/23567692/how-to-display-multiple-notification-at-the-same-time
-     * => Research
-     *
-     * @Run: https://stackoverflow.com/questions/20705691/calling-a-method-inside-activity-from-broadcastreceiver
-     * => Thanks
-     */
 
     private void initialAlarm(Calendar calendar) {
         NotificationPublisher.setUpdateReminder(this);

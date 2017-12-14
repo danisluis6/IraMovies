@@ -51,27 +51,9 @@ import vn.enclave.iramovies.ui.views.ToolbarLayout;
 import vn.enclave.iramovies.utilities.Constants;
 import vn.enclave.iramovies.utilities.Utils;
 
-
 /**
- * @Run: https://www.androidhive.info/2016/05/android-working-with-card-view-and-recycler-view/
- * => Done
- * @Run: https://www.google.com/search?q=create+badge+icon+at+corner+layout&client=ubuntu&hs=Amc&channel=fs&source=lnms&sa=X&ved=0ahUKEwiu9dnh_MTXAhVHPo8KHV3OBAgQ_AUICSgA&biw=1505&bih=877&dpr=1
- * => Done
- * @Run: https://stackoverflow.com/questions/8348707/prevent-viewpager-from-destroying-off-screen-views
- * => Done mViewPager.setOffscreenPageLimit(tabNavigationBottomMenu.getTabCount()-1);
- * @Run: https://github.com/smartherd/AndroidToolbars/blob/master/app/src/main/java/com/example/sriyanksiddhartha/androidtoolbar/MainActivity.java
- * => Done
- * @Run: https://material.io/icons/
- * @Run: https://stackoverflow.com/questions/27556623/creating-a-searchview-that-looks-like-the-material-design-guidelines
- * => Implement
- * @Run: https://stackoverflow.com/questions/7066657/android-how-to-dynamically-change-menu-item-text-outside-of-onoptionsitemssele
- * => Implement
- * @Run: https://stackoverflow.com/questions/39963330/android-menuitem-setshowasaction-not-working
- * => Done
- * @Run: https://stackoverflow.com/questions/4207880/android-how-do-i-prevent-the-soft-keyboard-from-pushing-my-view-up
- * => Done
- * @Run: https://stackoverflow.com/questions/20639464/actionbaractivity-with-actionbardrawertoggle-not-using-drawerimageres
- * => Done
+ *
+ * Created by lorence on 24/11/2017.
  */
 
 public class HomeView extends BaseView {
@@ -99,10 +81,7 @@ public class HomeView extends BaseView {
     private boolean isModeView = true;
 
 
-    private TabItem moviesTab;
     private TabItem favoritesTab;
-    private TabItem settingsTab;
-    private TabItem aboutsTab;
 
     private MovieDetailView mDetailViewMovie;
     private MovieDetailView mDetailViewFavorite;
@@ -279,7 +258,7 @@ public class HomeView extends BaseView {
     }
 
     private void initViews() {
-        moviesTab = new TabItem(mContext, null);
+        TabItem moviesTab = new TabItem(mContext, null);
         moviesTab.setTabIcon(R.drawable.ic_movies);
         moviesTab.setTabText(getResources().getStringArray(R.array.menu_bottom_nav)[0]);
         tabNavigationBottomMenu.getTabAt(0).setCustomView(moviesTab.getView());
@@ -290,12 +269,12 @@ public class HomeView extends BaseView {
         tabNavigationBottomMenu.getTabAt(1).setCustomView(favoritesTab.getView());
 
 
-        settingsTab = new TabItem(mContext, null);
+        TabItem settingsTab = new TabItem(mContext, null);
         settingsTab.setTabIcon(R.drawable.ic_settings);
         settingsTab.setTabText(getResources().getStringArray(R.array.menu_bottom_nav)[2]);
         tabNavigationBottomMenu.getTabAt(2).setCustomView(settingsTab.getView());
 
-        aboutsTab = new TabItem(mContext, null);
+        TabItem aboutsTab = new TabItem(mContext, null);
         aboutsTab.setTabIcon(R.drawable.ic_about);
         aboutsTab.setTabText(getResources().getStringArray(R.array.menu_bottom_nav)[3]);
         tabNavigationBottomMenu.getTabAt(3).setCustomView(aboutsTab.getView());
@@ -318,28 +297,8 @@ public class HomeView extends BaseView {
         mViewPager.setOffscreenPageLimit(mPageAdapter.getCount() - 1);
         updateFragmentOnViewPaper();
         tabNavigationBottomMenu.setupWithViewPager(mViewPager);
-
-        /*
-         * @Run: https://stackoverflow.com/questions/8117523/how-do-you-get-the-current-page-number-of-a-viewpager-for-android
-         * => Done
-         *
-         * @Run: https://stackoverflow.com/questions/15002339/android-viewpager-detect-page-scroll-state
-         * => Done
-         *
-         * @Run: https://stackoverflow.com/questions/6645537/how-to-detect-the-swipe-left-or-right-in-android
-         * => Done
-         *
-         * @Run: https://www.google.com/search?q=PagerTabStrip+example+android&client=ubuntu&hs=pk8&channel=fs&source=lnms&tbm=isch&sa=X&ved=0ahUKEwjx2eCI17rXAhWGx7wKHXfOCB8Q_AUICigB&biw=1855&bih=983
-         * => Done
-         */
     }
 
-    /**
-     * @Run: seprate each child fragments
-     * => Done
-     * @Run: Faxage => Shoot change view[read/un-read] updateMovie to NavigationBar => The same
-     * => OnActivityForResult
-     */
     private void defineFragmentOnViewPaper() {
         mMovieView.setMovieInterface(new MovieView.MovieInterface() {
             @Override
@@ -767,15 +726,6 @@ public class HomeView extends BaseView {
         removeSearchPlateInSearchView(mSearchView);
     }
 
-    /**
-     * @param searchView
-     * @Run; https://stackoverflow.com/questions/27687116/how-to-remove-search-plate-in-searchview
-     * => Done
-     * @Run: https://stackoverflow.com/questions/30842921/how-to-remove-white-underline-in-a-searchview-widget-in-toolbar-android
-     * => Done
-     * @Run: => Done
-     */
-
     private void removeSearchPlateInSearchView(final SearchView searchView) {
         View v = searchView.findViewById(android.support.v7.appcompat.R.id.search_plate);
         v.setBackgroundColor(ContextCompat.getColor(mContext, R.color.colorPrimaryDark));
@@ -799,19 +749,6 @@ public class HomeView extends BaseView {
         });
         mFavoriteView.filterAutomatic(edtSearch);
     }
-
-    /**
-     * @param searchView
-     * @Run: https://stackoverflow.com/questions/20323990/remove-the-searchicon-as-hint-in-the-searchview
-     * => Done
-     * @Run: https://stackoverflow.com/questions/27556623/creating-a-searchview-that-looks-like-the-material-design-guidelines
-     * => Done
-     * @Run: https://stackoverflow.com/questions/31874836/why-is-androids-searchview-widgets-imageview-with-id-search-mag-icon-returni
-     * => Remove icon right hint search => DONE
-     * @Run: https://stackoverflow.com/questions/27687116/how-to-remove-search-plate-in-searchview
-     * => Go to resource => Remove public static final int search_plate = 0x7f0f008b;
-     * => Done
-     */
 
     private void removeSearchIconAsHint(SearchView searchView) {
         EditText searchEditText = searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);

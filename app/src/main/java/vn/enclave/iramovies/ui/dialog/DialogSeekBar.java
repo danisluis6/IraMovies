@@ -17,12 +17,6 @@ import vn.enclave.iramovies.utilities.Utils;
 /**
  *
  * Created by lorence on 21/11/2017.
- *
- * @Run: https://stackoverflow.com/questions/15647676/android-seekbar-float-values-from-0-0-to-2-0
- * => Done
- *
- * @Run: https://stackoverflow.com/questions/22833515/rounding-to-6-decimal-places-using-math-round-method-in-java-android
- * => Done
  */
 
 public class DialogSeekBar extends DialogBase {

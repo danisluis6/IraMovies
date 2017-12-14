@@ -1,12 +1,8 @@
 package vn.enclave.iramovies.local.storage;
 
 /**
- * Created by lorence on 06/11/2017.
- * @Run: https://github.com/mobilesiri/Android-Sqlite-Database-Tutorial/blob/master/app/src/main/java/com/mobilesiri/sqliteexample/DBHandler.java
- * => Reference
  *
- * @Run: http://www.mobzystems.com/code/using-constants-for-table-and-column-names/
- * => Organize => Done
+ * Created by lorence on 24/11/2017.
  */
 
 public class DatabaseInfo {

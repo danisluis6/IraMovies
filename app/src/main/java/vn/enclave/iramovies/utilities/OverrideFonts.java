@@ -6,10 +6,6 @@ import android.graphics.Typeface;
 /**
  * Created by lorence on 08/11/2017.
  *
- * @Run: https://stackoverflow.com/questions/6926263/add-custom-font-for-complete-android-application
- * => Done
- *
- *
  */
 
 public class OverrideFonts {

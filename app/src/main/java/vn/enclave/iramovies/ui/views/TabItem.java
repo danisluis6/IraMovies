@@ -16,8 +16,6 @@ import vn.enclave.iramovies.R;
 /**
  * Created by lorence on 13/11/2017.
  *
- * @Run: https://stackoverflow.com/questions/25203501/android-creating-a-circular-textview
- * @Run: https://stackoverflow.com/questions/6011786/add-new-item-count-to-icon-on-button-android
  */
 
 public class TabItem extends LinearLayout {

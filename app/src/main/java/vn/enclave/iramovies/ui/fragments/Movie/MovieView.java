@@ -39,38 +39,6 @@ import vn.enclave.iramovies.utilities.Utils;
 /**
  * Created by lorence on 08/11/2017.
  *
- * @Run: Apply Mode-View_Presenter : MVP
- * => Done
- *
- * @Run: https://stackoverflow.com/questions/28494637/android-how-to-stop-refreshing-fragments-on-tab-change
- * => Done
- *
- * @Run: https://www.coderefer.com/android-recyclerview-cardview-tutorial/
- * => @TODO
- *
- * @Run: http://pointofandroid.blogspot.com/2016/12/recyclerviewhorizontal-and-vertical.html
- * => Done
- *
- * @Run: https://www.youtube.com/results?search_query=nested+fragment+viewpager
- * => nested fragment viewpager
- *
- * @Run: https://stackoverflow.com/questions/39491655/communication-between-nested-fragments-in-android
- * => Communicate between nested fragments
- *
- * @Run: https://tausiq.wordpress.com/2014/06/06/android-multiple-fragments-stack-in-each-viewpager-tab/
- * => Research More
- *
- * @Run: https://stackoverflow.com/questions/14740445/what-is-difference-between-getsupportfragmentmanager-and-getchildfragmentmanag
- * => Done
- *
- * @Run: https://stackoverflow.com/questions/39885502/communication-between-nested-fragments-activities-both-ways
- * => Done
- *
- * @Run: http://panavtec.me/retain-restore-recycler-view-scroll-position
- * => Done
- *
- * @Run: https://stackoverflow.com/questions/38611348/recyclerview-keep-scrolling-position-after-changing-layout
- * => Done
  */
 
 public class MovieView extends IRBaseFragment implements IMovieView {

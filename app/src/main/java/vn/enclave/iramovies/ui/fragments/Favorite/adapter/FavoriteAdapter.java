@@ -17,28 +17,16 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import vn.enclave.iramovies.R;
-import vn.enclave.iramovies.services.IraMovieInfoAPIs;
 import vn.enclave.iramovies.local.storage.entity.Movie;
+import vn.enclave.iramovies.services.IraMovieInfoAPIs;
 import vn.enclave.iramovies.ui.activities.base.BaseView;
 import vn.enclave.iramovies.utilities.Constants;
 import vn.enclave.iramovies.utilities.OverrideFonts;
-import vn.enclave.iramovies.utilities.Utils;
 
 /**
  * Created by lorence on 14/11/2017.
- * @Run:
  *
- * @Run: http://www.devexchanges.info/2017/02/android-recyclerview-dynamically-load.html
- * => Done
  *
- * @Run: https://stackoverflow.com/questions/32040798/recyclerview-oncreateviewholder-return-type-incompatibility-with-multiple-custom
- * => Done
- *
- * @Run: https://codentrick.com/load-more-recyclerview-bottom-progressbar/
- * => Done
- *
- *  @Run: http://android-pratap.blogspot.in/2015/01/recyclerview-with-checkbox-example.html
- *  => Fix save the states when scroll view in Recycler View
  */
 
 public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHolder>{
@@ -68,8 +56,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(final FavoriteAdapter.ViewHolder holder, int position){
-        final int mPosition = position;
-        final Movie movie = mFilterMovies.get(mPosition);
+        final Movie movie = mFilterMovies.get(position);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,7 +69,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
         holder.tvOverview.setText(movie.getOverview());
 
         holder.imvFavorite.setImageResource((movie.getFavorite() == Constants.Favorites.FAVORITE) ? R.drawable.ic_star_picked : R.drawable.ic_star);
-        holder.imvFavorite.setTag(mFilterMovies.get(mPosition));
+        holder.imvFavorite.setTag(mFilterMovies.get(position));
 
         String poster = IraMovieInfoAPIs.Images.Thumbnail + movie.getPosterPath();
         Glide.with(mContext)
@@ -101,11 +88,6 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
 
     }
 
-    /**
-     * https://stackoverflow.com/questions/34429090/getitemcount-return-only-the-original-content-of-recyclerview
-     * => Decide that mOriginalGroupMovies or MFilterMovies is returned
-     * @return
-     */
     @Override
     public int getItemCount() {
         return mFilterMovies.size();
@@ -129,7 +111,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
                     mFilterMovies.add(movie);
                 }
             }
-        };
+        }
         this.notifyDataSetChanged();
     }
 

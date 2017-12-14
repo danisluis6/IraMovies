@@ -9,8 +9,6 @@ import vn.enclave.iramovies.R;
 /**
  * Created by lorence on 14/11/2017.
  *
- * @Run: https://stackoverflow.com/questions/16893209/how-to-customize-a-progress-bar-in-android
- * => Cust circle progress bar in Android
  */
 
 public class DialogView extends Dialog {

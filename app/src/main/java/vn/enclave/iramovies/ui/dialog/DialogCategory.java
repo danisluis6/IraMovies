@@ -16,22 +16,6 @@ import vn.enclave.iramovies.utilities.Utils;
 /**
  * Created by lorence on 20/11/2017.
  *
- * @Run: https://stackoverflow.com/questions/22655599/alertdialog-builder-with-custom-layout-and-edittext-cannot-access-view
- * => Done
- *
- * @Run: https://stackoverflow.com/questions/13341560/how-to-create-a-custom-dialog-box-in-android
- * => Done
- *
- * @Run: https://stackoverflow.com/questions/2134591/add-margin-between-a-radiobutton-and-its-label-in-android
- * => Done
- *
- * @Run: https://crosp.net/blog/android/creating-custom-radio-groups-radio-buttons-android/
- * => Researching
- *
- * @Run: https://stackoverflow.com/questions/9175635/how-to-set-radio-button-checked-as-default-in-radiogroup-with-android
- * => Done
- *
- * @Run:
  */
 
 public class DialogCategory extends DialogBase {

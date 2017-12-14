@@ -7,11 +7,8 @@ import android.content.Context;
 import android.content.Intent;
 
 /**
- *
  * Created by Lorence on 12/12/17.
  *
- * @Run: https://gist.github.com/BrandonSmith/6679223
- * => Thanks
  */
 
 public class NotificationPublisher extends BroadcastReceiver {

@@ -15,7 +15,6 @@ import vn.enclave.iramovies.ui.views.DialogView;
 
 /**
  * Created by lorence on 08/11/2017.
- * @Run: https://stackoverflow.com/questions/34201431/can-i-make-abstract-fragment-class-with-builder-pattern
  *
  */
 

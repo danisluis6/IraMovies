@@ -9,12 +9,9 @@ import android.view.View;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import vn.enclave.iramovies.local.storage.SessionManager;
-import vn.enclave.iramovies.utilities.Utils;
 
 
 public abstract class BaseView extends AppCompatActivity{
-
-    private static String TAG = Utils.makeLogTag(BaseView.class);
 
     /**
      * Context

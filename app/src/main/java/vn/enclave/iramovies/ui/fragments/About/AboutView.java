@@ -15,7 +15,7 @@ import vn.enclave.iramovies.utilities.Utils;
 
 /**
  * Created by lorence on 08/11/2017.
- * @Run: https://www.mkyong.com/android/android-webview-example/
+ *
  */
 
 public class AboutView extends IRBaseFragment{

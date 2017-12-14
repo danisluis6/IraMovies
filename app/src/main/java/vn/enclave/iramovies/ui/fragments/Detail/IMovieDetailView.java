@@ -1,7 +1,5 @@
 package vn.enclave.iramovies.ui.fragments.Detail;
 
-import java.util.List;
-
 import vn.enclave.iramovies.local.storage.entity.Movie;
 import vn.enclave.iramovies.local.storage.entity.Reminder;
 import vn.enclave.iramovies.services.response.CastAndCrewResponse;

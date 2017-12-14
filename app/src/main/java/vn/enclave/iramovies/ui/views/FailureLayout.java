@@ -43,20 +43,8 @@ public class FailureLayout extends LinearLayout {
         });
     }
 
-    public void setOnListener(OnRetryListener onRetryListener) {
-        this.mOnRetryListener = onRetryListener;
-    }
-
     public void setFailureMessage(String _message) {
         tvMessage.setText(_message);
-    }
-
-    public void setupStatusView(boolean status) {
-        if (status) {
-            btnRetry.setVisibility(VISIBLE);
-        } else {
-            btnRetry.setVisibility(GONE);
-        }
     }
 
     public interface OnRetryListener {

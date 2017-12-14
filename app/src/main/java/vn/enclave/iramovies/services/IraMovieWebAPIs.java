@@ -24,36 +24,24 @@ public interface IraMovieWebAPIs {
 
     /**
      * Get Popular Movies
-     *
-     * @Run: http://api.themoviedb.org/3/movie/popular?api_key=2d390f2deaa23e8b65d42a80beb8c1bd
-     * => Done
      */
     @GET(IraMovieInfoAPIs.Categories.Popular)
     Call<MovieResponse> getPopularMovies(@Query(IraMovieInfoAPIs.Fields.API_KEY) String apiKey, @Query(IraMovieInfoAPIs.Fields.PAGE) int page);
 
     /**
      * Get Top Rated Movies
-     *q
-     * @Run: http://api.themoviedb.org/3/movie/top_rated?api_key=2d390f2deaa23e8b65d42a80beb8c1bd
-     * => Done
      */
     @GET(IraMovieInfoAPIs.Categories.Top_Rated)
     Call<MovieResponse> getTopRatedMovies(@Query(IraMovieInfoAPIs.Fields.API_KEY) String apiKey, @Query(IraMovieInfoAPIs.Fields.PAGE) int page);
 
     /**
      * Get Now Playing Movies
-     *
-     * @Run: http://api.themoviedb.org/3/movie/now_playing?api_key=2d390f2deaa23e8b65d42a80beb8c1bd
-     * => Done
      */
     @GET(IraMovieInfoAPIs.Categories.Now_playing)
     Call<MovieResponse> getNowPlayingMovies(@Query(IraMovieInfoAPIs.Fields.API_KEY) String apiKey, @Query(IraMovieInfoAPIs.Fields.PAGE) int page);
 
     /**
      * Get Upcoming Movies
-     *
-     * @Run: http://api.themoviedb.org/3/movie/upcoming?api_key=2d390f2deaa23e8b65d42a80beb8c1bd
-     * => Done
      */
     @GET(IraMovieInfoAPIs.Categories.Upcoming)
     Call<MovieResponse> getUpcomingMovies(@Query(IraMovieInfoAPIs.Fields.API_KEY) String apiKey, @Query(IraMovieInfoAPIs.Fields.PAGE) int page);

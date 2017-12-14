@@ -14,9 +14,6 @@ import vn.enclave.iramovies.utilities.Utils;
 /**
  *
  * Created by lorence on 21/11/2017.
- *
- * @Run: https://stackoverflow.com/questions/20838227/set-cursor-position-in-android-edit-text
- * => Done
  */
 
 public class DialogReleaseYear extends DialogBase {

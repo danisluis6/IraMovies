@@ -13,8 +13,8 @@ import vn.enclave.iramovies.ui.dialog.base.DialogBase;
 import vn.enclave.iramovies.utilities.Utils;
 
 /**
- *
  * Created by lorence on 21/11/2017.
+ *
  */
 
 public class DialogReleaseDate extends DialogBase {

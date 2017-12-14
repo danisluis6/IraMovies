@@ -43,18 +43,6 @@ import static android.app.Activity.RESULT_OK;
 /**
  * Created by lorence on 08/11/2017.
  *
- * @Run: http://o7planning.org/vi/10491/huong-dan-su-dung-android-fragment
- * => Done
- * @Run: https://stackoverflow.com/questions/5608720/android-preventing-double-click-on-a-button
- * => Done
- * @Run: https://stackoverflow.com/questions/37861575/what-is-pick-contact-argument-in-startactivityforresult-function
- * => Done
- * @Run: https://stackoverflow.com/questions/23003867/android-passing-an-object-to-another-activity
- * => Done
- * @Run: https://stackoverflow.com/questions/38893042/pass-interface-between-activities-in-intent-interface-fails-to-be-serializable
- * => Done
- *
- * @Run: https://stackoverflow.com/questions/13911261/how-to-get-a-fragment-added-in-an-xml-layout
  */
 
 public class UserProfileView extends IRBaseFragment implements IUserProfileView {

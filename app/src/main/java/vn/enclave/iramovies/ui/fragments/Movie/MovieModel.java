@@ -3,7 +3,6 @@ package vn.enclave.iramovies.ui.fragments.Movie;
 import android.arch.persistence.room.Room;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Log;
 import android.widget.Toast;
 
 import java.util.List;
@@ -16,10 +15,9 @@ import vn.enclave.iramovies.IRApplication;
 import vn.enclave.iramovies.R;
 import vn.enclave.iramovies.local.storage.AppDatabase;
 import vn.enclave.iramovies.local.storage.SessionManager;
-import vn.enclave.iramovies.local.storage.entity.Reminder;
-import vn.enclave.iramovies.local.storage.entity.User;
-import vn.enclave.iramovies.services.IraMovieWebAPIs;
 import vn.enclave.iramovies.local.storage.entity.Movie;
+import vn.enclave.iramovies.local.storage.entity.Reminder;
+import vn.enclave.iramovies.services.IraMovieWebAPIs;
 import vn.enclave.iramovies.services.response.MovieResponse;
 import vn.enclave.iramovies.utilities.Constants;
 

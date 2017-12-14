@@ -1,16 +1,8 @@
 package vn.enclave.iramovies.services;
 
-import vn.enclave.iramovies.utilities.Constants;
-
 /**
  *
- * Created by lorence on 13/11/2017.
- *
- * @Run: https://www.youtube.com/watch?v=OOLFhtyCspA
- * => Done
- *
- * @Run: https://developer.android.com/studio/build/index.html
- * => Done
+ * Created by lorence on 24/11/2017.
  */
 
 public class IraMovieInfoAPIs {

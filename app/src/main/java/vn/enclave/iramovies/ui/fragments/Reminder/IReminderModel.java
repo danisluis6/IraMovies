@@ -1,6 +1,5 @@
 package vn.enclave.iramovies.ui.fragments.Reminder;
 
-import vn.enclave.iramovies.local.storage.entity.Movie;
 import vn.enclave.iramovies.local.storage.entity.Reminder;
 import vn.enclave.iramovies.ui.interfaces.IBasePresenter;
 

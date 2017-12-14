@@ -1,7 +1,5 @@
 package vn.enclave.iramovies.ui.interfaces;
 
-import vn.enclave.iramovies.local.storage.entity.Movie;
-
 /**
  *
  * Created by lorence on 14/11/2017.

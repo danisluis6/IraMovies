@@ -19,11 +19,6 @@ import vn.enclave.iramovies.ui.activities.base.Home.HomeView;
  * Created by lorence on 08/11/2017.
  */
 
-/**
- * @Run: http://awsrh.blogspot.com/2017/10/welcome-screen-with-uptodown-animation.html
- * => Implement Splash Screen
- */
-
 public class SplashScreen extends BaseView {
 
     LinearLayout l1,l2;
@@ -48,6 +43,7 @@ public class SplashScreen extends BaseView {
         new Handler().postDelayed(new Runnable() {
             public void run() {
                 startActivity(new Intent(SplashScreen.this, HomeView.class));
+                finish();
             }
         }, 500);
     }

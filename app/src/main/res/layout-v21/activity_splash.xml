@@ -11,21 +11,18 @@
         android:layout_width="match_parent"
         android:layout_height="400dp"
         android:orientation="vertical">
-        <TextView
-            android:textColor="@color/lightorange"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="36,520"
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="100dp"
             android:layout_gravity="center"
-            android:layout_marginTop="150dp"
-            android:textSize="60sp"
-            android:textStyle="bold"/>
+            android:src="@drawable/ic_movie"/>
         <TextView
             android:textColor="@color/lightorangedark"
             android:layout_width="398dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="IraMovies"
+            android:text="Ira Movies"
             android:textAlignment="center"
             android:textSize="30sp"
             android:layout_marginTop="50dp"/>

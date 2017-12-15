@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="/home/lorence/Android/Sdk/build-tools/26.0.1/renderscript/lib/renderscript-v8.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="6e81b059b564e20e1430f42fb38469a4d8f118f0">
+        <dex dex="/home/lorence/Desktop/IraMovies/app/build/intermediates/pre-dexed/debug/renderscript-v8_059f4ef5a74fea2ad37f84bcdc603f550b22a918.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/lorence/.android/build-cache/d9d6878e9845af0addb8016f47ed8ad18ad2a0c4/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="7be0c825fc04fef0599bf65ae6664819f30417ce">
+        <dex dex="/home/lorence/Desktop/IraMovies/app/build/intermediates/pre-dexed/debug/classes_6cc14306c03af5e04505cdeb4c3448ef4a0e3f8c.jar" />
+    </item>
+
+</items>

@@ -13,16 +13,20 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import vn.enclave.iramovies.R;
 import vn.enclave.iramovies.ui.activities.base.BaseView;
-import vn.enclave.iramovies.ui.views.TriangleImageView;
+
+/*
+ * Created by lorence on 08/11/2017.
+ */
 
 /**
- * Created by lorence on 08/11/2017.
- *
+ * @Run: http://awsrh.blogspot.com/2017/10/welcome-screen-with-uptodown-animation.html
+ * => Implement Splash Screen
  */
 
 public class SplashScreen extends BaseView {
@@ -93,15 +97,17 @@ public class SplashScreen extends BaseView {
     class CarouselAdapter extends PagerAdapter {
 
         @BindView(R.id.imv_carousel_item)
-        TriangleImageView imvCarouselItem;
+        ImageView imvCarouselItem;
 
         Context mContext;
         LayoutInflater mLayoutInflater;
         Unbinder mUnbinder;
+
         private int[] mImages = {
                 R.drawable.carousel_roar,
                 R.drawable.carousel_snowy,
                 R.drawable.carousel_medieval,
+                R.drawable.carousel_gameofthor,
         };
 
         CarouselAdapter(Context context, Unbinder unbinder) {

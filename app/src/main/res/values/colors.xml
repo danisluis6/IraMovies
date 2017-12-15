@@ -3,4 +3,10 @@
     <color name="colorPrimaryDark">#5564B1</color>
     <color name="colorCircleRadio">#009578</color>
     <color name="white">#FFFFFF</color>
+
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="black">#000</color>
+    <color name="lightorange">#fdf2df</color>
+    <color name="lightorangedark">#ebd6ab</color>
+    <color name="colorAccent">#FF4081</color>
 </resources>

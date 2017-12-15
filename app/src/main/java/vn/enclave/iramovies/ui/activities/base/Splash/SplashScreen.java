@@ -1,24 +1,19 @@
 package vn.enclave.iramovies.ui.activities.base.Splash;
 
 import android.annotation.TargetApi;
-import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.view.LayoutInflater;
+import android.os.Handler;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.LinearLayout;
 
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 import vn.enclave.iramovies.R;
 import vn.enclave.iramovies.ui.activities.base.BaseView;
+import vn.enclave.iramovies.ui.activities.base.Home.HomeView;
 
 /*
  * Created by lorence on 08/11/2017.
@@ -31,14 +26,9 @@ import vn.enclave.iramovies.ui.activities.base.BaseView;
 
 public class SplashScreen extends BaseView {
 
-    @BindView(R.id.vpCarousel)
-    ViewPager vpCarousel;
-
-    @BindView(R.id.SliderDots)
-    LinearLayout SliderDots;
-
-    private int dotscount;
-    private ImageView[] dots;
+    LinearLayout l1,l2;
+    Button btnsub;
+    Animation uptodown,downtoup;
 
     @Override
     public int getLayoutResId() {
@@ -48,40 +38,18 @@ public class SplashScreen extends BaseView {
     @Override
     public void activityCreated(Bundle savedInstanceState) {
         hiddenStatusBar();
-        CarouselAdapter mCarouselAdapter = new CarouselAdapter(mContext, getBinder());
-        vpCarousel.setAdapter(mCarouselAdapter);
-
-        dotscount = mCarouselAdapter.getCount();
-        dots = new ImageView[dotscount];
-
-        for (int index = 0; index < dotscount; index++ ) {
-            dots[index] = new ImageView(mContext);
-            dots[index].setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.noactive_dot));
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            params.setMargins(8, 0, 8, 0);
-            SliderDots.addView(dots[index]);
-        }
-
-        dots[0].setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.active_dot));
-        vpCarousel.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
+        btnsub = (Button)findViewById(R.id.buttonsub);
+        l1 = findViewById(R.id.l1);
+        l2 = findViewById(R.id.l2);
+        uptodown = AnimationUtils.loadAnimation(this,R.anim.uptodown);
+        downtoup = AnimationUtils.loadAnimation(this,R.anim.downtoup);
+        l1.setAnimation(uptodown);
+        l2.setAnimation(downtoup);
+        new Handler().postDelayed(new Runnable() {
+            public void run() {
+                startActivity(new Intent(SplashScreen.this, HomeView.class));
             }
-
-            @Override
-            public void onPageSelected(int position) {
-                for(int index = 0; index < dotscount; index++) {
-                    dots[index].setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.noactive_dot));
-                }
-                dots[position].setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.active_dot));
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
+        }, 500);
     }
 
     @TargetApi(Build.VERSION_CODES.KITKAT)
@@ -92,55 +60,5 @@ public class SplashScreen extends BaseView {
                 | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
                 | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                 | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
-    }
-
-    class CarouselAdapter extends PagerAdapter {
-
-        @BindView(R.id.imv_carousel_item)
-        ImageView imvCarouselItem;
-
-        Context mContext;
-        LayoutInflater mLayoutInflater;
-        Unbinder mUnbinder;
-
-        private int[] mImages = {
-                R.drawable.carousel_roar,
-                R.drawable.carousel_snowy,
-                R.drawable.carousel_medieval,
-                R.drawable.carousel_gameofthor,
-        };
-
-        CarouselAdapter(Context context, Unbinder unbinder) {
-            mContext = context;
-            mUnbinder = unbinder;
-            mLayoutInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        }
-
-        @Override
-        public int getCount() {
-            return mImages.length;
-        }
-
-        @Override
-        public boolean isViewFromObject(View view, Object object) {
-            return view == object;
-        }
-
-        @Override
-        public Object instantiateItem(ViewGroup container, int position) {
-            View view = mLayoutInflater.inflate(R.layout.carousel_item, null);
-            mUnbinder = ButterKnife.bind(this, view);
-            imvCarouselItem.setImageResource(mImages[position]);
-            ViewPager vp = (ViewPager) container;
-            vp.addView(view, 0);
-            return view;
-        }
-
-        @Override
-        public void destroyItem(ViewGroup container, int position, Object object) {
-            ViewPager vp = (ViewPager) container;
-            View view = (View) object;
-            vp.removeView(view);
-        }
     }
 }

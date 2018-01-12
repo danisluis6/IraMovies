@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="answers-shim-0.0.6">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.android/build-cache/7a8a675047a8e622004b3b1b64b4c038cd0877bc/output/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.android/build-cache/7a8a675047a8e622004b3b1b64b4c038cd0877bc/output/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

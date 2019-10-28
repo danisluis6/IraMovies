@@ -1,9 +1,14 @@
 package vn.enclave.iramovies.utilities;
 
+import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.ConnectivityManager;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 
 import java.io.ByteArrayOutputStream;
 
@@ -47,5 +52,31 @@ public class Utils {
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
         return stream.toByteArray();
+    }
+
+    public static boolean isInternetOn(Context context) {
+        final ConnectivityManager connectivityManager = ((ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE));
+        return connectivityManager.getActiveNetworkInfo() != null && connectivityManager.getActiveNetworkInfo().isConnected();
+    }
+
+    public enum FAILURE_CASE {
+        NO_DATA, NO_DATA_FOUND, NO_CONECTION
+    }
+
+    // Close keyboard in android
+    public static void dimissKeyBoard(Activity activity) {
+        View view = activity.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+    }
+
+    public static void clearFocusOnSearchView(View view) {
+        if (view instanceof EditText) {
+            if (view.isFocused()) {
+                view.clearFocus();
+            }
+        }
     }
 }

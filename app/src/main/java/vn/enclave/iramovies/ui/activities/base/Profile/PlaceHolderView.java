@@ -3,6 +3,7 @@ package vn.enclave.iramovies.ui.activities.base.Profile;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -48,7 +49,7 @@ public class PlaceHolderView extends BaseView{
     }
 
     @Override
-    public void activityCreated() {
+    public void activityCreated(Bundle savedInstanceState) {
         mPathImage = getIntent().getStringExtra(Constants.IMAGE_PATH);
         loadBitMapFromFile(mPathImage);
     }

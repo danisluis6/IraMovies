@@ -11,6 +11,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import vn.enclave.iramovies.local.storage.AppDatabase;
 import vn.enclave.iramovies.ui.activities.base.BaseView;
+import vn.enclave.iramovies.ui.views.DialogView;
 
 /**
  * Created by lorence on 08/11/2017.
@@ -27,6 +28,7 @@ public abstract class IRBaseFragment extends Fragment {
     private Unbinder mUnbinder;
     private View mView;
     protected AppDatabase mAppDatabase;
+    protected DialogView mDiaLoadView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -34,6 +36,7 @@ public abstract class IRBaseFragment extends Fragment {
         mAppDatabase = Room.databaseBuilder(mActivity, AppDatabase.class, AppDatabase.DB_NAME).build();
         mView = getViewLayout(inflater, container, savedInstanceState);
         mUnbinder = ButterKnife.bind(this, mView);
+        mDiaLoadView = new DialogView(mActivity);
         fragmentCreated();
         return mView;
     }

@@ -11,7 +11,7 @@
     <vn.enclave.iramovies.ui.views.ToolbarLayout
         android:id="@+id/toolbar_layout"
         android:layout_width="0dp"
-        android:layout_height="?actionBarSize"
+        android:layout_height="56dp"
         android:background="@color/colorPrimaryDark"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -19,125 +19,24 @@
 
     <android.support.v4.view.ViewPager
         android:id="@+id/viewpaper_content"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginBottom="56dp"
         android:layout_marginTop="56dp"
-        app:layout_constraintBottom_toBottomOf="@+id/lnBottomBar"
+        app:layout_constraintBottom_toBottomOf="@+id/tbBottomBar"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@+id/toolbar_layout" />
 
-    <LinearLayout
-        android:id="@+id/lnBottomBar"
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tbBottomBar"
         android:layout_width="0dp"
+        app:tabMode="fixed"
+        style="@style/SlidingTabs"
         android:layout_height="56dp"
         android:background="@color/colorPrimaryDark"
-        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent">
-
-        <LinearLayout
-            android:id="@+id/vpMovies"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="8dp"
-                android:contentDescription="@string/image_description"
-                android:src="@drawable/ic_movies" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:ellipsize="marquee"
-                android:text="Movies"
-                android:textSize="14sp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/vpFavorites"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="8dp"
-                android:contentDescription="@string/image_description"
-                android:src="@drawable/ic_favorite" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:ellipsize="marquee"
-                android:text="Favorites"
-                android:textSize="14sp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/vpSettings"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="8dp"
-                android:contentDescription="@string/image_description"
-                android:src="@drawable/ic_settings" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:ellipsize="marquee"
-                android:text="Settings"
-                android:textSize="14sp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/vpAbout"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="8dp"
-                android:contentDescription="@string/image_description"
-                android:src="@drawable/ic_about" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:ellipsize="marquee"
-                android:text="About"
-                android:textSize="14sp" />
-
-        </LinearLayout>
-
-    </LinearLayout>
+        app:layout_constraintRight_toRightOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

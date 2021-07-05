@@ -23,6 +23,8 @@ public class Constants {
     public static final int FAVORITES_INDEX = 1;
     public static final int SETTING_INDEX = 2;
     public static final int ABOUT_INDEX = 3;
+    public static final int FIRST_PAGE = 1;
+    public static String SAVE_THE_STATE = "save_state";
 
     /* Toolbar Information */
     public static class ToolbarLayoutInfo {
@@ -38,4 +40,22 @@ public class Constants {
         public static final int ACCESS_EXTERNAL_STORAGE = 2;
     }
 
+    public static class Keyboards {
+        public static final String FORWARD_SLASH = "/";
+    }
+
+    public static class Objects {
+        public static final String MOVIE = "fds";
+        public static final String LOAD = "Load";
+    }
+
+    public static class Favorites {
+        public static int DEFAULT = 0;
+        public static int FAVORITE = 1;
+    }
+
+    /* Interact between child fragment and container activity */
+    public static class Interact {
+        public final static int HANDLE_STATUS_FAVORITE = 0;
+    }
 }

@@ -2,4 +2,27 @@
     <string name="app_name">IraMovies</string>
     <string name="image_description">Informations about image</string>
     <string name="announce_update_info_account">Please update your information before using application!</string>
+
+    <array name="menu_bottom_nav">
+        <item name="movies">Movies</item>
+        <item name="favorites">Favorites</item>
+        <item name="settings">Settings</item>
+        <item name="about">About</item>
+    </array>
+
+
+    <!-- Info movie_card_view -->
+    <string name="release_date">Release date:</string>
+    <string name="rating">Rating:</string>
+    <string name="overview">Overview:</string>
+
+    <!-- Info failure layout -->
+    <string name="btn_retry">Retry</string>
+
+
+    <!-- Failure messages -->
+    <string name="no_internet_connection">No Internet Connection</string>
+    <string name="cannot_get_data">Something went wrong on server</string>
+    <string name="no_more_data">No more data</string>
+
 </resources>
